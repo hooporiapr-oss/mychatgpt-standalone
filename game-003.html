@@ -747,7 +747,7 @@
         <div class="period">FB</div>
         <div class="summary-copy">
           <strong data-en="Final Buzzer Review" data-es="Repaso de la Bocina Final">Final Buzzer Review</strong>
-          <span data-en="Box Score Check — review the whole game before Game 004 unlocks." data-es="Chequeo del Marcador — repasa todo el juego antes de desbloquear el Juego 004.">Box Score Check — review the whole game before Game 004 unlocks.</span>
+          <span data-en="Box Score Check — finish the free preview and unlock Level 2." data-es="Chequeo del Marcador — termina la vista gratis y desbloquea Nivel 2.">Box Score Check — finish the free preview and unlock Level 2.</span>
           <em class="lock-note" data-en="Locked until 4Q is complete." data-es="Bloqueado hasta completar 4Q.">Locked until 4Q is complete.</em>
         </div>
         <div class="open-icon">+</div>
@@ -834,7 +834,7 @@
 
         <div class="final-gate">
           <span class="bubble-label" data-en="Game Gate" data-es="Puerta del Juego">Game Gate</span>
-          <p data-en="Answer the Final Buzzer review to unlock Game 004. Choices only. No typing." data-es="Contesta el repaso de la Bocina Final para desbloquear el Juego 004. Solo opciones. Sin escribir.">Answer the Final Buzzer review to unlock Game 004. Choices only. No typing.</p>
+          <p data-en="Answer the Final Buzzer review to complete the free preview. Then Level 2: Separation unlocks through Podia." data-es="Contesta el repaso de la Bocina Final para completar la vista gratis. Entonces Nivel 2: Separación se desbloquea por Podia.">Answer the Final Buzzer review to complete the free preview. Then Level 2: Separation unlocks through Podia.</p>
           <div class="complete-row">
             <span class="complete-status" data-status="final" data-en="Final Buzzer locked." data-es="Bocina Final bloqueada.">Final Buzzer locked.</span>
             <button class="complete-btn" type="button" id="finalBuzzerBtn" disabled data-en="Final Buzzer Locked" data-es="Bocina Final Bloqueada">Final Buzzer Locked</button>
@@ -842,10 +842,10 @@
         </div>
 
         <div class="next-game-box" id="nextGameBox">
-          <span class="bubble-label" data-en="Next Game Unlocked" data-es="Próximo Juego Desbloqueado">Next Game Unlocked</span>
-          <p data-en="Game 003 complete. Next game: Confidence. Pressure is coming." data-es="Juego 003 completado. Próximo juego: Confianza. Viene la presión.">Game 003 complete. Next game: Confidence. Pressure is coming.</p>
+          <span class="bubble-label" data-en="Free Preview Complete" data-es="Vista Gratis Completada">Free Preview Complete</span>
+          <p data-en="Game 003 complete. You finished the free preview. Most players stop here. If you are serious, unlock Level 2: Separation. Game 004 begins with Confidence." data-es="Juego 003 completado. Terminaste la vista gratis. La mayoría de los jugadores se detienen aquí. Si vas en serio, desbloquea Nivel 2: Separación. El Juego 004 empieza con Confianza.">Game 003 complete. You finished the free preview. Most players stop here. If you are serious, unlock Level 2: Separation. Game 004 begins with Confidence.</p>
           <div class="cta-row">
-            <a class="btn primary" href="game-004.html" data-en="Enter Game 004 →" data-es="Entrar al Juego 004 →">Enter Game 004 →</a>
+            <a class="btn primary" href="https://getreadyhoops.podia.com/hoops-money-level-2-separation/buy" data-en="Unlock Level 2 — Separation →" data-es="Desbloquear Nivel 2 — Separación →">Unlock Level 2 — Separation →</a>
           </div>
         </div>
       </div>
@@ -1090,8 +1090,8 @@
         } else if (reviewComplete) {
           finalBuzzerBtn.classList.remove('done');
           finalBuzzerBtn.textContent = currentLang === 'es'
-            ? 'Sonar Bocina Final → Desbloquear Juego 004'
-            : 'Hit Final Buzzer → Unlock Game 004';
+            ? 'Sonar Bocina Final → Completar Vista Gratis'
+            : 'Hit Final Buzzer → Complete Free Preview';
         } else if (isUnlocked('final')) {
           finalBuzzerBtn.classList.remove('done');
           finalBuzzerBtn.textContent = currentLang === 'es'
