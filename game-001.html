@@ -367,6 +367,96 @@
     .commitment { position: relative; z-index: 1; margin-top: 20px; display: grid; gap: 10px; }
     .commitment div { border: 1px dashed rgba(255,255,255,0.25); background: rgba(0,0,0,0.28); border-radius: 18px; padding: 14px 16px; color: white; font-weight: 850; }
 
+    .review-stack {
+      margin-top: 20px;
+      display: grid;
+      gap: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .review-card {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.26);
+      border-radius: 24px;
+      padding: 16px;
+    }
+
+    .review-card.locked-review {
+      opacity: .55;
+      pointer-events: none;
+    }
+
+    .review-card h3 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .review-card p {
+      margin: 8px 0 0;
+      color: #e4e4e7;
+      font-size: 15px;
+    }
+
+    .review-options {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .review-choice {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.055);
+      color: white;
+      border-radius: 16px;
+      padding: 12px;
+      text-align: left;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .review-choice.selected {
+      border-color: var(--orange);
+      background: rgba(249,115,22,0.16);
+      color: #fed7aa;
+    }
+
+    .review-choice.correct {
+      border-color: var(--green);
+      background: rgba(34,197,94,0.18);
+      color: #bbf7d0;
+    }
+
+    .review-explanation {
+      display: none;
+      margin-top: 12px;
+      border-left: 3px solid var(--orange);
+      padding-left: 12px;
+      color: #fef3c7;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .review-explanation.show {
+      display: block;
+    }
+
+    .final-gate {
+      margin-top: 18px;
+      position: relative;
+      z-index: 2;
+      border: 1px solid rgba(251,191,36,0.26);
+      background: rgba(251,191,36,0.08);
+      border-radius: 24px;
+      padding: 18px;
+    }
+
+    @media (max-width: 700px) {
+      .review-options { grid-template-columns: 1fr; }
+    }
+
     .next-game-box {
       display: none;
       margin-top: 18px;
@@ -727,20 +817,95 @@
     </section>
 
     <section id="final" class="final-card locked" data-section="final">
-      <p class="kicker" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</p>
-      <h2 data-en="What did you prove?" data-es="¿Qué tú probaste?">What did you prove?</h2>
-      <p data-en="The Final Buzzer is locked until all four quarters are complete. No skipping the work." data-es="La Bocina Final está bloqueada hasta completar los cuatro cuartos. No se brinca el trabajo." id="finalIntro">
-        The Final Buzzer is locked until all four quarters are complete. No skipping the work.
+      <p class="kicker" data-en="Final Buzzer Review" data-es="Repaso de la Bocina Final">Final Buzzer Review</p>
+      <h2 data-en="Box Score Check" data-es="Chequeo del Marcador">Box Score Check</h2>
+      <p data-en="The Final Buzzer is locked until all four quarters are complete. Once unlocked, review the game with choices only. No typing. No scattered answers." data-es="La Bocina Final está bloqueada hasta completar los cuatro cuartos. Cuando se desbloquee, repasas el juego solo con opciones. Sin escribir. Sin respuestas regadas." id="finalIntro">
+        The Final Buzzer is locked until all four quarters are complete. Once unlocked, review the game with choices only. No typing. No scattered answers.
       </p>
-      <div class="commitment">
-        <div data-en="Action: __________________________________________" data-es="Acción: __________________________________________">Action: __________________________________________</div>
-        <div data-en="Deadline: ________________________________________" data-es="Fecha límite: ____________________________________">Deadline: ________________________________________</div>
-        <div data-en="Proof: ___________________________________________" data-es="Prueba: __________________________________________">Proof: ___________________________________________</div>
+
+      <div class="review-stack" id="reviewStack">
+        <div class="review-card locked-review" data-review="r1">
+          <span class="bubble-label" data-en="Tip-Off Review" data-es="Repaso del Salto Inicial">Tip-Off Review</span>
+          <h3 data-en="What makes a player valuable?" data-es="¿Qué hace valioso a un jugador?">What makes a player valuable?</h3>
+          <div class="review-options">
+            <button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Popularity" data-es="Popularidad">Popularity</button>
+            <button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Noise online" data-es="Ruido en línea">Noise online</button>
+            <button class="review-choice" type="button" data-review-choice="r1" data-correct="true" data-en="Value that helps a team win" data-es="Valor que ayuda al equipo a ganar">Value that helps a team win</button>
+            <button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Excuses" data-es="Excusas">Excuses</button>
+          </div>
+          <div class="review-explanation" data-review-explanation="r1" data-en="Correct read: money follows value, not noise." data-es="Lectura correcta: el dinero sigue al valor, no al ruido.">Correct read: money follows value, not noise.</div>
+        </div>
+
+        <div class="review-card locked-review" data-review="r2">
+          <span class="bubble-label" data-en="1st Quarter Review" data-es="Repaso del 1er Cuarto">1st Quarter Review</span>
+          <h3 data-en="What makes an answer strong?" data-es="¿Qué hace fuerte una respuesta?">What makes an answer strong?</h3>
+          <div class="review-options">
+            <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="Hype" data-es="Hype">Hype</button>
+            <button class="review-choice" type="button" data-review-choice="r2" data-correct="true" data-en="Proof" data-es="Evidencia">Proof</button>
+            <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="Saying I am different" data-es="Decir que soy diferente">Saying I am different</button>
+            <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="Confidence only" data-es="Solo confianza">Confidence only</button>
+          </div>
+          <div class="review-explanation" data-review-explanation="r2" data-en="Correct read: proof separates real value from talk." data-es="Lectura correcta: la evidencia separa el valor real del hablar.">Correct read: proof separates real value from talk.</div>
+        </div>
+
+        <div class="review-card locked-review" data-review="r3">
+          <span class="bubble-label" data-en="2nd Quarter Review" data-es="Repaso del 2do Cuarto">2nd Quarter Review</span>
+          <h3 data-en="Where does value need to show up?" data-es="¿Dónde tiene que aparecer el valor?">Where does value need to show up?</h3>
+          <div class="review-options">
+            <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only online" data-es="Solo en línea">Only online</button>
+            <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only when things go well" data-es="Solo cuando todo va bien">Only when things go well</button>
+            <button class="review-choice" type="button" data-review-choice="r3" data-correct="true" data-en="Practice, games, film, trust, consistency" data-es="Práctica, juegos, video, confianza, consistencia">Practice, games, film, trust, consistency</button>
+            <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only in your head" data-es="Solo en tu mente">Only in your head</button>
+          </div>
+          <div class="review-explanation" data-review-explanation="r3" data-en="Correct read: if there is no evidence, it is just confidence talking." data-es="Lectura correcta: si no hay evidencia, es solo confianza hablando.">Correct read: if there is no evidence, it is just confidence talking.</div>
+        </div>
+
+        <div class="review-card locked-review" data-review="r4">
+          <span class="bubble-label" data-en="Halftime Review" data-es="Repaso del Medio Tiempo">Halftime Review</span>
+          <h3 data-en="What matters most in the reality check?" data-es="¿Qué importa más en el chequeo de realidad?">What matters most in the reality check?</h3>
+          <div class="review-options">
+            <button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="What coach hopes you become" data-es="Lo que el coach espera que seas">What coach hopes you become</button>
+            <button class="review-choice" type="button" data-review-choice="r4" data-correct="true" data-en="What coach can trust today" data-es="Lo que el coach puede confiar hoy">What coach can trust today</button>
+            <button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="What you say you can do" data-es="Lo que dices que puedes hacer">What you say you can do</button>
+            <button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="What sounds good" data-es="Lo que suena bonito">What sounds good</button>
+          </div>
+          <div class="review-explanation" data-review-explanation="r4" data-en="Correct read: trust is built by what repeats." data-es="Lectura correcta: la confianza se construye con lo que se repite.">Correct read: trust is built by what repeats.</div>
+        </div>
+
+        <div class="review-card locked-review" data-review="r5">
+          <span class="bubble-label" data-en="3rd Quarter Review" data-es="Repaso del 3er Cuarto">3rd Quarter Review</span>
+          <h3 data-en="When does real value get exposed?" data-es="¿Cuándo se expone el valor real?">When does real value get exposed?</h3>
+          <div class="review-options">
+            <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="When everything is easy" data-es="Cuando todo está fácil">When everything is easy</button>
+            <button class="review-choice" type="button" data-review-choice="r5" data-correct="true" data-en="When pressure hits" data-es="Cuando llega la presión">When pressure hits</button>
+            <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only during highlights" data-es="Solo en highlights">Only during highlights</button>
+            <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only when you score" data-es="Solo cuando anotas">Only when you score</button>
+          </div>
+          <div class="review-explanation" data-review-explanation="r5" data-en="Correct read: pressure shows what is real." data-es="Lectura correcta: la presión muestra lo que es real.">Correct read: pressure shows what is real.</div>
+        </div>
+
+        <div class="review-card locked-review" data-review="r6">
+          <span class="bubble-label" data-en="4th Quarter Review" data-es="Repaso del 4to Cuarto">4th Quarter Review</span>
+          <h3 data-en="What should you leave Game 001 with?" data-es="¿Con qué debes salir del Juego 001?">What should you leave Game 001 with?</h3>
+          <div class="review-options">
+            <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="A vague goal" data-es="Una meta vaga">A vague goal</button>
+            <button class="review-choice" type="button" data-review-choice="r6" data-correct="true" data-en="A measurable action" data-es="Una acción medible">A measurable action</button>
+            <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="A good feeling" data-es="Un buen sentimiento">A good feeling</button>
+            <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="More hype" data-es="Más hype">More hype</button>
+          </div>
+          <div class="review-explanation" data-review-explanation="r6" data-en="Correct read: if it cannot be measured, it is not ready." data-es="Lectura correcta: si no se puede medir, no está listo.">Correct read: if it cannot be measured, it is not ready.</div>
+        </div>
       </div>
-      <div class="complete-row">
-        <span class="complete-status" data-status="final" data-en="Final Buzzer locked." data-es="Bocina Final bloqueada.">Final Buzzer locked.</span>
-        <button class="complete-btn" type="button" id="finalBuzzerBtn" disabled data-en="Final Buzzer Locked" data-es="Bocina Final Bloqueada">Final Buzzer Locked</button>
+
+      <div class="final-gate">
+        <span class="bubble-label" data-en="Game Gate" data-es="Puerta del Juego">Game Gate</span>
+        <p data-en="Answer the Final Buzzer review to unlock Game 002. Choices only. No typing." data-es="Contesta el repaso de la Bocina Final para desbloquear el Juego 002. Solo opciones. Sin escribir.">Answer the Final Buzzer review to unlock Game 002. Choices only. No typing.</p>
+        <div class="complete-row">
+          <span class="complete-status" data-status="final" data-en="Final Buzzer locked." data-es="Bocina Final bloqueada.">Final Buzzer locked.</span>
+          <button class="complete-btn" type="button" id="finalBuzzerBtn" disabled data-en="Final Buzzer Locked" data-es="Bocina Final Bloqueada">Final Buzzer Locked</button>
+        </div>
       </div>
+
       <div class="next-game-box" id="nextGameBox">
         <span class="bubble-label" data-en="Next Game Unlocked" data-es="Próximo Juego Desbloqueado">Next Game Unlocked</span>
         <p data-en="Game 001 complete. Next game: Habits. Now we test whether your actions match what you say you want." data-es="Juego 001 completado. Próximo juego: Hábitos. Ahora vamos a probar si tus acciones van con lo que dices que quieres.">Game 001 complete. Next game: Habits. Now we test whether your actions match what you say you want.</p>
@@ -787,6 +952,8 @@
     const progressSteps = document.querySelectorAll('.progress-step');
     const finalBuzzerBtn = document.getElementById('finalBuzzerBtn');
     const nextGameBox = document.getElementById('nextGameBox');
+    const reviewCards = document.querySelectorAll('[data-review]');
+    const reviewChoices = document.querySelectorAll('[data-review-choice]');
     const resetProgress = document.getElementById('resetProgress');
 
     let currentLang = 'en';
@@ -800,14 +967,24 @@
       return {
         completed: [],
         unlocked: ['tipoff'],
-        finalComplete: false
+        finalComplete: false,
+        reviewAnswered: []
       };
+    }
+
+    function ensureProgressShape() {
+      if (!Array.isArray(progress.reviewAnswered)) progress.reviewAnswered = [];
     }
 
     function saveProgress() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
       } catch (error) {}
+    }
+
+    function isReviewComplete() {
+      ensureProgressShape();
+      return ['r1','r2','r3','r4','r5','r6'].every(id => progress.reviewAnswered.includes(id));
     }
 
     function isCompleted(section) {
@@ -904,15 +1081,36 @@
       const finalUnlocked = isUnlocked('final');
       const finalCard = document.getElementById('final');
       finalCard.classList.toggle('locked', !finalUnlocked);
-      finalBuzzerBtn.disabled = !finalUnlocked || progress.finalComplete;
+
+      reviewCards.forEach(card => {
+        card.classList.toggle('locked-review', !finalUnlocked);
+      });
+
+      reviewChoices.forEach(choice => {
+        const id = choice.dataset.reviewChoice;
+        const answered = progress.reviewAnswered.includes(id);
+        choice.classList.toggle('selected', answered);
+        choice.classList.toggle('correct', answered && choice.dataset.correct === 'true');
+      });
+
+      document.querySelectorAll('[data-review-explanation]').forEach(explanation => {
+        const id = explanation.dataset.reviewExplanation;
+        explanation.classList.toggle('show', progress.reviewAnswered.includes(id));
+      });
+
+      const reviewComplete = finalUnlocked && isReviewComplete();
+      finalBuzzerBtn.disabled = !reviewComplete || progress.finalComplete;
 
       if (progress.finalComplete) {
         finalBuzzerBtn.classList.add('done');
         finalBuzzerBtn.textContent = currentLang === 'es' ? 'Juego 001 Completado ✓' : 'Game 001 Complete ✓';
         nextGameBox.classList.add('unlocked');
-      } else if (finalUnlocked) {
+      } else if (reviewComplete) {
         finalBuzzerBtn.classList.remove('done');
         finalBuzzerBtn.textContent = currentLang === 'es' ? 'Sonar Bocina Final → Desbloquear Juego 002' : 'Hit Final Buzzer → Unlock Game 002';
+      } else if (finalUnlocked) {
+        finalBuzzerBtn.classList.remove('done');
+        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Completa el Repaso Final' : 'Complete Final Review';
       } else {
         finalBuzzerBtn.classList.remove('done');
         finalBuzzerBtn.textContent = currentLang === 'es' ? 'Bocina Final Bloqueada' : 'Final Buzzer Locked';
@@ -955,8 +1153,19 @@
       });
     });
 
+    reviewChoices.forEach(choice => {
+      choice.addEventListener('click', () => {
+        if (!isUnlocked('final')) return;
+        const id = choice.dataset.reviewChoice;
+        ensureProgressShape();
+        if (!progress.reviewAnswered.includes(id)) progress.reviewAnswered.push(id);
+        saveProgress();
+        renderProgress();
+      });
+    });
+
     finalBuzzerBtn.addEventListener('click', () => {
-      if (!isUnlocked('final')) return;
+      if (!isUnlocked('final') || !isReviewComplete()) return;
       progress.finalComplete = true;
       if (!progress.completed.includes('final')) progress.completed.push('final');
       saveProgress();
@@ -966,7 +1175,7 @@
 
     resetProgress.addEventListener('click', () => {
       localStorage.removeItem(STORAGE_KEY);
-      progress = { completed: [], unlocked: ['tipoff'], finalComplete: false };
+      progress = { completed: [], unlocked: ['tipoff'], finalComplete: false, reviewAnswered: [] };
       closeAllQuarters();
       renderProgress();
       document.getElementById('tipoff').scrollIntoView({ behavior: 'smooth', block: 'start' });
