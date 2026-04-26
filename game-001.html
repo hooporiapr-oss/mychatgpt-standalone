@@ -11,13 +11,11 @@
       --muted: #5f6368;
       --line: #e5e7eb;
       --soft: #f8fafc;
-      --warm: #fff7ed;
-      --purple: #6d28d9;
-      --purple-dark: #4c1d95;
-      --purple-soft: #f3e8ff;
-      --orange: #ea580c;
-      --success: #15803d;
-      --success-bg: #dcfce7;
+      --green: #9B59B6;
+      --green-dark: #6F3F83;
+      --green-soft: rgba(155, 89, 182, 0.14);
+      --success: #00D9A5;
+      --success-bg: rgba(0, 217, 165, 0.16);
       --radius: 22px;
       --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
       --max: 920px;
@@ -69,19 +67,19 @@
     .brand-mark {
       width: 46px;
       height: 46px;
-      border: 2px solid var(--purple);
+      border: 2px solid var(--green);
       display: grid;
       place-items: center;
       font-weight: 900;
       font-size: 18px;
       letter-spacing: -0.04em;
-      color: var(--purple);
+      color: var(--green);
       background: #fff;
     }
 
     .brand-copy small {
       display: block;
-      color: var(--purple);
+      color: var(--green);
       font-size: 11px;
       font-weight: 900;
       letter-spacing: 0.16em;
@@ -139,8 +137,22 @@
     }
 
     .lang-btn.active {
-      background: var(--purple);
+      background: var(--green);
       color: #fff;
+    }
+
+    .header-image {
+      width: 100%;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+      background: #fff;
     }
 
     .page {
@@ -160,25 +172,10 @@
     }
 
     .pad { padding: 24px; }
-    .image-card { padding: 14px; }
-
-    .hero-image-wrap {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      overflow: hidden;
-    }
-
-    .hero-image {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      background: #fff;
-    }
 
     .eyebrow {
       margin: 0 0 10px;
-      color: var(--purple);
+      color: var(--green);
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.18em;
@@ -201,8 +198,8 @@
 
     .rule {
       margin-top: 18px;
-      border-left: 5px solid var(--purple);
-      background: var(--purple-soft);
+      border-left: 5px solid var(--green);
+      background: var(--green-soft);
       padding: 14px 16px;
       font-weight: 800;
       font-size: 17px;
@@ -259,9 +256,9 @@
     }
 
     .step.active {
-      background: var(--purple);
+      background: var(--green);
       color: #fff;
-      border-color: var(--purple);
+      border-color: var(--green);
     }
 
     .step.done {
@@ -285,7 +282,7 @@
 
     .note {
       border: 1px solid var(--line);
-      border-left: 5px solid var(--purple);
+      border-left: 5px solid var(--green);
       border-radius: 16px;
       background: #fafafa;
       padding: 18px;
@@ -300,9 +297,9 @@
       margin-top: 16px;
     }
 
-    .box.orange {
-      background: var(--purple-soft);
-      border-left: 5px solid var(--purple);
+    .box.green {
+      background: var(--green-soft);
+      border-left: 5px solid var(--green);
     }
 
     .box-label {
@@ -311,7 +308,7 @@
       font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--purple);
+      color: var(--green);
       margin-bottom: 10px;
     }
 
@@ -331,7 +328,7 @@
     }
 
     .choice b {
-      color: var(--purple);
+      color: var(--green);
       display: block;
       margin-bottom: 4px;
     }
@@ -356,8 +353,8 @@
     .btn,
     .review-choice {
       display: inline-block;
-      border: 1px solid var(--purple);
-      background: var(--purple);
+      border: 1px solid var(--green);
+      background: var(--green);
       color: #fff;
       padding: 12px 16px;
       border-radius: 999px;
@@ -372,8 +369,8 @@
 
     .btn.secondary {
       background: #fff;
-      color: var(--purple);
-      border-color: var(--purple);
+      color: var(--green);
+      border-color: var(--green);
     }
 
     .btn.done {
@@ -407,13 +404,13 @@
     .badge {
       width: 52px;
       height: 52px;
-      border: 2px solid var(--purple);
+      border: 2px solid var(--green);
       border-radius: 14px;
       display: grid;
       place-items: center;
       font-weight: 900;
       background: #fff;
-      color: var(--purple);
+      color: var(--green);
     }
 
     details.accordion.done .badge {
@@ -438,14 +435,14 @@
     .lock-note {
       display: inline-block;
       margin-top: 6px;
-      color: var(--purple);
+      color: var(--green);
       font-size: 12px;
       font-weight: 900;
     }
 
     .plus {
       font-size: 28px;
-      color: var(--purple);
+      color: var(--green);
       line-height: 1;
     }
 
@@ -508,9 +505,9 @@
     }
 
     .review-choice.selected {
-      background: var(--purple-soft);
-      border-color: var(--purple);
-      color: var(--purple-dark);
+      background: var(--green-soft);
+      border-color: var(--green);
+      color: var(--green-dark);
     }
 
     .review-choice.correct {
@@ -523,7 +520,7 @@
       display: none;
       margin-top: 12px;
       padding: 14px;
-      border-left: 4px solid var(--purple);
+      border-left: 4px solid var(--green);
       background: #fafafa;
       border-radius: 10px;
       font-weight: 700;
@@ -543,9 +540,9 @@
     .next-box.unlocked { display: block; }
 
     .coach-close {
-      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
       color: #fff;
-      border-color: var(--purple);
+      border-color: var(--green);
     }
 
     .coach-close p {
@@ -563,7 +560,6 @@
     @media (max-width: 760px) {
       .page { padding: 16px 14px 60px; }
       .pad { padding: 18px; }
-      .image-card { padding: 10px; }
       .meta-grid { grid-template-columns: 1fr; }
       .progress-grid { grid-template-columns: repeat(2, 1fr); }
       .choice-grid,
@@ -576,7 +572,7 @@
       .badge { width: 46px; height: 46px; }
       .top-links { width: 100%; }
       .top-links a { flex: 1 1 auto; text-align: center; }
-      .hero-image { width: 100%; height: auto; object-fit: contain; }
+      .header-image img { width: 100%; height: auto; object-fit: contain; }
     }
   </style>
 </head>
@@ -597,7 +593,6 @@
           <a href="#final-buzzer" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
         </div>
       </div>
-
       <div class="lang-row">
         <div class="lang-toggle">
           <button class="lang-btn active" type="button" data-lang="en">English</button>
@@ -607,14 +602,12 @@
     </div>
   </nav>
 
+  <header class="header-image">
+    <img src="./ready.png" alt="Get Ready Hoops header image" />
+  </header>
+
   <main class="page">
     <div class="stack">
-      <section class="card image-card">
-        <div class="hero-image-wrap">
-          <img src="ready.png" alt="Get Ready Hoops header image" class="hero-image" />
-        </div>
-      </section>
-
       <section class="card pad">
         <p class="eyebrow" data-en="Free Preview • Game 001" data-es="Vista Gratis • Juego 001">Free Preview • Game 001</p>
         <h1 data-en="Value" data-es="Valor">Value</h1>
@@ -653,7 +646,7 @@
           <p><strong data-en="What actually makes you valuable?" data-es="¿Qué realmente te hace valioso?">What actually makes you valuable?</strong></p>
         </div>
 
-        <div class="box orange">
+        <div class="box green">
           <span class="box-label" data-en="Tip-Off Question" data-es="Pregunta del Salto Inicial">Tip-Off Question</span>
           <p><strong data-en="Why would someone choose you?" data-es="¿Por qué alguien te escogería a ti?">Why would someone choose you?</strong></p>
           <div class="choice-grid">
@@ -722,7 +715,7 @@
         </summary>
         <div class="accordion-body">
           <div class="note"><span class="box-label">Bori</span><p data-en="If there is no evidence, create evidence. Proof has to be observable." data-es="Si no hay evidencia, crea evidencia. La prueba tiene que poder observarse.">If there is no evidence, create evidence. Proof has to be observable.</p></div>
-          <div class="box orange">
+          <div class="box green">
             <span class="box-label" data-en="Evidence Check" data-es="Chequeo de Evidencia">Evidence Check</span>
             <p data-en="Where does your value show up most clearly?" data-es="¿Dónde se ve tu valor más claro?">Where does your value show up most clearly?</p>
             <div class="choice-grid">
@@ -751,7 +744,7 @@
         </summary>
         <div class="accordion-body">
           <div class="note"><span class="box-label" data-en="Reality Check" data-es="Chequeo de Realidad">Reality Check</span><p data-en="Potential opens the conversation. Trust earns the responsibility." data-es="El potencial abre la conversación. La confianza gana la responsabilidad.">Potential opens the conversation. Trust earns the responsibility.</p></div>
-          <div class="box orange">
+          <div class="box green">
             <p data-en="If a coach watched you today, what would they trust?" data-es="Si un coach te viera hoy, ¿qué confiaría de ti?">If a coach watched you today, what would they trust?</p>
             <div class="choice-grid">
               <div class="choice"><b>A</b><span data-en="Effort" data-es="Esfuerzo">Effort</span></div>
@@ -779,7 +772,7 @@
         </summary>
         <div class="accordion-body">
           <div class="note"><span class="box-label" data-en="Game Situation" data-es="Situación del Juego">Game Situation</span><p data-en="Score is close. Crowd is loud. Your defender is pressuring you. Your team needs one reliable player." data-es="El juego está cerrado. La gente está encendida. Tu defensor te presiona. Tu equipo necesita un jugador confiable.">Score is close. Crowd is loud. Your defender is pressuring you. Your team needs one reliable player.</p></div>
-          <div class="box orange">
+          <div class="box green">
             <p data-en="What do you do when your first option gets taken away?" data-es="¿Qué haces cuando te quitan tu primera opción?">What do you do when your first option gets taken away?</p>
             <div class="choice-grid">
               <div class="choice"><b>A</b><span data-en="Force it" data-es="Forzarla">Force it</span></div>
@@ -807,7 +800,7 @@
         </summary>
         <div class="accordion-body">
           <div class="note"><span class="box-label" data-en="Decision Point" data-es="Momento de Decisión">Decision Point</span><p data-en="A player who understands value asks: what do I need to prove so opportunity makes sense?" data-es="Un jugador que entiende el valor pregunta: ¿qué necesito probar para que la oportunidad tenga sentido?">A player who understands value asks: what do I need to prove so opportunity makes sense?</p></div>
-          <div class="box orange">
+          <div class="box green">
             <p data-en="Pick one value target for this week." data-es="Escoge un objetivo de valor para esta semana.">Pick one value target for this week.</p>
             <div class="choice-grid">
               <div class="choice"><b>A</b><span data-en="Reliable effort" data-es="Esfuerzo confiable">Reliable effort</span></div>
@@ -844,8 +837,8 @@
             <span class="box-label" data-en="Question 2" data-es="Pregunta 2">Question 2</span>
             <h3 data-en="What makes a value statement strong?" data-es="¿Qué hace fuerte una declaración de valor?">What makes a value statement strong?</h3>
             <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It sounds confident" data-es="Suena confiada">It sounds confident</button>
               <button class="review-choice" type="button" data-review-choice="r2" data-correct="true" data-en="It has proof" data-es="Tiene evidencia">It has proof</button>
+              <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It sounds confident" data-es="Suena confiada">It sounds confident</button>
               <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It sounds different" data-es="Suena diferente">It sounds different</button>
               <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It looks popular" data-es="Se ve popular">It looks popular</button>
             </div>
@@ -858,8 +851,8 @@
             <div class="review-options">
               <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only online" data-es="Solo en línea">Only online</button>
               <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only when things go well" data-es="Solo cuando todo va bien">Only when things go well</button>
-              <button class="review-choice" type="button" data-review-choice="r3" data-correct="true" data-en="Practice, games, film, trust, and consistency" data-es="Práctica, juegos, video, confianza y consistencia">Practice, games, film, trust, and consistency</button>
               <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only in your head" data-es="Solo en tu mente">Only in your head</button>
+              <button class="review-choice" type="button" data-review-choice="r3" data-correct="true" data-en="Practice, games, film, trust, and consistency" data-es="Práctica, juegos, video, confianza y consistencia">Practice, games, film, trust, and consistency</button>
             </div>
             <div class="review-explanation" data-review-explanation="r3" data-en="Value needs evidence. Practice, games, film, coach trust, teammate trust, and consistency reveal what is real." data-es="El valor necesita evidencia. Práctica, juegos, video, confianza del coach, confianza de compañeros y consistencia revelan lo real.">Value needs evidence. Practice, games, film, coach trust, teammate trust, and consistency reveal what is real.</div>
           </div>
@@ -880,8 +873,8 @@
             <span class="box-label" data-en="Question 5" data-es="Pregunta 5">Question 5</span>
             <h3 data-en="When does real value get exposed?" data-es="¿Cuándo se expone el valor real?">When does real value get exposed?</h3>
             <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="When everything is easy" data-es="Cuando todo está fácil">When everything is easy</button>
               <button class="review-choice" type="button" data-review-choice="r5" data-correct="true" data-en="When pressure hits" data-es="Cuando llega la presión">When pressure hits</button>
+              <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="When everything is easy" data-es="Cuando todo está fácil">When everything is easy</button>
               <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only during highlights" data-es="Solo en highlights">Only during highlights</button>
               <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only when you score" data-es="Solo cuando anotas">Only when you score</button>
             </div>
@@ -893,8 +886,8 @@
             <h3 data-en="What should a player leave Game 001 with?" data-es="¿Con qué debe salir un jugador del Juego 001?">What should a player leave Game 001 with?</h3>
             <div class="review-options">
               <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="A vague goal" data-es="Una meta vaga">A vague goal</button>
-              <button class="review-choice" type="button" data-review-choice="r6" data-correct="true" data-en="A measurable action" data-es="Una acción medible">A measurable action</button>
               <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="A good feeling" data-es="Un buen sentimiento">A good feeling</button>
+              <button class="review-choice" type="button" data-review-choice="r6" data-correct="true" data-en="A measurable action" data-es="Una acción medible">A measurable action</button>
               <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="More hype" data-es="Más hype">More hype</button>
             </div>
             <div class="review-explanation" data-review-explanation="r6" data-en="If it cannot be measured, it is not ready. Serious players turn value into action." data-es="Si no se puede medir, no está listo. Los jugadores serios convierten el valor en acción.">If it cannot be measured, it is not ready. Serious players turn value into action.</div>
@@ -907,16 +900,21 @@
         </div>
 
         <div class="next-box" id="nextGameBox">
-          <span class="box-label" data-en="Game 002 Unlocked" data-es="Juego 002 Desbloqueado">Game 002 Unlocked</span>
-          <p data-en="Game 001 complete. Next game: Habits. Now we test whether your actions match what you say you want." data-es="Juego 001 completado. Próximo juego: Hábitos. Ahora vamos a probar si tus acciones van con lo que dices que quieres.">Game 001 complete. Next game: Habits. Now we test whether your actions match what you say you want.</p>
-          <div style="margin-top:14px;"><a class="btn" href="game-002.html" data-en="Enter Game 002 →" data-es="Entrar al Juego 002 →">Enter Game 002 →</a></div>
+          <span class="box-label" data-en="Overtime Drill 001 Unlocked" data-es="Overtime Drill 001 Desbloqueado">Overtime Drill 001 Unlocked</span>
+          <h2 class="section-title" data-en="Online Cognitive Program" data-es="Programa Cognitivo Online">Online Cognitive Program</h2>
+          <p data-en="Game 001 is complete. Before Game 002, enter our basketball reaction training: The React. This is where value moves from understanding to reaction speed." data-es="Juego 001 completado. Antes del Juego 002, entra a nuestro entrenamiento de reacción para baloncesto: The React. Aquí el valor pasa de entender a reaccionar rápido.">Game 001 is complete. Before Game 002, enter our basketball reaction training: The React. This is where value moves from understanding to reaction speed.</p>
+          <div class="note">
+            <span class="box-label" data-en="Basketball Reaction" data-es="Reacción de Baloncesto">Basketball Reaction</span>
+            <p data-en="The React trains visual awareness, quick decisions, and response under pressure. No overthinking. See it. Read it. React." data-es="The React entrena conciencia visual, decisiones rápidas y respuesta bajo presión. Sin sobrepensar. Míralo. Léelo. Reacciona.">The React trains visual awareness, quick decisions, and response under pressure. No overthinking. See it. Read it. React.</p>
+          </div>
+          <div style="margin-top:14px;"><a class="btn" href="001-react.html" data-en="Enter Overtime Drill 001 →" data-es="Entrar al Overtime Drill 001 →">Enter Overtime Drill 001 →</a></div>
         </div>
       </section>
 
       <section class="card pad coach-close">
         <p>
           <strong data-en="Coach Close:" data-es="Cierre del Coach:">Coach Close:</strong>
-          <span data-en=" Game 001 is not about money yet. It is about value. Because if there is no value, there is nothing for money to follow." data-es=" El Juego 001 todavía no se trata del dinero. Se trata del valor. Porque si no hay valor, no hay nada que el dinero pueda seguir."> Game 001 is not about money yet. It is about value. Because if there is no value, there is nothing for money to follow.</span>
+          <span data-en=" Game 001 is not about money yet. It is about value. Then Overtime trains reaction. Learn it, review it, react." data-es=" El Juego 001 todavía no se trata del dinero. Se trata del valor. Después Overtime entrena reacción. Apréndelo, repásalo, reacciona."> Game 001 is not about money yet. It is about value. Then Overtime trains reaction. Learn it, review it, react.</span>
         </p>
       </section>
 
@@ -925,7 +923,7 @@
   </main>
 
   <script>
-    const STORAGE_KEY = 'hm-game-001-purple-v1';
+    const STORAGE_KEY = 'hm-game-001-green-v1';
     const unlockMap = { tipoff:'q1', q1:'q2', q2:'half', half:'q3', q3:'q4', q4:'final' };
     const reviews = ['r1','r2','r3','r4','r5','r6'];
 
@@ -1050,7 +1048,7 @@
       } else if(ready){
         finalBuzzerBtn.disabled = false;
         finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Completar Juego 001 → Desbloquear Juego 002' : 'Complete Game 001 → Unlock Game 002';
+        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Completar Juego 001 → Desbloquear Overtime' : 'Complete Game 001 → Unlock Overtime';
         nextGameBox.classList.remove('unlocked');
       } else {
         finalBuzzerBtn.disabled = true;
