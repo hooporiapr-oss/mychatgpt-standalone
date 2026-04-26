@@ -157,6 +157,27 @@ html,body{height:100%;overflow-x:hidden;overflow-y:auto;font-family:'Outfit',san
 @media(max-height:550px){.demo-court{width:180px;height:180px}.play-court-wrap{max-width:260px}.play-stat-value{font-size:1.3rem}.play-message-text{font-size:.8rem}.play-action-btn{padding:10px;font-size:1rem}}
 @media(max-width:360px){.play-court-wrap{max-width:280px}.play-court{gap:3px;padding:6px}.demo-court{width:180px;height:180px}}
 </style>
+<script>
+  // Reset Game 001 when returning from the reaction drill
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const shouldReset = params.get("reset") === "1";
+
+    if (shouldReset) {
+      Object.keys(localStorage).forEach(function (key) {
+        if (
+          key.includes("game-001") ||
+          key.includes("hm-game-001") ||
+          key.includes("question-flow")
+        ) {
+          localStorage.removeItem(key);
+        }
+      });
+
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  })();
+</script>
 </head>
 <body>
 <nav class="mini-nav">
