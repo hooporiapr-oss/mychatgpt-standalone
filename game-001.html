@@ -359,6 +359,46 @@
     .complete-status { color: #a1a1aa; font-size: 13px; font-weight: 850; }
     .complete-status.done { color: #86efac; }
 
+    .ready-header {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.48);
+      border-radius: 34px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .ready-header.locked {
+      opacity: .68;
+    }
+
+    .ready-image {
+      display: block;
+      width: 100%;
+      height: clamp(220px, 32vw, 390px);
+      object-fit: cover;
+      object-position: center;
+      background: #000;
+    }
+
+    .ready-overlay {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      z-index: 2;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.58);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: #fed7aa;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
     .final-card { margin-top: 18px; padding: 0; background: linear-gradient(135deg, rgba(249,115,22,0.18), rgba(251,191,36,0.07)), var(--panel-strong); overflow: hidden; position: relative; }
     details.final-card summary { list-style: none; cursor: pointer; padding: clamp(24px, 4vw, 38px); display: grid; grid-template-columns: 76px minmax(0,1fr) auto; gap: 16px; align-items: center; }
     details.final-card summary::-webkit-details-marker { display: none; }
@@ -822,6 +862,11 @@
       </div>
     </section>
 
+    <section class="ready-header locked" id="readyHeader">
+      <img class="ready-image" src="ready.png" alt="Are you ready basketball arena" loading="lazy" />
+      <div class="ready-overlay" data-en="Final Buzzer Entrance" data-es="Entrada a la Bocina Final">Final Buzzer Entrance</div>
+    </section>
+
     <details id="final" class="final-card locked" data-section="final">
       <summary>
         <div class="period">FB</div>
@@ -976,6 +1021,7 @@
     const reviewCards = document.querySelectorAll('[data-review]');
     const reviewChoices = document.querySelectorAll('[data-review-choice]');
     const reviewExplanations = document.querySelectorAll('[data-review-explanation]');
+    const readyHeader = document.getElementById('readyHeader');
 
     let currentLang = 'en';
     let progress = normalizeProgress(loadProgress());
@@ -1145,6 +1191,7 @@
       const finalUnlocked = isUnlocked('final');
       const finalCard = document.getElementById('final');
       if (finalCard) finalCard.classList.toggle('locked', !finalUnlocked);
+      if (readyHeader) readyHeader.classList.toggle('locked', !finalUnlocked);
 
       reviewCards.forEach(function(card) {
         card.classList.toggle('locked-review', !finalUnlocked);
