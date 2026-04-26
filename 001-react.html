@@ -161,7 +161,7 @@ html,body{height:100%;overflow-x:hidden;overflow-y:auto;font-family:'Outfit',san
 <body>
 <nav class="mini-nav">
 <div class="nav-row">
-<a href="/index.html" class="back-btn" id="backBtn">← Back</a>
+<a href="./game-001.html" class="back-btn" id="backBtn">← Game 001</a>
 <div class="nav-title">THE REACT</div>
 <div class="nav-right">
 <div class="nav-lang">
@@ -399,5 +399,46 @@ initDC();uUI();startDemo();uTr();
 </script>
 <script>window.COGNITIVE_TEST_NAME='react';</script>
 <script src="/cognitive-sync.js"></script>
+<script>
+  // Hoops Money routing only — does not change drill design
+  document.addEventListener("DOMContentLoaded", function () {
+    const backBtn = document.getElementById("backBtn");
+
+    if (backBtn) {
+      backBtn.href = "./game-001.html";
+      backBtn.textContent = "← Game 001";
+    }
+
+    const goToGame002 = function () {
+      window.location.href = "./game-002.html";
+    };
+
+    // Adds a clean completion route without touching the drill's visual system
+    const completeBtn = document.createElement("button");
+    completeBtn.textContent = "COMPLETE DRILL → GAME 002";
+    completeBtn.type = "button";
+    completeBtn.style.cssText = `
+      position: fixed;
+      left: 50%;
+      bottom: calc(16px + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      z-index: 3000;
+      width: min(340px, calc(100% - 28px));
+      padding: 14px 18px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #9B59B6, #A873B8);
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(155,89,182,0.35);
+    `;
+
+    completeBtn.addEventListener("click", goToGame002);
+    document.body.appendChild(completeBtn);
+  });
+</script>
 </body>
 </html>
