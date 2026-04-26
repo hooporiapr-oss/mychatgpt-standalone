@@ -11,11 +11,11 @@
       --muted: #5f6368;
       --line: #e5e7eb;
       --soft: #f8fafc;
-      --purple: #6d28d9;
-      --purple-dark: #4c1d95;
-      --purple-soft: #f3e8ff;
-      --success: #15803d;
-      --success-bg: #dcfce7;
+      --brand: #9B59B6;
+      --brand-dark: #6F3F83;
+      --brand-soft: rgba(155, 89, 182, 0.14);
+      --success: #00D9A5;
+      --success-soft: rgba(0, 217, 165, 0.16);
       --radius: 22px;
       --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
       --max: 920px;
@@ -23,6 +23,7 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       background: var(--bg);
@@ -67,19 +68,19 @@
     .brand-mark {
       width: 46px;
       height: 46px;
-      border: 2px solid var(--purple);
+      border: 2px solid var(--brand);
       display: grid;
       place-items: center;
       font-weight: 900;
       font-size: 18px;
       letter-spacing: -0.04em;
-      color: var(--purple);
+      color: var(--brand);
       background: #fff;
     }
 
     .brand-copy small {
       display: block;
-      color: var(--purple);
+      color: var(--brand);
       font-size: 11px;
       font-weight: 900;
       letter-spacing: 0.16em;
@@ -137,7 +138,7 @@
     }
 
     .lang-btn.active {
-      background: var(--purple);
+      background: var(--brand);
       color: #fff;
     }
 
@@ -161,7 +162,10 @@
       padding: 22px 18px 80px;
     }
 
-    .stack { display: grid; gap: 20px; }
+    .stack {
+      display: grid;
+      gap: 20px;
+    }
 
     .card {
       background: #fff;
@@ -171,26 +175,13 @@
       overflow: hidden;
     }
 
-    .pad { padding: 24px; }
-    .image-card { padding: 14px; }
-
-    .hero-image-wrap {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      overflow: hidden;
-    }
-
-    .hero-image {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      background: #fff;
+    .pad {
+      padding: 24px;
     }
 
     .eyebrow {
       margin: 0 0 10px;
-      color: var(--purple);
+      color: var(--brand);
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.18em;
@@ -204,6 +195,13 @@
       letter-spacing: -0.065em;
     }
 
+    h2.section-title {
+      margin: 0;
+      font-size: clamp(28px, 4.8vw, 44px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
     .subtitle {
       margin: 18px 0 0;
       font-size: clamp(18px, 2.5vw, 24px);
@@ -211,16 +209,22 @@
       color: #222;
     }
 
+    .section-sub {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
     .rule {
       margin-top: 18px;
-      border-left: 5px solid var(--purple);
-      background: var(--purple-soft);
+      border-left: 5px solid var(--brand);
+      background: var(--brand-soft);
       padding: 14px 16px;
       font-weight: 800;
       font-size: 17px;
     }
 
-    .cta-row {
+    .btn-row {
       margin-top: 22px;
       display: flex;
       flex-wrap: wrap;
@@ -228,9 +232,11 @@
     }
 
     .btn {
-      display: inline-block;
-      border: 1px solid var(--purple);
-      background: var(--purple);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--brand);
+      background: var(--brand);
       color: #fff;
       padding: 12px 16px;
       border-radius: 999px;
@@ -240,12 +246,14 @@
       transition: transform 0.15s ease, background 0.15s ease;
     }
 
-    .btn:hover { transform: translateY(-1px); }
+    .btn:hover {
+      transform: translateY(-1px);
+    }
 
     .btn.secondary {
       background: #fff;
-      color: var(--purple);
-      border-color: var(--purple);
+      color: var(--brand);
+      border-color: var(--brand);
     }
 
     .meta-grid {
@@ -272,24 +280,13 @@
       margin-bottom: 6px;
     }
 
-    .meta strong { font-size: 16px; }
-
-    .section-title {
-      margin: 0;
-      font-size: clamp(28px, 4.8vw, 44px);
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-
-    .section-sub {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 15px;
+    .meta strong {
+      font-size: 16px;
     }
 
     .note {
       border: 1px solid var(--line);
-      border-left: 5px solid var(--purple);
+      border-left: 5px solid var(--brand);
       border-radius: 16px;
       background: #fafafa;
       padding: 18px;
@@ -302,115 +299,168 @@
       font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--purple);
+      color: var(--brand);
       margin-bottom: 10px;
     }
 
-    .game-grid {
+    .game-grid,
+    .drill-grid,
+    .method-grid {
       display: grid;
       gap: 14px;
       margin-top: 18px;
     }
 
-    .game-card {
+    .game-card,
+    .drill-card,
+    .method-card {
       border: 1px solid var(--line);
       border-radius: 18px;
       background: #fff;
       padding: 18px;
+    }
+
+    .game-card {
       display: grid;
       grid-template-columns: 64px 1fr auto;
       gap: 14px;
       align-items: center;
     }
 
-    .game-badge {
+    .game-badge,
+    .drill-badge {
       width: 56px;
       height: 56px;
-      border: 2px solid var(--purple);
+      border: 2px solid var(--brand);
       border-radius: 16px;
       display: grid;
       place-items: center;
       font-weight: 900;
-      color: var(--purple);
+      color: var(--brand);
+      background: #fff;
+      flex: 0 0 auto;
     }
 
-    .game-copy strong {
+    .game-copy strong,
+    .drill-copy strong,
+    .method-card strong {
       display: block;
       font-size: 21px;
       line-height: 1.1;
       letter-spacing: -0.02em;
     }
 
-    .game-copy span {
+    .game-copy span,
+    .drill-copy span,
+    .method-card p {
       display: block;
       color: var(--muted);
-      margin-top: 4px;
+      margin-top: 5px;
+      font-size: 14px;
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(0, 217, 165, 0.35);
       border-radius: 999px;
       padding: 8px 12px;
       font-size: 12px;
       font-weight: 900;
-      color: var(--purple);
-      background: var(--purple-soft);
+      color: #064e3b;
+      background: var(--success-soft);
       white-space: nowrap;
     }
 
     .method-grid {
-      display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 18px;
     }
 
-    .method {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
+    .method-card {
       background: var(--soft);
     }
 
-    .method strong {
-      display: block;
+    .drill-card {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .drill-card:nth-child(1) .drill-badge {
+      border-color: #9B59B6;
+      color: #9B59B6;
+    }
+
+    .drill-card:nth-child(2) .drill-badge {
+      border-color: #FF6B35;
+      color: #FF6B35;
+    }
+
+    .drill-card:nth-child(3) .drill-badge {
+      border-color: #00CED1;
+      color: #0284c7;
+    }
+
+    .drill-card:nth-child(4) .drill-badge {
+      border-color: #00D9A5;
+      color: #047857;
+    }
+
+    .drill-card:nth-child(5) .drill-badge {
+      border-color: #9ACD32;
+      color: #4d7c0f;
+    }
+
+    .drill-tag {
+      display: inline-flex;
+      margin-top: 10px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .cognitive-quote {
+      border: 1px solid rgba(0, 217, 165, 0.35);
+      background: var(--success-soft);
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 18px;
       font-size: 18px;
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
+      font-weight: 850;
     }
 
-    .method p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .paid-card {
-      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+    .paid-card,
+    .coach-close {
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
       color: #fff;
-      border-color: var(--purple);
+      border-color: var(--brand);
     }
 
-    .paid-card .eyebrow { color: #ddd6fe; }
-    .paid-card .subtitle { color: #f5f3ff; }
+    .paid-card .eyebrow,
+    .coach-close .box-label {
+      color: #f3e8ff;
+    }
+
+    .paid-card .subtitle,
+    .paid-card .section-sub {
+      color: #f5f3ff;
+    }
+
     .paid-card .rule {
       background: rgba(255, 255, 255, 0.1);
       border-left-color: #fff;
       color: #fff;
     }
+
     .paid-card .btn {
       background: #fff;
-      color: var(--purple-dark);
+      color: var(--brand-dark);
       border-color: #fff;
-    }
-
-    .coach-close {
-      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
-      color: #fff;
-      border-color: var(--purple);
     }
 
     .coach-close p {
@@ -426,28 +476,59 @@
     }
 
     @media (max-width: 760px) {
-      .page { padding: 16px 14px 60px; }
-      .pad { padding: 18px; }
-      .image-card { padding: 10px; }
+      .page {
+        padding: 16px 14px 60px;
+      }
+
+      .pad {
+        padding: 18px;
+      }
+
       .meta-grid,
-      .method-grid { grid-template-columns: 1fr; }
+      .method-grid {
+        grid-template-columns: 1fr;
+      }
+
       .game-card {
         grid-template-columns: 52px 1fr;
       }
+
       .game-card .pill {
         grid-column: 1 / -1;
         justify-self: start;
       }
-      .game-badge {
+
+      .game-badge,
+      .drill-badge {
         width: 46px;
         height: 46px;
       }
-      .top-links { width: 100%; }
-      .top-links a { flex: 1 1 auto; text-align: center; }
-      .hero-image { width: 100%; height: auto; object-fit: contain; }
+
+      .top-links {
+        width: 100%;
+      }
+
+      .top-links a {
+        flex: 1 1 auto;
+        text-align: center;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .btn-row {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .drill-card {
+        grid-template-columns: 52px 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
   <nav class="topbar">
     <div class="topbar-inner">
@@ -461,8 +542,8 @@
         </div>
 
         <div class="top-links">
-          <a href="#preview" data-en="Free Preview" data-es="Vista Gratis">Free Preview</a>
-          <a href="#method" data-en="Method" data-es="Método">Method</a>
+          <a href="#preview" data-en="Preview" data-es="Vista">Preview</a>
+          <a href="#cognitive" data-en="Cognitive" data-es="Cognitivo">Cognitive</a>
           <a href="game-001.html" data-en="Start" data-es="Comenzar">Start</a>
         </div>
       </div>
@@ -477,39 +558,48 @@
   </nav>
 
   <header class="header-image">
-    <img src="ready.png" alt="Get Ready Hoops header image" />
+    <img src="./ready.png" alt="Get Ready Hoops header image" />
   </header>
 
   <main class="page">
     <div class="stack">
-
       <section class="card pad">
         <p class="eyebrow" data-en="Get Ready Hoops Presents" data-es="Get Ready Hoops Presenta">Get Ready Hoops Presents</p>
         <h1 data-en="Hoops Money" data-es="Hoops Money">Hoops Money</h1>
-        <p class="subtitle" data-en="The Business of Basketball. A 30-game financial literacy and accountability program for players who want to understand value, habits, influence, opportunity, visibility, brand, and readiness." data-es="El Negocio del Baloncesto. Un programa de 30 juegos de alfabetización financiera y accountability para jugadores que quieren entender valor, hábitos, influencia, oportunidad, visibilidad, marca y preparación.">
-          The Business of Basketball. A 30-game financial literacy and accountability program for players who want to understand value, habits, influence, opportunity, visibility, brand, and readiness.
+        <p class="subtitle" data-en="The Business of Basketball. A 30-game financial literacy and accountability program for players learning value, habits, influence, opportunity, visibility, brand, decisions, and readiness." data-es="El Negocio del Baloncesto. Un programa de 30 juegos de alfabetización financiera y accountability para jugadores que están aprendiendo valor, hábitos, influencia, oportunidad, visibilidad, marca, decisiones y preparación.">
+          The Business of Basketball. A 30-game financial literacy and accountability program for players learning value, habits, influence, opportunity, visibility, brand, decisions, and readiness.
         </p>
+
         <div class="rule" data-en="This is not motivation. This is accountability. If you say you want it, prove it." data-es="Esto no es motivación. Esto es accountability. Si dices que lo quieres, pruébalo.">
           This is not motivation. This is accountability. If you say you want it, prove it.
         </div>
 
-        <div class="cta-row">
+        <div class="btn-row">
           <a class="btn" href="game-001.html" data-en="Start Game 001 →" data-es="Comenzar Juego 001 →">Start Game 001 →</a>
-          <a class="btn secondary" href="#preview" data-en="View Free Preview" data-es="Ver Vista Gratis">View Free Preview</a>
+          <a class="btn secondary" href="#cognitive" data-en="See Cognitive Training" data-es="Ver Entrenamiento Cognitivo">See Cognitive Training</a>
         </div>
 
         <div class="meta-grid">
-          <div class="meta"><span data-en="Season" data-es="Temporada">Season</span><strong>30 Games</strong></div>
-          <div class="meta"><span data-en="Format" data-es="Formato">Format</span><strong data-en="Lesson + Review" data-es="Lección + Repaso">Lesson + Review</strong></div>
-          <div class="meta"><span data-en="Coach" data-es="Coach">Coach</span><strong>Bori</strong></div>
+          <div class="meta">
+            <span data-en="Season" data-es="Temporada">Season</span>
+            <strong>30 Games</strong>
+          </div>
+          <div class="meta">
+            <span data-en="Format" data-es="Formato">Format</span>
+            <strong data-en="Lesson + Review + Drill" data-es="Lección + Repaso + Drill">Lesson + Review + Drill</strong>
+          </div>
+          <div class="meta">
+            <span data-en="Coach" data-es="Coach">Coach</span>
+            <strong>Bori</strong>
+          </div>
         </div>
       </section>
 
       <section class="card pad" id="preview">
         <p class="eyebrow" data-en="Free Preview" data-es="Vista Gratis">Free Preview</p>
         <h2 class="section-title" data-en="Games 001–003" data-es="Juegos 001–003">Games 001–003</h2>
-        <p class="section-sub" data-en="The free preview builds the foundation: value, habits, and influence. If a player cannot face these three, they are not ready for the paid season." data-es="La vista gratis construye la base: valor, hábitos e influencia. Si un jugador no puede enfrentar estos tres, no está listo para la temporada paga.">
-          The free preview builds the foundation: value, habits, and influence. If a player cannot face these three, they are not ready for the paid season.
+        <p class="section-sub" data-en="The free preview builds the foundation: value, habits, and influence. Each game teaches, checks, and then leads into a cognitive rep." data-es="La vista gratis construye la base: valor, hábitos e influencia. Cada juego enseña, revisa y luego lleva a una repetición cognitiva.">
+          The free preview builds the foundation: value, habits, and influence. Each game teaches, checks, and then leads into a cognitive rep.
         </p>
 
         <div class="game-grid">
@@ -544,24 +634,92 @@
 
       <section class="card pad" id="method">
         <p class="eyebrow" data-en="The Method" data-es="El Método">The Method</p>
-        <h2 class="section-title" data-en="Controlled Progression" data-es="Progresión Controlada">Controlled Progression</h2>
-        <p class="section-sub" data-en="Every game is built to slow the player down, check understanding, and force the next step to be earned." data-es="Cada juego está construido para bajar la velocidad del jugador, revisar entendimiento y hacer que el próximo paso se gane.">
-          Every game is built to slow the player down, check understanding, and force the next step to be earned.
+        <h2 class="section-title" data-en="Teach. Check. React." data-es="Enseña. Revisa. Reacciona.">Teach. Check. React.</h2>
+        <p class="section-sub" data-en="Hoops Money is not only content. It is a progression system. Players learn the concept, review the lesson, then enter a cognitive drill before moving on." data-es="Hoops Money no es solo contenido. Es un sistema de progresión. Los jugadores aprenden el concepto, repasan la lección y luego entran a un drill cognitivo antes de seguir.">
+          Hoops Money is not only content. It is a progression system. Players learn the concept, review the lesson, then enter a cognitive drill before moving on.
         </p>
 
         <div class="method-grid">
-          <div class="method">
+          <div class="method-card">
             <strong data-en="Lesson" data-es="Lección">Lesson</strong>
-            <p data-en="The player learns the concept through basketball situations." data-es="El jugador aprende el concepto con situaciones de baloncesto.">The player learns the concept through basketball situations.</p>
+            <p data-en="The player learns the business concept through basketball language." data-es="El jugador aprende el concepto de negocio usando lenguaje de baloncesto.">The player learns the business concept through basketball language.</p>
           </div>
-          <div class="method">
-            <strong data-en="Review" data-es="Repaso">Review</strong>
-            <p data-en="The Final Buzzer checks whether the lesson was understood." data-es="La Bocina Final revisa si la lección se entendió.">The Final Buzzer checks whether the lesson was understood.</p>
+
+          <div class="method-card">
+            <strong data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</strong>
+            <p data-en="The review checks understanding before the next step opens." data-es="El repaso revisa entendimiento antes de abrir el próximo paso.">The review checks understanding before the next step opens.</p>
           </div>
-          <div class="method">
-            <strong data-en="Unlock" data-es="Desbloqueo">Unlock</strong>
-            <p data-en="The next game opens only after the current game is completed." data-es="El próximo juego abre solo después de completar el juego actual.">The next game opens only after the current game is completed.</p>
+
+          <div class="method-card">
+            <strong data-en="Cognitive Drill" data-es="Drill Cognitivo">Cognitive Drill</strong>
+            <p data-en="The drill trains reaction, memory, vision, sequence, or change detection." data-es="El drill entrena reacción, memoria, visión, secuencia o detección de cambios.">The drill trains reaction, memory, vision, sequence, or change detection.</p>
           </div>
+        </div>
+      </section>
+
+      <section class="card pad" id="cognitive">
+        <p class="eyebrow" data-en="Online Cognitive Program" data-es="Programa Cognitivo Online">Online Cognitive Program</p>
+        <h2 class="section-title" data-en="Cognitive Reaction Hoops" data-es="Cognitive Reaction Hoops">Cognitive Reaction Hoops</h2>
+        <p class="section-sub" data-en="The game is moving fast. The best players do not just know what to do. They process, remember, see, sequence, and adjust faster." data-es="El juego se mueve rápido. Los mejores jugadores no solo saben qué hacer. Procesan, recuerdan, ven, secuencian y ajustan más rápido.">
+          The game is moving fast. The best players do not just know what to do. They process, remember, see, sequence, and adjust faster.
+        </p>
+
+        <div class="note">
+          <span class="box-label" data-en="Why This Belongs Here" data-es="Por Qué Esto Va Aquí">Why This Belongs Here</span>
+          <p data-en="Hoops Money teaches value and decisions. Cognitive Reaction Hoops trains the player’s decision system: eyes, timing, reaction, memory, pressure, and adjustment." data-es="Hoops Money enseña valor y decisiones. Cognitive Reaction Hoops entrena el sistema de decisión del jugador: visión, timing, reacción, memoria, presión y ajuste.">
+            Hoops Money teaches value and decisions. Cognitive Reaction Hoops trains the player’s decision system: eyes, timing, reaction, memory, pressure, and adjustment.
+          </p>
+        </div>
+
+        <div class="drill-grid">
+          <div class="drill-card">
+            <div class="drill-badge">01</div>
+            <div class="drill-copy">
+              <strong data-en="The React" data-es="The React">The React</strong>
+              <span data-en="Reaction and rhythm. Trains the player to process a visual cue and respond before the next beat." data-es="Reacción y ritmo. Entrena al jugador a procesar una señal visual y responder antes del próximo beat.">Reaction and rhythm. Trains the player to process a visual cue and respond before the next beat.</span>
+              <div class="drill-tag" data-en="Basketball use: closeouts, loose balls, quick reads" data-es="Uso en cancha: closeouts, balones sueltos, lecturas rápidas">Basketball use: closeouts, loose balls, quick reads</div>
+            </div>
+          </div>
+
+          <div class="drill-card">
+            <div class="drill-badge">02</div>
+            <div class="drill-copy">
+              <strong data-en="The Recall" data-es="The Recall">The Recall</strong>
+              <span data-en="Working memory. Trains the player to hold multiple positions or instructions while still executing." data-es="Memoria de trabajo. Entrena al jugador a sostener varias posiciones o instrucciones mientras ejecuta.">Working memory. Trains the player to hold multiple positions or instructions while still executing.</span>
+              <div class="drill-tag" data-en="Basketball use: plays, defensive assignments, spacing" data-es="Uso en cancha: jugadas, asignaciones defensivas, spacing">Basketball use: plays, defensive assignments, spacing</div>
+            </div>
+          </div>
+
+          <div class="drill-card">
+            <div class="drill-badge">03</div>
+            <div class="drill-copy">
+              <strong data-en="The Reflex" data-es="The Reflex">The Reflex</strong>
+              <span data-en="Visual processing. Trains the player to scan the court quickly and identify what matters first." data-es="Procesamiento visual. Entrena al jugador a escanear la cancha rápido e identificar lo que importa primero.">Visual processing. Trains the player to scan the court quickly and identify what matters first.</span>
+              <div class="drill-tag" data-en="Basketball use: court vision, help defense, passing windows" data-es="Uso en cancha: visión de cancha, ayuda defensiva, ventanas de pase">Basketball use: court vision, help defense, passing windows</div>
+            </div>
+          </div>
+
+          <div class="drill-card">
+            <div class="drill-badge">04</div>
+            <div class="drill-copy">
+              <strong data-en="The Replay" data-es="The Replay">The Replay</strong>
+              <span data-en="Sequence memory. Trains the player to remember order, timing, and movement under pressure." data-es="Memoria secuencial. Entrena al jugador a recordar orden, timing y movimiento bajo presión.">Sequence memory. Trains the player to remember order, timing, and movement under pressure.</span>
+              <div class="drill-tag" data-en="Basketball use: sets, reads, rotations, late-game execution" data-es="Uso en cancha: sistemas, lecturas, rotaciones, ejecución al cierre">Basketball use: sets, reads, rotations, late-game execution</div>
+            </div>
+          </div>
+
+          <div class="drill-card">
+            <div class="drill-badge">05</div>
+            <div class="drill-copy">
+              <strong data-en="The Ritmo" data-es="The Ritmo">The Ritmo</strong>
+              <span data-en="Change detection. Trains the player to notice what moved, what opened, and what changed in the possession." data-es="Detección de cambio. Entrena al jugador a notar qué se movió, qué se abrió y qué cambió en la posesión.">Change detection. Trains the player to notice what moved, what opened, and what changed in the possession.</span>
+              <div class="drill-tag" data-en="Basketball use: defensive rotations, broken plays, advantage reads" data-es="Uso en cancha: rotaciones defensivas, jugadas rotas, lecturas de ventaja">Basketball use: defensive rotations, broken plays, advantage reads</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cognitive-quote" data-en="Every drill is a basketball read. Every read is a decision. Every decision reveals readiness." data-es="Cada drill es una lectura de baloncesto. Cada lectura es una decisión. Cada decisión revela preparación.">
+          Every drill is a basketball read. Every read is a decision. Every decision reveals readiness.
         </div>
       </section>
 
@@ -579,33 +737,43 @@
       <section class="card pad coach-close">
         <p>
           <strong data-en="Coach Close:" data-es="Cierre del Coach:">Coach Close:</strong>
-          <span data-en=" Hoops Money starts before the money. It starts with value, habits, influence, decisions, and proof." data-es=" Hoops Money empieza antes del dinero. Empieza con valor, hábitos, influencia, decisiones y evidencia.">
-            Hoops Money starts before the money. It starts with value, habits, influence, decisions, and proof.
+          <span data-en=" Hoops Money teaches the business. Cognitive Reaction Hoops trains the decision system. Together, the player gets clearer and faster." data-es=" Hoops Money enseña el negocio. Cognitive Reaction Hoops entrena el sistema de decisión. Juntos, el jugador se vuelve más claro y más rápido.">
+            Hoops Money teaches the business. Cognitive Reaction Hoops trains the decision system. Together, the player gets clearer and faster.
           </span>
         </p>
       </section>
 
-      <footer data-en="Hoops Money — The Business of Basketball" data-es="Hoops Money — El Negocio del Baloncesto">Hoops Money — The Business of Basketball</footer>
+      <footer data-en="Hoops Money — The Business of Basketball" data-es="Hoops Money — El Negocio del Baloncesto">
+        Hoops Money — The Business of Basketball
+      </footer>
     </div>
   </main>
 
   <script>
     const langButtons = document.querySelectorAll('.lang-btn');
     const translatable = document.querySelectorAll('[data-en][data-es]');
-    let currentLang = 'en';
+    let currentLang = localStorage.getItem('hm-lang') || 'en';
 
     function setLanguage(lang) {
       currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('hm-lang', currentLang);
       document.documentElement.lang = currentLang;
+
       translatable.forEach(el => {
         const text = el.getAttribute('data-' + currentLang);
         if (text !== null) el.textContent = text;
       });
-      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === currentLang));
+
+      langButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
     }
 
-    langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-    setLanguage('en');
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
   </script>
 </body>
 </html>
