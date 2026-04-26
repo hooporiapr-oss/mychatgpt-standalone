@@ -6,558 +6,464 @@
   <title>Hoops Money | The Business of Basketball</title>
   <style>
     :root {
-      --bg: #050505;
-      --panel: rgba(12, 12, 14, 0.88);
-      --panel-strong: #0b0b0d;
-      --line: rgba(255, 255, 255, 0.12);
-      --muted: #a1a1aa;
-      --text: #f8fafc;
-      --orange: #f97316;
-      --gold: #fbbf24;
-      --cream: #fff7ed;
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #5f6368;
+      --line: #e5e7eb;
+      --soft: #f8fafc;
+      --purple: #6d28d9;
+      --purple-dark: #4c1d95;
+      --purple-soft: #f3e8ff;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --radius: 22px;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --max: 920px;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      min-height: 100vh;
+      background: var(--bg);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 18% 8%, rgba(249, 115, 22, 0.42), transparent 26%),
-        radial-gradient(circle at 86% 18%, rgba(251, 191, 36, 0.22), transparent 22%),
-        linear-gradient(135deg, #210606 0%, #09090b 38%, #000 100%);
-      overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(circle at center, black, transparent 76%);
-    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
 
-    a { color: inherit; }
-
-    .arena-light {
-      position: fixed;
-      width: 460px;
-      height: 460px;
-      border-radius: 999px;
-      background: rgba(249, 115, 22, 0.23);
-      filter: blur(90px);
-      top: -190px;
-      right: -170px;
-      pointer-events: none;
-    }
-
-    .nav {
+    .topbar {
       position: sticky;
       top: 0;
-      z-index: 20;
-      padding: 12px 16px 10px;
-      background: rgba(0, 0, 0, 0.74);
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(16px);
     }
 
-    .nav-inner {
-      max-width: 1180px;
+    .topbar-inner {
+      max-width: var(--max);
       margin: 0 auto;
+      padding: 14px 18px 16px;
     }
 
-    .nav-top {
+    .brand-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      min-width: 0;
     }
 
-    .logo {
-      width: 48px;
-      height: 48px;
-      border-radius: 17px;
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border: 2px solid var(--purple);
       display: grid;
       place-items: center;
-      color: #111;
-      font-weight: 950;
-      background: linear-gradient(135deg, var(--orange), var(--gold));
-      box-shadow: 0 16px 45px rgba(249, 115, 22, 0.35);
-      flex: 0 0 auto;
-    }
-
-    .brand small {
-      display: block;
-      color: var(--orange);
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
       font-weight: 900;
+      font-size: 18px;
+      letter-spacing: -0.04em;
+      color: var(--purple);
+      background: #fff;
     }
 
-    .brand strong {
+    .brand-copy small {
+      display: block;
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .brand-copy strong {
       display: block;
       font-size: 18px;
-      line-height: 1.1;
-      white-space: nowrap;
+      line-height: 1.15;
     }
 
-    .nav-links {
+    .top-links {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .nav-links a {
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #e4e4e7;
+    .top-links a {
+      border: 1px solid var(--line);
+      padding: 10px 14px;
       border-radius: 999px;
-      padding: 9px 12px;
       font-size: 13px;
-      font-weight: 850;
-      background: rgba(255,255,255,0.045);
+      font-weight: 800;
+      background: #fff;
     }
 
     .lang-row {
+      margin-top: 14px;
       display: flex;
       justify-content: center;
-      margin-top: 12px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 14px;
+      border-top: 1px solid #f1f5f9;
     }
 
     .lang-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px;
+      background: var(--soft);
+      border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
+      padding: 4px;
+      display: inline-flex;
+      gap: 4px;
     }
 
     .lang-btn {
       border: 0;
-      cursor: pointer;
-      border-radius: 999px;
-      padding: 9px 14px;
-      font-size: 13px;
-      font-weight: 900;
-      color: #e4e4e7;
       background: transparent;
-      font-family: inherit;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 13px;
+      cursor: pointer;
+      color: #334155;
     }
 
     .lang-btn.active {
-      background: linear-gradient(135deg, var(--orange), var(--gold));
-      color: #111;
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .header-image {
+      width: 100%;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+      background: #fff;
     }
 
     .page {
-      position: relative;
-      max-width: 1180px;
+      max-width: var(--max);
       margin: 0 auto;
-      padding: 24px 16px 72px;
+      padding: 22px 18px 80px;
     }
 
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) 370px;
-      gap: 18px;
-      align-items: stretch;
-      margin-top: 18px;
-    }
+    .stack { display: grid; gap: 20px; }
 
-    .hero-card,
-    .scoreboard,
-    .panel,
-    .game-card,
-    .final-card {
+    .card {
+      background: #fff;
       border: 1px solid var(--line);
-      background: var(--panel);
-      border-radius: 34px;
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(20px);
-    }
-
-    .hero-card {
-      padding: clamp(26px, 5vw, 54px);
-      position: relative;
       overflow: hidden;
     }
 
-    .hero-card::after {
-      content: "HM";
-      position: absolute;
-      right: -20px;
-      bottom: -44px;
-      font-size: clamp(130px, 22vw, 260px);
-      line-height: 0.8;
-      font-weight: 950;
-      color: rgba(255, 255, 255, 0.035);
-      pointer-events: none;
+    .pad { padding: 24px; }
+    .image-card { padding: 14px; }
+
+    .hero-image-wrap {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
     }
 
-    .kicker {
-      margin: 0;
-      color: var(--orange);
+    .hero-image {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--purple);
       font-size: 12px;
-      font-weight: 950;
-      letter-spacing: 0.25em;
+      font-weight: 900;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
     }
 
     h1 {
-      margin: 12px 0 0;
-      font-size: clamp(58px, 11vw, 128px);
-      letter-spacing: -0.08em;
-      line-height: 0.86;
-      font-weight: 950;
-    }
-
-    .business-title {
-      margin: 12px 0 0;
-      font-size: clamp(25px, 4vw, 48px);
-      line-height: 1;
-      letter-spacing: -0.045em;
-      color: #fed7aa;
-      font-weight: 950;
+      margin: 0;
+      font-size: clamp(42px, 8vw, 82px);
+      line-height: 0.96;
+      letter-spacing: -0.065em;
     }
 
     .subtitle {
-      margin: 20px 0 0;
-      max-width: 730px;
-      color: #e7e5e4;
-      font-size: clamp(17px, 2vw, 22px);
+      margin: 18px 0 0;
+      font-size: clamp(18px, 2.5vw, 24px);
       line-height: 1.5;
+      color: #222;
     }
 
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 24px;
-    }
-
-    .tag {
-      border: 1px solid rgba(249, 115, 22, 0.32);
-      background: rgba(249, 115, 22, 0.10);
-      color: #fed7aa;
-      border-radius: 999px;
-      padding: 10px 13px;
-      font-size: 13px;
-      font-weight: 900;
+    .rule {
+      margin-top: 18px;
+      border-left: 5px solid var(--purple);
+      background: var(--purple-soft);
+      padding: 14px 16px;
+      font-weight: 800;
+      font-size: 17px;
     }
 
     .cta-row {
+      margin-top: 22px;
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
-      position: relative;
-      z-index: 1;
+      gap: 10px;
     }
 
     .btn {
       display: inline-block;
-      text-decoration: none;
+      border: 1px solid var(--purple);
+      background: var(--purple);
+      color: #fff;
+      padding: 12px 16px;
       border-radius: 999px;
-      padding: 14px 18px;
-      font-weight: 950;
-      border: 1px solid var(--line);
-      transition: transform .15s ease, background .15s ease;
+      font-weight: 900;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
     }
 
-    .btn:hover { transform: translateY(-2px); }
-    .btn.primary { background: var(--orange); color: #111; border-color: var(--orange); }
-    .btn.secondary { background: rgba(255,255,255,0.06); color: white; }
+    .btn:hover { transform: translateY(-1px); }
 
-    .scoreboard {
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-      position: relative;
+    .btn.secondary {
+      background: #fff;
+      color: var(--purple);
+      border-color: var(--purple);
     }
 
-    .scoreboard::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(135deg, rgba(249,115,22,0.16), transparent 42%),
-        repeating-linear-gradient(0deg, transparent, transparent 13px, rgba(255,255,255,0.025) 14px);
-      pointer-events: none;
-    }
-
-    .scoreboard > * { position: relative; }
-
-    .board-label {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      font-weight: 950;
-      text-transform: uppercase;
-    }
-
-    .board-big {
-      margin: 14px 0 0;
-      font-size: 52px;
-      line-height: 0.9;
-      font-weight: 950;
-      letter-spacing: -0.06em;
-    }
-
-    .board-row {
-      margin-top: 26px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .stat {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      border: 1px solid rgba(255,255,255,0.09);
-      background: rgba(0,0,0,0.28);
-      border-radius: 18px;
-      padding: 13px 14px;
-    }
-
-    .stat span { color: var(--muted); font-size: 13px; }
-    .stat strong { font-size: 13px; text-align: right; }
-
-    .section-head {
-      margin: 40px 0 16px;
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(30px, 4vw, 50px);
-      letter-spacing: -0.05em;
-      line-height: 1;
-    }
-
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 440px;
-      line-height: 1.45;
-      text-align: right;
-    }
-
-    .mission-grid {
+    .meta-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .panel {
-      padding: 22px;
-    }
-
-    .panel-number {
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      background: rgba(249, 115, 22, 0.14);
-      border: 1px solid rgba(249, 115, 22, 0.28);
-      color: #fed7aa;
-      font-weight: 950;
-    }
-
-    .panel h3 {
-      margin: 16px 0 0;
-      font-size: 24px;
-      letter-spacing: -0.035em;
-    }
-
-    .panel p {
-      margin: 10px 0 0;
-      color: #d4d4d8;
-      line-height: 1.55;
-    }
-
-    .game-card {
-      padding: clamp(24px, 4vw, 38px);
-      display: grid;
-      grid-template-columns: 150px minmax(0, 1fr) auto;
-      gap: 20px;
-      align-items: center;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .game-card::after {
-      content: "001";
-      position: absolute;
-      right: -10px;
-      bottom: -36px;
-      color: rgba(255,255,255,0.045);
-      font-weight: 950;
-      font-size: 150px;
-      letter-spacing: -0.06em;
-      pointer-events: none;
-    }
-
-    .game-badge {
-      width: 130px;
-      height: 130px;
-      border-radius: 34px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--orange), var(--gold));
-      color: #111;
-      box-shadow: 0 18px 50px rgba(249,115,22,0.28);
-      font-size: 34px;
-      font-weight: 950;
-    }
-
-    .game-copy { position: relative; z-index: 1; }
-
-    .game-copy h3 {
-      margin: 0;
-      font-size: clamp(32px, 5vw, 60px);
-      letter-spacing: -0.065em;
-      line-height: .9;
-    }
-
-    .game-copy p {
-      margin: 12px 0 0;
-      color: #d4d4d8;
-      line-height: 1.55;
-      max-width: 680px;
-    }
-
-    .season-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
+      margin-top: 20px;
     }
 
-    .season-card {
+    .meta {
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.055);
-      border-radius: 24px;
-      padding: 18px;
-      min-height: 160px;
+      border-radius: 16px;
+      background: var(--soft);
+      padding: 14px;
     }
 
-    .season-card strong {
+    .meta span {
       display: block;
-      color: #fed7aa;
-      font-size: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .meta strong { font-size: 16px; }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(28px, 4.8vw, 44px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .section-sub {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .note {
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--purple);
+      border-radius: 16px;
+      background: #fafafa;
+      padding: 18px;
+      margin-top: 16px;
+    }
+
+    .box-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--purple);
       margin-bottom: 10px;
     }
 
-    .season-card h3 {
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: -0.035em;
+    .game-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
     }
 
-    .season-card p {
-      margin: 9px 0 0;
-      color: #cbd5e1;
-      line-height: 1.45;
+    .game-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .game-badge {
+      width: 56px;
+      height: 56px;
+      border: 2px solid var(--purple);
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: var(--purple);
+    }
+
+    .game-copy strong {
+      display: block;
+      font-size: 21px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .game-copy span {
+      display: block;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--purple);
+      background: var(--purple-soft);
+      white-space: nowrap;
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .method {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: var(--soft);
+    }
+
+    .method strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .method p {
+      margin: 0;
+      color: var(--muted);
       font-size: 14px;
     }
 
-    .final-card {
-      margin-top: 34px;
-      padding: clamp(24px, 4vw, 42px);
-      background:
-        linear-gradient(135deg, rgba(249,115,22,0.18), rgba(251,191,36,0.07)),
-        var(--panel-strong);
-      overflow: hidden;
-      position: relative;
-      text-align: center;
+    .paid-card {
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      color: #fff;
+      border-color: var(--purple);
     }
 
-    .final-card h2 {
-      margin: 10px auto 0;
-      font-size: clamp(38px, 6vw, 78px);
-      line-height: 0.95;
-      letter-spacing: -0.07em;
-      max-width: 860px;
+    .paid-card .eyebrow { color: #ddd6fe; }
+    .paid-card .subtitle { color: #f5f3ff; }
+    .paid-card .rule {
+      background: rgba(255, 255, 255, 0.1);
+      border-left-color: #fff;
+      color: #fff;
+    }
+    .paid-card .btn {
+      background: #fff;
+      color: var(--purple-dark);
+      border-color: #fff;
     }
 
-    .final-card p {
-      margin: 18px auto 0;
-      color: #fef3c7;
-      max-width: 720px;
-      line-height: 1.55;
-      font-size: 18px;
+    .coach-close {
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      color: #fff;
+      border-color: var(--purple);
+    }
+
+    .coach-close p {
+      margin: 0;
+      font-size: 16px;
     }
 
     footer {
-      margin-top: 36px;
-      color: #71717a;
       text-align: center;
+      color: var(--muted);
       font-size: 13px;
+      margin-top: 24px;
     }
 
-    @media (max-width: 1000px) {
-      .hero { grid-template-columns: 1fr; }
-      .mission-grid { grid-template-columns: 1fr; }
-      .season-grid { grid-template-columns: repeat(2, 1fr); }
-      .game-card { grid-template-columns: 1fr; }
-      .section-head { align-items: start; flex-direction: column; }
-      .section-head p { text-align: left; }
-    }
-
-    @media (max-width: 700px) {
-      .nav-top { align-items: flex-start; flex-direction: column; }
-      .nav-links { justify-content: flex-start; }
-      .brand strong { white-space: normal; }
-      .season-grid { grid-template-columns: 1fr; }
-      .game-badge { width: 96px; height: 96px; border-radius: 26px; font-size: 26px; }
-      .lang-toggle { width: 100%; justify-content: center; }
-      .lang-btn { flex: 1; }
+    @media (max-width: 760px) {
+      .page { padding: 16px 14px 60px; }
+      .pad { padding: 18px; }
+      .image-card { padding: 10px; }
+      .meta-grid,
+      .method-grid { grid-template-columns: 1fr; }
+      .game-card {
+        grid-template-columns: 52px 1fr;
+      }
+      .game-card .pill {
+        grid-column: 1 / -1;
+        justify-self: start;
+      }
+      .game-badge {
+        width: 46px;
+        height: 46px;
+      }
+      .top-links { width: 100%; }
+      .top-links a { flex: 1 1 auto; text-align: center; }
+      .hero-image { width: 100%; height: auto; object-fit: contain; }
     }
   </style>
 </head>
 <body>
-  <div class="arena-light"></div>
-
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="nav-top">
+  <nav class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-row">
         <div class="brand">
-          <div class="logo">HM</div>
-          <div>
-            <small data-en="Hoops Money" data-es="Hoops Money">Hoops Money</small>
+          <div class="brand-mark">HM</div>
+          <div class="brand-copy">
+            <small>Hoops Money</small>
             <strong data-en="The Business of Basketball" data-es="El Negocio del Baloncesto">The Business of Basketball</strong>
           </div>
         </div>
-        <div class="nav-links">
-          <a href="#mission" data-en="Mission" data-es="Misión">Mission</a>
-          <a href="#game001" data-en="Game 001" data-es="Juego 001">Game 001</a>
-          <a href="#season" data-en="Season" data-es="Temporada">Season</a>
+
+        <div class="top-links">
+          <a href="#preview" data-en="Free Preview" data-es="Vista Gratis">Free Preview</a>
+          <a href="#method" data-en="Method" data-es="Método">Method</a>
+          <a href="game-001.html" data-en="Start" data-es="Comenzar">Start</a>
         </div>
       </div>
 
@@ -570,176 +476,135 @@
     </div>
   </nav>
 
+  <header class="header-image">
+    <img src="ready.png" alt="Get Ready Hoops header image" />
+  </header>
+
   <main class="page">
-    <section class="hero">
-      <div class="hero-card">
-        <p class="kicker" data-en="Basketball Financial Literacy Program" data-es="Programa de Educación Financiera en Baloncesto">Basketball Financial Literacy Program</p>
-        <h1>Hoops Money</h1>
-        <div class="business-title" data-en="The Business of Basketball" data-es="El Negocio del Baloncesto">The Business of Basketball</div>
-        <p class="subtitle" data-en="A 30-game season that teaches players how value, habits, money, discipline, decisions, and opportunity work through the language of basketball." data-es="Una temporada de 30 juegos que enseña a los jugadores cómo funcionan el valor, los hábitos, el dinero, la disciplina, las decisiones y las oportunidades usando el lenguaje del baloncesto.">
-          A 30-game season that teaches players how value, habits, money, discipline, decisions, and opportunity work through the language of basketball.
+    <div class="stack">
+
+      <section class="card pad">
+        <p class="eyebrow" data-en="Get Ready Hoops Presents" data-es="Get Ready Hoops Presenta">Get Ready Hoops Presents</p>
+        <h1 data-en="Hoops Money" data-es="Hoops Money">Hoops Money</h1>
+        <p class="subtitle" data-en="The Business of Basketball. A 30-game financial literacy and accountability program for players who want to understand value, habits, influence, opportunity, visibility, brand, and readiness." data-es="El Negocio del Baloncesto. Un programa de 30 juegos de alfabetización financiera y accountability para jugadores que quieren entender valor, hábitos, influencia, oportunidad, visibilidad, marca y preparación.">
+          The Business of Basketball. A 30-game financial literacy and accountability program for players who want to understand value, habits, influence, opportunity, visibility, brand, and readiness.
         </p>
-        <div class="tag-row">
-          <span class="tag" data-en="30-Game Season" data-es="Temporada de 30 Juegos">30-Game Season</span>
-          <span class="tag" data-en="Financial Literacy" data-es="Educación Financiera">Financial Literacy</span>
-          <span class="tag" data-en="Basketball Accountability" data-es="Accountability de Baloncesto">Basketball Accountability</span>
-          <span class="tag" data-en="Built for Players" data-es="Creado para Jugadores">Built for Players</span>
+        <div class="rule" data-en="This is not motivation. This is accountability. If you say you want it, prove it." data-es="Esto no es motivación. Esto es accountability. Si dices que lo quieres, pruébalo.">
+          This is not motivation. This is accountability. If you say you want it, prove it.
         </div>
+
         <div class="cta-row">
-          <a class="btn primary" href="game-001.html" data-en="Enter Game 001" data-es="Entrar al Juego 001">Enter Game 001</a>
-          <a class="btn secondary" href="#mission" data-en="See the Mission" data-es="Ver la Misión">See the Mission</a>
+          <a class="btn" href="game-001.html" data-en="Start Game 001 →" data-es="Comenzar Juego 001 →">Start Game 001 →</a>
+          <a class="btn secondary" href="#preview" data-en="View Free Preview" data-es="Ver Vista Gratis">View Free Preview</a>
         </div>
-      </div>
 
-      <aside class="scoreboard">
-        <div>
-          <p class="board-label" data-en="Arena Board" data-es="Marcador de la Arena">Arena Board</p>
-          <p class="board-big">
-            <span data-en="Value" data-es="Valor">Value</span><br />
-            <span data-en="Before" data-es="Antes del">Before</span><br />
-            <span data-en="Money" data-es="Dinero">Money</span>
-          </p>
+        <div class="meta-grid">
+          <div class="meta"><span data-en="Season" data-es="Temporada">Season</span><strong>30 Games</strong></div>
+          <div class="meta"><span data-en="Format" data-es="Formato">Format</span><strong data-en="Lesson + Review" data-es="Lección + Repaso">Lesson + Review</strong></div>
+          <div class="meta"><span data-en="Coach" data-es="Coach">Coach</span><strong>Bori</strong></div>
         </div>
-        <div class="board-row">
-          <div class="stat"><span data-en="Program" data-es="Programa">Program</span><strong>Hoops Money</strong></div>
-          <div class="stat"><span data-en="Identity" data-es="Identidad">Identity</span><strong data-en="The Business of Basketball" data-es="El Negocio del Baloncesto">The Business of Basketball</strong></div>
-          <div class="stat"><span data-en="Season" data-es="Temporada">Season</span><strong data-en="30 Games" data-es="30 Juegos">30 Games</strong></div>
-          <div class="stat"><span data-en="Coach" data-es="Coach">Coach</span><strong>Bori</strong></div>
-        </div>
-      </aside>
-    </section>
+      </section>
 
-    <section id="mission">
-      <div class="section-head">
-        <h2 data-en="What This Is" data-es="Qué Es Esto">What This Is</h2>
-        <p data-en="Hoops Money is not hype. It is a basketball financial literacy program built around value, proof, and decisions." data-es="Hoops Money no es hype. Es un programa de educación financiera en baloncesto construido alrededor de valor, evidencia y decisiones.">
-          Hoops Money is not hype. It is a basketball financial literacy program built around value, proof, and decisions.
+      <section class="card pad" id="preview">
+        <p class="eyebrow" data-en="Free Preview" data-es="Vista Gratis">Free Preview</p>
+        <h2 class="section-title" data-en="Games 001–003" data-es="Juegos 001–003">Games 001–003</h2>
+        <p class="section-sub" data-en="The free preview builds the foundation: value, habits, and influence. If a player cannot face these three, they are not ready for the paid season." data-es="La vista gratis construye la base: valor, hábitos e influencia. Si un jugador no puede enfrentar estos tres, no está listo para la temporada paga.">
+          The free preview builds the foundation: value, habits, and influence. If a player cannot face these three, they are not ready for the paid season.
         </p>
-      </div>
 
-      <div class="mission-grid">
-        <article class="panel">
-          <div class="panel-number">01</div>
-          <h3 data-en="Value" data-es="Valor">Value</h3>
-          <p data-en="Before money shows up, value has to be real. Players learn why someone would choose, trust, recruit, sponsor, or invest in them." data-es="Antes de que llegue el dinero, el valor tiene que ser real. Los jugadores aprenden por qué alguien los escogería, confiaría en ellos, los reclutaría, auspiciaría o invertiría en ellos.">
-            Before money shows up, value has to be real. Players learn why someone would choose, trust, recruit, sponsor, or invest in them.
-          </p>
-        </article>
+        <div class="game-grid">
+          <a class="game-card" href="game-001.html">
+            <div class="game-badge">001</div>
+            <div class="game-copy">
+              <strong data-en="Value" data-es="Valor">Value</strong>
+              <span data-en="Why would someone choose you?" data-es="¿Por qué alguien te escogería a ti?">Why would someone choose you?</span>
+            </div>
+            <div class="pill" data-en="Start Here" data-es="Empieza Aquí">Start Here</div>
+          </a>
 
-        <article class="panel">
-          <div class="panel-number">02</div>
-          <h3 data-en="Habits" data-es="Hábitos">Habits</h3>
-          <p data-en="The program exposes whether a player's daily actions match what they say they want. No excuses. No fake answers." data-es="El programa expone si las acciones diarias del jugador van con lo que dice que quiere. Sin excusas. Sin respuestas falsas.">
-            The program exposes whether a player's daily actions match what they say they want. No excuses. No fake answers.
-          </p>
-        </article>
+          <a class="game-card" href="game-002.html">
+            <div class="game-badge">002</div>
+            <div class="game-copy">
+              <strong data-en="Habits" data-es="Hábitos">Habits</strong>
+              <span data-en="Do your actions match what you say you want?" data-es="¿Tus acciones van con lo que dices que quieres?">Do your actions match what you say you want?</span>
+            </div>
+            <div class="pill" data-en="Next" data-es="Próximo">Next</div>
+          </a>
 
-        <article class="panel">
-          <div class="panel-number">03</div>
-          <h3 data-en="Money Decisions" data-es="Decisiones de Dinero">Money Decisions</h3>
-          <p data-en="Players learn that basketball can open doors, but money, opportunity, brand, and reputation require discipline." data-es="Los jugadores aprenden que el baloncesto puede abrir puertas, pero el dinero, la oportunidad, la marca y la reputación requieren disciplina.">
-            Players learn that basketball can open doors, but money, opportunity, brand, and reputation require discipline.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section id="game001">
-      <div class="section-head">
-        <h2 data-en="Season Opener" data-es="Juego de Apertura">Season Opener</h2>
-        <p data-en="Game 001 sets the standard for the whole season. The first question is not about money. It is about value." data-es="El Juego 001 establece el estándar para toda la temporada. La primera pregunta no es sobre dinero. Es sobre valor.">
-          Game 001 sets the standard for the whole season. The first question is not about money. It is about value.
-        </p>
-      </div>
-
-      <article class="game-card">
-        <div class="game-badge">001</div>
-        <div class="game-copy">
-          <p class="kicker" data-en="Game 001" data-es="Juego 001">Game 001</p>
-          <h3 data-en="Value" data-es="Valor">Value</h3>
-          <p data-en="Everybody talks about basketball money, but nobody explains what makes a player valuable. Game 001 starts there: Why would someone choose you?" data-es="Todo el mundo habla del dinero en el baloncesto, pero casi nadie explica qué hace valioso a un jugador. El Juego 001 empieza ahí: ¿por qué alguien te escogería a ti?">
-            Everybody talks about basketball money, but nobody explains what makes a player valuable. Game 001 starts there: Why would someone choose you?
-          </p>
+          <a class="game-card" href="game-003.html">
+            <div class="game-badge">003</div>
+            <div class="game-copy">
+              <strong data-en="Influence" data-es="Influencia">Influence</strong>
+              <span data-en="Who and what is shaping you?" data-es="¿Quién y qué te está formando?">Who and what is shaping you?</span>
+            </div>
+            <div class="pill" data-en="Gate" data-es="Puerta">Gate</div>
+          </a>
         </div>
-        <div class="cta-row">
-          <a class="btn primary" href="game-001.html" data-en="Start Game" data-es="Comenzar Juego">Start Game</a>
-        </div>
-      </article>
-    </section>
+      </section>
 
-    <section id="season">
-      <div class="section-head">
-        <h2 data-en="30-Game Season" data-es="Temporada de 30 Juegos">30-Game Season</h2>
-        <p data-en="This is the season map. Build one game at a time. Stay disciplined. Win possessions." data-es="Este es el mapa de la temporada. Construimos un juego a la vez. Con disciplina. Ganando posesiones.">
-          This is the season map. Build one game at a time. Stay disciplined. Win possessions.
+      <section class="card pad" id="method">
+        <p class="eyebrow" data-en="The Method" data-es="El Método">The Method</p>
+        <h2 class="section-title" data-en="Controlled Progression" data-es="Progresión Controlada">Controlled Progression</h2>
+        <p class="section-sub" data-en="Every game is built to slow the player down, check understanding, and force the next step to be earned." data-es="Cada juego está construido para bajar la velocidad del jugador, revisar entendimiento y hacer que el próximo paso se gane.">
+          Every game is built to slow the player down, check understanding, and force the next step to be earned.
         </p>
-      </div>
 
-      <div class="season-grid">
-        <article class="season-card">
-          <strong data-en="Games 001–003" data-es="Juegos 001–003">Games 001–003</strong>
-          <h3 data-en="Foundation" data-es="Fundación">Foundation</h3>
-          <p data-en="Value, habits, and influence. The player learns what is really shaping them." data-es="Valor, hábitos e influencia. El jugador aprende qué realmente lo está formando.">Value, habits, and influence. The player learns what is really shaping them.</p>
-        </article>
+        <div class="method-grid">
+          <div class="method">
+            <strong data-en="Lesson" data-es="Lección">Lesson</strong>
+            <p data-en="The player learns the concept through basketball situations." data-es="El jugador aprende el concepto con situaciones de baloncesto.">The player learns the concept through basketball situations.</p>
+          </div>
+          <div class="method">
+            <strong data-en="Review" data-es="Repaso">Review</strong>
+            <p data-en="The Final Buzzer checks whether the lesson was understood." data-es="La Bocina Final revisa si la lección se entendió.">The Final Buzzer checks whether the lesson was understood.</p>
+          </div>
+          <div class="method">
+            <strong data-en="Unlock" data-es="Desbloqueo">Unlock</strong>
+            <p data-en="The next game opens only after the current game is completed." data-es="El próximo juego abre solo después de completar el juego actual.">The next game opens only after the current game is completed.</p>
+          </div>
+        </div>
+      </section>
 
-        <article class="season-card">
-          <strong data-en="Games 004–010" data-es="Juegos 004–010">Games 004–010</strong>
-          <h3 data-en="Separation" data-es="Separación">Separation</h3>
-          <p data-en="Confidence, coach perception, opportunity, discipline, identity, consistency, and productivity." data-es="Confianza, percepción del coach, oportunidad, disciplina, identidad, consistencia y productividad.">Confidence, coach perception, opportunity, discipline, identity, consistency, and productivity.</p>
-        </article>
+      <section class="card pad paid-card">
+        <p class="eyebrow" data-en="After The Free Preview" data-es="Después de la Vista Gratis">After The Free Preview</p>
+        <h2 class="section-title" data-en="Level 2: Separation" data-es="Nivel 2: Separación">Level 2: Separation</h2>
+        <p class="subtitle" data-en="Games 004–010 begin the paid season: confidence, coach perception, opportunity, discipline, identity, consistency, and productivity." data-es="Los Juegos 004–010 comienzan la temporada paga: confianza, percepción del coach, oportunidad, disciplina, identidad, consistencia y productividad.">
+          Games 004–010 begin the paid season: confidence, coach perception, opportunity, discipline, identity, consistency, and productivity.
+        </p>
+        <div class="rule" data-en="Most players stop after the preview. Serious players keep going." data-es="La mayoría de los jugadores se detienen después de la vista. Los serios siguen.">
+          Most players stop after the preview. Serious players keep going.
+        </div>
+      </section>
 
-        <article class="season-card">
-          <strong data-en="Games 011–020" data-es="Juegos 011–020">Games 011–020</strong>
-          <h3 data-en="Business" data-es="Negocio">Business</h3>
-          <p data-en="Money, brand, visibility, decisions, readiness, saving, spending, investing, contracts, and opportunity cost." data-es="Dinero, marca, visibilidad, decisiones, preparación, ahorro, gasto, inversión, contratos y costo de oportunidad.">Money, brand, visibility, decisions, readiness, saving, spending, investing, contracts, and opportunity cost.</p>
-        </article>
+      <section class="card pad coach-close">
+        <p>
+          <strong data-en="Coach Close:" data-es="Cierre del Coach:">Coach Close:</strong>
+          <span data-en=" Hoops Money starts before the money. It starts with value, habits, influence, decisions, and proof." data-es=" Hoops Money empieza antes del dinero. Empieza con valor, hábitos, influencia, decisiones y evidencia.">
+            Hoops Money starts before the money. It starts with value, habits, influence, decisions, and proof.
+          </span>
+        </p>
+      </section>
 
-        <article class="season-card">
-          <strong data-en="Games 021–030" data-es="Juegos 021–030">Games 021–030</strong>
-          <h3 data-en="Elite Season" data-es="Temporada Elite">Elite Season</h3>
-          <p data-en="Leadership, reputation, time, sponsorship thinking, pressure decisions, vision, and player business planning." data-es="Liderazgo, reputación, tiempo, mentalidad de auspicios, decisiones bajo presión, visión y plan de negocio del jugador.">Leadership, reputation, time, sponsorship thinking, pressure decisions, vision, and player business planning.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="final-card">
-      <p class="kicker" data-en="Game Plan" data-es="Plan de Juego">Game Plan</p>
-      <h2 data-en="No scattered plays. Build the season one game at a time." data-es="Sin jugadas regadas. Construimos la temporada un juego a la vez.">No scattered plays. Build the season one game at a time.</h2>
-      <p data-en="Hoops Money starts with Game 001. Value first. Money later. That is winning basketball." data-es="Hoops Money empieza con el Juego 001. Valor primero. Dinero después. Eso es baloncesto ganador.">
-        Hoops Money starts with Game 001. Value first. Money later. That is winning basketball.
-      </p>
-      <div class="cta-row" style="justify-content:center;">
-        <a class="btn primary" href="game-001.html" data-en="Enter the Arena" data-es="Entrar a la Arena">Enter the Arena</a>
-      </div>
-    </section>
-
-    <footer data-en="Hoops Money — The Business of Basketball • Homepage Uniform" data-es="Hoops Money — El Negocio del Baloncesto • Uniforme del Homepage">
-      Hoops Money — The Business of Basketball • Homepage Uniform
-    </footer>
+      <footer data-en="Hoops Money — The Business of Basketball" data-es="Hoops Money — El Negocio del Baloncesto">Hoops Money — The Business of Basketball</footer>
+    </div>
   </main>
 
   <script>
     const langButtons = document.querySelectorAll('.lang-btn');
     const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = 'en';
 
     function setLanguage(lang) {
-      document.documentElement.lang = lang === 'es' ? 'es' : 'en';
-
+      currentLang = lang === 'es' ? 'es' : 'en';
+      document.documentElement.lang = currentLang;
       translatable.forEach(el => {
-        el.textContent = el.getAttribute(`data-${lang}`);
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) el.textContent = text;
       });
-
-      langButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-      });
+      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === currentLang));
     }
 
-    langButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        setLanguage(btn.dataset.lang);
-      });
-    });
-
+    langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
     setLanguage('en');
   </script>
 </body>
