@@ -933,8 +933,10 @@
   </main>
 
   <script>
-    const STORAGE_KEY = 'hoops-money-game-001-progress-v1';
+    const STORAGE_KEY = 'hoops-money-game-001-progress-v2';
     const order = ['tipoff', 'q1', 'q2', 'half', 'q3', 'q4', 'final'];
+    const reviewOrder = ['r1', 'r2', 'r3', 'r4', 'r5', 'r6'];
+
     const unlockMap = {
       tipoff: 'q1',
       q1: 'q2',
@@ -947,64 +949,88 @@
     const langButtons = document.querySelectorAll('.lang-btn');
     const translatable = document.querySelectorAll('[data-en][data-es]');
     const completeButtons = document.querySelectorAll('[data-complete]');
-    const quarters = document.querySelectorAll('[data-section]');
+    const gameSections = document.querySelectorAll('[data-section]');
     const railLinks = document.querySelectorAll('[data-rail]');
     const progressSteps = document.querySelectorAll('.progress-step');
     const finalBuzzerBtn = document.getElementById('finalBuzzerBtn');
     const nextGameBox = document.getElementById('nextGameBox');
+    const resetProgress = document.getElementById('resetProgress');
     const reviewCards = document.querySelectorAll('[data-review]');
     const reviewChoices = document.querySelectorAll('[data-review-choice]');
-    const resetProgress = document.getElementById('resetProgress');
+    const reviewExplanations = document.querySelectorAll('[data-review-explanation]');
 
     let currentLang = 'en';
-    let progress = loadProgress();
+    let progress = normalizeProgress(loadProgress());
+
+    function normalizeProgress(value) {
+      const clean = value && typeof value === 'object' ? value : {};
+
+      return {
+        completed: Array.isArray(clean.completed) ? clean.completed : [],
+        unlocked: Array.isArray(clean.unlocked) && clean.unlocked.length > 0 ? clean.unlocked : ['tipoff'],
+        reviewAnswered: Array.isArray(clean.reviewAnswered) ? clean.reviewAnswered : [],
+        finalComplete: clean.finalComplete === true
+      };
+    }
 
     function loadProgress() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) return JSON.parse(raw);
-      } catch (error) {}
-      return {
-        completed: [],
-        unlocked: ['tipoff'],
-        finalComplete: false,
-        reviewAnswered: []
-      };
-    }
-
-    function ensureProgressShape() {
-      if (!Array.isArray(progress.reviewAnswered)) progress.reviewAnswered = [];
+        return raw ? JSON.parse(raw) : null;
+      } catch (error) {
+        return null;
+      }
     }
 
     function saveProgress() {
+      progress = normalizeProgress(progress);
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
       } catch (error) {}
     }
 
-    function isReviewComplete() {
-      ensureProgressShape();
-      return ['r1','r2','r3','r4','r5','r6'].every(id => progress.reviewAnswered.includes(id));
-    }
-
     function isCompleted(section) {
+      progress = normalizeProgress(progress);
       return progress.completed.includes(section);
     }
 
     function isUnlocked(section) {
+      progress = normalizeProgress(progress);
       return progress.unlocked.includes(section);
     }
 
+    function isReviewAnswered(reviewId) {
+      progress = normalizeProgress(progress);
+      return progress.reviewAnswered.includes(reviewId);
+    }
+
+    function isReviewComplete() {
+      progress = normalizeProgress(progress);
+      return reviewOrder.every(function(id) {
+        return progress.reviewAnswered.includes(id);
+      });
+    }
+
     function unlock(section) {
+      progress = normalizeProgress(progress);
       if (section && !progress.unlocked.includes(section)) {
         progress.unlocked.push(section);
       }
     }
 
+    function closeAllQuarters() {
+      document.querySelectorAll('details.quarter').forEach(function(q) {
+        q.open = false;
+      });
+    }
+
     function complete(section) {
+      progress = normalizeProgress(progress);
+
       if (!progress.completed.includes(section)) {
         progress.completed.push(section);
       }
+
       unlock(unlockMap[section]);
       saveProgress();
       renderProgress();
@@ -1018,20 +1044,21 @@
           nextEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
+
       if (next === 'final') {
-        document.getElementById('final').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const finalEl = document.getElementById('final');
+        if (finalEl) finalEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
-    function closeAllQuarters() {
-      document.querySelectorAll('details.quarter').forEach(q => { q.open = false; });
-    }
-
     function renderProgress() {
-      quarters.forEach(section => {
+      progress = normalizeProgress(progress);
+
+      gameSections.forEach(function(section) {
         const id = section.dataset.section;
         const unlocked = isUnlocked(id);
         const completed = isCompleted(id);
+
         section.classList.toggle('locked', !unlocked);
         section.classList.toggle('done', completed);
 
@@ -1039,150 +1066,203 @@
         if (note) note.style.display = unlocked ? 'none' : 'inline-block';
       });
 
-      railLinks.forEach(link => {
+      railLinks.forEach(function(link) {
         const id = link.dataset.rail;
         const unlocked = isUnlocked(id);
         const completed = isCompleted(id);
+
         link.classList.toggle('locked', !unlocked);
         link.classList.toggle('done', completed);
       });
 
-      progressSteps.forEach(step => {
+      progressSteps.forEach(function(step) {
         const id = step.dataset.step;
         step.classList.toggle('done', isCompleted(id));
         step.classList.toggle('active', isUnlocked(id) && !isCompleted(id));
       });
 
-      completeButtons.forEach(button => {
+      completeButtons.forEach(function(button) {
         const id = button.dataset.complete;
         if (isCompleted(id)) {
           button.classList.add('done');
           button.textContent = currentLang === 'es' ? 'Completado ✓' : 'Completed ✓';
         } else {
           button.classList.remove('done');
-          button.textContent = button.getAttribute(`data-${currentLang}`);
+          button.textContent = button.getAttribute('data-' + currentLang) || button.textContent;
         }
       });
 
-      document.querySelectorAll('[data-status]').forEach(status => {
+      document.querySelectorAll('[data-status]').forEach(function(status) {
         const id = status.dataset.status;
+
         if (isCompleted(id)) {
           status.classList.add('done');
-          status.textContent = currentLang === 'es' ? 'Completado. Próxima posesión desbloqueada.' : 'Completed. Next possession unlocked.';
-        } else if (id === 'final' && isUnlocked('final')) {
-          status.classList.remove('done');
-          status.textContent = currentLang === 'es' ? 'Bocina Final desbloqueada.' : 'Final Buzzer unlocked.';
-        } else {
-          status.classList.remove('done');
-          status.textContent = status.getAttribute(`data-${currentLang}`);
+          status.textContent = currentLang === 'es'
+            ? 'Completado. Próxima posesión desbloqueada.'
+            : 'Completed. Next possession unlocked.';
+          return;
         }
+
+        if (id === 'final' && isUnlocked('final')) {
+          status.classList.remove('done');
+          if (isReviewComplete()) {
+            status.textContent = currentLang === 'es'
+              ? 'Repaso completo. Bocina Final lista.'
+              : 'Review complete. Final Buzzer ready.';
+          } else {
+            status.textContent = currentLang === 'es'
+              ? 'Bocina Final desbloqueada. Completa el repaso.'
+              : 'Final Buzzer unlocked. Complete the review.';
+          }
+          return;
+        }
+
+        status.classList.remove('done');
+        status.textContent = status.getAttribute('data-' + currentLang) || status.textContent;
       });
 
       const finalUnlocked = isUnlocked('final');
       const finalCard = document.getElementById('final');
-      finalCard.classList.toggle('locked', !finalUnlocked);
+      if (finalCard) finalCard.classList.toggle('locked', !finalUnlocked);
 
-      reviewCards.forEach(card => {
+      reviewCards.forEach(function(card) {
         card.classList.toggle('locked-review', !finalUnlocked);
       });
 
-      reviewChoices.forEach(choice => {
+      reviewChoices.forEach(function(choice) {
         const id = choice.dataset.reviewChoice;
-        const answered = progress.reviewAnswered.includes(id);
+        const answered = isReviewAnswered(id);
+        const correct = choice.dataset.correct === 'true';
+
         choice.classList.toggle('selected', answered);
-        choice.classList.toggle('correct', answered && choice.dataset.correct === 'true');
+        choice.classList.toggle('correct', answered && correct);
       });
 
-      document.querySelectorAll('[data-review-explanation]').forEach(explanation => {
+      reviewExplanations.forEach(function(explanation) {
         const id = explanation.dataset.reviewExplanation;
-        explanation.classList.toggle('show', progress.reviewAnswered.includes(id));
+        explanation.classList.toggle('show', isReviewAnswered(id));
       });
 
       const reviewComplete = finalUnlocked && isReviewComplete();
-      finalBuzzerBtn.disabled = !reviewComplete || progress.finalComplete;
 
-      if (progress.finalComplete) {
-        finalBuzzerBtn.classList.add('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Juego 001 Completado ✓' : 'Game 001 Complete ✓';
-        nextGameBox.classList.add('unlocked');
-      } else if (reviewComplete) {
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Sonar Bocina Final → Desbloquear Juego 002' : 'Hit Final Buzzer → Unlock Game 002';
-      } else if (finalUnlocked) {
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Completa el Repaso Final' : 'Complete Final Review';
-      } else {
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Bocina Final Bloqueada' : 'Final Buzzer Locked';
+      if (finalBuzzerBtn) {
+        finalBuzzerBtn.disabled = !reviewComplete || progress.finalComplete;
+
+        if (progress.finalComplete) {
+          finalBuzzerBtn.classList.add('done');
+          finalBuzzerBtn.textContent = currentLang === 'es' ? 'Juego 001 Completado ✓' : 'Game 001 Complete ✓';
+          if (nextGameBox) nextGameBox.classList.add('unlocked');
+        } else if (reviewComplete) {
+          finalBuzzerBtn.classList.remove('done');
+          finalBuzzerBtn.textContent = currentLang === 'es'
+            ? 'Sonar Bocina Final → Desbloquear Juego 002'
+            : 'Hit Final Buzzer → Unlock Game 002';
+        } else if (finalUnlocked) {
+          finalBuzzerBtn.classList.remove('done');
+          finalBuzzerBtn.textContent = currentLang === 'es'
+            ? 'Completa el Repaso Final'
+            : 'Complete Final Review';
+        } else {
+          finalBuzzerBtn.classList.remove('done');
+          finalBuzzerBtn.textContent = currentLang === 'es'
+            ? 'Bocina Final Bloqueada'
+            : 'Final Buzzer Locked';
+        }
       }
+
+      saveProgress();
     }
 
     function setLanguage(lang) {
-      currentLang = lang;
-      document.documentElement.lang = lang === 'es' ? 'es' : 'en';
+      currentLang = lang === 'es' ? 'es' : 'en';
+      document.documentElement.lang = currentLang;
 
-      translatable.forEach(el => {
-        el.textContent = el.getAttribute(`data-${lang}`);
+      translatable.forEach(function(el) {
+        const nextText = el.getAttribute('data-' + currentLang);
+        if (nextText !== null) el.textContent = nextText;
       });
 
-      langButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
+      langButtons.forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
       });
 
       renderProgress();
     }
 
-    document.querySelectorAll('details.quarter').forEach(detail => {
-      detail.addEventListener('toggle', () => {
+    document.querySelectorAll('details.quarter').forEach(function(detail) {
+      detail.addEventListener('toggle', function() {
         if (detail.open && !isUnlocked(detail.id)) {
           detail.open = false;
         }
       });
 
       const summary = detail.querySelector('summary');
-      summary.addEventListener('click', event => {
-        if (!isUnlocked(detail.id)) {
-          event.preventDefault();
-        }
-      });
+      if (summary) {
+        summary.addEventListener('click', function(event) {
+          if (!isUnlocked(detail.id)) {
+            event.preventDefault();
+          }
+        });
+      }
     });
 
-    completeButtons.forEach(button => {
-      button.addEventListener('click', () => {
+    completeButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
         complete(button.dataset.complete);
       });
     });
 
-    reviewChoices.forEach(choice => {
-      choice.addEventListener('click', () => {
+    reviewChoices.forEach(function(choice) {
+      choice.addEventListener('click', function() {
         if (!isUnlocked('final')) return;
-        const id = choice.dataset.reviewChoice;
-        ensureProgressShape();
-        if (!progress.reviewAnswered.includes(id)) progress.reviewAnswered.push(id);
+
+        const reviewId = choice.dataset.reviewChoice;
+        if (!reviewId) return;
+
+        progress = normalizeProgress(progress);
+        if (!progress.reviewAnswered.includes(reviewId)) {
+          progress.reviewAnswered.push(reviewId);
+        }
+
         saveProgress();
         renderProgress();
       });
     });
 
-    finalBuzzerBtn.addEventListener('click', () => {
-      if (!isUnlocked('final') || !isReviewComplete()) return;
-      progress.finalComplete = true;
-      if (!progress.completed.includes('final')) progress.completed.push('final');
-      saveProgress();
-      renderProgress();
-      nextGameBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
+    if (finalBuzzerBtn) {
+      finalBuzzerBtn.addEventListener('click', function() {
+        if (!isUnlocked('final') || !isReviewComplete()) return;
 
-    resetProgress.addEventListener('click', () => {
-      localStorage.removeItem(STORAGE_KEY);
-      progress = { completed: [], unlocked: ['tipoff'], finalComplete: false, reviewAnswered: [] };
-      closeAllQuarters();
-      renderProgress();
-      document.getElementById('tipoff').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+        progress = normalizeProgress(progress);
+        progress.finalComplete = true;
 
-    langButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
+        if (!progress.completed.includes('final')) {
+          progress.completed.push('final');
+        }
+
+        saveProgress();
+        renderProgress();
+
+        if (nextGameBox) {
+          nextGameBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+
+    if (resetProgress) {
+      resetProgress.addEventListener('click', function() {
+        localStorage.removeItem(STORAGE_KEY);
+        progress = normalizeProgress(null);
+        closeAllQuarters();
+        renderProgress();
+
+        const tipoff = document.getElementById('tipoff');
+        if (tipoff) tipoff.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    langButtons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
         setLanguage(btn.dataset.lang);
       });
     });
