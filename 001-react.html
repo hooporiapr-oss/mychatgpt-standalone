@@ -161,7 +161,7 @@ html,body{height:100%;overflow-x:hidden;overflow-y:auto;font-family:'Outfit',san
 <body>
 <nav class="mini-nav">
 <div class="nav-row">
-<a href="./game-001.html" class="back-btn" id="backBtn">← Home</a>
+<a href="./game-001.html?reset=1" class="back-btn" id="backBtn">← Game 001</a>
 <div class="nav-title">THE REACT</div>
 <div class="nav-right">
 <div class="nav-lang">
@@ -406,7 +406,7 @@ initDC();uUI();startDemo();uTr();
     const demoCta = document.querySelector(".demo-cta");
 
     if (backBtn) {
-      backBtn.href = "./game-001.html";
+      backBtn.href = "./game-001.html?reset=1";
       backBtn.textContent = "← Home";
     }
 
