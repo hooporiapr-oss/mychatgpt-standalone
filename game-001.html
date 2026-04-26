@@ -11,11 +11,13 @@
       --muted: #5f6368;
       --line: #e5e7eb;
       --soft: #f8fafc;
-      --green: #9B59B6;
-      --green-dark: #6F3F83;
-      --green-soft: rgba(155, 89, 182, 0.14);
-      --success: #00D9A5;
-      --success-bg: rgba(0, 217, 165, 0.16);
+      --purple: #9B59B6;
+      --purple-dark: #6F3F83;
+      --purple-soft: rgba(155, 89, 182, 0.14);
+      --teal: #00D9A5;
+      --teal-soft: rgba(0, 217, 165, 0.16);
+      --wrong: #fff1f2;
+      --wrong-border: #fb7185;
       --radius: 22px;
       --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
       --max: 920px;
@@ -67,19 +69,19 @@
     .brand-mark {
       width: 46px;
       height: 46px;
-      border: 2px solid var(--green);
+      border: 2px solid var(--purple);
       display: grid;
       place-items: center;
       font-weight: 900;
       font-size: 18px;
       letter-spacing: -0.04em;
-      color: var(--green);
+      color: var(--purple);
       background: #fff;
     }
 
     .brand-copy small {
       display: block;
-      color: var(--green);
+      color: var(--purple);
       font-size: 11px;
       font-weight: 900;
       letter-spacing: 0.16em;
@@ -137,7 +139,7 @@
     }
 
     .lang-btn.active {
-      background: var(--green);
+      background: var(--purple);
       color: #fff;
     }
 
@@ -175,7 +177,7 @@
 
     .eyebrow {
       margin: 0 0 10px;
-      color: var(--green);
+      color: var(--purple);
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.18em;
@@ -189,6 +191,13 @@
       letter-spacing: -0.06em;
     }
 
+    .section-title {
+      margin: 0;
+      font-size: clamp(28px, 4.8vw, 44px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
     .subtitle {
       margin: 18px 0 0;
       font-size: clamp(18px, 2.5vw, 24px);
@@ -196,10 +205,16 @@
       color: #222;
     }
 
+    .section-sub {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
     .rule {
       margin-top: 18px;
-      border-left: 5px solid var(--green);
-      background: var(--green-soft);
+      border-left: 5px solid var(--purple);
+      background: var(--purple-soft);
       padding: 14px 16px;
       font-weight: 800;
       font-size: 17px;
@@ -256,50 +271,24 @@
     }
 
     .step.active {
-      background: var(--green);
+      background: var(--purple);
       color: #fff;
-      border-color: var(--green);
+      border-color: var(--purple);
     }
 
     .step.done {
-      background: var(--success-bg);
-      border-color: #bbf7d0;
-      color: #166534;
-    }
-
-    .section-title {
-      margin: 0;
-      font-size: clamp(28px, 4.8vw, 44px);
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-
-    .section-sub {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 15px;
+      background: var(--teal-soft);
+      border-color: var(--teal);
+      color: #047857;
     }
 
     .note {
       border: 1px solid var(--line);
-      border-left: 5px solid var(--green);
+      border-left: 5px solid var(--purple);
       border-radius: 16px;
       background: #fafafa;
       padding: 18px;
       margin-top: 16px;
-    }
-
-    .box {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      padding: 18px;
-      margin-top: 16px;
-    }
-
-    .box.green {
-      background: var(--green-soft);
-      border-left: 5px solid var(--green);
     }
 
     .box-label {
@@ -308,32 +297,115 @@
       font-weight: 900;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--green);
+      color: var(--purple);
       margin-bottom: 10px;
+    }
+
+    .question-card {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .question-card.active,
+    .question-card.completed {
+      display: block;
+    }
+
+    .question-card.completed {
+      opacity: 0.86;
+    }
+
+    .question-head {
+      padding: 20px 20px 0;
+    }
+
+    .question-number {
+      width: 52px;
+      height: 52px;
+      border: 2px solid var(--purple);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: var(--purple);
+      margin-bottom: 14px;
+    }
+
+    .question-card.completed .question-number {
+      background: var(--teal-soft);
+      border-color: var(--teal);
+      color: #047857;
+    }
+
+    .question-card h2 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 36px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .question-prompt {
+      margin: 10px 0 0;
+      font-size: 18px;
+      color: #222;
     }
 
     .choice-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      margin-top: 14px;
+      padding: 20px;
     }
 
-    .choice {
+    .choice-btn {
+      width: 100%;
+      min-height: 78px;
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 14px;
       background: #fff;
-      min-height: 74px;
+      color: #111;
+      text-align: left;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
     }
 
-    .choice b {
-      color: var(--green);
-      display: block;
-      margin-bottom: 4px;
+    .choice-btn:hover { transform: translateY(-1px); }
+    .choice-btn b { display: block; color: var(--purple); margin-bottom: 4px; }
+    .choice-btn.correct { background: var(--teal-soft); border-color: var(--teal); color: #064e3b; }
+    .choice-btn.wrong { background: var(--wrong); border-color: var(--wrong-border); color: #881337; }
+    .choice-btn.disabled { pointer-events: none; }
+
+    .explanation {
+      display: none;
+      border-top: 1px solid var(--line);
+      padding: 20px;
+      background: #fafafa;
     }
 
-    .complete-row {
+    .explanation.show { display: block; }
+
+    .answer-line {
+      border-left: 5px solid var(--teal);
+      background: var(--teal-soft);
+      padding: 14px 16px;
+      border-radius: 0 14px 14px 0;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .coach-explanation {
+      margin: 0;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .next-row {
       margin-top: 18px;
       display: flex;
       justify-content: space-between;
@@ -342,19 +414,16 @@
       flex-wrap: wrap;
     }
 
-    .complete-status {
+    .status-text {
       color: var(--muted);
       font-size: 13px;
       font-weight: 800;
     }
 
-    .complete-status.done { color: var(--success); }
-
-    .btn,
-    .review-choice {
+    .btn {
       display: inline-block;
-      border: 1px solid var(--green);
-      background: var(--green);
+      border: 1px solid var(--purple);
+      background: var(--purple);
       color: #fff;
       padding: 12px 16px;
       border-radius: 999px;
@@ -364,185 +433,41 @@
       transition: transform 0.15s ease, background 0.15s ease;
     }
 
-    .btn:hover,
-    .review-choice:hover { transform: translateY(-1px); }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 
-    .btn.secondary {
-      background: #fff;
-      color: var(--green);
-      border-color: var(--green);
+    .overtime-card {
+      display: none;
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+      color: #fff;
+      border-color: var(--purple);
     }
 
-    .btn.done {
-      background: var(--success);
-      border-color: var(--success);
+    .overtime-card.unlocked { display: block; }
+    .overtime-card .eyebrow { color: #f5d0fe; }
+    .overtime-card .subtitle { color: #f8f5ff; }
+    .overtime-card .rule {
+      background: rgba(255,255,255,.1);
+      color: #fff;
+      border-left-color: #fff;
+    }
+    .overtime-card .note {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.25);
+      border-left-color: #fff;
       color: #fff;
     }
-
-    details.accordion {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
+    .overtime-card .box-label { color: #f5d0fe; }
+    .overtime-card .btn {
       background: #fff;
-      box-shadow: var(--shadow);
-      overflow: hidden;
+      color: var(--purple-dark);
+      border-color: #fff;
     }
-
-    details.accordion.locked { opacity: 0.62; }
-
-    details.accordion summary {
-      list-style: none;
-      cursor: pointer;
-      display: grid;
-      grid-template-columns: 60px 1fr auto;
-      gap: 14px;
-      align-items: center;
-      padding: 20px;
-    }
-
-    details.accordion summary::-webkit-details-marker { display: none; }
-
-    .badge {
-      width: 52px;
-      height: 52px;
-      border: 2px solid var(--green);
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      background: #fff;
-      color: var(--green);
-    }
-
-    details.accordion.done .badge {
-      background: var(--success-bg);
-      border-color: var(--success);
-      color: var(--success);
-    }
-
-    .summary-copy strong {
-      display: block;
-      font-size: 22px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .summary-copy span {
-      display: block;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .lock-note {
-      display: inline-block;
-      margin-top: 6px;
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .plus {
-      font-size: 28px;
-      color: var(--green);
-      line-height: 1;
-    }
-
-    details[open] .plus { transform: rotate(45deg); }
-
-    .accordion-body {
-      border-top: 1px solid var(--line);
-      padding: 0 20px 20px;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    ul.clean { margin: 8px 0 0; padding-left: 20px; }
-    ul.clean li { margin: 7px 0; }
-
-    .review-grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .review-card {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
-      background: #fff;
-    }
-
-    .review-card.locked-review {
-      opacity: 0.55;
-      pointer-events: none;
-    }
-
-    .review-card h3 {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-    }
-
-    .review-options {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .review-choice {
-      width: 100%;
-      text-align: left;
-      border-radius: 14px;
-      background: #fff;
-      color: #111;
-      border-color: var(--line);
-    }
-
-    .review-choice.selected {
-      background: var(--green-soft);
-      border-color: var(--green);
-      color: var(--green-dark);
-    }
-
-    .review-choice.correct {
-      background: var(--success-bg);
-      border-color: #86efac;
-      color: #166534;
-    }
-
-    .review-explanation {
-      display: none;
-      margin-top: 12px;
-      padding: 14px;
-      border-left: 4px solid var(--green);
-      background: #fafafa;
-      border-radius: 10px;
-      font-weight: 700;
-    }
-
-    .review-explanation.show { display: block; }
-
-    .next-box {
-      display: none;
-      margin-top: 18px;
-      border: 1px solid #86efac;
-      background: #f0fdf4;
-      border-radius: 18px;
-      padding: 18px;
-    }
-
-    .next-box.unlocked { display: block; }
 
     .coach-close {
-      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
       color: #fff;
-      border-color: var(--green);
+      border-color: var(--purple);
     }
 
     .coach-close p {
@@ -560,16 +485,9 @@
     @media (max-width: 760px) {
       .page { padding: 16px 14px 60px; }
       .pad { padding: 18px; }
-      .meta-grid { grid-template-columns: 1fr; }
+      .meta-grid,
+      .choice-grid { grid-template-columns: 1fr; }
       .progress-grid { grid-template-columns: repeat(2, 1fr); }
-      .choice-grid,
-      .review-options,
-      .two-col { grid-template-columns: 1fr; }
-      details.accordion summary {
-        grid-template-columns: 52px 1fr auto;
-        padding: 16px;
-      }
-      .badge { width: 46px; height: 46px; }
       .top-links { width: 100%; }
       .top-links a { flex: 1 1 auto; text-align: center; }
       .header-image img { width: 100%; height: auto; object-fit: contain; }
@@ -589,9 +507,8 @@
         </div>
         <div class="top-links">
           <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-          <a href="#game-start" data-en="Start" data-es="Comenzar">Start</a>
-          <a href="#cognitive-reaction-hoops" data-en="Reaction" data-es="Reacción">Reaction</a>
-          <a href="#final-buzzer" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+          <a href="#question-flow" data-en="Questions" data-es="Preguntas">Questions</a>
+          <a href="#overtime" data-en="Overtime" data-es="Overtime">Overtime</a>
         </div>
       </div>
       <div class="lang-row">
@@ -612,331 +529,191 @@
       <section class="card pad">
         <p class="eyebrow" data-en="Free Preview • Game 001" data-es="Vista Gratis • Juego 001">Free Preview • Game 001</p>
         <h1 data-en="Value" data-es="Valor">Value</h1>
-        <p class="subtitle" data-en="Everybody talks about basketball money. But before offers, NIL, contracts, and exposure, the first question is value: why would someone choose you?" data-es="Todo el mundo habla del dinero en el baloncesto. Pero antes de ofertas, NIL, contratos y exposición, la primera pregunta es valor: ¿por qué alguien te escogería a ti?">
-          Everybody talks about basketball money. But before offers, NIL, contracts, and exposure, the first question is value: why would someone choose you?
+        <p class="subtitle" data-en="No skimming. Answer each question. After every response, you get the correct answer and Coach Bori’s explanation." data-es="Sin skimming. Contesta cada pregunta. Después de cada respuesta, recibes la contestación correcta y la explicación de Coach Bori.">
+          No skimming. Answer each question. After every response, you get the correct answer and Coach Bori’s explanation.
         </p>
-        <div class="rule" data-en="Money follows value. Not noise. Not hype. Value." data-es="El dinero sigue al valor. No al ruido. No al hype. Al valor.">Money follows value. Not noise. Not hype. Value.</div>
-
+        <div class="rule" data-en="Money follows value. But value has to be understood, proven, and repeated." data-es="El dinero sigue al valor. Pero el valor tiene que entenderse, probarse y repetirse.">
+          Money follows value. But value has to be understood, proven, and repeated.
+        </div>
         <div class="meta-grid">
           <div class="meta"><span data-en="Program" data-es="Programa">Program</span><strong>Hoops Money</strong></div>
           <div class="meta"><span data-en="Game" data-es="Juego">Game</span><strong>001 / 30</strong></div>
-          <div class="meta"><span data-en="Coach" data-es="Coach">Coach</span><strong>Bori</strong></div>
+          <div class="meta"><span data-en="Mode" data-es="Modo">Mode</span><strong data-en="Question Flow" data-es="Flujo de Preguntas">Question Flow</strong></div>
         </div>
       </section>
 
-      <section class="card pad progress-card">
+      <section class="card pad">
         <p class="progress-label" data-en="Progress" data-es="Progreso">Progress</p>
         <div class="progress-grid">
-          <div class="step active" data-step="tipoff">Tip-Off</div>
-          <div class="step" data-step="q1">1Q</div>
-          <div class="step" data-step="q2">2Q</div>
-          <div class="step" data-step="half">HT</div>
-          <div class="step" data-step="q3">3Q</div>
-          <div class="step" data-step="q4">4Q</div>
+          <div class="step active" data-step="q1">Q1</div>
+          <div class="step" data-step="q2">Q2</div>
+          <div class="step" data-step="q3">Q3</div>
+          <div class="step" data-step="q4">Q4</div>
+          <div class="step" data-step="q5">Q5</div>
+          <div class="step" data-step="q6">Q6</div>
         </div>
       </section>
-
-      <section class="card pad" id="game-start">
-        <h2 class="section-title" data-en="Warmup + Tip-Off" data-es="Calentamiento + Salto Inicial">Warmup + Tip-Off</h2>
-        <p class="section-sub" data-en="Read the setup, choose your answer, then complete Tip-Off to unlock the 1st Quarter." data-es="Lee la entrada, escoge tu respuesta y completa el Salto Inicial para desbloquear el 1er Cuarto.">Read the setup, choose your answer, then complete Tip-Off to unlock the 1st Quarter.</p>
-
-        <div class="note">
-          <span class="box-label">Bori</span>
-          <p data-en="Welcome to Hoops Money. This is not motivation. This is accountability." data-es="Bienvenido a Hoops Money. Esto no es motivación. Esto es accountability.">Welcome to Hoops Money. This is not motivation. This is accountability.</p>
-          <p data-en="Everybody talks about basketball money, but most players skip the first question." data-es="Todo el mundo habla del dinero en el baloncesto, pero la mayoría de los jugadores brincan la primera pregunta.">Everybody talks about basketball money, but most players skip the first question.</p>
-          <p><strong data-en="What actually makes you valuable?" data-es="¿Qué realmente te hace valioso?">What actually makes you valuable?</strong></p>
-        </div>
-
-        <div class="box green">
-          <span class="box-label" data-en="Tip-Off Question" data-es="Pregunta del Salto Inicial">Tip-Off Question</span>
-          <p><strong data-en="Why would someone choose you?" data-es="¿Por qué alguien te escogería a ti?">Why would someone choose you?</strong></p>
-          <div class="choice-grid">
-            <div class="choice"><b>A</b><span data-en="Skill" data-es="Habilidad">Skill</span></div>
-            <div class="choice"><b>B</b><span data-en="Work ethic" data-es="Ética de trabajo">Work ethic</span></div>
-            <div class="choice"><b>C</b><span data-en="Trust" data-es="Confianza">Trust</span></div>
-            <div class="choice"><b>D</b><span data-en="I do not know" data-es="No sé">I do not know</span></div>
-          </div>
-        </div>
-
-        <div class="complete-row">
-          <span class="complete-status" data-status="tipoff" data-en="Tip-Off not completed." data-es="Salto Inicial no completado.">Tip-Off not completed.</span>
-          <button class="btn" type="button" data-complete="tipoff" data-en="Complete Tip-Off → Unlock 1Q" data-es="Completar Salto Inicial → Desbloquear 1Q">Complete Tip-Off → Unlock 1Q</button>
-        </div>
-      </section>
-
-      <details class="accordion locked" id="q1" data-section="q1">
-        <summary>
-          <div class="badge">1Q</div>
-          <div class="summary-copy">
-            <strong data-en="Belief" data-es="Creencia">Belief</strong>
-            <span data-en="What do you believe your value is right now?" data-es="¿Qué tú crees que es tu valor ahora mismo?">What do you believe your value is right now?</span>
-            <em class="lock-note" data-en="Locked until Tip-Off is complete." data-es="Bloqueado hasta completar el Salto Inicial.">Locked until Tip-Off is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note">
-            <span class="box-label" data-en="Coach Challenge" data-es="Reto del Coach">Coach Challenge</span>
-            <p data-en="Do not answer with hype. Answer with proof." data-es="No contestes con hype. Contesta con evidencia.">Do not answer with hype. Answer with proof.</p>
-          </div>
-          <div class="two-col">
-            <div class="box">
-              <span class="box-label" data-en="Weak Answers" data-es="Respuestas Débiles">Weak Answers</span>
-              <ul class="clean">
-                <li data-en="I am different." data-es="Soy diferente.">I am different.</li>
-                <li data-en="I work hard." data-es="Trabajo duro.">I work hard.</li>
-                <li data-en="I can score." data-es="Puedo anotar.">I can score.</li>
-              </ul>
-            </div>
-            <div class="box">
-              <span class="box-label" data-en="Stronger Answers" data-es="Respuestas Más Fuertes">Stronger Answers</span>
-              <ul class="clean">
-                <li data-en="I defend full court without fouling." data-es="Defiendo cancha completa sin hacer faltas.">I defend full court without fouling.</li>
-                <li data-en="I make the right read under pressure." data-es="Hago la lectura correcta bajo presión.">I make the right read under pressure.</li>
-                <li data-en="I communicate every defensive possession." data-es="Comunico en cada posesión defensiva.">I communicate every defensive possession.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="complete-row">
-            <span class="complete-status" data-status="q1" data-en="1st Quarter not completed." data-es="1er Cuarto no completado.">1st Quarter not completed.</span>
-            <button class="btn" type="button" data-complete="q1" data-en="Complete 1Q → Unlock 2Q" data-es="Completar 1Q → Desbloquear 2Q">Complete 1Q → Unlock 2Q</button>
-          </div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q2" data-section="q2">
-        <summary>
-          <div class="badge">2Q</div>
-          <div class="summary-copy">
-            <strong data-en="Evidence" data-es="Evidencia">Evidence</strong>
-            <span data-en="Value without evidence is just confidence talking." data-es="El valor sin evidencia es solo confianza hablando.">Value without evidence is just confidence talking.</span>
-            <em class="lock-note" data-en="Locked until 1Q is complete." data-es="Bloqueado hasta completar 1Q.">Locked until 1Q is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label">Bori</span><p data-en="If there is no evidence, create evidence. Proof has to be observable." data-es="Si no hay evidencia, crea evidencia. La prueba tiene que poder observarse.">If there is no evidence, create evidence. Proof has to be observable.</p></div>
-          <div class="box green">
-            <span class="box-label" data-en="Evidence Check" data-es="Chequeo de Evidencia">Evidence Check</span>
-            <p data-en="Where does your value show up most clearly?" data-es="¿Dónde se ve tu valor más claro?">Where does your value show up most clearly?</p>
-            <div class="choice-grid">
-              <div class="choice"><b>A</b><span data-en="Practice" data-es="Práctica">Practice</span></div>
-              <div class="choice"><b>B</b><span data-en="Games" data-es="Juegos">Games</span></div>
-              <div class="choice"><b>C</b><span data-en="Film" data-es="Video">Film</span></div>
-              <div class="choice"><b>D</b><span data-en="Trust" data-es="Confianza">Trust</span></div>
-            </div>
-          </div>
-          <div class="complete-row">
-            <span class="complete-status" data-status="q2" data-en="2nd Quarter not completed." data-es="2do Cuarto no completado.">2nd Quarter not completed.</span>
-            <button class="btn" type="button" data-complete="q2" data-en="Complete 2Q → Unlock Halftime" data-es="Completar 2Q → Desbloquear Medio Tiempo">Complete 2Q → Unlock Halftime</button>
-          </div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="half" data-section="half">
-        <summary>
-          <div class="badge">HT</div>
-          <div class="summary-copy">
-            <strong data-en="Halftime Reality Check" data-es="Chequeo Real de Medio Tiempo">Halftime Reality Check</strong>
-            <span data-en="What can a coach trust today?" data-es="¿Qué puede confiar un coach hoy?">What can a coach trust today?</span>
-            <em class="lock-note" data-en="Locked until 2Q is complete." data-es="Bloqueado hasta completar 2Q.">Locked until 2Q is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Reality Check" data-es="Chequeo de Realidad">Reality Check</span><p data-en="Potential opens the conversation. Trust earns the responsibility." data-es="El potencial abre la conversación. La confianza gana la responsabilidad.">Potential opens the conversation. Trust earns the responsibility.</p></div>
-          <div class="box green">
-            <p data-en="If a coach watched you today, what would they trust?" data-es="Si un coach te viera hoy, ¿qué confiaría de ti?">If a coach watched you today, what would they trust?</p>
-            <div class="choice-grid">
-              <div class="choice"><b>A</b><span data-en="Effort" data-es="Esfuerzo">Effort</span></div>
-              <div class="choice"><b>B</b><span data-en="Defense" data-es="Defensa">Defense</span></div>
-              <div class="choice"><b>C</b><span data-en="Decisions" data-es="Decisiones">Decisions</span></div>
-              <div class="choice"><b>D</b><span data-en="Nothing consistently yet" data-es="Todavía nada consistentemente">Nothing consistently yet</span></div>
-            </div>
-          </div>
-          <div class="complete-row">
-            <span class="complete-status" data-status="half" data-en="Halftime not completed." data-es="Medio Tiempo no completado.">Halftime not completed.</span>
-            <button class="btn" type="button" data-complete="half" data-en="Complete Halftime → Unlock 3Q" data-es="Completar Medio Tiempo → Desbloquear 3Q">Complete Halftime → Unlock 3Q</button>
-          </div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q3" data-section="q3">
-        <summary>
-          <div class="badge">3Q</div>
-          <div class="summary-copy">
-            <strong data-en="Pressure" data-es="Presión">Pressure</strong>
-            <span data-en="Real value shows when the easy option disappears." data-es="El valor real aparece cuando se va la opción fácil.">Real value shows when the easy option disappears.</span>
-            <em class="lock-note" data-en="Locked until Halftime is complete." data-es="Bloqueado hasta completar Medio Tiempo.">Locked until Halftime is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Game Situation" data-es="Situación del Juego">Game Situation</span><p data-en="Score is close. Crowd is loud. Your defender is pressuring you. Your team needs one reliable player." data-es="El juego está cerrado. La gente está encendida. Tu defensor te presiona. Tu equipo necesita un jugador confiable.">Score is close. Crowd is loud. Your defender is pressuring you. Your team needs one reliable player.</p></div>
-          <div class="box green">
-            <p data-en="What do you do when your first option gets taken away?" data-es="¿Qué haces cuando te quitan tu primera opción?">What do you do when your first option gets taken away?</p>
-            <div class="choice-grid">
-              <div class="choice"><b>A</b><span data-en="Force it" data-es="Forzarla">Force it</span></div>
-              <div class="choice"><b>B</b><span data-en="Panic" data-es="Entrar en pánico">Panic</span></div>
-              <div class="choice"><b>C</b><span data-en="Make the next right read" data-es="Hacer la próxima lectura correcta">Make the next right read</span></div>
-              <div class="choice"><b>D</b><span data-en="Blame someone" data-es="Culpar a alguien">Blame someone</span></div>
-            </div>
-          </div>
-          <div class="complete-row">
-            <span class="complete-status" data-status="q3" data-en="3rd Quarter not completed." data-es="3er Cuarto no completado.">3rd Quarter not completed.</span>
-            <button class="btn" type="button" data-complete="q3" data-en="Complete 3Q → Unlock 4Q" data-es="Completar 3Q → Desbloquear 4Q">Complete 3Q → Unlock 4Q</button>
-          </div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q4" data-section="q4">
-        <summary>
-          <div class="badge">4Q</div>
-          <div class="summary-copy">
-            <strong data-en="Decision" data-es="Decisión">Decision</strong>
-            <span data-en="What are you going to prove this week?" data-es="¿Qué tú vas a probar esta semana?">What are you going to prove this week?</span>
-            <em class="lock-note" data-en="Locked until 3Q is complete." data-es="Bloqueado hasta completar 3Q.">Locked until 3Q is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Decision Point" data-es="Momento de Decisión">Decision Point</span><p data-en="A player who understands value asks: what do I need to prove so opportunity makes sense?" data-es="Un jugador que entiende el valor pregunta: ¿qué necesito probar para que la oportunidad tenga sentido?">A player who understands value asks: what do I need to prove so opportunity makes sense?</p></div>
-          <div class="box green">
-            <p data-en="Pick one value target for this week." data-es="Escoge un objetivo de valor para esta semana.">Pick one value target for this week.</p>
-            <div class="choice-grid">
-              <div class="choice"><b>A</b><span data-en="Reliable effort" data-es="Esfuerzo confiable">Reliable effort</span></div>
-              <div class="choice"><b>B</b><span data-en="One specific skill" data-es="Una habilidad específica">One specific skill</span></div>
-              <div class="choice"><b>C</b><span data-en="Coach trust" data-es="Confianza del coach">Coach trust</span></div>
-              <div class="choice"><b>D</b><span data-en="Better decisions" data-es="Mejores decisiones">Better decisions</span></div>
-            </div>
-          </div>
-          <div class="complete-row">
-            <span class="complete-status" data-status="q4" data-en="4th Quarter not completed." data-es="4to Cuarto no completado.">4th Quarter not completed.</span>
-            <button class="btn" type="button" data-complete="q4" data-en="Complete 4Q → Unlock Final Buzzer" data-es="Completar 4Q → Desbloquear Bocina Final">Complete 4Q → Unlock Final Buzzer</button>
-          </div>
-        </div>
-      </details>
 
       <section class="card pad" id="cognitive-reaction-hoops">
-        <p class="eyebrow" data-en="Overtime Training" data-es="Entrenamiento Overtime">Overtime Training</p>
-        <h2 class="section-title" data-en="Cognitive Reaction Hoops" data-es="Cognitive Reaction Hoops">Cognitive Reaction Hoops</h2>
+        <p class="eyebrow" data-en="Cognitive Reaction Hoops" data-es="Cognitive Reaction Hoops">Cognitive Reaction Hoops</p>
+        <h2 class="section-title" data-en="Think. Read. React." data-es="Piensa. Lee. Reacciona.">Think. Read. React.</h2>
         <p class="section-sub" data-en="Hoops Money teaches the business of basketball. Cognitive Reaction Hoops trains the decision system behind the player: eyes, reaction, timing, focus, and pressure response." data-es="Hoops Money enseña el negocio del baloncesto. Cognitive Reaction Hoops entrena el sistema de decisión detrás del jugador: visión, reacción, timing, enfoque y respuesta bajo presión.">
           Hoops Money teaches the business of basketball. Cognitive Reaction Hoops trains the decision system behind the player: eyes, reaction, timing, focus, and pressure response.
         </p>
         <div class="note">
-          <span class="box-label" data-en="Why It Matters" data-es="Por Qué Importa">Why It Matters</span>
-          <p data-en="A valuable player does not only know the right answer. A valuable player has to react when the game speeds up." data-es="Un jugador valioso no solo sabe la respuesta correcta. Un jugador valioso tiene que reaccionar cuando el juego se acelera.">
-            A valuable player does not only know the right answer. A valuable player has to react when the game speeds up.
-          </p>
-        </div>
-        <div class="box green">
-          <span class="box-label" data-en="Drill 001" data-es="Drill 001">Drill 001</span>
-          <p><strong data-en="THE REACT — Single-Beat Brake Read" data-es="THE REACT — Lectura de Freno en un Solo Beat">THE REACT — Single-Beat Brake Read</strong></p>
-          <p data-en="Complete Game 001 first. Then the Overtime Drill unlocks before Game 002." data-es="Completa el Juego 001 primero. Después se desbloquea el Overtime Drill antes del Juego 002.">
-            Complete Game 001 first. Then the Overtime Drill unlocks before Game 002.
+          <span class="box-label">Bori</span>
+          <p data-en="A valuable player does not only know the right answer. A valuable player reacts when the game speeds up." data-es="Un jugador valioso no solo sabe la respuesta correcta. Un jugador valioso reacciona cuando el juego se acelera.">
+            A valuable player does not only know the right answer. A valuable player reacts when the game speeds up.
           </p>
         </div>
       </section>
 
-      <section id="final-buzzer" class="card pad">
-        <h2 class="section-title" data-en="Final Buzzer Review" data-es="Repaso de la Bocina Final">Final Buzzer Review</h2>
-        <p class="section-sub" data-en="Review the lesson before Game 002 unlocks." data-es="Repasa la lección antes de desbloquear el Juego 002.">Review the lesson before Game 002 unlocks.</p>
-
-        <div class="review-grid">
-          <div class="review-card locked-review" data-review="r1">
-            <span class="box-label" data-en="Question 1" data-es="Pregunta 1">Question 1</span>
-            <h3 data-en="What makes a player valuable?" data-es="¿Qué hace valioso a un jugador?">What makes a player valuable?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Popularity" data-es="Popularidad">Popularity</button>
-              <button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Noise online" data-es="Ruido en línea">Noise online</button>
-              <button class="review-choice" type="button" data-review-choice="r1" data-correct="true" data-en="Value that helps a team win" data-es="Valor que ayuda al equipo a ganar">Value that helps a team win</button>
-              <button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Excuses" data-es="Excusas">Excuses</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r1" data-en="Money follows value, not noise. Real value helps the team and gives coaches something to trust." data-es="El dinero sigue al valor, no al ruido. El valor real ayuda al equipo y le da al coach algo que puede confiar.">Money follows value, not noise. Real value helps the team and gives coaches something to trust.</div>
+      <section id="question-flow" class="stack">
+        <article class="question-card active" data-question="q1">
+          <div class="question-head">
+            <div class="question-number">Q1</div>
+            <span class="box-label" data-en="Value Check" data-es="Chequeo de Valor">Value Check</span>
+            <h2 data-en="What makes a player valuable?" data-es="¿Qué hace valioso a un jugador?">What makes a player valuable?</h2>
+            <p class="question-prompt" data-en="Choose the answer. Then read the explanation before moving forward." data-es="Escoge la respuesta. Después lee la explicación antes de seguir.">Choose the answer. Then read the explanation before moving forward.</p>
           </div>
-
-          <div class="review-card locked-review" data-review="r2">
-            <span class="box-label" data-en="Question 2" data-es="Pregunta 2">Question 2</span>
-            <h3 data-en="What makes a value statement strong?" data-es="¿Qué hace fuerte una declaración de valor?">What makes a value statement strong?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r2" data-correct="true" data-en="It has proof" data-es="Tiene evidencia">It has proof</button>
-              <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It sounds confident" data-es="Suena confiada">It sounds confident</button>
-              <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It sounds different" data-es="Suena diferente">It sounds different</button>
-              <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It looks popular" data-es="Se ve popular">It looks popular</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r2" data-en="Proof separates real value from talk. If nobody can see it, trust it, or measure it, it is not strong yet." data-es="La evidencia separa el valor real del hablar. Si nadie puede verlo, confiarlo o medirlo, todavía no está fuerte.">Proof separates real value from talk. If nobody can see it, trust it, or measure it, it is not strong yet.</div>
+          <div class="choice-grid">
+            <button class="choice-btn" type="button" data-choice="q1" data-correct="false"><b>A</b><span data-en="Popularity" data-es="Popularidad">Popularity</span></button>
+            <button class="choice-btn" type="button" data-choice="q1" data-correct="false"><b>B</b><span data-en="Noise online" data-es="Ruido en línea">Noise online</span></button>
+            <button class="choice-btn" type="button" data-choice="q1" data-correct="true"><b>C</b><span data-en="Value that helps a team win" data-es="Valor que ayuda al equipo a ganar">Value that helps a team win</span></button>
+            <button class="choice-btn" type="button" data-choice="q1" data-correct="false"><b>D</b><span data-en="Excuses" data-es="Excusas">Excuses</span></button>
           </div>
-
-          <div class="review-card locked-review" data-review="r3">
-            <span class="box-label" data-en="Question 3" data-es="Pregunta 3">Question 3</span>
-            <h3 data-en="Where does value need to show up?" data-es="¿Dónde tiene que aparecer el valor?">Where does value need to show up?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only online" data-es="Solo en línea">Only online</button>
-              <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only when things go well" data-es="Solo cuando todo va bien">Only when things go well</button>
-              <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only in your head" data-es="Solo en tu mente">Only in your head</button>
-              <button class="review-choice" type="button" data-review-choice="r3" data-correct="true" data-en="Practice, games, film, trust, and consistency" data-es="Práctica, juegos, video, confianza y consistencia">Practice, games, film, trust, and consistency</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r3" data-en="Value needs evidence. Practice, games, film, coach trust, teammate trust, and consistency reveal what is real." data-es="El valor necesita evidencia. Práctica, juegos, video, confianza del coach, confianza de compañeros y consistencia revelan lo real.">Value needs evidence. Practice, games, film, coach trust, teammate trust, and consistency reveal what is real.</div>
+          <div class="explanation" data-explanation="q1">
+            <div class="answer-line" data-en="Correct Answer: C — Value that helps a team win" data-es="Respuesta Correcta: C — Valor que ayuda al equipo a ganar">Correct Answer: C — Value that helps a team win</div>
+            <p class="coach-explanation" data-en="Money follows value, not noise. Real value helps the team and gives coaches something they can trust." data-es="El dinero sigue al valor, no al ruido. El valor real ayuda al equipo y le da al coach algo que puede confiar.">Money follows value, not noise. Real value helps the team and gives coaches something they can trust.</p>
+            <div class="next-row"><span class="status-text" data-en="Explanation unlocked. Move to Question 2." data-es="Explicación desbloqueada. Sigue a Pregunta 2.">Explanation unlocked. Move to Question 2.</span><button class="btn" type="button" data-next="q2" data-en="Next Question →" data-es="Próxima Pregunta →">Next Question →</button></div>
           </div>
+        </article>
 
-          <div class="review-card locked-review" data-review="r4">
-            <span class="box-label" data-en="Question 4" data-es="Pregunta 4">Question 4</span>
-            <h3 data-en="What matters most in the halftime reality check?" data-es="¿Qué importa más en el chequeo de realidad del medio tiempo?">What matters most in the halftime reality check?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="What coach hopes you become" data-es="Lo que el coach espera que seas">What coach hopes you become</button>
-              <button class="review-choice" type="button" data-review-choice="r4" data-correct="true" data-en="What coach can trust today" data-es="Lo que el coach puede confiar hoy">What coach can trust today</button>
-              <button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="What you say you can do" data-es="Lo que dices que puedes hacer">What you say you can do</button>
-              <button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="What sounds good" data-es="Lo que suena bonito">What sounds good</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r4" data-en="Trust is built by what repeats. The question is not what sounds good. The question is what can be trusted now." data-es="La confianza se construye con lo que se repite. La pregunta no es lo que suena bonito. La pregunta es qué se puede confiar ahora.">Trust is built by what repeats. The question is not what sounds good. The question is what can be trusted now.</div>
+        <article class="question-card" data-question="q2">
+          <div class="question-head">
+            <div class="question-number">Q2</div>
+            <span class="box-label" data-en="Proof Check" data-es="Chequeo de Evidencia">Proof Check</span>
+            <h2 data-en="What makes a value statement strong?" data-es="¿Qué hace fuerte una declaración de valor?">What makes a value statement strong?</h2>
+            <p class="question-prompt" data-en="Do not guess for speed. Choose what separates real value from talk." data-es="No adivines por rapidez. Escoge lo que separa el valor real del hablar.">Do not guess for speed. Choose what separates real value from talk.</p>
           </div>
+          <div class="choice-grid">
+            <button class="choice-btn" type="button" data-choice="q2" data-correct="true"><b>A</b><span data-en="It has proof" data-es="Tiene evidencia">It has proof</span></button>
+            <button class="choice-btn" type="button" data-choice="q2" data-correct="false"><b>B</b><span data-en="It sounds confident" data-es="Suena confiada">It sounds confident</span></button>
+            <button class="choice-btn" type="button" data-choice="q2" data-correct="false"><b>C</b><span data-en="It sounds different" data-es="Suena diferente">It sounds different</span></button>
+            <button class="choice-btn" type="button" data-choice="q2" data-correct="false"><b>D</b><span data-en="It looks popular" data-es="Se ve popular">It looks popular</span></button>
+          </div>
+          <div class="explanation" data-explanation="q2">
+            <div class="answer-line" data-en="Correct Answer: A — It has proof" data-es="Respuesta Correcta: A — Tiene evidencia">Correct Answer: A — It has proof</div>
+            <p class="coach-explanation" data-en="Proof separates real value from talk. If nobody can see it, trust it, or measure it, it is not strong yet." data-es="La evidencia separa el valor real del hablar. Si nadie puede verlo, confiarlo o medirlo, todavía no está fuerte.">Proof separates real value from talk. If nobody can see it, trust it, or measure it, it is not strong yet.</p>
+            <div class="next-row"><span class="status-text" data-en="Explanation unlocked. Move to Question 3." data-es="Explicación desbloqueada. Sigue a Pregunta 3.">Explanation unlocked. Move to Question 3.</span><button class="btn" type="button" data-next="q3" data-en="Next Question →" data-es="Próxima Pregunta →">Next Question →</button></div>
+          </div>
+        </article>
 
-          <div class="review-card locked-review" data-review="r5">
-            <span class="box-label" data-en="Question 5" data-es="Pregunta 5">Question 5</span>
-            <h3 data-en="When does real value get exposed?" data-es="¿Cuándo se expone el valor real?">When does real value get exposed?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r5" data-correct="true" data-en="When pressure hits" data-es="Cuando llega la presión">When pressure hits</button>
-              <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="When everything is easy" data-es="Cuando todo está fácil">When everything is easy</button>
-              <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only during highlights" data-es="Solo en highlights">Only during highlights</button>
-              <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only when you score" data-es="Solo cuando anotas">Only when you score</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r5" data-en="Pressure shows what is real. Reliable players show value when the game becomes uncomfortable." data-es="La presión muestra lo que es real. Los jugadores confiables muestran valor cuando el juego se pone incómodo.">Pressure shows what is real. Reliable players show value when the game becomes uncomfortable.</div>
+        <article class="question-card" data-question="q3">
+          <div class="question-head">
+            <div class="question-number">Q3</div>
+            <span class="box-label" data-en="Evidence Check" data-es="Chequeo de Evidencia">Evidence Check</span>
+            <h2 data-en="Where does value need to show up?" data-es="¿Dónde tiene que aparecer el valor?">Where does value need to show up?</h2>
+            <p class="question-prompt" data-en="One good moment is not enough. Choose where value has to repeat." data-es="Un buen momento no es suficiente. Escoge dónde el valor tiene que repetirse.">One good moment is not enough. Choose where value has to repeat.</p>
           </div>
+          <div class="choice-grid">
+            <button class="choice-btn" type="button" data-choice="q3" data-correct="false"><b>A</b><span data-en="Only online" data-es="Solo en línea">Only online</span></button>
+            <button class="choice-btn" type="button" data-choice="q3" data-correct="false"><b>B</b><span data-en="Only when things go well" data-es="Solo cuando todo va bien">Only when things go well</span></button>
+            <button class="choice-btn" type="button" data-choice="q3" data-correct="false"><b>C</b><span data-en="Only in your head" data-es="Solo en tu mente">Only in your head</span></button>
+            <button class="choice-btn" type="button" data-choice="q3" data-correct="true"><b>D</b><span data-en="Practice, games, film, trust, and consistency" data-es="Práctica, juegos, video, confianza y consistencia">Practice, games, film, trust, and consistency</span></button>
+          </div>
+          <div class="explanation" data-explanation="q3">
+            <div class="answer-line" data-en="Correct Answer: D — Practice, games, film, trust, and consistency" data-es="Respuesta Correcta: D — Práctica, juegos, video, confianza y consistencia">Correct Answer: D — Practice, games, film, trust, and consistency</div>
+            <p class="coach-explanation" data-en="Value needs evidence. Practice, games, film, coach trust, teammate trust, and consistency reveal what is real." data-es="El valor necesita evidencia. Práctica, juegos, video, confianza del coach, confianza de compañeros y consistencia revelan lo real.">Value needs evidence. Practice, games, film, coach trust, teammate trust, and consistency reveal what is real.</p>
+            <div class="next-row"><span class="status-text" data-en="Explanation unlocked. Move to Question 4." data-es="Explicación desbloqueada. Sigue a Pregunta 4.">Explanation unlocked. Move to Question 4.</span><button class="btn" type="button" data-next="q4" data-en="Next Question →" data-es="Próxima Pregunta →">Next Question →</button></div>
+          </div>
+        </article>
 
-          <div class="review-card locked-review" data-review="r6">
-            <span class="box-label" data-en="Question 6" data-es="Pregunta 6">Question 6</span>
-            <h3 data-en="What should a player leave Game 001 with?" data-es="¿Con qué debe salir un jugador del Juego 001?">What should a player leave Game 001 with?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="A vague goal" data-es="Una meta vaga">A vague goal</button>
-              <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="A good feeling" data-es="Un buen sentimiento">A good feeling</button>
-              <button class="review-choice" type="button" data-review-choice="r6" data-correct="true" data-en="A measurable action" data-es="Una acción medible">A measurable action</button>
-              <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="More hype" data-es="Más hype">More hype</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r6" data-en="If it cannot be measured, it is not ready. Serious players turn value into action." data-es="Si no se puede medir, no está listo. Los jugadores serios convierten el valor en acción.">If it cannot be measured, it is not ready. Serious players turn value into action.</div>
+        <article class="question-card" data-question="q4">
+          <div class="question-head">
+            <div class="question-number">Q4</div>
+            <span class="box-label" data-en="Trust Check" data-es="Chequeo de Confianza">Trust Check</span>
+            <h2 data-en="What matters most in the reality check?" data-es="¿Qué importa más en el chequeo de realidad?">What matters most in the reality check?</h2>
+            <p class="question-prompt" data-en="Coach has to make decisions now. Choose what matters today." data-es="El coach tiene que tomar decisiones ahora. Escoge lo que importa hoy.">Coach has to make decisions now. Choose what matters today.</p>
           </div>
+          <div class="choice-grid">
+            <button class="choice-btn" type="button" data-choice="q4" data-correct="false"><b>A</b><span data-en="What coach hopes you become" data-es="Lo que el coach espera que seas">What coach hopes you become</span></button>
+            <button class="choice-btn" type="button" data-choice="q4" data-correct="true"><b>B</b><span data-en="What coach can trust today" data-es="Lo que el coach puede confiar hoy">What coach can trust today</span></button>
+            <button class="choice-btn" type="button" data-choice="q4" data-correct="false"><b>C</b><span data-en="What you say you can do" data-es="Lo que dices que puedes hacer">What you say you can do</span></button>
+            <button class="choice-btn" type="button" data-choice="q4" data-correct="false"><b>D</b><span data-en="What sounds good" data-es="Lo que suena bonito">What sounds good</span></button>
+          </div>
+          <div class="explanation" data-explanation="q4">
+            <div class="answer-line" data-en="Correct Answer: B — What coach can trust today" data-es="Respuesta Correcta: B — Lo que el coach puede confiar hoy">Correct Answer: B — What coach can trust today</div>
+            <p class="coach-explanation" data-en="Trust is built by what repeats. The question is not what sounds good. The question is what can be trusted now." data-es="La confianza se construye con lo que se repite. La pregunta no es lo que suena bonito. La pregunta es qué se puede confiar ahora.">Trust is built by what repeats. The question is not what sounds good. The question is what can be trusted now.</p>
+            <div class="next-row"><span class="status-text" data-en="Explanation unlocked. Move to Question 5." data-es="Explicación desbloqueada. Sigue a Pregunta 5.">Explanation unlocked. Move to Question 5.</span><button class="btn" type="button" data-next="q5" data-en="Next Question →" data-es="Próxima Pregunta →">Next Question →</button></div>
+          </div>
+        </article>
+
+        <article class="question-card" data-question="q5">
+          <div class="question-head">
+            <div class="question-number">Q5</div>
+            <span class="box-label" data-en="Pressure Check" data-es="Chequeo de Presión">Pressure Check</span>
+            <h2 data-en="When does real value get exposed?" data-es="¿Cuándo se expone el valor real?">When does real value get exposed?</h2>
+            <p class="question-prompt" data-en="Comfort hides some things. Pressure does not." data-es="La comodidad esconde algunas cosas. La presión no.">Comfort hides some things. Pressure does not.</p>
+          </div>
+          <div class="choice-grid">
+            <button class="choice-btn" type="button" data-choice="q5" data-correct="true"><b>A</b><span data-en="When pressure hits" data-es="Cuando llega la presión">When pressure hits</span></button>
+            <button class="choice-btn" type="button" data-choice="q5" data-correct="false"><b>B</b><span data-en="When everything is easy" data-es="Cuando todo está fácil">When everything is easy</span></button>
+            <button class="choice-btn" type="button" data-choice="q5" data-correct="false"><b>C</b><span data-en="Only during highlights" data-es="Solo en highlights">Only during highlights</span></button>
+            <button class="choice-btn" type="button" data-choice="q5" data-correct="false"><b>D</b><span data-en="Only when you score" data-es="Solo cuando anotas">Only when you score</span></button>
+          </div>
+          <div class="explanation" data-explanation="q5">
+            <div class="answer-line" data-en="Correct Answer: A — When pressure hits" data-es="Respuesta Correcta: A — Cuando llega la presión">Correct Answer: A — When pressure hits</div>
+            <p class="coach-explanation" data-en="Pressure shows what is real. Reliable players show value when the game becomes uncomfortable." data-es="La presión muestra lo que es real. Los jugadores confiables muestran valor cuando el juego se pone incómodo.">Pressure shows what is real. Reliable players show value when the game becomes uncomfortable.</p>
+            <div class="next-row"><span class="status-text" data-en="Explanation unlocked. Move to Question 6." data-es="Explicación desbloqueada. Sigue a Pregunta 6.">Explanation unlocked. Move to Question 6.</span><button class="btn" type="button" data-next="q6" data-en="Next Question →" data-es="Próxima Pregunta →">Next Question →</button></div>
+          </div>
+        </article>
+
+        <article class="question-card" data-question="q6">
+          <div class="question-head">
+            <div class="question-number">Q6</div>
+            <span class="box-label" data-en="Action Check" data-es="Chequeo de Acción">Action Check</span>
+            <h2 data-en="What should a player leave Game 001 with?" data-es="¿Con qué debe salir un jugador del Juego 001?">What should a player leave Game 001 with?</h2>
+            <p class="question-prompt" data-en="A feeling is not enough. Choose what creates accountability." data-es="Un sentimiento no es suficiente. Escoge lo que crea accountability.">A feeling is not enough. Choose what creates accountability.</p>
+          </div>
+          <div class="choice-grid">
+            <button class="choice-btn" type="button" data-choice="q6" data-correct="false"><b>A</b><span data-en="A vague goal" data-es="Una meta vaga">A vague goal</span></button>
+            <button class="choice-btn" type="button" data-choice="q6" data-correct="false"><b>B</b><span data-en="A good feeling" data-es="Un buen sentimiento">A good feeling</span></button>
+            <button class="choice-btn" type="button" data-choice="q6" data-correct="true"><b>C</b><span data-en="A measurable action" data-es="Una acción medible">A measurable action</span></button>
+            <button class="choice-btn" type="button" data-choice="q6" data-correct="false"><b>D</b><span data-en="More hype" data-es="Más hype">More hype</span></button>
+          </div>
+          <div class="explanation" data-explanation="q6">
+            <div class="answer-line" data-en="Correct Answer: C — A measurable action" data-es="Respuesta Correcta: C — Una acción medible">Correct Answer: C — A measurable action</div>
+            <p class="coach-explanation" data-en="If it cannot be measured, it is not ready. Serious players turn value into action." data-es="Si no se puede medir, no está listo. Los jugadores serios convierten el valor en acción.">If it cannot be measured, it is not ready. Serious players turn value into action.</p>
+            <div class="next-row"><span class="status-text" data-en="Game 001 response flow complete." data-es="Flujo de respuestas del Juego 001 completado.">Game 001 response flow complete.</span><button class="btn" type="button" id="unlockOvertime" data-en="Unlock Overtime Drill →" data-es="Desbloquear Overtime Drill →">Unlock Overtime Drill →</button></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="card pad overtime-card" id="overtime">
+        <p class="eyebrow" data-en="Overtime Drill 001" data-es="Overtime Drill 001">Overtime Drill 001</p>
+        <h2 class="section-title" data-en="THE REACT" data-es="THE REACT">THE REACT</h2>
+        <p class="subtitle" data-en="You finished the value questions. Now train the reaction system. See it. Read it. React." data-es="Terminaste las preguntas de valor. Ahora entrena el sistema de reacción. Míralo. Léelo. Reacciona.">
+          You finished the value questions. Now train the reaction system. See it. Read it. React.
+        </p>
+        <div class="rule" data-en="Complete this drill, then continue to Game 002." data-es="Completa este drill, después continúa al Juego 002.">Complete this drill, then continue to Game 002.</div>
+        <div class="note">
+          <span class="box-label" data-en="Cognitive Reaction Hoops" data-es="Cognitive Reaction Hoops">Cognitive Reaction Hoops</span>
+          <p data-en="This is our online cognitive program for basketball reaction: visual awareness, quick decisions, timing, focus, and pressure response." data-es="Este es nuestro programa cognitivo online para reacción de baloncesto: conciencia visual, decisiones rápidas, timing, enfoque y respuesta bajo presión.">
+            This is our online cognitive program for basketball reaction: visual awareness, quick decisions, timing, focus, and pressure response.
+          </p>
         </div>
-
-        <div class="complete-row" style="margin-top:18px;">
-          <span class="complete-status" data-status="final" data-en="Final Buzzer locked." data-es="Bocina Final bloqueada.">Final Buzzer locked.</span>
-          <button class="btn" id="finalBuzzerBtn" type="button" disabled data-en="Complete Final Review" data-es="Completar Repaso Final">Complete Final Review</button>
-        </div>
-
-        <div class="next-box" id="nextGameBox">
-          <span class="box-label" data-en="Overtime Drill 001 Unlocked" data-es="Overtime Drill 001 Desbloqueado">Overtime Drill 001 Unlocked</span>
-          <h2 class="section-title" data-en="Online Cognitive Program" data-es="Programa Cognitivo Online">Online Cognitive Program</h2>
-          <p data-en="Game 001 is complete. Before Game 002, enter our basketball reaction training: The React. This is where value moves from understanding to reaction speed." data-es="Juego 001 completado. Antes del Juego 002, entra a nuestro entrenamiento de reacción para baloncesto: The React. Aquí el valor pasa de entender a reaccionar rápido.">Game 001 is complete. Before Game 002, enter our basketball reaction training: The React. This is where value moves from understanding to reaction speed.</p>
-          <div class="note">
-            <span class="box-label" data-en="Basketball Reaction" data-es="Reacción de Baloncesto">Basketball Reaction</span>
-            <p data-en="The React trains visual awareness, quick decisions, and response under pressure. No overthinking. See it. Read it. React." data-es="The React entrena conciencia visual, decisiones rápidas y respuesta bajo presión. Sin sobrepensar. Míralo. Léelo. Reacciona.">The React trains visual awareness, quick decisions, and response under pressure. No overthinking. See it. Read it. React.</p>
-          </div>
-          <div style="margin-top:14px;"><a class="btn" href="./001-react.html" data-en="Enter Overtime Drill 001 →" data-es="Entrar al Overtime Drill 001 →">Enter Overtime Drill 001 →</a></div>
+        <div style="margin-top:18px;">
+          <a class="btn" href="./001-react.html" data-en="Enter Overtime Drill 001 →" data-es="Entrar al Overtime Drill 001 →">Enter Overtime Drill 001 →</a>
         </div>
       </section>
 
       <section class="card pad coach-close">
         <p>
           <strong data-en="Coach Close:" data-es="Cierre del Coach:">Coach Close:</strong>
-          <span data-en=" Game 001 is not about money yet. It is about value. Then Overtime trains reaction. Learn it, review it, react." data-es=" El Juego 001 todavía no se trata del dinero. Se trata del valor. Después Overtime entrena reacción. Apréndelo, repásalo, reacciona."> Game 001 is not about money yet. It is about value. Then Overtime trains reaction. Learn it, review it, react.</span>
+          <span data-en=" Game 001 is value. Not hype. Not noise. Value. Now prove you can react." data-es=" El Juego 001 es valor. No hype. No ruido. Valor. Ahora prueba que puedes reaccionar.">
+            Game 001 is value. Not hype. Not noise. Value. Now prove you can react.
+          </span>
         </p>
       </section>
 
@@ -945,180 +722,112 @@
   </main>
 
   <script>
-    const STORAGE_KEY = 'hm-game-001-green-v1';
-    const unlockMap = { tipoff:'q1', q1:'q2', q2:'half', half:'q3', q3:'q4', q4:'final' };
-    const reviews = ['r1','r2','r3','r4','r5','r6'];
-
+    const STORAGE_KEY = 'hm-game-001-question-flow-v1';
     const langButtons = document.querySelectorAll('.lang-btn');
     const translatable = document.querySelectorAll('[data-en][data-es]');
-    const completeButtons = document.querySelectorAll('[data-complete]');
-    const sections = document.querySelectorAll('[data-section]');
-    const progressSteps = document.querySelectorAll('.step');
-    const reviewChoices = document.querySelectorAll('[data-review-choice]');
-    const reviewCards = document.querySelectorAll('[data-review]');
-    const reviewExplanations = document.querySelectorAll('[data-review-explanation]');
-    const finalBuzzerBtn = document.getElementById('finalBuzzerBtn');
-    const nextGameBox = document.getElementById('nextGameBox');
+    const choiceButtons = document.querySelectorAll('[data-choice]');
+    const questionCards = document.querySelectorAll('[data-question]');
+    const nextButtons = document.querySelectorAll('[data-next]');
+    const steps = document.querySelectorAll('[data-step]');
+    const unlockOvertime = document.getElementById('unlockOvertime');
+    const overtime = document.getElementById('overtime');
 
     let currentLang = 'en';
-    let progress = normalize(loadProgress());
+    let progress = loadProgress();
 
-    function normalize(value){
-      const clean = value && typeof value === 'object' ? value : {};
-      return {
-        completed: Array.isArray(clean.completed) ? clean.completed : [],
-        unlocked: Array.isArray(clean.unlocked) && clean.unlocked.length ? clean.unlocked : ['tipoff'],
-        reviews: Array.isArray(clean.reviews) ? clean.reviews : [],
-        finalComplete: clean.finalComplete === true
-      };
+    function defaultProgress() {
+      return { answered: [], current: 'q1', overtimeUnlocked: false };
     }
 
-    function loadProgress(){
-      try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : null; }
-      catch(e) { return null; }
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? { ...defaultProgress(), ...JSON.parse(raw) } : defaultProgress();
+      } catch (e) {
+        return defaultProgress();
+      }
     }
 
-    function saveProgress(){
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); }
-      catch(e) {}
+    function saveProgress() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); } catch (e) {}
     }
 
-    function isCompleted(id){ return progress.completed.includes(id); }
-    function isUnlocked(id){ return progress.unlocked.includes(id); }
-    function unlock(id){ if(id && !progress.unlocked.includes(id)) progress.unlocked.push(id); }
-    function isReviewComplete(){ return reviews.every(id => progress.reviews.includes(id)); }
-
-    function setLanguage(lang){
+    function setLanguage(lang) {
       currentLang = lang === 'es' ? 'es' : 'en';
       document.documentElement.lang = currentLang;
       translatable.forEach(el => {
         const text = el.getAttribute('data-' + currentLang);
-        if(text !== null) el.textContent = text;
+        if (text !== null) el.textContent = text;
       });
       langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === currentLang));
-      render();
     }
 
-    function render(){
-      sections.forEach(section => {
-        const id = section.dataset.section;
-        const unlocked = isUnlocked(id);
-        const completed = isCompleted(id);
-        section.classList.toggle('locked', !unlocked);
-        section.classList.toggle('done', completed);
-        const note = section.querySelector('.lock-note');
-        if(note) note.style.display = unlocked ? 'none' : 'inline-block';
+    function render() {
+      questionCards.forEach(card => {
+        const id = card.dataset.question;
+        const answered = progress.answered.includes(id);
+        card.classList.toggle('active', progress.current === id && !answered);
+        card.classList.toggle('completed', answered);
+
+        const exp = card.querySelector('[data-explanation]');
+        if (exp) exp.classList.toggle('show', answered);
+
+        card.querySelectorAll('[data-choice]').forEach(btn => {
+          btn.classList.toggle('disabled', answered);
+          if (answered) {
+            btn.classList.toggle('correct', btn.dataset.correct === 'true');
+          }
+        });
       });
 
-      progressSteps.forEach(step => {
+      steps.forEach(step => {
         const id = step.dataset.step;
-        step.classList.toggle('done', isCompleted(id));
-        step.classList.toggle('active', isUnlocked(id) && !isCompleted(id));
+        const answered = progress.answered.includes(id);
+        step.classList.toggle('done', answered);
+        step.classList.toggle('active', progress.current === id && !answered);
       });
 
-      completeButtons.forEach(button => {
-        const id = button.dataset.complete;
-        if(isCompleted(id)){
-          button.classList.add('done');
-          button.textContent = currentLang === 'es' ? 'Completado ✓' : 'Completed ✓';
-        } else {
-          button.classList.remove('done');
-          button.textContent = button.getAttribute('data-' + currentLang) || button.textContent;
-        }
-      });
-
-      document.querySelectorAll('[data-status]').forEach(status => {
-        const id = status.dataset.status;
-        if(isCompleted(id)){
-          status.classList.add('done');
-          status.textContent = currentLang === 'es' ? 'Completado. Próxima posesión desbloqueada.' : 'Completed. Next possession unlocked.';
-          return;
-        }
-        if(id === 'final' && isUnlocked('final')){
-          status.classList.remove('done');
-          status.textContent = isReviewComplete()
-            ? (currentLang === 'es' ? 'Repaso completo. Bocina Final lista.' : 'Review complete. Final Buzzer ready.')
-            : (currentLang === 'es' ? 'Bocina Final desbloqueada. Completa el repaso.' : 'Final Buzzer unlocked. Complete the review.');
-          return;
-        }
-        status.classList.remove('done');
-        status.textContent = status.getAttribute('data-' + currentLang) || status.textContent;
-      });
-
-      reviewCards.forEach(card => card.classList.toggle('locked-review', !isUnlocked('final')));
-
-      reviewChoices.forEach(choice => {
-        const id = choice.dataset.reviewChoice;
-        const answered = progress.reviews.includes(id);
-        const correct = choice.dataset.correct === 'true';
-        choice.classList.toggle('selected', answered);
-        choice.classList.toggle('correct', answered && correct);
-      });
-
-      reviewExplanations.forEach(exp => {
-        const id = exp.dataset.reviewExplanation;
-        exp.classList.toggle('show', progress.reviews.includes(id));
-      });
-
-      const ready = isUnlocked('final') && isReviewComplete();
-
-      if(progress.finalComplete){
-        finalBuzzerBtn.disabled = true;
-        finalBuzzerBtn.classList.add('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Juego 001 Completado ✓' : 'Game 001 Complete ✓';
-        nextGameBox.classList.add('unlocked');
-      } else if(ready){
-        finalBuzzerBtn.disabled = false;
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Completar Juego 001 → Desbloquear Overtime' : 'Complete Game 001 → Unlock Overtime';
-        nextGameBox.classList.remove('unlocked');
-      } else {
-        finalBuzzerBtn.disabled = true;
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = finalBuzzerBtn.getAttribute('data-' + currentLang);
-        nextGameBox.classList.remove('unlocked');
-      }
-
+      overtime.classList.toggle('unlocked', progress.overtimeUnlocked);
       saveProgress();
     }
 
-    function completeSection(id){
-      if(!progress.completed.includes(id)) progress.completed.push(id);
-      unlock(unlockMap[id]);
-      saveProgress();
-      render();
-      const next = unlockMap[id];
-      if(next){
-        const el = document.getElementById(next === 'final' ? 'final-buzzer' : next);
-        if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
-      }
-    }
+    choiceButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const id = button.dataset.choice;
+        if (progress.answered.includes(id)) return;
 
-    document.querySelectorAll('details.accordion').forEach(detail => {
-      detail.addEventListener('toggle', () => { if(detail.open && !isUnlocked(detail.id)) detail.open = false; });
-      const summary = detail.querySelector('summary');
-      if(summary){ summary.addEventListener('click', e => { if(!isUnlocked(detail.id)) e.preventDefault(); }); }
-    });
+        const card = button.closest('[data-question]');
+        card.querySelectorAll('[data-choice]').forEach(btn => {
+          btn.classList.add('disabled');
+          if (btn.dataset.correct === 'true') btn.classList.add('correct');
+        });
 
-    completeButtons.forEach(button => button.addEventListener('click', () => completeSection(button.dataset.complete)));
-
-    reviewChoices.forEach(choice => {
-      choice.addEventListener('click', () => {
-        if(!isUnlocked('final')) return;
-        const id = choice.dataset.reviewChoice;
-        if(!progress.reviews.includes(id)) progress.reviews.push(id);
+        if (button.dataset.correct !== 'true') button.classList.add('wrong');
+        progress.answered.push(id);
         saveProgress();
         render();
+
+        const exp = card.querySelector('[data-explanation]');
+        if (exp) exp.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
 
-    finalBuzzerBtn.addEventListener('click', () => {
-      if(!isUnlocked('final') || !isReviewComplete()) return;
-      progress.finalComplete = true;
-      if(!progress.completed.includes('final')) progress.completed.push('final');
+    nextButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const next = button.dataset.next;
+        progress.current = next;
+        saveProgress();
+        render();
+        const nextCard = document.querySelector(`[data-question="${next}"]`);
+        if (nextCard) nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    unlockOvertime.addEventListener('click', () => {
+      progress.overtimeUnlocked = true;
       saveProgress();
       render();
-      nextGameBox.scrollIntoView({ behavior:'smooth', block:'center' });
+      overtime.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
     langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
