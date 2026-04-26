@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Ready Hoops | Basketball Money</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #7c2d12 0%, #09090b 34%, #000 100%);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    a { color: inherit; }
+    .page { max-width: 980px; margin: 0 auto; padding: 24px 16px 60px; }
+    .hero {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.62);
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.5);
+    }
+    .kicker {
+      margin: 0;
+      color: #fb923c;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 8px 0 0; font-size: clamp(36px, 7vw, 72px); line-height: .95; }
+    .sub { margin: 18px 0 0; color: #d4d4d8; font-size: 18px; line-height: 1.5; max-width: 720px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-weight: 900;
+      border: 1px solid rgba(255,255,255,.16);
+    }
+    .btn.primary { background: #f97316; color: #111; border-color: #f97316; }
+    .btn.secondary { background: rgba(255,255,255,.06); color: #fff; }
+    .section-title { margin: 34px 0 14px; font-size: 24px; }
+    .accordion { display: grid; gap: 12px; }
+    details {
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(9,9,11,.92);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      font-weight: 900;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: #fb923c; font-size: 24px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    .content {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding: 18px 20px 20px;
+      color: #d4d4d8;
+      line-height: 1.6;
+    }
+    .content p { margin: 0 0 12px; }
+    .question {
+      color: #fff;
+      font-weight: 900;
+      font-size: 18px;
+      margin-top: 12px;
+    }
+    .choices { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chip {
+      border: 1px solid rgba(251,146,60,.45);
+      background: rgba(249,115,22,.12);
+      color: #fed7aa;
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .offers {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .offer {
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      border-radius: 24px;
+      padding: 18px;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .offer:hover { transform: translateY(-2px); background: rgba(255,255,255,.1); }
+    .offer.best { background: #f97316; color: #111; border-color: #f97316; }
+    .offer h3 { margin: 0; font-size: 20px; }
+    .price { margin: 8px 0 0; font-size: 28px; font-weight: 950; }
+    .desc { margin: 8px 0 0; opacity: .78; line-height: 1.4; }
+    .locked {
+      display: inline-block;
+      margin-left: 8px;
+      color: #fb923c;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .note {
+      margin-top: 18px;
+      border: 1px solid rgba(249,115,22,.28);
+      background: rgba(249,115,22,.12);
+      color: #fed7aa;
+      border-radius: 22px;
+      padding: 16px 18px;
+      line-height: 1.5;
+    }
+    footer { margin-top: 34px; color: #71717a; font-size: 13px; text-align: center; }
+    @media (max-width: 800px) {
+      .hero { padding: 22px; border-radius: 26px; }
+      .offers { grid-template-columns: 1fr; }
+      summary { padding: 16px; }
+      .content { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <p class="kicker">Basketball Money</p>
+      <h1>Get Ready Hoops</h1>
+      <p class="sub">
+        This is not motivation. This is accountability. Start with the free episodes. If you are serious, unlock the deeper work.
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="#unlock">Unlock Access</a>
+        <a class="btn secondary" href="#free">Start Free</a>
+      </div>
+    </section>
+
+    <h2 class="section-title" id="free">Free Episodes</h2>
+    <div class="accordion">
+      <details open>
+        <summary>Episode 001 — Value</summary>
+        <div class="content">
+          <p>Everybody talks about basketball money, but nobody explains what makes a player valuable.</p>
+          <p class="question">Why would someone choose you?</p>
+          <div class="choices">
+            <span class="chip">Skill</span>
+            <span class="chip">Work ethic</span>
+            <span class="chip">Trust</span>
+            <span class="chip">I don't know</span>
+          </div>
+          <p class="question">Bori says:</p>
+          <p>Do not answer pretty. Answer real. What makes a coach say, “I need this player on the floor”?</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Episode 002 — Behavior</summary>
+        <div class="content">
+          <p>That is what you say. Now let us see what you do.</p>
+          <p class="question">When nobody is watching, do your habits match what you say you want?</p>
+          <div class="choices">
+            <span class="chip">Consistent</span>
+            <span class="chip">Inconsistent</span>
+            <span class="chip">Feel-based</span>
+            <span class="chip">I don't know</span>
+          </div>
+          <p class="question">Bori says:</p>
+          <p>If you do not track your habits, you are guessing. Serious players do not guess.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Episode 003 — Influence</summary>
+        <div class="content">
+          <p>You are not building yourself alone.</p>
+          <p class="question">Who is influencing you?</p>
+          <div class="choices">
+            <span class="chip">Positive people</span>
+            <span class="chip">Negative people</span>
+            <span class="chip">I am not aware</span>
+            <span class="chip">I ignore it</span>
+          </div>
+          <p class="question">Bori says:</p>
+          <p>Ignoring influence does not make you strong. It makes you easy to control.</p>
+        </div>
+      </details>
+    </div>
+
+    <h2 class="section-title" id="unlock">Unlock the Next Level</h2>
+    <section class="hero">
+      <p class="kicker">Decision Point</p>
+      <h1 style="font-size: clamp(32px, 5vw, 52px);">Most players stop here.</h1>
+      <p class="sub">If you are serious, we go deeper. One level shows interest. The full path shows commitment.</p>
+
+      <div class="offers">
+        <a class="offer" href="https://buy.stripe.com/6oUdRacOH6VUdYQcyS8Zq06" target="_blank" rel="noopener noreferrer">
+          <div>
+            <h3>Level 2</h3>
+            <p class="price">$29</p>
+            <p class="desc">Separation: confidence, discipline, identity, consistency, productivity.</p>
+          </div>
+          <strong>Unlock Level 2 →</strong>
+        </a>
+
+        <a class="offer" href="https://buy.stripe.com/00weVedSL5RQ08042m8Zq07" target="_blank" rel="noopener noreferrer">
+          <div>
+            <h3>Level 3</h3>
+            <p class="price">$39</p>
+            <p class="desc">Mastery: money, brand, visibility, decisions, readiness.</p>
+          </div>
+          <strong>Unlock Level 3 →</strong>
+        </a>
+
+        <a class="offer best" href="https://buy.stripe.com/8x2cN6aGz2FE7As1Ue8Zq08" target="_blank" rel="noopener noreferrer">
+          <div>
+            <h3>Best Value</h3>
+            <p class="price">$49</p>
+            <p class="desc">Levels 2 + 3 bundle. The full path.</p>
+          </div>
+          <strong>Unlock Bundle →</strong>
+        </a>
+      </div>
+
+      <div class="note">
+        Payments happen through Stripe Payment Links. No secret keys. No backend. No automatic chat unlocking. Simple and safer for version 1.
+      </div>
+    </section>
+
+    <h2 class="section-title">Locked Curriculum Preview</h2>
+    <div class="accordion">
+      <details>
+        <summary>Level 2 — Separation <span class="locked">Locked</span></summary>
+        <div class="content">
+          <p>Episodes 004–010:</p>
+          <p>Confidence, coach perception, opportunity, discipline, identity, consistency, productivity.</p>
+          <p class="question">Question:</p>
+          <p>Are you separating from average players, or just saying you want to?</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Level 3 — Mastery <span class="locked">Locked</span></summary>
+        <div class="content">
+          <p>Episodes 011–015:</p>
+          <p>Money, brand, visibility, decisions, readiness.</p>
+          <p class="question">Question:</p>
+          <p>If opportunity came tomorrow, what would you need to fix today?</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Daily Loop / Elite Mode <span class="locked">After Completion</span></summary>
+        <div class="content">
+          <p>You said you wanted more.</p>
+          <p class="question">What did you actually do?</p>
+          <p>Come back tomorrow. Let us see if anything actually changed.</p>
+        </div>
+      </details>
+    </div>
+
+    <footer>
+      Get Ready Hoops — Basketball Money. Built for accountability, not excuses.
+    </footer>
+  </div>
+</body>
+</html>
