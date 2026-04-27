@@ -176,29 +176,7 @@ html,body{height:100%;overflow-x:hidden;overflow-y:auto;font-family:'Outfit',san
 
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-  })();
-</script>
-<script>
-  // Reset Game 001 when returning from the reaction drill
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    const shouldReset = params.get("reset") === "1";
-
-    if (shouldReset) {
-      Object.keys(localStorage).forEach(function (key) {
-        if (
-          key.includes("game-001") ||
-          key.includes("hm-game-001") ||
-          key.includes("question-flow")
-        ) {
-          localStorage.removeItem(key);
-        }
-      });
-
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  })();
-</script>
+  })()
 </head>
 <body>
 <nav class="mini-nav">
