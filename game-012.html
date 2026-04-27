@@ -1,0 +1,1060 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Game 012 | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --cyan:#20d7ff;
+      --cyan-soft:rgba(32,215,255,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --green-soft:rgba(0,217,165,.14);
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(32,215,255,.18),transparent 34%),
+        radial-gradient(circle at top right,rgba(255,138,61,.16),transparent 30%),
+        radial-gradient(circle at bottom center,rgba(155,89,182,.12),transparent 34%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--cyan),var(--orange));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--cyan);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .hero-image{
+      max-width:var(--max);
+      margin:16px auto 0;
+      padding:0 16px;
+    }
+
+    .hero-image-inner{
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      object-fit:cover;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(32,215,255,.55);
+      background:
+        linear-gradient(135deg,rgba(32,215,255,.16),rgba(255,138,61,.14),rgba(155,89,182,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.lab{
+      border-color:rgba(255,138,61,.50);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.14),rgba(32,215,255,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.warning{
+      border-color:rgba(255,138,61,.45);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(0,217,165,.5);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(32,215,255,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--cyan);
+      color:var(--cyan);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .avatar.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(32,215,255,.38);
+      background:var(--cyan-soft);
+      color:#bcefff;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--cyan);
+      background:var(--cyan-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      color:#d9f8ff;
+    }
+
+    .section-label{
+      color:var(--cyan);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-list,.check-list,.quiz-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,.check-card,.quiz-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,.check-card strong,.quiz-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,.check-card p,.quiz-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .check-card{
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    .check-num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--cyan);
+      color:var(--cyan);
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(32,215,255,.36);
+      background:var(--cyan-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .orange-note{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:900;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--brand);
+      background:var(--brand);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .btn.orange{
+      background:var(--orange);
+      color:#160802;
+      border-color:var(--orange);
+    }
+
+    .btn.cyan{
+      background:var(--cyan);
+      color:#031014;
+      border-color:var(--cyan);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .stat span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .prompt-box{
+      margin-top:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .prompt-box small{
+      display:block;
+      color:var(--cyan);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-size:11px;
+    }
+
+    .prompt-box p{
+      margin:0;
+      color:#e8edf2;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .post-actions{
+      display:flex;
+      gap:22px;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 012: Pattern Recognition" data-es="Juego 012: Reconocimiento de Patrones">Game 012: Pattern Recognition</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="game-011.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#cog02" data-en="COG 02" data-es="COG 02">COG 02</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-012.png" alt="Game 012 Pattern Recognition Basketball Money">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar gold">012</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 012" data-es="Juego 012">Game 012</span>
+              <span class="handle">@paidseason</span>
+              <span class="badge gold" data-en="COG 02 Segment" data-es="Segmento COG 02">COG 02 Segment</span>
+            </div>
+            <span class="handle" data-en="Read the floor. Recognize the signal." data-es="Lee la cancha. Reconoce la señal.">Read the floor. Recognize the signal.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="See the pattern before everyone else reacts." data-es="Ve el patrón antes de que todos reaccionen.">
+          See the pattern before everyone else reacts.
+        </h1>
+
+        <p class="post-sub" data-en="Game 012 teaches Pattern Recognition. Great players do not only move fast. They read faster. They see what is forming before it becomes obvious." data-es="El Juego 012 enseña Reconocimiento de Patrones. Los grandes jugadores no solo se mueven rápido. Leen más rápido. Ven lo que se está formando antes de que sea obvio.">
+          Game 012 teaches Pattern Recognition. Great players do not only move fast. They read faster. They see what is forming before it becomes obvious.
+        </p>
+
+        <div class="thread-line" data-en="Basketball business rule: when you recognize patterns earlier, you make better decisions sooner." data-es="Regla de negocio en baloncesto: cuando reconoces patrones más temprano, tomas mejores decisiones más rápido.">
+          Basketball business rule: when you recognize patterns earlier, you make better decisions sooner.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>012</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Pattern Recognition" data-es="Reconocer Patrones">Pattern Recognition</strong>
+          </div>
+          <div class="stat">
+            <span data-en="COG Access" data-es="Acceso COG">COG Access</span>
+            <strong data-en="COG 02" data-es="COG 02">COG 02</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn cyan" href="#lesson" data-en="Start Paid Lesson →" data-es="Comenzar Lección Paga →">Start Paid Lesson →</a>
+          <a class="btn orange" href="#cog02" data-en="Open COG 02 Access" data-es="Abrir Acceso COG 02">Open COG 02 Access</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 012</span>
+          <span>👁️ Pattern Recognition</span>
+          <span>🧠 COG 02</span>
+        </div>
+      </section>
+
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@readthepattern</span>
+            </div>
+            <span class="handle" data-en="Read what is forming." data-es="Lee lo que se está formando.">Read what is forming.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The twelfth business lesson" data-es="La duodécima lección de negocio">The twelfth business lesson</p>
+
+        <h2 class="post-text" data-en="A pattern is a signal that repeats until the prepared player recognizes it." data-es="Un patrón es una señal que se repite hasta que el jugador preparado la reconoce.">
+          A pattern is a signal that repeats until the prepared player recognizes it.
+        </h2>
+
+        <p class="post-sub" data-en="On the court, patterns show up in spacing, timing, matchups, body language, rotations, and decisions. In basketball business, patterns show up in opportunity, behavior, trust, audience, and timing." data-es="En la cancha, los patrones aparecen en el espacio, timing, pareos, lenguaje corporal, rotaciones y decisiones. En el negocio del baloncesto, los patrones aparecen en oportunidad, conducta, confianza, audiencia y timing.">
+          On the court, patterns show up in spacing, timing, matchups, body language, rotations, and decisions. In basketball business, patterns show up in opportunity, behavior, trust, audience, and timing.
+        </p>
+
+        <div class="quote" data-en="The player who reads the pattern early does not need to panic late." data-es="El jugador que lee el patrón temprano no tiene que entrar en pánico tarde.">
+          The player who reads the pattern early does not need to panic late.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@signalsmatter</span>
+            </div>
+            <span class="handle" data-en="Signals are everywhere." data-es="Las señales están en todas partes.">Signals are everywhere.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="What patterns look like" data-es="Cómo se ven los patrones">What patterns look like</p>
+
+        <h2 class="post-text" data-en="The game gives signals before it gives results." data-es="El juego da señales antes de dar resultados.">
+          The game gives signals before it gives results.
+        </h2>
+
+        <p class="post-sub" data-en="If you only look at the final result, you are late. Pattern recognition means seeing the clues before the play is finished." data-es="Si solo miras el resultado final, llegas tarde. Reconocer patrones significa ver las pistas antes de que la jugada termine.">
+          If you only look at the final result, you are late. Pattern recognition means seeing the clues before the play is finished.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Court patterns" data-es="Patrones de cancha">Court patterns</strong>
+            <p data-en="Spacing, rotations, driving lanes, weak-side help, screens, and defensive habits." data-es="Espacios, rotaciones, carriles de penetración, ayudas del lado débil, pantallas y hábitos defensivos.">
+              Spacing, rotations, driving lanes, weak-side help, screens, and defensive habits.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Player patterns" data-es="Patrones de jugador">Player patterns</strong>
+            <p data-en="Body language, pace, favorite moves, pressure reactions, and decision habits." data-es="Lenguaje corporal, ritmo, movimientos favoritos, reacción bajo presión y hábitos de decisión.">
+              Body language, pace, favorite moves, pressure reactions, and decision habits.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Opportunity patterns" data-es="Patrones de oportunidad">Opportunity patterns</strong>
+            <p data-en="Who keeps showing interest, what rooms keep opening, and what needs keep appearing." data-es="Quién sigue mostrando interés, qué espacios siguen abriendo y qué necesidades siguen apareciendo.">
+              Who keeps showing interest, what rooms keep opening, and what needs keep appearing.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Money patterns" data-es="Patrones de dinero">Money patterns</strong>
+            <p data-en="Where value is being created, where trust is growing, and where attention is moving." data-es="Dónde se está creando valor, dónde está creciendo la confianza y hacia dónde se mueve la atención.">
+              Where value is being created, where trust is growing, and where attention is moving.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@dontguessread</span>
+            </div>
+            <span class="handle" data-en="Guessing is not reading." data-es="Adivinar no es leer.">Guessing is not reading.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Do not confuse guessing with reading" data-es="No confundas adivinar con leer">Do not confuse guessing with reading</p>
+
+        <h2 class="post-text" data-en="A guess hopes. A read recognizes." data-es="Una suposición espera. Una lectura reconoce.">
+          A guess hopes. A read recognizes.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: pattern recognition is trained by attention, repetition, memory, and review — not by random instinct alone." data-es="Regla de negocio en baloncesto: el reconocimiento de patrones se entrena con atención, repetición, memoria y repaso — no solo con instinto al azar.">
+          Basketball business rule: pattern recognition is trained by attention, repetition, memory, and review — not by random instinct alone.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@readright</span>
+            </div>
+            <span class="handle" data-en="Read right, then move." data-es="Lee bien, luego muévete.">Read right, then move.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="How to improve pattern recognition" data-es="Cómo mejorar el reconocimiento de patrones">How to improve pattern recognition</p>
+
+        <h2 class="post-text" data-en="Great reads come from trained eyes and stored memory." data-es="Las grandes lecturas vienen de ojos entrenados y memoria almacenada.">
+          Great reads come from trained eyes and stored memory.
+        </h2>
+
+        <p class="post-sub" data-en="The player who has seen a situation before can process it faster when it appears again. This is why memory, repetition, and review matter." data-es="El jugador que ha visto una situación antes puede procesarla más rápido cuando aparece otra vez. Por eso importan la memoria, la repetición y el repaso.">
+          The player who has seen a situation before can process it faster when it appears again. This is why memory, repetition, and review matter.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Scan" data-es="Escanea">Scan</strong>
+            <p data-en="Train your eyes to see more than the ball." data-es="Entrena tus ojos para ver más que el balón.">Train your eyes to see more than the ball.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Compare" data-es="Compara">Compare</strong>
+            <p data-en="Ask: have I seen this spacing, movement, or behavior before?" data-es="Pregunta: ¿he visto este espacio, movimiento o conducta antes?">Ask: have I seen this spacing, movement, or behavior before?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Predict" data-es="Predice">Predict</strong>
+            <p data-en="Use the pattern to anticipate what is likely to happen next." data-es="Usa el patrón para anticipar lo que probablemente viene después.">Use the pattern to anticipate what is likely to happen next.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Act" data-es="Actúa">Act</strong>
+            <p data-en="A good read becomes valuable when it turns into the right move." data-es="Una buena lectura gana valor cuando se convierte en el movimiento correcto.">A good read becomes valuable when it turns into the right move.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@patternhabits</span>
+            </div>
+            <span class="handle" data-en="Build pattern habits." data-es="Construye hábitos de patrón.">Build pattern habits.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Pattern recognition checklist" data-es="Checklist de reconocimiento de patrones">Pattern recognition checklist</p>
+
+        <h2 class="post-text" data-en="To recognize better patterns, you must practice looking for better information." data-es="Para reconocer mejores patrones, tienes que practicar buscar mejor información.">
+          To recognize better patterns, you must practice looking for better information.
+        </h2>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Look away from the ball." data-es="Mira más allá del balón.">Look away from the ball.</strong>
+              <p data-en="The ball is important, but the pattern often forms around it." data-es="El balón importa, pero el patrón muchas veces se forma alrededor.">
+                The ball is important, but the pattern often forms around it.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Notice repeated behavior." data-es="Nota conductas repetidas.">Notice repeated behavior.</strong>
+              <p data-en="Repeated habits create readable signals." data-es="Los hábitos repetidos crean señales que se pueden leer.">
+                Repeated habits create readable signals.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Review after the play." data-es="Repasa después de la jugada.">Review after the play.</strong>
+              <p data-en="Film and reflection turn missed patterns into future reads." data-es="El video y la reflexión convierten patrones perdidos en lecturas futuras.">
+                Film and reflection turn missed patterns into future reads.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Act on the signal." data-es="Actúa sobre la señal.">Act on the signal.</strong>
+              <p data-en="A pattern only helps if it leads to the right decision." data-es="Un patrón solo ayuda si lleva a la decisión correcta.">
+                A pattern only helps if it leads to the right decision.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post lab" id="cog02">
+        <div class="post-head">
+          <div class="avatar">COG</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 02 Access" data-es="Acceso COG 02">COG 02 Access</span>
+              <span class="handle">@therecall</span>
+              <span class="badge" data-en="Games 011–015" data-es="Juegos 011–015">Games 011–015</span>
+            </div>
+            <span class="handle" data-en="Memory supports pattern recognition." data-es="La memoria apoya el reconocimiento de patrones.">Memory supports pattern recognition.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Cognitive Training Lab" data-es="Laboratorio de Entrenamiento Cognitivo">Cognitive Training Lab</p>
+
+        <h2 class="post-text" data-en="COG 02 helps Game 012 because patterns are easier to read when the mind remembers order." data-es="COG 02 ayuda al Juego 012 porque los patrones son más fáciles de leer cuando la mente recuerda el orden.">
+          COG 02 helps Game 012 because patterns are easier to read when the mind remembers order.
+        </h2>
+
+        <p class="post-sub" data-en="The Recall trains the player to watch, memorize, and execute a sequence. Pattern Recognition adds the next layer: see the setup, recognize the signal, and choose the right move." data-es="The Recall entrena al jugador a observar, memorizar y ejecutar una secuencia. Reconocimiento de Patrones añade la próxima capa: ver la preparación, reconocer la señal y escoger el movimiento correcto.">
+          The Recall trains the player to watch, memorize, and execute a sequence. Pattern Recognition adds the next layer: see the setup, recognize the signal, and choose the right move.
+        </p>
+
+        <div class="gold-note" data-en="Paid separator: the player is not only remembering numbers — the player is training the brain to organize what it sees." data-es="Separador pago: el jugador no solo está recordando números — está entrenando el cerebro para organizar lo que ve.">
+          Paid separator: the player is not only remembering numbers — the player is training the brain to organize what it sees.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn orange" href="cog-02.html" data-en="Train COG 02: The Recall →" data-es="Entrenar COG 02: The Recall →">Train COG 02: The Recall →</a>
+          <a class="btn secondary" href="#final" data-en="Finish Game 012 First" data-es="Terminar Juego 012 Primero">Finish Game 012 First</a>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game012review</span>
+              <span class="badge gold" data-en="Paid Review" data-es="Repaso Pago">Paid Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the paid lesson." data-es="Asegura la lección paga.">Lock in the paid lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 012 Review" data-es="Repaso del Juego 012">Game 012 Review</p>
+
+        <h2 class="post-text" data-en="Before Game 013, answer this honestly: what patterns are you missing?" data-es="Antes del Juego 013, contesta esto con honestidad: ¿qué patrones estás perdiendo?">
+          Before Game 013, answer this honestly: what patterns are you missing?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. What pattern do you recognize well?" data-es="1. ¿Qué patrón reconoces bien?">1. What pattern do you recognize well?</strong>
+            <p data-en="A court read, a player habit, a business signal, or an opportunity pattern." data-es="Una lectura de cancha, un hábito de jugador, una señal de negocio o un patrón de oportunidad.">
+              A court read, a player habit, a business signal, or an opportunity pattern.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What pattern do you usually miss?" data-es="2. ¿Qué patrón usualmente pierdes?">2. What pattern do you usually miss?</strong>
+            <p data-en="Name the read that often shows up late for you." data-es="Nombra la lectura que muchas veces reconoces tarde.">
+              Name the read that often shows up late for you.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. What information do you need to scan earlier?" data-es="3. ¿Qué información necesitas escanear más temprano?">3. What information do you need to scan earlier?</strong>
+            <p data-en="Spacing, body language, rotations, timing, relationships, or opportunity signals." data-es="Espacios, lenguaje corporal, rotaciones, timing, relaciones o señales de oportunidad.">
+              Spacing, body language, rotations, timing, relationships, or opportunity signals.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. How can COG 02 help your pattern recognition?" data-es="4. ¿Cómo puede COG 02 ayudar tu reconocimiento de patrones?">4. How can COG 02 help your pattern recognition?</strong>
+            <p data-en="Think memory, order, sequence, focus, and fewer wrong reads." data-es="Piensa en memoria, orden, secuencia, enfoque y menos lecturas incorrectas.">
+              Think memory, order, sequence, focus, and fewer wrong reads.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Can you see it, read it, and play it?" data-es="5. ¿Puedes verlo, leerlo y jugarlo?">5. Can you see it, read it, and play it?</strong>
+            <p data-en="This is the question that closes Game 012." data-es="Esta es la pregunta que cierra el Juego 012.">
+              This is the question that closes Game 012.
+            </p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 012. Help me improve my pattern recognition in basketball and business. Identify the signals I should scan for earlier, the patterns I may be missing, and one training system to help me read better under pressure." data-es="Prompt: Acabo de terminar Basketball Money Juego 012. Ayúdame a mejorar mi reconocimiento de patrones en baloncesto y negocio. Identifica las señales que debo escanear más temprano, los patrones que puedo estar perdiendo y un sistema de entrenamiento para leer mejor bajo presión.">
+            Prompt: I just finished Basketball Money Game 012. Help me improve my pattern recognition in basketball and business. Identify the signals I should scan for earlier, the patterns I may be missing, and one training system to help me read better under pressure.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn orange" href="cog-02.html" data-en="Train COG 02: The Recall →" data-es="Entrenar COG 02: The Recall →">Train COG 02: The Recall →</a>
+          <a class="btn secondary" href="game-013.html" data-en="Continue to Game 013 →" data-es="Continuar al Juego 013 →">Continue to Game 013 →</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>👁️ Pattern Recognition</span>
+          <span>🧠 The Recall</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="It is not about reacting fast. It is about reading right." data-es="No se trata de reaccionar rápido. Se trata de leer correctamente.">
+          It is not about reacting fast. It is about reading right.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 012: Pattern Recognition | COG 02 Segment" data-es="Basketball Money — Juego 012: Reconocimiento de Patrones | Segmento COG 02">
+        Basketball Money — Game 012: Pattern Recognition | COG 02 Segment
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
+  </script>
+
+</body>
+</html>
