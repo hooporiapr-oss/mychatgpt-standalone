@@ -1,0 +1,1144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Game 015 | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --cyan:#20d7ff;
+      --cyan-soft:rgba(32,215,255,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --green-soft:rgba(0,217,165,.14);
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(255,138,61,.18),transparent 34%),
+        radial-gradient(circle at top right,rgba(32,215,255,.16),transparent 30%),
+        radial-gradient(circle at bottom center,rgba(155,89,182,.12),transparent 34%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--orange),var(--cyan));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--orange);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .hero-image{
+      max-width:var(--max);
+      margin:16px auto 0;
+      padding:0 16px;
+    }
+
+    .hero-image-inner{
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      object-fit:cover;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(255,138,61,.55);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.16),rgba(32,215,255,.14),rgba(155,89,182,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.lab{
+      border-color:rgba(32,215,255,.50);
+      background:
+        linear-gradient(135deg,rgba(32,215,255,.14),rgba(255,138,61,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.transition{
+      border-color:rgba(245,197,66,.55);
+      background:
+        linear-gradient(135deg,rgba(245,197,66,.14),rgba(255,138,61,.14),rgba(32,215,255,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.warning{
+      border-color:rgba(255,138,61,.45);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(0,217,165,.5);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(32,215,255,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--orange);
+      color:var(--orange);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .avatar.cyan{
+      border-color:var(--cyan);
+      color:var(--cyan);
+    }
+
+    .avatar.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(255,138,61,.38);
+      background:var(--orange-soft);
+      color:#ffd4bf;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.cyan{
+      border-color:rgba(32,215,255,.38);
+      background:var(--cyan-soft);
+      color:#bcefff;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--orange);
+      background:var(--orange-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      color:#ffe1d3;
+    }
+
+    .section-label{
+      color:var(--orange);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .section-label.cyan{
+      color:var(--cyan);
+    }
+
+    .mini-list,.check-list,.quiz-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,.check-card,.quiz-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,.check-card strong,.quiz-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,.check-card p,.quiz-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .check-card{
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    .check-num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--orange);
+      color:var(--orange);
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .cyan-note{
+      margin-top:16px;
+      border:1px solid rgba(32,215,255,.36);
+      background:var(--cyan-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#d9f8ff;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .orange-note{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:900;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--brand);
+      background:var(--brand);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .btn.orange{
+      background:var(--orange);
+      color:#160802;
+      border-color:var(--orange);
+    }
+
+    .btn.cyan{
+      background:var(--cyan);
+      color:#031014;
+      border-color:var(--cyan);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .stat span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .prompt-box{
+      margin-top:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .prompt-box small{
+      display:block;
+      color:var(--orange);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-size:11px;
+    }
+
+    .prompt-box p{
+      margin:0;
+      color:#e8edf2;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .post-actions{
+      display:flex;
+      gap:22px;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 015: Pressure Recall" data-es="Juego 015: Memoria Bajo Presión">Game 015: Pressure Recall</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="game-014.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#cog02" data-en="COG 02" data-es="COG 02">COG 02</a>
+          <a href="#next" data-en="COG 03" data-es="COG 03">COG 03</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-015.png" alt="Game 015 Pressure Recall Basketball Money">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar gold">015</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 015" data-es="Juego 015">Game 015</span>
+              <span class="handle">@paidseason</span>
+              <span class="badge gold" data-en="COG 02 Finale" data-es="Final COG 02">COG 02 Finale</span>
+            </div>
+            <span class="handle" data-en="Remember it when the game gets loud." data-es="Recuérdalo cuando el juego se pone intenso.">Remember it when the game gets loud.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="Memory only matters if it survives pressure." data-es="La memoria solo importa si sobrevive la presión.">
+          Memory only matters if it survives pressure.
+        </h1>
+
+        <p class="post-sub" data-en="Game 015 completes the COG 02 segment. The theme is Pressure Recall: remembering the plan, the space, the pattern, and the decision when the moment speeds up." data-es="El Juego 015 completa el segmento COG 02. El tema es Memoria Bajo Presión: recordar el plan, el espacio, el patrón y la decisión cuando el momento acelera.">
+          Game 015 completes the COG 02 segment. The theme is Pressure Recall: remembering the plan, the space, the pattern, and the decision when the moment speeds up.
+        </p>
+
+        <div class="thread-line" data-en="Basketball business rule: pressure does not erase the prepared mind. It exposes it." data-es="Regla de negocio en baloncesto: la presión no borra la mente preparada. La expone.">
+          Basketball business rule: pressure does not erase the prepared mind. It exposes it.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>015</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Pressure Recall" data-es="Memoria Bajo Presión">Pressure Recall</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Next Unlock" data-es="Próximo Desbloqueo">Next Unlock</span>
+            <strong data-en="COG 03" data-es="COG 03">COG 03</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn orange" href="#lesson" data-en="Start Paid Lesson →" data-es="Comenzar Lección Paga →">Start Paid Lesson →</a>
+          <a class="btn cyan" href="#next" data-en="Preview COG 03 →" data-es="Ver COG 03 →">Preview COG 03 →</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 015</span>
+          <span>🧠 Pressure Recall</span>
+          <span>⚡ COG 03 Next</span>
+        </div>
+      </section>
+
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@pressuretest</span>
+            </div>
+            <span class="handle" data-en="Pressure tests recall." data-es="La presión prueba la memoria.">Pressure tests recall.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The fifteenth business lesson" data-es="La decimoquinta lección de negocio">The fifteenth business lesson</p>
+
+        <h2 class="post-text" data-en="A player does not need perfect memory. A player needs usable memory under pressure." data-es="Un jugador no necesita memoria perfecta. Necesita memoria útil bajo presión.">
+          A player does not need perfect memory. A player needs usable memory under pressure.
+        </h2>
+
+        <p class="post-sub" data-en="In quiet moments, many players know the plan. Under pressure, only trained recall stays available. That is the difference between knowing and executing." data-es="En momentos tranquilos, muchos jugadores conocen el plan. Bajo presión, solo la memoria entrenada sigue disponible. Esa es la diferencia entre saber y ejecutar.">
+          In quiet moments, many players know the plan. Under pressure, only trained recall stays available. That is the difference between knowing and executing.
+        </p>
+
+        <div class="quote" data-en="Pressure does not ask what you know. Pressure asks what you can access fast." data-es="La presión no pregunta qué sabes. La presión pregunta qué puedes acceder rápido.">
+          Pressure does not ask what you know. Pressure asks what you can access fast.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@orderinchaos</span>
+            </div>
+            <span class="handle" data-en="Keep order in chaos." data-es="Mantén orden en el caos.">Keep order in chaos.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="From order to chaos" data-es="Del orden al caos">From order to chaos</p>
+
+        <h2 class="post-text" data-en="COG 02 trained order. Game 015 asks: can you keep the order when the moment gets messy?" data-es="COG 02 entrenó el orden. El Juego 015 pregunta: ¿puedes mantener el orden cuando el momento se complica?">
+          COG 02 trained order. Game 015 asks: can you keep the order when the moment gets messy?
+        </h2>
+
+        <p class="post-sub" data-en="The game gets messy when the defense rotates, the clock drops, the crowd gets loud, the ball moves fast, and the first option disappears." data-es="El juego se complica cuando la defensa rota, el reloj baja, el público se activa, el balón se mueve rápido y la primera opción desaparece.">
+          The game gets messy when the defense rotates, the clock drops, the crowd gets loud, the ball moves fast, and the first option disappears.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Remember the role" data-es="Recuerda el rol">Remember the role</strong>
+            <p data-en="Know what your job is before the possession breaks down." data-es="Sabe cuál es tu trabajo antes de que la posesión se complique.">Know what your job is before the possession breaks down.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Remember the space" data-es="Recuerda el espacio">Remember the space</strong>
+            <p data-en="Know where pressure is, where help is, and where the next opening can appear." data-es="Sabe dónde está la presión, dónde está la ayuda y dónde puede aparecer la próxima apertura.">Know where pressure is, where help is, and where the next opening can appear.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Remember the order" data-es="Recuerda el orden">Remember the order</strong>
+            <p data-en="Do not skip the simple read because the moment feels urgent." data-es="No brinques la lectura simple porque el momento se siente urgente.">Do not skip the simple read because the moment feels urgent.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Remember the next move" data-es="Recuerda el próximo movimiento">Remember the next move</strong>
+            <p data-en="The best players are ready for the next action before the first one ends." data-es="Los mejores jugadores están listos para la próxima acción antes de que termine la primera.">The best players are ready for the next action before the first one ends.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@confusioncosts</span>
+            </div>
+            <span class="handle" data-en="Confusion costs." data-es="La confusión cuesta.">Confusion costs.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Do not let pressure steal your order" data-es="No dejes que la presión robe tu orden">Do not let pressure steal your order</p>
+
+        <h2 class="post-text" data-en="A confused mind turns good opportunities into rushed mistakes." data-es="Una mente confundida convierte buenas oportunidades en errores apresurados.">
+          A confused mind turns good opportunities into rushed mistakes.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: if pressure makes you forget the plan, the plan was not trained deep enough." data-es="Regla de negocio en baloncesto: si la presión te hace olvidar el plan, el plan no fue entrenado lo suficientemente profundo.">
+          Basketball business rule: if pressure makes you forget the plan, the plan was not trained deep enough.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@pressurememorysystem</span>
+            </div>
+            <span class="handle" data-en="Build a pressure memory system." data-es="Construye un sistema de memoria bajo presión.">Build a pressure memory system.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="How to protect recall" data-es="Cómo proteger la memoria">How to protect recall</p>
+
+        <h2 class="post-text" data-en="Pressure recall improves when the player builds simple anchors." data-es="La memoria bajo presión mejora cuando el jugador construye anclas simples.">
+          Pressure recall improves when the player builds simple anchors.
+        </h2>
+
+        <p class="post-sub" data-en="An anchor is a simple cue that helps the mind return to the right action: scan, space, order, option, execute." data-es="Un ancla es una señal simple que ayuda a la mente a volver a la acción correcta: escanear, espacio, orden, opción, ejecutar.">
+          An anchor is a simple cue that helps the mind return to the right action: scan, space, order, option, execute.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Scan" data-es="Escanea">Scan</strong>
+            <p data-en="Find the information before pressure chooses for you." data-es="Encuentra la información antes de que la presión escoja por ti.">Find the information before pressure chooses for you.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Space" data-es="Espacio">Space</strong>
+            <p data-en="Know where you are and where the advantage can form." data-es="Sabe dónde estás y dónde se puede formar la ventaja.">Know where you are and where the advantage can form.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Order" data-es="Orden">Order</strong>
+            <p data-en="Do the right things in the right sequence." data-es="Haz las cosas correctas en la secuencia correcta.">Do the right things in the right sequence.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Execute" data-es="Ejecuta">Execute</strong>
+            <p data-en="Turn memory into action before the moment closes." data-es="Convierte la memoria en acción antes de que el momento cierre.">Turn memory into action before the moment closes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@recallchecklist</span>
+            </div>
+            <span class="handle" data-en="The pressure recall checklist." data-es="Checklist de memoria bajo presión.">The pressure recall checklist.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Pressure recall checklist" data-es="Checklist de memoria bajo presión">Pressure recall checklist</p>
+
+        <h2 class="post-text" data-en="A serious player trains recall before pressure arrives." data-es="Un jugador serio entrena la memoria antes de que llegue la presión.">
+          A serious player trains recall before pressure arrives.
+        </h2>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Review the plan before speed." data-es="Repasa el plan antes de la velocidad.">Review the plan before speed.</strong>
+              <p data-en="If the order is not clear slow, it will not be clear fast." data-es="Si el orden no está claro lento, no estará claro rápido.">
+                If the order is not clear slow, it will not be clear fast.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Train memory with pressure." data-es="Entrena memoria con presión.">Train memory with pressure.</strong>
+              <p data-en="Add speed, noise, time, and consequence to recall training." data-es="Añade velocidad, ruido, tiempo y consecuencia al entrenamiento de memoria.">
+                Add speed, noise, time, and consequence to recall training.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Use simple cues." data-es="Usa señales simples.">Use simple cues.</strong>
+              <p data-en="Short cues protect the mind when the game becomes chaotic." data-es="Señales cortas protegen la mente cuando el juego se vuelve caótico.">
+                Short cues protect the mind when the game becomes chaotic.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Recover quickly after mistakes." data-es="Recupérate rápido después de errores.">Recover quickly after mistakes.</strong>
+              <p data-en="The next play still needs your memory, focus, and decision." data-es="La próxima jugada todavía necesita tu memoria, enfoque y decisión.">
+                The next play still needs your memory, focus, and decision.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post lab" id="cog02">
+        <div class="post-head">
+          <div class="avatar cyan">COG</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 02 Segment Complete" data-es="Segmento COG 02 Completado">COG 02 Segment Complete</span>
+              <span class="handle">@therecall</span>
+              <span class="badge cyan" data-en="Games 011–015" data-es="Juegos 011–015">Games 011–015</span>
+            </div>
+            <span class="handle" data-en="The Recall segment ends here." data-es="El segmento The Recall termina aquí.">The Recall segment ends here.</span>
+          </div>
+        </div>
+
+        <p class="section-label cyan" data-en="Cognitive Training Lab" data-es="Laboratorio de Entrenamiento Cognitivo">Cognitive Training Lab</p>
+
+        <h2 class="post-text" data-en="Game 015 completes COG 02, not the paid season." data-es="El Juego 015 completa COG 02, no la temporada paga.">
+          Game 015 completes COG 02, not the paid season.
+        </h2>
+
+        <p class="post-sub" data-en="Games 011–015 trained memory, order, sequence, pattern recognition, spatial awareness, decision speed, and pressure recall. The paid season continues through Game 030." data-es="Los Juegos 011–015 entrenaron memoria, orden, secuencia, reconocimiento de patrones, conciencia espacial, velocidad de decisión y memoria bajo presión. La temporada paga continúa hasta el Juego 030.">
+          Games 011–015 trained memory, order, sequence, pattern recognition, spatial awareness, decision speed, and pressure recall. The paid season continues through Game 030.
+        </p>
+
+        <div class="cyan-note" data-en="You are not done. You are advancing. Next comes COG 03: The Reflex for Games 016–020." data-es="No has terminado. Estás avanzando. Lo próximo es COG 03: The Reflex para los Juegos 016–020.">
+          You are not done. You are advancing. Next comes COG 03: The Reflex for Games 016–020.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn orange" href="cog-02.html" data-en="Train COG 02 One More Time →" data-es="Entrenar COG 02 Una Vez Más →">Train COG 02 One More Time →</a>
+          <a class="btn secondary" href="#next" data-en="See COG 03 Next" data-es="Ver COG 03 Próximo">See COG 03 Next</a>
+        </div>
+      </section>
+
+      <section class="post transition" id="next">
+        <div class="post-head">
+          <div class="avatar gold">03</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Next Unlock" data-es="Próximo Desbloqueo">Next Unlock</span>
+              <span class="handle">@cog03thereflex</span>
+              <span class="badge gold" data-en="Games 016–020" data-es="Juegos 016–020">Games 016–020</span>
+            </div>
+            <span class="handle" data-en="The Reflex begins after Game 015." data-es="The Reflex comienza después del Juego 015.">The Reflex begins after Game 015.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="COG 03: The Reflex" data-es="COG 03: The Reflex">COG 03: The Reflex</p>
+
+        <h2 class="post-text big" data-en="Next: find the flash." data-es="Próximo: encuentra el destello.">
+          Next: find the flash.
+        </h2>
+
+        <p class="post-sub" data-en="COG 02 trained ordered recall. COG 03 trains reflex memory. Multiple cells flash at once. You remember which cells lit up. Then you find them all by tapping in any order." data-es="COG 02 entrenó memoria en orden. COG 03 entrena memoria de reflejo. Varias celdas prenden a la vez. Recuerdas cuáles se iluminaron. Luego las encuentras tocándolas en cualquier orden.">
+          COG 02 trained ordered recall. COG 03 trains reflex memory. Multiple cells flash at once. You remember which cells lit up. Then you find them all by tapping in any order.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Games 011–015" data-es="Juegos 011–015">Games 011–015</strong>
+            <p data-en="COG 02: The Recall — memory, order, sequence, and pressure recall." data-es="COG 02: The Recall — memoria, orden, secuencia y memoria bajo presión.">
+              COG 02: The Recall — memory, order, sequence, and pressure recall.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Games 016–020" data-es="Juegos 016–020">Games 016–020</strong>
+            <p data-en="COG 03: The Reflex — multi-cell flash recognition, reflex recall, and fast target finding." data-es="COG 03: The Reflex — reconocimiento de múltiples destellos, memoria de reflejo y búsqueda rápida de objetivos.">
+              COG 03: The Reflex — multi-cell flash recognition, reflex recall, and fast target finding.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Paid Season" data-es="Temporada Paga">Paid Season</strong>
+            <p data-en="The paid season continues from Game 016 through Game 030." data-es="La temporada paga continúa desde el Juego 016 hasta el Juego 030.">
+              The paid season continues from Game 016 through Game 030.
+            </p>
+          </div>
+        </div>
+
+        <div class="gold-note" data-en="COG 03 is different: the order no longer matters. The challenge is seeing multiple targets, remembering them, and finding all of them before pressure wins." data-es="COG 03 es diferente: el orden ya no importa. El reto es ver múltiples objetivos, recordarlos y encontrarlos todos antes de que gane la presión.">
+          COG 03 is different: the order no longer matters. The challenge is seeing multiple targets, remembering them, and finding all of them before pressure wins.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn gold" href="cog-03.html" data-en="Unlock COG 03: The Reflex →" data-es="Desbloquear COG 03: The Reflex →">Unlock COG 03: The Reflex →</a>
+          <a class="btn secondary" href="game-016.html" data-en="Continue to Game 016 →" data-es="Continuar al Juego 016 →">Continue to Game 016 →</a>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game015review</span>
+              <span class="badge gold" data-en="Paid Review" data-es="Repaso Pago">Paid Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the paid lesson." data-es="Asegura la lección paga.">Lock in the paid lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 015 Review" data-es="Repaso del Juego 015">Game 015 Review</p>
+
+        <h2 class="post-text" data-en="Before COG 03, answer this honestly: does your memory hold up when the moment gets fast?" data-es="Antes de COG 03, contesta esto con honestidad: ¿tu memoria aguanta cuando el momento acelera?">
+          Before COG 03, answer this honestly: does your memory hold up when the moment gets fast?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. What do you forget under pressure?" data-es="1. ¿Qué olvidas bajo presión?">1. What do you forget under pressure?</strong>
+            <p data-en="A play, a role, a sequence, a follow-up, a read, or a next move." data-es="Una jugada, un rol, una secuencia, un seguimiento, una lectura o un próximo movimiento.">
+              A play, a role, a sequence, a follow-up, a read, or a next move.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What helps you remember faster?" data-es="2. ¿Qué te ayuda a recordar más rápido?">2. What helps you remember faster?</strong>
+            <p data-en="Simple cues, repetition, film, notes, routines, or COG training." data-es="Señales simples, repetición, video, notas, rutinas o entrenamiento COG.">
+              Simple cues, repetition, film, notes, routines, or COG training.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. Where does confusion cost you?" data-es="3. ¿Dónde te cuesta la confusión?">3. Where does confusion cost you?</strong>
+            <p data-en="On offense, defense, communication, opportunity, relationships, or business follow-up." data-es="En ofensiva, defensa, comunicación, oportunidad, relaciones o seguimiento de negocio.">
+              On offense, defense, communication, opportunity, relationships, or business follow-up.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. How did COG 02 prepare you for COG 03?" data-es="4. ¿Cómo COG 02 te preparó para COG 03?">4. How did COG 02 prepare you for COG 03?</strong>
+            <p data-en="COG 02 trained ordered recall. COG 03 will test multi-target reflex recall." data-es="COG 02 entrenó memoria en orden. COG 03 probará memoria de reflejo con múltiples objetivos.">
+              COG 02 trained ordered recall. COG 03 will test multi-target reflex recall.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Can you remember, reset, and react?" data-es="5. ¿Puedes recordar, reiniciar y reaccionar?">5. Can you remember, reset, and react?</strong>
+            <p data-en="This is the question that closes Game 015." data-es="Esta es la pregunta que cierra el Juego 015.">
+              This is the question that closes Game 015.
+            </p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 015. Help me evaluate my pressure recall. Identify what I forget under pressure, what cues can help me remember faster, and how I should prepare for COG 03: The Reflex." data-es="Prompt: Acabo de terminar Basketball Money Juego 015. Ayúdame a evaluar mi memoria bajo presión. Identifica qué olvido bajo presión, qué señales pueden ayudarme a recordar más rápido y cómo debo prepararme para COG 03: The Reflex.">
+            Prompt: I just finished Basketball Money Game 015. Help me evaluate my pressure recall. Identify what I forget under pressure, what cues can help me remember faster, and how I should prepare for COG 03: The Reflex.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn gold" href="cog-03.html" data-en="Continue to COG 03: The Reflex →" data-es="Continuar a COG 03: The Reflex →">Continue to COG 03: The Reflex →</a>
+          <a class="btn secondary" href="game-016.html" data-en="Continue to Game 016 →" data-es="Continuar al Juego 016 →">Continue to Game 016 →</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>🧠 Pressure Recall</span>
+          <span>⚡ COG 03 Next</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="Memory under pressure becomes reflex when the mind is trained to find the answer fast." data-es="La memoria bajo presión se convierte en reflejo cuando la mente está entrenada para encontrar la respuesta rápido.">
+          Memory under pressure becomes reflex when the mind is trained to find the answer fast.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 015: Pressure Recall | COG 02 Complete | COG 03 Next" data-es="Basketball Money — Juego 015: Memoria Bajo Presión | COG 02 Completado | COG 03 Próximo">
+        Basketball Money — Game 015: Pressure Recall | COG 02 Complete | COG 03 Next
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
+  </script>
+
+</body>
+</html>
