@@ -14,10 +14,10 @@
       --muted:#8b98a5;
       --line:#242833;
       --brand:#9B59B6;
-      --brand-2:#00D9A5;
+      --green:#00D9A5;
+      --green-soft:rgba(0,217,165,.14);
       --gold:#f5c542;
       --gold-soft:rgba(245,197,66,.14);
-      --green-soft:rgba(0,217,165,.14);
       --orange:#ff8a3d;
       --orange-soft:rgba(255,138,61,.14);
       --radius:22px;
@@ -26,13 +26,16 @@
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+
+    html{
+      scroll-behavior:smooth;
+    }
 
     body{
       margin:0;
       background:
-        radial-gradient(circle at top left,rgba(245,197,66,.18),transparent 34%),
-        radial-gradient(circle at top right,rgba(0,217,165,.12),transparent 30%),
+        radial-gradient(circle at top left,rgba(245,197,66,.20),transparent 34%),
+        radial-gradient(circle at top right,rgba(0,217,165,.13),transparent 30%),
         radial-gradient(circle at bottom center,rgba(155,89,182,.12),transparent 34%),
         var(--bg);
       color:var(--text);
@@ -40,9 +43,19 @@
       line-height:1.45;
     }
 
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    button{font-family:inherit}
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    button{
+      font-family:inherit;
+    }
 
     .topbar{
       position:sticky;
@@ -79,7 +92,7 @@
       border-radius:50%;
       display:grid;
       place-items:center;
-      background:linear-gradient(135deg,var(--gold),var(--brand-2));
+      background:linear-gradient(135deg,var(--gold),var(--green));
       color:#050505;
       font-weight:950;
       letter-spacing:-.08em;
@@ -205,24 +218,17 @@
       background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
     }
 
-    .post.pinned{
+    .post.hero-card{
       border-color:rgba(245,197,66,.55);
       background:
         linear-gradient(135deg,rgba(245,197,66,.16),rgba(0,217,165,.12),rgba(155,89,182,.12)),
         rgba(15,17,21,.96);
     }
 
-    .post.warning{
-      border-color:rgba(255,138,61,.45);
-      background:
-        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
-        rgba(15,17,21,.96);
-    }
-
-    .post.conversation-final{
+    .post.conversation-card{
       border-color:rgba(0,217,165,.55);
       background:
-        linear-gradient(135deg,rgba(0,217,165,.16),rgba(245,197,66,.12),rgba(155,89,182,.12)),
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(245,197,66,.10),rgba(155,89,182,.10)),
         rgba(15,17,21,.96);
     }
 
@@ -242,16 +248,16 @@
       display:grid;
       place-items:center;
       background:#050505;
-      border:2px solid var(--brand-2);
-      color:var(--brand-2);
+      border:2px solid var(--gold);
+      color:var(--gold);
       font-weight:950;
       letter-spacing:-.05em;
       font-size:13px;
     }
 
-    .avatar.gold{
-      border-color:var(--gold);
-      color:var(--gold);
+    .avatar.green{
+      border-color:var(--green);
+      color:var(--green);
     }
 
     .post-meta{
@@ -281,9 +287,9 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      border:1px solid rgba(0,217,165,.38);
-      background:var(--green-soft);
-      color:#b9ffee;
+      border:1px solid rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
       border-radius:999px;
       padding:4px 8px;
       font-size:11px;
@@ -292,194 +298,46 @@
       letter-spacing:.06em;
     }
 
-    .badge.gold{
-      border-color:rgba(245,197,66,.48);
-      background:var(--gold-soft);
-      color:#ffe9a6;
+    .badge.green{
+      border-color:rgba(0,217,165,.38);
+      background:var(--green-soft);
+      color:#b9ffee;
     }
 
-    .post-text{
-      margin:12px 0 0;
-      font-size:clamp(21px,4.2vw,32px);
-      line-height:1.1;
-      font-weight:950;
-      letter-spacing:-.055em;
-      position:relative;
-      z-index:2;
-    }
-
-    .post-text.big{
-      font-size:clamp(40px,10vw,76px);
-      line-height:.92;
-      letter-spacing:-.08em;
-    }
-
-    .post-sub{
+    .game-title{
       margin:14px 0 0;
-      color:#cfd6dd;
-      font-size:16px;
+      font-size:clamp(42px,10vw,82px);
+      line-height:.9;
+      letter-spacing:-.08em;
+      font-weight:950;
       position:relative;
       z-index:2;
     }
 
-    .thread-line{
-      margin:16px 0 0;
-      padding:14px 16px;
+    .definition{
+      margin:18px 0 0;
+      padding:16px;
       border-left:4px solid var(--gold);
       background:var(--gold-soft);
-      border-radius:14px;
-      font-size:17px;
-      font-weight:900;
-      position:relative;
-      z-index:2;
+      border-radius:16px;
       color:#fff3c4;
-    }
-
-    .section-label{
-      color:var(--brand-2);
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:.16em;
+      font-size:clamp(19px,4vw,27px);
+      line-height:1.12;
       font-weight:950;
-      margin:0 0 8px;
+      letter-spacing:-.04em;
       position:relative;
       z-index:2;
     }
 
-    .mini-list,.check-list{
-      display:grid;
-      gap:10px;
-      margin-top:16px;
-      position:relative;
-      z-index:2;
-    }
-
-    .mini-card,.check-card{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.035);
-      border-radius:18px;
-      padding:15px;
-    }
-
-    .mini-card strong,.check-card strong{
-      display:block;
-      font-size:20px;
-      letter-spacing:-.035em;
-      line-height:1.08;
-    }
-
-    .mini-card p,.check-card p{
-      margin:7px 0 0;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .check-card{
-      display:grid;
-      grid-template-columns:44px 1fr;
-      gap:12px;
-      align-items:start;
-    }
-
-    .check-num{
-      width:40px;
-      height:40px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:#050505;
-      border:2px solid var(--brand-2);
-      color:var(--brand-2);
-      font-weight:950;
-      font-size:13px;
-    }
-
-    .quote{
-      margin-top:16px;
-      border:1px solid rgba(0,217,165,.36);
-      background:var(--green-soft);
-      border-radius:18px;
-      padding:16px;
-      font-weight:950;
-      font-size:18px;
-      position:relative;
-      z-index:2;
-    }
-
-    .gold-note{
-      margin-top:16px;
-      border:1px solid rgba(245,197,66,.38);
-      background:var(--gold-soft);
-      border-radius:18px;
-      padding:16px;
-      font-weight:950;
-      font-size:18px;
-      position:relative;
-      z-index:2;
-      color:#fff3c4;
-    }
-
-    .orange-note{
-      margin-top:16px;
-      border:1px solid rgba(255,138,61,.36);
-      background:var(--orange-soft);
-      border-radius:18px;
-      padding:16px;
-      font-weight:900;
+    .why{
+      margin:16px 0 0;
+      color:#d8dee5;
       font-size:17px;
       position:relative;
       z-index:2;
     }
 
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:18px;
-      position:relative;
-      z-index:2;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border:1px solid var(--brand-2);
-      background:var(--brand-2);
-      color:#03110d;
-      padding:13px 16px;
-      border-radius:999px;
-      font-size:14px;
-      font-weight:950;
-      cursor:pointer;
-      transition:.18s ease;
-      text-align:center;
-    }
-
-    .btn:hover{
-      transform:translateY(-1px);
-      filter:brightness(1.08);
-    }
-
-    .btn.secondary{
-      background:transparent;
-      color:var(--text);
-      border-color:var(--line);
-    }
-
-    .btn.gold{
-      background:var(--gold);
-      color:#161000;
-      border-color:var(--gold);
-    }
-
-    .btn.orange{
-      background:var(--orange);
-      color:#160802;
-      border-color:var(--orange);
-    }
-
-    .stats{
+    .mini-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:10px;
@@ -488,14 +346,14 @@
       z-index:2;
     }
 
-    .stat{
+    .mini-card{
       border:1px solid var(--line);
       background:rgba(255,255,255,.035);
       border-radius:16px;
       padding:13px;
     }
 
-    .stat span{
+    .mini-card span{
       display:block;
       color:var(--muted);
       font-size:11px;
@@ -505,120 +363,35 @@
       margin-bottom:6px;
     }
 
-    .stat strong{
+    .mini-card strong{
       display:block;
       font-size:17px;
       line-height:1.1;
     }
 
-    .accordion{
-      padding:0;
-    }
-
-    .accordion-head{
-      width:100%;
-      border:0;
-      background:transparent;
-      color:var(--text);
-      display:grid;
-      grid-template-columns:46px 1fr auto;
-      gap:12px;
-      align-items:center;
-      text-align:left;
-      padding:18px;
-      cursor:pointer;
+    .intro-message{
+      margin:14px 0 0;
+      border:1px solid rgba(0,217,165,.36);
+      background:var(--green-soft);
+      border-radius:18px;
+      padding:16px;
       position:relative;
       z-index:2;
     }
 
-    .accordion-head span{
-      width:46px;
-      height:46px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:#050505;
-      border:2px solid var(--brand-2);
-      color:var(--brand-2);
-      font-weight:950;
-      font-size:13px;
-    }
-
-    .accordion-head strong{
-      font-size:20px;
-      letter-spacing:-.04em;
-      line-height:1.05;
-    }
-
-    .accordion-head em{
-      color:var(--muted);
-      font-style:normal;
-      font-size:12px;
-      font-weight:950;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-    }
-
-    .accordion-body{
-      display:none;
-      padding:0 18px 18px;
-      position:relative;
-      z-index:2;
-    }
-
-    .accordion.active .accordion-body{
+    .intro-message strong{
       display:block;
-    }
-
-    .accordion.locked{
-      opacity:.55;
-    }
-
-    .accordion.locked .accordion-head{
-      cursor:not-allowed;
-    }
-
-    .accordion.locked .accordion-head span{
-      border-color:var(--muted);
-      color:var(--muted);
-    }
-
-    .answer-list{
-      display:grid;
-      gap:10px;
-      margin-top:16px;
-    }
-
-    .answer-btn{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      border-radius:16px;
-      padding:14px 15px;
-      font-size:15px;
-      font-weight:850;
-      text-align:left;
-      cursor:pointer;
-      transition:.18s ease;
-    }
-
-    .answer-btn:hover{
-      border-color:var(--gold);
-      transform:translateY(-1px);
-    }
-
-    .answer-btn.selected{
-      border-color:var(--brand-2);
-      background:rgba(0,217,165,.14);
+      font-size:20px;
+      line-height:1.08;
+      letter-spacing:-.04em;
       color:#b9ffee;
     }
 
-    .unlock-note{
-      margin-top:12px;
-      color:var(--gold);
-      font-size:13px;
-      font-weight:950;
-      min-height:18px;
+    .intro-message p{
+      margin:8px 0 0;
+      color:#d8fff5;
+      font-size:15px;
+      font-weight:800;
     }
 
     .prompt-box{
@@ -633,7 +406,7 @@
 
     .prompt-box small{
       display:block;
-      color:var(--brand-2);
+      color:var(--green);
       font-weight:950;
       letter-spacing:.12em;
       text-transform:uppercase;
@@ -641,33 +414,112 @@
       font-size:11px;
     }
 
-    .prompt-box p{
-      margin:0;
+    .prompt-instruction{
+      margin:0 0 12px;
+      color:#cfd6dd;
+      font-size:14px;
+      font-weight:800;
+      line-height:1.35;
+    }
+
+    .prompt-text{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.22);
+      border-radius:14px;
+      padding:14px;
       color:#e8edf2;
       font-size:15px;
       font-weight:800;
+      line-height:1.4;
+      user-select:text;
     }
 
-    .prompt-link{
-      display:block;
-      color:inherit;
-      text-decoration:none;
+    .copy-mini-btn{
+      width:100%;
+      margin-top:12px;
+      border:1px solid var(--gold);
+      background:var(--gold);
+      color:#161000;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
       transition:.18s ease;
     }
 
-    .prompt-link:hover{
-      border-color:var(--gold);
+    .copy-mini-btn:hover{
       transform:translateY(-1px);
-      background:rgba(255,255,255,.06);
+      filter:brightness(1.08);
     }
 
-    .prompt-click{
-      display:inline-flex;
+    .copy-status{
+      min-height:20px;
       margin-top:12px;
       color:var(--gold);
       font-size:13px;
       font-weight:950;
-      letter-spacing:.04em;
+    }
+
+    .prompt-actions{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--green);
+      background:var(--green);
+      color:#03110d;
+      padding:14px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .btn.orange{
+      background:var(--orange);
+      color:#160802;
+      border-color:var(--orange);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .bottom-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .bottom-row .btn{
+      flex:1 1 auto;
     }
 
     footer{
@@ -679,19 +531,35 @@
     }
 
     @media(max-width:720px){
-      .brand-row{align-items:flex-start}
-      .top-links{width:100%}
-      .top-links a{flex:1 1 auto;text-align:center}
-      .post{padding:16px}
-      .accordion-head{
-        grid-template-columns:42px 1fr;
+      .brand-row{
+        align-items:flex-start;
       }
-      .accordion-head em{
-        grid-column:2;
+
+      .top-links{
+        width:100%;
       }
-      .stats{grid-template-columns:1fr}
-      .cta-row{display:grid;grid-template-columns:1fr}
-      .btn{width:100%}
+
+      .top-links a{
+        flex:1 1 auto;
+        text-align:center;
+      }
+
+      .post{
+        padding:16px;
+      }
+
+      .mini-grid{
+        grid-template-columns:1fr;
+      }
+
+      .bottom-row{
+        display:grid;
+        grid-template-columns:1fr;
+      }
+
+      .btn{
+        width:100%;
+      }
     }
   </style>
 </head>
@@ -706,7 +574,8 @@
           <div class="brand-mark">BM</div>
           <div class="brand-copy">
             <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
-            <strong data-en="Game 001: Basketball Is A Business" data-es="Juego 001: El Baloncesto Es Un Negocio">
+            <strong data-en="Game 001: Basketball Is A Business"
+                    data-es="Juego 001: El Baloncesto Es Un Negocio">
               Game 001: Basketball Is A Business
             </strong>
           </div>
@@ -714,7 +583,6 @@
 
         <div class="top-links">
           <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-          <a href="#playbook" data-en="Playbook" data-es="Playbook">Playbook</a>
           <a href="#conversation" data-en="Start Conversation" data-es="Conversación">Start Conversation</a>
           <a href="game-002.html" data-en="Next Game" data-es="Próximo Juego">Next Game</a>
         </div>
@@ -732,412 +600,157 @@
 
   <header class="hero-image">
     <div class="hero-image-inner">
-      <img src="./image-001.png" alt="Game 001 Basketball Money">
+      <img src="./image-001.png" alt="Game 001 Basketball Is A Business">
     </div>
   </header>
 
-  <main class="page" id="playbook">
+  <main class="page">
     <div class="feed">
 
-      <section class="post pinned">
+      <section class="post hero-card">
         <div class="post-head">
-          <div class="avatar gold">001</div>
+          <div class="avatar">001</div>
           <div class="post-meta">
             <div class="name-row">
               <span class="name" data-en="Game 001" data-es="Juego 001">Game 001</span>
               <span class="handle">@freeseason</span>
-              <span class="badge gold" data-en="Free Game" data-es="Juego Gratis">Free Game</span>
+              <span class="badge" data-en="Free Game" data-es="Juego Gratis">Free Game</span>
             </div>
-            <span class="handle" data-en="The business of basketball starts here." data-es="El negocio del baloncesto empieza aquí.">
+            <span class="handle"
+                  data-en="The business of basketball starts here."
+                  data-es="El negocio del baloncesto empieza aquí.">
               The business of basketball starts here.
             </span>
           </div>
         </div>
 
-        <h1 class="post-text big"
-            data-en="Basketball is not only a game. Basketball is an economy."
-            data-es="El baloncesto no es solo un juego. El baloncesto es una economía.">
-          Basketball is not only a game. Basketball is an economy.
+        <h1 class="game-title"
+            data-en="Basketball Is A Business"
+            data-es="El Baloncesto Es Un Negocio">
+          Basketball Is A Business
         </h1>
 
-        <p class="post-sub"
-           data-en="Game 001 teaches the foundation of Basketball Money: players must understand the business around the game, not only the points inside the game."
-           data-es="El Juego 001 enseña la base de Basketball Money: los jugadores tienen que entender el negocio alrededor del juego, no solo los puntos dentro del juego.">
-          Game 001 teaches the foundation of Basketball Money: players must understand the business around the game, not only the points inside the game.
+        <div class="definition"
+             data-en="Definition: Basketball is not only what happens on the court. It is an economy built around skill, attention, trust, relationships, proof, and opportunity."
+             data-es="Definición: El baloncesto no es solo lo que pasa en la cancha. Es una economía construida alrededor de habilidad, atención, confianza, relaciones, evidencia y oportunidad.">
+          Definition: Basketball is not only what happens on the court. It is an economy built around skill, attention, trust, relationships, proof, and opportunity.
+        </div>
+
+        <p class="why"
+           data-en="Why it matters: A player who understands the business of basketball sees more doors than a player who only sees points."
+           data-es="Por qué importa: Un jugador que entiende el negocio del baloncesto ve más puertas que un jugador que solo ve puntos.">
+          Why it matters: A player who understands the business of basketball sees more doors than a player who only sees points.
         </p>
 
-        <div class="thread-line"
-             data-en="Playbook rule: Every player is also a brand, a relationship, a story, and a future opportunity."
-             data-es="Regla del playbook: Todo jugador también es una marca, una relación, una historia y una oportunidad futura.">
-          Playbook rule: Every player is also a brand, a relationship, a story, and a future opportunity.
-        </div>
-
-        <div class="stats">
-          <div class="stat">
-            <span data-en="Game" data-es="Juego">Game</span>
-            <strong>001</strong>
-          </div>
-          <div class="stat">
-            <span data-en="Concept" data-es="Concepto">Concept</span>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <span data-en="Core Idea" data-es="Idea Central">Core Idea</span>
             <strong data-en="Basketball Economy" data-es="Economía del Baloncesto">Basketball Economy</strong>
           </div>
-          <div class="stat">
-            <span data-en="Access" data-es="Acceso">Access</span>
-            <strong data-en="Free Season" data-es="Temporada Gratis">Free Season</strong>
-          </div>
-        </div>
 
-        <div class="cta-row">
-          <a class="btn gold" href="#step-1" data-en="Open Playbook →" data-es="Abrir Playbook →">Open Playbook →</a>
-          <a class="btn secondary" href="game-002.html" data-en="Next Game" data-es="Próximo Juego">Next Game</a>
+          <div class="mini-card">
+            <span data-en="Player Shift" data-es="Cambio Del Jugador">Player Shift</span>
+            <strong data-en="From Player to Asset" data-es="De Jugador a Activo">From Player to Asset</strong>
+          </div>
+
+          <div class="mini-card">
+            <span data-en="Goal" data-es="Meta">Goal</span>
+            <strong data-en="See Opportunity" data-es="Ver Oportunidad">See Opportunity</strong>
+          </div>
         </div>
       </section>
 
-      <section class="post accordion active" id="step-1" data-step="1">
-        <button class="accordion-head" type="button">
-          <span>Q1</span>
-          <strong data-en="Quarter 1: The Bigger Game" data-es="Primer Quarter: El Juego Más Grande">Quarter 1: The Bigger Game</strong>
-          <em data-status>Open</em>
-        </button>
-
-        <div class="accordion-body">
-          <p class="section-label" data-en="Foundation" data-es="Fundamento">Foundation</p>
-
-          <h2 class="post-text"
-              data-en="The first lesson is simple: the game on the court creates value off the court."
-              data-es="La primera lección es simple: el juego en la cancha crea valor fuera de la cancha.">
-            The first lesson is simple: the game on the court creates value off the court.
-          </h2>
-
-          <p class="post-sub"
-             data-en="A player is not only playing for stats. A player is creating attention, trust, proof, relationships, content, reputation, and future access."
-             data-es="Un jugador no solo juega por estadísticas. Un jugador crea atención, confianza, evidencia, relaciones, contenido, reputación y acceso futuro.">
-            A player is not only playing for stats. A player is creating attention, trust, proof, relationships, content, reputation, and future access.
-          </p>
-
-          <div class="answer-list">
-            <button class="answer-btn" data-next="2"
-              data-en="A. Basketball can create opportunities beyond the scoreboard."
-              data-es="A. El baloncesto puede crear oportunidades más allá del marcador.">
-              A. Basketball can create opportunities beyond the scoreboard.
-            </button>
-
-            <button class="answer-btn" data-next="2"
-              data-en="B. A player should understand the value created around the game."
-              data-es="B. Un jugador debe entender el valor que se crea alrededor del juego.">
-              B. A player should understand the value created around the game.
-            </button>
-
-            <button class="answer-btn" data-next="2"
-              data-en="C. Stats matter, but they are not the whole business."
-              data-es="C. Las estadísticas importan, pero no son todo el negocio.">
-              C. Stats matter, but they are not the whole business.
-            </button>
+      <section class="post conversation-card" id="conversation">
+        <div class="post-head">
+          <div class="avatar green">GO</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name"
+                    data-en="Start The Conversation"
+                    data-es="Empieza La Conversación">
+                Start The Conversation
+              </span>
+              <span class="handle">@basketballmoneygpt</span>
+              <span class="badge green" data-en="Real Lesson" data-es="Lección Real">Real Lesson</span>
+            </div>
+            <span class="handle"
+                  data-en="Copy the prompt, open the GPT, paste it, and begin."
+                  data-es="Copia el prompt, abre el GPT, pégalo y comienza.">
+              Copy the prompt, open the GPT, paste it, and begin.
+            </span>
           </div>
-
-          <div class="unlock-note"></div>
         </div>
-      </section>
 
-      <section class="post accordion locked" id="step-2" data-step="2">
-        <button class="accordion-head" type="button">
-          <span>Q2</span>
-          <strong data-en="Quarter 2: What Creates Basketball Money?" data-es="Segundo Quarter: ¿Qué Crea Basketball Money?">
-            Quarter 2: What Creates Basketball Money?
+        <h2 class="game-title"
+            style="font-size:clamp(34px,8vw,62px);"
+            data-en="Let’s talk Basketball Money."
+            data-es="Vamos a hablar de Basketball Money.">
+          Let’s talk Basketball Money.
+        </h2>
+
+        <div class="intro-message">
+          <strong data-en="Welcome to Basketball Money — The Business of Basketball."
+                  data-es="Bienvenido a Basketball Money — El Negocio del Baloncesto.">
+            Welcome to Basketball Money — The Business of Basketball.
           </strong>
-          <em data-status>Locked</em>
-        </button>
 
-        <div class="accordion-body">
-          <p class="section-label" data-en="Value creation" data-es="Creación de valor">Value creation</p>
-
-          <h2 class="post-text"
-              data-en="Basketball money starts when skill, attention, trust, and opportunity connect."
-              data-es="Basketball Money empieza cuando habilidad, atención, confianza y oportunidad se conectan.">
-            Basketball money starts when skill, attention, trust, and opportunity connect.
-          </h2>
-
-          <p class="post-sub"
-             data-en="The business side of basketball is not only contracts. It includes training, camps, branding, content, sponsorship, coaching, scouting, community, and relationships."
-             data-es="El lado de negocio del baloncesto no son solo contratos. Incluye entrenamiento, campamentos, marca personal, contenido, auspicios, coaching, scouting, comunidad y relaciones.">
-            The business side of basketball is not only contracts. It includes training, camps, branding, content, sponsorship, coaching, scouting, community, and relationships.
+          <p data-en="Ask me anything, or paste your game prompt to begin."
+             data-es="Pregúntame cualquier cosa, o pega el prompt del juego para comenzar.">
+            Ask me anything, or paste your game prompt to begin.
           </p>
-
-          <div class="mini-list">
-            <div class="mini-card">
-              <strong data-en="Skill creates proof." data-es="La habilidad crea evidencia.">Skill creates proof.</strong>
-              <p data-en="People believe what they can see repeated." data-es="La gente cree lo que puede ver repetido.">People believe what they can see repeated.</p>
-            </div>
-
-            <div class="mini-card">
-              <strong data-en="Attention creates reach." data-es="La atención crea alcance.">Attention creates reach.</strong>
-              <p data-en="Reach helps the right people discover the player." data-es="El alcance ayuda a que las personas correctas descubran al jugador.">Reach helps the right people discover the player.</p>
-            </div>
-
-            <div class="mini-card">
-              <strong data-en="Trust creates opportunity." data-es="La confianza crea oportunidad.">Trust creates opportunity.</strong>
-              <p data-en="People open doors for players they trust." data-es="La gente abre puertas para jugadores en quienes confían.">People open doors for players they trust.</p>
-            </div>
-          </div>
-
-          <div class="answer-list">
-            <button class="answer-btn" data-next="3"
-              data-en="A. Skill plus attention plus trust can create opportunity."
-              data-es="A. Habilidad más atención más confianza puede crear oportunidad.">
-              A. Skill plus attention plus trust can create opportunity.
-            </button>
-
-            <button class="answer-btn" data-next="3"
-              data-en="B. Basketball business includes more than playing professionally."
-              data-es="B. El negocio del baloncesto incluye más que jugar profesional.">
-              B. Basketball business includes more than playing professionally.
-            </button>
-
-            <button class="answer-btn" data-next="3"
-              data-en="C. A player can build value through proof, content, training, and relationships."
-              data-es="C. Un jugador puede construir valor con evidencia, contenido, entrenamiento y relaciones.">
-              C. A player can build value through proof, content, training, and relationships.
-            </button>
-          </div>
-
-          <div class="unlock-note"></div>
         </div>
-      </section>
 
-      <section class="post accordion locked warning" id="step-3" data-step="3">
-        <button class="accordion-head" type="button">
-          <span>HT</span>
-          <strong data-en="Halftime: Do Not Think Small" data-es="Medio Tiempo: No Pienses Pequeño">
-            Halftime: Do Not Think Small
-          </strong>
-          <em data-status>Locked</em>
-        </button>
-
-        <div class="accordion-body">
-          <p class="section-label" data-en="Mindset warning" data-es="Advertencia de mentalidad">Mindset warning</p>
-
-          <h2 class="post-text"
-              data-en="If you only see basketball as points, you may miss the business around the points."
-              data-es="Si solo ves el baloncesto como puntos, puedes perder el negocio alrededor de los puntos.">
-            If you only see basketball as points, you may miss the business around the points.
-          </h2>
-
-          <div class="orange-note"
-               data-en="Playbook warning: a player can be talented and still miss opportunities because they never learned how the basketball economy works."
-               data-es="Advertencia del playbook: un jugador puede tener talento y aun así perder oportunidades porque nunca aprendió cómo funciona la economía del baloncesto.">
-            Playbook warning: a player can be talented and still miss opportunities because they never learned how the basketball economy works.
-          </div>
-
-          <div class="answer-list">
-            <button class="answer-btn" data-next="4"
-              data-en="A. Talent needs understanding, positioning, and direction."
-              data-es="A. El talento necesita entendimiento, posicionamiento y dirección.">
-              A. Talent needs understanding, positioning, and direction.
-            </button>
-
-            <button class="answer-btn" data-next="4"
-              data-en="B. A player should learn the business before the opportunity arrives."
-              data-es="B. Un jugador debe aprender el negocio antes de que llegue la oportunidad.">
-              B. A player should learn the business before the opportunity arrives.
-            </button>
-
-            <button class="answer-btn" data-next="4"
-              data-en="C. Thinking bigger helps a player recognize more doors."
-              data-es="C. Pensar más grande ayuda al jugador a reconocer más puertas.">
-              C. Thinking bigger helps a player recognize more doors.
-            </button>
-          </div>
-
-          <div class="unlock-note"></div>
-        </div>
-      </section>
-
-      <section class="post accordion locked" id="step-4" data-step="4">
-        <button class="accordion-head" type="button">
-          <span>Q3</span>
-          <strong data-en="Quarter 3: The Player As An Asset" data-es="Tercer Quarter: El Jugador Como Activo">
-            Quarter 3: The Player As An Asset
-          </strong>
-          <em data-status>Locked</em>
-        </button>
-
-        <div class="accordion-body">
-          <p class="section-label" data-en="Player value" data-es="Valor del jugador">Player value</p>
-
-          <h2 class="post-text"
-              data-en="In the basketball economy, the player is not only a participant. The player can become an asset."
-              data-es="En la economía del baloncesto, el jugador no es solo un participante. El jugador puede convertirse en un activo.">
-            In the basketball economy, the player is not only a participant. The player can become an asset.
-          </h2>
-
-          <p class="post-sub"
-             data-en="An asset creates value. A player creates value through performance, leadership, attention, knowledge, community, and influence."
-             data-es="Un activo crea valor. Un jugador crea valor mediante rendimiento, liderazgo, atención, conocimiento, comunidad e influencia.">
-            An asset creates value. A player creates value through performance, leadership, attention, knowledge, community, and influence.
-          </p>
-
-          <div class="check-list">
-            <div class="check-card">
-              <div class="check-num">1</div>
-              <div>
-                <strong data-en="Performance" data-es="Rendimiento">Performance</strong>
-                <p data-en="What you do in the game." data-es="Lo que haces en el juego.">What you do in the game.</p>
-              </div>
-            </div>
-
-            <div class="check-card">
-              <div class="check-num">2</div>
-              <div>
-                <strong data-en="Reputation" data-es="Reputación">Reputation</strong>
-                <p data-en="What people believe about your consistency and character." data-es="Lo que la gente cree sobre tu consistencia y carácter.">What people believe about your consistency and character.</p>
-              </div>
-            </div>
-
-            <div class="check-card">
-              <div class="check-num">3</div>
-              <div>
-                <strong data-en="Platform" data-es="Plataforma">Platform</strong>
-                <p data-en="Where your story, value, and message can be seen." data-es="Donde tu historia, valor y mensaje se pueden ver.">Where your story, value, and message can be seen.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="answer-list">
-            <button class="answer-btn" data-next="5"
-              data-en="A. A player creates value through more than scoring."
-              data-es="A. Un jugador crea valor con más que anotar.">
-              A. A player creates value through more than scoring.
-            </button>
-
-            <button class="answer-btn" data-next="5"
-              data-en="B. Reputation and trust can become basketball currency."
-              data-es="B. La reputación y la confianza pueden convertirse en moneda del baloncesto.">
-              B. Reputation and trust can become basketball currency.
-            </button>
-
-            <button class="answer-btn" data-next="5"
-              data-en="C. A player with a platform can create more future options."
-              data-es="C. Un jugador con plataforma puede crear más opciones futuras.">
-              C. A player with a platform can create more future options.
-            </button>
-          </div>
-
-          <div class="unlock-note"></div>
-        </div>
-      </section>
-
-      <section class="post accordion locked" id="step-5" data-step="5">
-        <button class="accordion-head" type="button">
-          <span>Q4</span>
-          <strong data-en="Quarter 4: Start Thinking Like A Builder" data-es="Cuarto Quarter: Empieza A Pensar Como Constructor">
-            Quarter 4: Start Thinking Like A Builder
-          </strong>
-          <em data-status>Locked</em>
-        </button>
-
-        <div class="accordion-body">
-          <p class="section-label" data-en="Action mindset" data-es="Mentalidad de acción">Action mindset</p>
-
-          <h2 class="post-text"
-              data-en="The player who understands the business starts building before the big opportunity arrives."
-              data-es="El jugador que entiende el negocio empieza a construir antes de que llegue la gran oportunidad.">
-            The player who understands the business starts building before the big opportunity arrives.
-          </h2>
-
-          <p class="post-sub"
-             data-en="This is the beginning of Basketball Money: learn the economy, understand your value, build proof, create trust, and prepare for opportunity."
-             data-es="Este es el comienzo de Basketball Money: aprende la economía, entiende tu valor, construye evidencia, crea confianza y prepárate para la oportunidad.">
-            This is the beginning of Basketball Money: learn the economy, understand your value, build proof, create trust, and prepare for opportunity.
-          </p>
-
-          <div class="quote"
-               data-en="Do not wait until someone gives you a platform. Start building the value that makes the platform possible."
-               data-es="No esperes a que alguien te dé una plataforma. Empieza a construir el valor que hace posible la plataforma.">
-            Do not wait until someone gives you a platform. Start building the value that makes the platform possible.
-          </div>
-
-          <div class="answer-list">
-            <button class="answer-btn" data-next="6"
-              data-en="A. I need to understand the business around the game."
-              data-es="A. Necesito entender el negocio alrededor del juego.">
-              A. I need to understand the business around the game.
-            </button>
-
-            <button class="answer-btn" data-next="6"
-              data-en="B. I need to build proof, trust, and opportunity."
-              data-es="B. Necesito construir evidencia, confianza y oportunidad.">
-              B. I need to build proof, trust, and opportunity.
-            </button>
-
-            <button class="answer-btn" data-next="6"
-              data-en="C. I need to think like a player and a builder."
-              data-es="C. Necesito pensar como jugador y como constructor.">
-              C. I need to think like a player and a builder.
-            </button>
-          </div>
-
-          <div class="unlock-note"></div>
-        </div>
-      </section>
-
-      <section class="post accordion locked conversation-final" id="conversation" data-step="6">
-        <button class="accordion-head" type="button">
-          <span>GO</span>
-          <strong data-en="Start The Conversation" data-es="Empieza La Conversación">
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">
             Start The Conversation
-          </strong>
-          <em data-status>Locked</em>
-        </button>
+          </small>
 
-        <div class="accordion-body">
-          <p class="section-label"
-             data-en="Your next move"
-             data-es="Tu próximo movimiento">
-            Your next move
+          <p class="prompt-instruction"
+             data-en="Step 1: Copy this prompt. Step 2: Open Basketball Money GPT. Step 3: Paste it into the chat and start."
+             data-es="Paso 1: Copia este prompt. Paso 2: Abre Basketball Money GPT. Paso 3: Pégalo en el chat y comienza.">
+            Step 1: Copy this prompt. Step 2: Open Basketball Money GPT. Step 3: Paste it into the chat and start.
           </p>
 
-          <h2 class="post-text"
-              data-en="Now turn Game 001 into your personal Basketball Money plan."
-              data-es="Ahora convierte el Juego 001 en tu plan personal de Basketball Money.">
-            Now turn Game 001 into your personal Basketball Money plan.
-          </h2>
+          <div class="prompt-text" id="conversationPrompt"
+               data-en="Prompt: I just finished Basketball Money Game 001: Basketball Is A Business. Help me understand how basketball creates value beyond the court. Ask me questions about my basketball background, my goals, my strengths, my network, and how I can start building value as a player, brand, relationship, and future opportunity."
+               data-es="Prompt: Acabo de terminar Basketball Money Juego 001: El Baloncesto Es Un Negocio. Ayúdame a entender cómo el baloncesto crea valor más allá de la cancha. Hazme preguntas sobre mi trasfondo en baloncesto, mis metas, mis fortalezas, mi red de contactos y cómo puedo empezar a construir valor como jugador, marca, relación y oportunidad futura.">
+            Prompt: I just finished Basketball Money Game 001: Basketball Is A Business. Help me understand how basketball creates value beyond the court. Ask me questions about my basketball background, my goals, my strengths, my network, and how I can start building value as a player, brand, relationship, and future opportunity.
+          </div>
 
-          <a class="prompt-box prompt-link"
+          <button class="copy-mini-btn" type="button" id="copyPromptBtn"
+                  data-en="Copy This Prompt"
+                  data-es="Copiar Este Prompt">
+            Copy This Prompt
+          </button>
+
+          <div class="copy-status" id="copyStatus"></div>
+        </div>
+
+        <div class="prompt-actions">
+          <a class="btn"
              href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money"
              target="_blank"
-             rel="noopener">
-            <small data-en="Click to open Basketball Money GPT"
-                   data-es="Haz clic para abrir Basketball Money GPT">
-              Click to open Basketball Money GPT
-            </small>
+             rel="noopener"
+             data-en="Open Basketball Money GPT →"
+             data-es="Abrir Basketball Money GPT →">
+            Open Basketball Money GPT →
+          </a>
+        </div>
 
-            <p data-en="Prompt: I just finished Basketball Money Game 001. Help me understand the business of basketball and identify how I can start building value as a player, brand, relationship, and future opportunity."
-               data-es="Prompt: Acabo de terminar Basketball Money Juego 001. Ayúdame a entender el negocio del baloncesto e identificar cómo puedo empezar a construir valor como jugador, marca, relación y oportunidad futura.">
-              Prompt: I just finished Basketball Money Game 001. Help me understand the business of basketball and identify how I can start building value as a player, brand, relationship, and future opportunity.
-            </p>
-
-            <span class="prompt-click"
-                  data-en="Start the conversation →"
-                  data-es="Empieza la conversación →">
-              Start the conversation →
-            </span>
+        <div class="bottom-row">
+          <a class="btn secondary"
+             href="index.html"
+             data-en="Back to Home"
+             data-es="Volver al Inicio">
+            Back to Home
           </a>
 
-          <div class="cta-row">
-            <a class="btn gold"
-               href="game-002.html"
-               data-en="Continue to Game 002 →"
-               data-es="Continuar al Juego 002 →">
-              Continue to Game 002 →
-            </a>
-
-            <a class="btn secondary"
-               href="index.html"
-               data-en="Back to Home"
-               data-es="Volver al Inicio">
-              Back to Home
-            </a>
-          </div>
+          <a class="btn orange"
+             href="game-002.html"
+             data-en="Continue to Game 002 →"
+             data-es="Continuar al Juego 002 →">
+            Continue to Game 002 →
+          </a>
         </div>
       </section>
 
@@ -1152,16 +765,11 @@
   <script>
     const langButtons = document.querySelectorAll('.lang-btn');
     const translatable = document.querySelectorAll('[data-en][data-es]');
+    const copyPromptBtn = document.getElementById('copyPromptBtn');
+    const conversationPrompt = document.getElementById('conversationPrompt');
+    const copyStatus = document.getElementById('copyStatus');
+
     let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
-
-    function statusText(status){
-      const map = {
-        en: { open:'Open', closed:'Closed', locked:'Locked', complete:'Complete' },
-        es: { open:'Abierto', closed:'Cerrado', locked:'Cerrado', complete:'Completado' }
-      };
-
-      return map[currentLang][status] || map.en[status];
-    }
 
     function setLanguage(lang) {
       currentLang = lang === 'es' ? 'es' : 'en';
@@ -1175,112 +783,34 @@
         }
       });
 
-      document.querySelectorAll('[data-status]').forEach((statusEl) => {
-        const section = statusEl.closest('.accordion');
-
-        if(section.classList.contains('locked')){
-          statusEl.textContent = statusText('locked');
-        } else if(section.classList.contains('completed')){
-          statusEl.textContent = statusText('complete');
-        } else if(section.classList.contains('active')){
-          statusEl.textContent = statusText('open');
-        } else {
-          statusEl.textContent = statusText('closed');
-        }
-      });
-
-      document.querySelectorAll('.unlock-note.unlocked').forEach((note) => {
-        note.textContent = currentLang === 'es' ? 'Próxima sección desbloqueada →' : 'Next section unlocked →';
-      });
-
       langButtons.forEach((btn) => {
         btn.classList.toggle('active', btn.dataset.lang === currentLang);
       });
+
+      copyStatus.textContent = '';
+    }
+
+    async function copyPrompt() {
+      const text = conversationPrompt.textContent.trim();
+
+      try {
+        await navigator.clipboard.writeText(text);
+
+        copyStatus.textContent = currentLang === 'es'
+          ? 'Prompt copiado. Ahora toca “Abrir Basketball Money GPT”, pega el prompt y comienza.'
+          : 'Prompt copied. Now tap “Open Basketball Money GPT”, paste the prompt, and begin.';
+      } catch (error) {
+        copyStatus.textContent = currentLang === 'es'
+          ? 'No se pudo copiar automáticamente. Mantén presionado el texto del prompt y cópialo manualmente.'
+          : 'Could not copy automatically. Press and hold the prompt text and copy it manually.';
+      }
     }
 
     langButtons.forEach((btn) => {
       btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
     });
 
-    const accordionSections = document.querySelectorAll('.accordion');
-    const answerButtons = document.querySelectorAll('.answer-btn');
-
-    function openAccordion(step){
-      accordionSections.forEach(section => {
-        const sectionStep = section.dataset.step;
-        const status = section.querySelector('[data-status]');
-
-        if(sectionStep === String(step)){
-          section.classList.remove('locked');
-          section.classList.add('active');
-
-          if(status) status.textContent = statusText('open');
-
-          setTimeout(() => {
-            section.scrollIntoView({ behavior:'smooth', block:'start' });
-          }, 150);
-        } else {
-          section.classList.remove('active');
-
-          if(status && !section.classList.contains('locked') && !section.classList.contains('completed')){
-            status.textContent = statusText('closed');
-          }
-        }
-      });
-    }
-
-    document.querySelectorAll('.accordion-head').forEach(head => {
-      head.addEventListener('click', () => {
-        const section = head.closest('.accordion');
-        const status = section.querySelector('[data-status]');
-
-        if(section.classList.contains('locked')) return;
-
-        section.classList.toggle('active');
-
-        if(status){
-          if(section.classList.contains('active')){
-            status.textContent = statusText('open');
-          } else if(section.classList.contains('completed')){
-            status.textContent = statusText('complete');
-          } else {
-            status.textContent = statusText('closed');
-          }
-        }
-      });
-    });
-
-    answerButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const currentSection = button.closest('.accordion');
-        const nextStep = button.dataset.next;
-        const currentStatus = currentSection.querySelector('[data-status]');
-
-        currentSection.querySelectorAll('.answer-btn').forEach(btn => {
-          btn.classList.remove('selected');
-        });
-
-        button.classList.add('selected');
-        currentSection.classList.add('completed');
-
-        if(currentStatus){
-          currentStatus.textContent = statusText('complete');
-        }
-
-        const note = currentSection.querySelector('.unlock-note');
-
-        if(note){
-          note.classList.add('unlocked');
-          note.textContent = currentLang === 'es' ? 'Próxima sección desbloqueada →' : 'Next section unlocked →';
-        }
-
-        if(nextStep){
-          setTimeout(() => {
-            openAccordion(nextStep);
-          }, 350);
-        }
-      });
-    });
+    copyPromptBtn.addEventListener('click', copyPrompt);
 
     setLanguage(currentLang);
   </script>
