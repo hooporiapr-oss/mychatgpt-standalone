@@ -7,6 +7,100 @@
   <title>Game 001 | Basketball Money</title>
 
   <link rel="stylesheet" href="../css/basketball-money.css">
+
+  <style>
+    .nav-main{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      position:relative;
+    }
+
+    .menu-toggle{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      transition:.18s ease;
+      flex:0 0 auto;
+    }
+
+    .menu-toggle:hover{
+      border-color:var(--gold);
+      transform:translateY(-1px);
+    }
+
+    .hamburger{
+      width:20px;
+      display:grid;
+      gap:5px;
+    }
+
+    .hamburger span{
+      height:2px;
+      background:var(--text);
+      border-radius:999px;
+      display:block;
+    }
+
+    .nav-menu{
+      display:none;
+      margin-top:14px;
+      border:1px solid var(--line);
+      background:rgba(15,17,21,.98);
+      border-radius:18px;
+      padding:10px;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+
+    .nav-menu.open{
+      display:grid;
+      gap:8px;
+    }
+
+    .nav-menu a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:13px 14px;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:950;
+      transition:.18s ease;
+    }
+
+    .nav-menu a:hover{
+      border-color:var(--gold);
+      transform:translateY(-1px);
+    }
+
+    @media(min-width:720px){
+      .menu-toggle{
+        display:none;
+      }
+
+      .nav-menu{
+        display:flex;
+        margin-top:0;
+        border:0;
+        background:transparent;
+        box-shadow:none;
+        padding:0;
+        gap:8px;
+      }
+
+      .nav-menu a{
+        border-radius:999px;
+        padding:10px 13px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -39,4 +133,201 @@
           <a href="game-002.html" data-en="Next Game" data-es="Próximo Juego">Next Game</a>
           <a href="../paid-gate.html" data-en="Paid Gateway" data-es="Entrada Paga">Paid Gateway</a>
         </div>
-      </div
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="../images/image-001.png" alt="Game 001 Basketball Is A Business">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post hero-card">
+        <div class="post-head">
+          <div class="avatar">001</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 001" data-es="Juego 001">Game 001</span>
+              <span class="handle">@freeseason</span>
+              <span class="badge" data-en="Free Game" data-es="Juego Gratis">Free Game</span>
+            </div>
+            <span class="handle"
+                  data-en="The business of basketball starts here."
+                  data-es="El negocio del baloncesto empieza aquí.">
+              The business of basketball starts here.
+            </span>
+          </div>
+        </div>
+
+        <h1 class="game-title"
+            data-en="Basketball Is A Business"
+            data-es="El Baloncesto Es Un Negocio">
+          Basketball Is A Business
+        </h1>
+
+        <div class="definition"
+             data-en="Definition: Basketball is not only what happens on the court. It is an economy built around skill, attention, trust, relationships, proof, and opportunity."
+             data-es="Definición: El baloncesto no es solo lo que pasa en la cancha. Es una economía construida alrededor de habilidad, atención, confianza, relaciones, evidencia y oportunidad.">
+          Definition: Basketball is not only what happens on the court. It is an economy built around skill, attention, trust, relationships, proof, and opportunity.
+        </div>
+
+        <p class="why"
+           data-en="Why it matters: A player who understands the business of basketball sees more doors than a player who only sees points."
+           data-es="Por qué importa: Un jugador que entiende el negocio del baloncesto ve más puertas que un jugador que solo ve puntos.">
+          Why it matters: A player who understands the business of basketball sees more doors than a player who only sees points.
+        </p>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <span data-en="Core Idea" data-es="Idea Central">Core Idea</span>
+            <strong data-en="Basketball Economy" data-es="Economía del Baloncesto">Basketball Economy</strong>
+          </div>
+
+          <div class="mini-card">
+            <span data-en="Player Shift" data-es="Cambio Del Jugador">Player Shift</span>
+            <strong data-en="From Player to Asset" data-es="De Jugador a Activo">From Player to Asset</strong>
+          </div>
+
+          <div class="mini-card">
+            <span data-en="Goal" data-es="Meta">Goal</span>
+            <strong data-en="See Opportunity" data-es="Ver Oportunidad">See Opportunity</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="post conversation-card" id="conversation">
+        <div class="post-head">
+          <div class="avatar green">GO</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name"
+                    data-en="Start The Conversation"
+                    data-es="Empieza La Conversación">
+                Start The Conversation
+              </span>
+              <span class="handle">@basketballmoneygpt</span>
+              <span class="badge green" data-en="Real Lesson" data-es="Lección Real">Real Lesson</span>
+            </div>
+            <span class="handle"
+                  data-en="Copy the prompt, open the GPT, paste it, and begin."
+                  data-es="Copia el prompt, abre el GPT, pégalo y comienza.">
+              Copy the prompt, open the GPT, paste it, and begin.
+            </span>
+          </div>
+        </div>
+
+        <h2 class="game-title conversation-title"
+            data-en="Let’s talk Basketball Money."
+            data-es="Vamos a hablar de Basketball Money.">
+          Let’s talk Basketball Money.
+        </h2>
+
+        <div class="intro-message">
+          <strong data-en="Welcome to Basketball Money — The Business of Basketball."
+                  data-es="Bienvenido a Basketball Money — El Negocio del Baloncesto.">
+            Welcome to Basketball Money — The Business of Basketball.
+          </strong>
+
+          <p data-en="Ask me anything, or paste your game prompt to begin."
+             data-es="Pregúntame cualquier cosa, o pega el prompt del juego para comenzar.">
+            Ask me anything, or paste your game prompt to begin.
+          </p>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">
+            Start The Conversation
+          </small>
+
+          <p class="prompt-instruction"
+             data-en="Step 1: Copy this prompt. Step 2: Open Basketball Money GPT. Step 3: Paste it into the chat and start."
+             data-es="Paso 1: Copia este prompt. Paso 2: Abre Basketball Money GPT. Paso 3: Pégalo en el chat y comienza.">
+            Step 1: Copy this prompt. Step 2: Open Basketball Money GPT. Step 3: Paste it into the chat and start.
+          </p>
+
+          <div class="prompt-text" id="conversationPrompt"
+               data-en="Prompt: I just finished Basketball Money Game 001: Basketball Is A Business. Help me understand how basketball creates value beyond the court. Ask me questions about my basketball background, my goals, my strengths, my network, and how I can start building value as a player, brand, relationship, and future opportunity."
+               data-es="Prompt: Acabo de terminar Basketball Money Juego 001: El Baloncesto Es Un Negocio. Ayúdame a entender cómo el baloncesto crea valor más allá de la cancha. Hazme preguntas sobre mi trasfondo en baloncesto, mis metas, mis fortalezas, mi red de contactos y cómo puedo empezar a construir valor como jugador, marca, relación y oportunidad futura.">
+            Prompt: I just finished Basketball Money Game 001: Basketball Is A Business. Help me understand how basketball creates value beyond the court. Ask me questions about my basketball background, my goals, my strengths, my network, and how I can start building value as a player, brand, relationship, and future opportunity.
+          </div>
+
+          <button class="copy-mini-btn" type="button" id="copyPromptBtn"
+                  data-en="Copy This Prompt"
+                  data-es="Copiar Este Prompt">
+            Copy This Prompt
+          </button>
+
+          <div class="copy-status" id="copyStatus"></div>
+        </div>
+
+        <div class="prompt-actions">
+          <a class="btn"
+             href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money"
+             target="_blank"
+             rel="noopener"
+             data-en="Open Basketball Money GPT →"
+             data-es="Abrir Basketball Money GPT →">
+            Open Basketball Money GPT →
+          </a>
+        </div>
+
+        <div class="bottom-row">
+          <a class="btn secondary"
+             href="../index.html"
+             data-en="Back to Home"
+             data-es="Volver al Inicio">
+            Back to Home
+          </a>
+
+          <a class="btn orange"
+             href="game-002.html"
+             data-en="Continue to Game 002 →"
+             data-es="Continuar al Juego 002 →">
+            Continue to Game 002 →
+          </a>
+        </div>
+      </section>
+
+      <footer data-en="Basketball Money — Game 001: Basketball Is A Business"
+              data-es="Basketball Money — Juego 001: El Baloncesto Es Un Negocio">
+        Basketball Money — Game 001: Basketball Is A Business
+      </footer>
+
+    </div>
+  </main>
+
+  <script src="../js/basketball-money.js"></script>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if(menuToggle && navMenu){
+      menuToggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      navMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
