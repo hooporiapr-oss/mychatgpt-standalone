@@ -3,58 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hoops Money | Game 002 — Habits</title>
+  <title>Game 002 | Basketball Money</title>
+
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --muted: #5f6368;
-      --line: #e5e7eb;
-      --soft: #f8fafc;
-      --purple: #6d28d9;
-      --purple-dark: #4c1d95;
-      --purple-soft: #f3e8ff;
-      --success: #15803d;
-      --success-bg: #dcfce7;
+      --bg: #050505;
+      --panel: #0f1115;
+      --text: #f5f7fa;
+      --muted: #8b98a5;
+      --line: #242833;
+      --brand: #9B59B6;
+      --brand-2: #00D9A5;
+      --brand-soft: rgba(155, 89, 182, 0.18);
+      --green-soft: rgba(0, 217, 165, 0.14);
+      --orange: #ff8a3d;
+      --orange-soft: rgba(255, 138, 61, 0.14);
       --radius: 22px;
-      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-      --max: 920px;
+      --max: 760px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
     }
 
     * { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(155, 89, 182, 0.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(0, 217, 165, 0.10), transparent 30%),
+        var(--bg);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
+      line-height: 1.45;
     }
 
-    iframe { display: block; border: 0; width: 100%; }
     a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
     button { font-family: inherit; }
 
     .topbar {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 5, 0.88);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
     }
 
     .topbar-inner {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 14px 18px 16px;
+      padding: 14px 16px 16px;
     }
 
     .brand-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      justify-content: space-between;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
@@ -67,30 +74,29 @@
     .brand-mark {
       width: 46px;
       height: 46px;
-      border: 2px solid var(--purple);
+      border-radius: 50%;
       display: grid;
       place-items: center;
-      font-weight: 900;
-      font-size: 18px;
-      letter-spacing: -0.04em;
-      color: var(--purple);
-      background: #fff;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #050505;
+      font-weight: 950;
+      letter-spacing: -0.08em;
+      border: 2px solid rgba(255, 255, 255, 0.18);
     }
 
     .brand-copy small {
       display: block;
-      color: var(--purple);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
     }
 
     .brand-copy strong {
       display: block;
       font-size: 18px;
-      line-height: 1.15;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
     }
 
     .top-links {
@@ -101,11 +107,18 @@
 
     .top-links a {
       border: 1px solid var(--line);
-      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      padding: 10px 13px;
       border-radius: 999px;
       font-size: 13px;
-      font-weight: 800;
-      background: #fff;
+      font-weight: 900;
+      transition: 0.18s ease;
+    }
+
+    .top-links a:hover {
+      border-color: var(--brand);
+      transform: translateY(-1px);
     }
 
     .lang-row {
@@ -113,815 +126,854 @@
       display: flex;
       justify-content: center;
       padding-top: 14px;
-      border-top: 1px solid #f1f5f9;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .lang-toggle {
-      background: var(--soft);
+      display: inline-flex;
+      gap: 4px;
+      background: #0b0d12;
       border: 1px solid var(--line);
       border-radius: 999px;
       padding: 4px;
-      display: inline-flex;
-      gap: 4px;
     }
 
     .lang-btn {
       border: 0;
       background: transparent;
+      color: var(--muted);
       padding: 10px 14px;
       border-radius: 999px;
-      font-weight: 900;
       font-size: 13px;
+      font-weight: 950;
       cursor: pointer;
-      color: #334155;
     }
 
     .lang-btn.active {
-      background: var(--purple);
-      color: #fff;
+      background: var(--text);
+      color: #050505;
+    }
+
+    .hero-image {
+      max-width: var(--max);
+      margin: 16px auto 0;
+      padding: 0 16px;
+    }
+
+    .hero-image-inner {
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
     }
 
     .page {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 22px 18px 80px;
+      padding: 16px 16px 80px;
     }
 
-    .stack { display: grid; gap: 20px; }
-
-    .card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .pad { padding: 24px; }
-
-    .eyebrow {
-      margin: 0 0 10px;
-      color: var(--purple);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(42px, 8vw, 78px);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-    }
-
-    .subtitle {
-      margin: 18px 0 0;
-      font-size: clamp(18px, 2.5vw, 24px);
-      line-height: 1.5;
-      color: #222;
-    }
-
-    .rule {
-      margin-top: 18px;
-      border-left: 5px solid var(--purple);
-      background: var(--purple-soft);
-      padding: 14px 16px;
-      font-weight: 800;
-      font-size: 17px;
-    }
-
-    .meta-grid {
+    .feed {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .meta {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--soft);
-      padding: 14px;
-    }
-
-    .meta span {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
-    }
-
-    .meta strong { font-size: 16px; }
-
-    .progress-label {
-      font-weight: 900;
-      margin: 0 0 12px;
-      letter-spacing: -0.02em;
-      font-size: 22px;
-    }
-
-    .progress-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
-    }
-
-    .step {
-      border: 1px solid var(--line);
-      background: var(--soft);
-      border-radius: 14px;
-      padding: 12px 10px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 900;
-      color: #64748b;
-    }
-
-    .step.active {
-      background: var(--purple);
-      color: #fff;
-      border-color: var(--purple);
-    }
-
-    .step.done {
-      background: var(--success-bg);
-      border-color: #bbf7d0;
-      color: #166534;
-    }
-
-    .section-title {
-      margin: 0;
-      font-size: clamp(28px, 4.8vw, 44px);
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-
-    .section-sub {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .note {
-      border: 1px solid var(--line);
-      border-left: 5px solid var(--purple);
-      border-radius: 16px;
-      background: #fafafa;
-      padding: 18px;
-      margin-top: 16px;
-    }
-
-    .box {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      padding: 18px;
-      margin-top: 16px;
-    }
-
-    .box.purple {
-      background: var(--purple-soft);
-      border-left: 5px solid var(--purple);
-    }
-
-    .box-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--purple);
-      margin-bottom: 10px;
-    }
-
-    .choice-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .choice {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px;
-      background: #fff;
-      min-height: 74px;
-    }
-
-    .choice b {
-      color: var(--purple);
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .complete-row {
-      margin-top: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .complete-status {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .complete-status.done { color: var(--success); }
-
-    .btn,
-    .review-choice {
-      display: inline-block;
-      border: 1px solid var(--purple);
-      background: var(--purple);
-      color: #fff;
-      padding: 12px 16px;
-      border-radius: 999px;
-      font-weight: 900;
-      font-size: 14px;
-      cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-
-    .btn:hover,
-    .review-choice:hover { transform: translateY(-1px); }
-
-    .btn.done {
-      background: var(--success);
-      border-color: var(--success);
-      color: #fff;
-    }
-
-    details.accordion {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    details.accordion.locked { opacity: 0.62; }
-
-    details.accordion summary {
-      list-style: none;
-      cursor: pointer;
-      display: grid;
-      grid-template-columns: 60px 1fr auto;
       gap: 14px;
-      align-items: center;
-      padding: 20px;
     }
 
-    details.accordion summary::-webkit-details-marker { display: none; }
+    .post {
+      background: rgba(15, 17, 21, 0.94);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
 
-    .badge {
-      width: 52px;
-      height: 52px;
-      border: 2px solid var(--purple);
-      border-radius: 14px;
+    .post::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.045), transparent 42%);
+    }
+
+    .post.pinned {
+      border-color: rgba(155, 89, 182, 0.55);
+      background:
+        linear-gradient(135deg, rgba(155, 89, 182, 0.18), rgba(0, 217, 165, 0.06)),
+        rgba(15, 17, 21, 0.96);
+    }
+
+    .post.final {
+      border-color: rgba(0, 217, 165, 0.5);
+      background:
+        linear-gradient(135deg, rgba(0, 217, 165, 0.16), rgba(155, 89, 182, 0.16)),
+        rgba(15, 17, 21, 0.96);
+    }
+
+    .post.warning {
+      border-color: rgba(255, 138, 61, 0.45);
+      background:
+        linear-gradient(135deg, rgba(255, 138, 61, 0.13), rgba(155, 89, 182, 0.08)),
+        rgba(15, 17, 21, 0.96);
+    }
+
+    .post-head {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      position: relative;
+      z-index: 2;
+    }
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      flex: 0 0 auto;
       display: grid;
       place-items: center;
-      font-weight: 900;
-      background: #fff;
-      color: var(--purple);
+      background: #050505;
+      border: 2px solid var(--brand);
+      color: var(--brand-2);
+      font-weight: 950;
+      letter-spacing: -0.05em;
+      font-size: 13px;
     }
 
-    details.accordion.done .badge {
-      background: var(--success-bg);
-      border-color: var(--success);
-      color: var(--success);
+    .post-meta {
+      min-width: 0;
+      flex: 1;
     }
 
-    .summary-copy strong {
-      display: block;
-      font-size: 22px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+    .name-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 2px;
     }
 
-    .summary-copy span {
-      display: block;
+    .name {
+      font-weight: 950;
+      letter-spacing: -0.03em;
+    }
+
+    .handle {
       color: var(--muted);
-      margin-top: 4px;
+      font-size: 14px;
     }
 
-    .lock-note {
-      display: inline-block;
-      margin-top: 6px;
-      color: var(--purple);
-      font-size: 12px;
-      font-weight: 900;
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 217, 165, 0.38);
+      background: var(--green-soft);
+      color: #b9ffee;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
-    .plus {
-      font-size: 28px;
-      color: var(--purple);
-      line-height: 1;
+    .post-text {
+      margin: 12px 0 0;
+      font-size: clamp(21px, 4.2vw, 32px);
+      line-height: 1.1;
+      font-weight: 950;
+      letter-spacing: -0.055em;
+      position: relative;
+      z-index: 2;
     }
 
-    details[open] .plus { transform: rotate(45deg); }
-
-    .accordion-body {
-      border-top: 1px solid var(--line);
-      padding: 0 20px 20px;
+    .post-text.big {
+      font-size: clamp(40px, 10vw, 76px);
+      line-height: 0.92;
+      letter-spacing: -0.08em;
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 14px;
+    .post-sub {
+      margin: 14px 0 0;
+      color: #cfd6dd;
+      font-size: 16px;
+      position: relative;
+      z-index: 2;
     }
 
-    ul.clean { margin: 8px 0 0; padding-left: 20px; }
-    ul.clean li { margin: 7px 0; }
-
-    .ready-break {
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      background: #fff;
-      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.06);
-      overflow: hidden;
-    }
-
-    .ready-break iframe {
-      width: 100%;
-      height: clamp(220px, 32vw, 430px);
-      background: #fff;
-    }
-
-    .review-grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .review-card {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
-      background: #fff;
-    }
-
-    .review-card.locked-review {
-      opacity: 0.55;
-      pointer-events: none;
-    }
-
-    .review-card h3 {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-    }
-
-    .review-options {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .review-choice {
-      width: 100%;
-      text-align: left;
+    .thread-line {
+      margin: 16px 0 0;
+      padding: 14px 16px;
+      border-left: 4px solid var(--brand);
+      background: var(--brand-soft);
       border-radius: 14px;
-      background: #fff;
-      color: #111;
+      font-size: 17px;
+      font-weight: 900;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-label {
+      color: var(--brand-2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 950;
+      margin: 0 0 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mini-list,
+    .check-list,
+    .quiz-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mini-card,
+    .check-card,
+    .quiz-card {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 18px;
+      padding: 15px;
+    }
+
+    .mini-card strong,
+    .check-card strong,
+    .quiz-card strong {
+      display: block;
+      font-size: 20px;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+    }
+
+    .mini-card p,
+    .check-card p,
+    .quiz-card p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .check-card {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .check-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #050505;
+      border: 2px solid var(--brand-2);
+      color: var(--brand-2);
+      font-weight: 950;
+      font-size: 13px;
+    }
+
+    .quote {
+      margin-top: 16px;
+      border: 1px solid rgba(0, 217, 165, 0.36);
+      background: var(--green-soft);
+      border-radius: 18px;
+      padding: 16px;
+      font-weight: 950;
+      font-size: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .orange-note {
+      margin-top: 16px;
+      border: 1px solid rgba(255, 138, 61, 0.36);
+      background: var(--orange-soft);
+      border-radius: 18px;
+      padding: 16px;
+      font-weight: 900;
+      font-size: 17px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--brand);
+      background: var(--brand);
+      color: #fff;
+      padding: 13px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 950;
+      cursor: pointer;
+      transition: 0.18s ease;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--text);
       border-color: var(--line);
     }
 
-    .review-choice.selected {
-      background: var(--purple-soft);
-      border-color: var(--purple);
-      color: var(--purple-dark);
+    .btn.green {
+      background: var(--brand-2);
+      color: #03110d;
+      border-color: var(--brand-2);
     }
 
-    .review-choice.correct {
-      background: var(--success-bg);
-      border-color: #86efac;
-      color: #166534;
-    }
-
-    .review-explanation {
-      display: none;
-      margin-top: 12px;
-      padding: 14px;
-      border-left: 4px solid var(--purple);
-      background: #fafafa;
-      border-radius: 10px;
-      font-weight: 700;
-    }
-
-    .review-explanation.show { display: block; }
-
-    .next-box {
-      display: none;
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
       margin-top: 18px;
-      border: 1px solid #86efac;
-      background: #f0fdf4;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 16px;
+      padding: 13px;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 17px;
+      line-height: 1.1;
+    }
+
+    .prompt-box {
+      margin-top: 16px;
+      border: 1px dashed rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.04);
       border-radius: 18px;
-      padding: 18px;
+      padding: 16px;
+      position: relative;
+      z-index: 2;
     }
 
-    .next-box.unlocked { display: block; }
-
-    .coach-close {
-      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
-      color: #fff;
-      border-color: var(--purple);
+    .prompt-box small {
+      display: block;
+      color: var(--brand-2);
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-size: 11px;
     }
 
-    .coach-close p {
+    .prompt-box p {
       margin: 0;
-      font-size: 16px;
+      color: #e8edf2;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 22px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
     }
 
     footer {
       text-align: center;
       color: var(--muted);
       font-size: 13px;
-      margin-top: 24px;
+      margin-top: 20px;
+      padding-bottom: 20px;
     }
 
-    @media (max-width: 760px) {
-      .page { padding: 16px 14px 60px; }
-      .pad { padding: 18px; }
-      .meta-grid { grid-template-columns: 1fr; }
-      .progress-grid { grid-template-columns: repeat(2, 1fr); }
-      .choice-grid,
-      .review-options,
-      .two-col { grid-template-columns: 1fr; }
-      details.accordion summary {
-        grid-template-columns: 52px 1fr auto;
+    @media (max-width: 720px) {
+      .brand-row { align-items: flex-start; }
+
+      .top-links {
+        width: 100%;
+      }
+
+      .top-links a {
+        flex: 1 1 auto;
+        text-align: center;
+      }
+
+      .post {
         padding: 16px;
       }
-      .badge { width: 46px; height: 46px; }
-      .top-links { width: 100%; }
-      .top-links a { flex: 1 1 auto; text-align: center; }
-      .ready-break iframe { height: clamp(210px, 56vw, 360px); }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-row {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
+
   <nav class="topbar">
     <div class="topbar-inner">
+
       <div class="brand-row">
-        <div class="brand">
-          <div class="brand-mark">HM</div>
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
           <div class="brand-copy">
-            <small>Hoops Money</small>
-            <strong data-en="The Business of Basketball" data-es="El Negocio del Baloncesto">The Business of Basketball</strong>
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 002: Habits" data-es="Juego 002: Hábitos">Game 002: Habits</strong>
           </div>
-        </div>
+        </a>
+
         <div class="top-links">
           <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-          <a href="#game-start" data-en="Start" data-es="Comenzar">Start</a>
-          <a href="#final-buzzer" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+          <a href="game-001.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+          <a href="game-003.html" data-en="Next" data-es="Próximo">Next</a>
         </div>
       </div>
+
       <div class="lang-row">
-        <div class="lang-toggle">
+        <div class="lang-toggle" aria-label="Language toggle">
           <button class="lang-btn active" type="button" data-lang="en">English</button>
           <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
         </div>
       </div>
+
     </div>
   </nav>
 
-  <main class="page">
-    <div class="stack">
-      <section class="card pad">
-        <p class="eyebrow" data-en="Free Preview • Game 002" data-es="Vista Gratis • Juego 002">Free Preview • Game 002</p>
-        <h1 data-en="Habits" data-es="Hábitos">Habits</h1>
-        <p class="subtitle" data-en="Game 001 asked what value you bring. Game 002 tests whether your actions match what you say you want. Talk is easy. Habits keep score." data-es="El Juego 001 preguntó qué valor traes. El Juego 002 prueba si tus acciones van con lo que dices que quieres. Hablar es fácil. Los hábitos llevan el marcador.">
-          Game 001 asked what value you bring. Game 002 tests whether your actions match what you say you want. Talk is easy. Habits keep score.
-        </p>
-        <div class="rule" data-en="What you repeat is what you are really building." data-es="Lo que repites es lo que realmente estás construyendo.">What you repeat is what you are really building.</div>
-
-        <div class="meta-grid">
-          <div class="meta"><span data-en="Program" data-es="Programa">Program</span><strong>Hoops Money</strong></div>
-          <div class="meta"><span data-en="Game" data-es="Juego">Game</span><strong>002 / 30</strong></div>
-          <div class="meta"><span data-en="Coach" data-es="Coach">Coach</span><strong>Bori</strong></div>
-        </div>
-      </section>
-
-      <section class="card pad progress-card">
-        <p class="progress-label" data-en="Progress" data-es="Progreso">Progress</p>
-        <div class="progress-grid">
-          <div class="step active" data-step="tipoff">Tip-Off</div>
-          <div class="step" data-step="q1">1Q</div>
-          <div class="step" data-step="q2">2Q</div>
-          <div class="step" data-step="half">HT</div>
-          <div class="step" data-step="q3">3Q</div>
-          <div class="step" data-step="q4">4Q</div>
-        </div>
-      </section>
-
-      <section class="card pad" id="game-start">
-        <h2 class="section-title" data-en="Warmup + Tip-Off" data-es="Calentamiento + Salto Inicial">Warmup + Tip-Off</h2>
-        <p class="section-sub" data-en="Read the setup, choose your answer, then complete Tip-Off to unlock the 1st Quarter." data-es="Lee la entrada, escoge tu respuesta y completa el Salto Inicial para desbloquear el 1er Cuarto.">Read the setup, choose your answer, then complete Tip-Off to unlock the 1st Quarter.</p>
-
-        <div class="note">
-          <span class="box-label">Bori</span>
-          <p data-en="Game 001 was about value. But value cannot stay in your mouth. Value has to show up in your behavior." data-es="El Juego 001 fue sobre valor. Pero el valor no puede quedarse en tu boca. El valor tiene que aparecer en tu conducta.">Game 001 was about value. But value cannot stay in your mouth. Value has to show up in your behavior.</p>
-          <p><strong data-en="That is what you say. Now let us see what you do." data-es="Eso es lo que tú dices. Ahora vamos a ver lo que haces.">That is what you say. Now let us see what you do.</strong></p>
-        </div>
-
-        <div class="box purple">
-          <span class="box-label" data-en="Tip-Off Question" data-es="Pregunta del Salto Inicial">Tip-Off Question</span>
-          <p><strong data-en="When nobody is watching, do your habits match what you say you want?" data-es="Cuando nadie está mirando, ¿tus hábitos van con lo que dices que quieres?">When nobody is watching, do your habits match what you say you want?</strong></p>
-          <div class="choice-grid">
-            <div class="choice"><b>A</b><span data-en="Consistent" data-es="Consistente">Consistent</span></div>
-            <div class="choice"><b>B</b><span data-en="Inconsistent" data-es="Inconsistente">Inconsistent</span></div>
-            <div class="choice"><b>C</b><span data-en="Feel-based" data-es="Depende de cómo me sienta">Feel-based</span></div>
-            <div class="choice"><b>D</b><span data-en="I do not know" data-es="No sé">I do not know</span></div>
-          </div>
-        </div>
-
-        <div class="complete-row">
-          <span class="complete-status" data-status="tipoff" data-en="Tip-Off not completed." data-es="Salto Inicial no completado.">Tip-Off not completed.</span>
-          <button class="btn" type="button" data-complete="tipoff" data-en="Complete Tip-Off → Unlock 1Q" data-es="Completar Salto Inicial → Desbloquear 1Q">Complete Tip-Off → Unlock 1Q</button>
-        </div>
-      </section>
-
-      <details class="accordion locked" id="q1" data-section="q1">
-        <summary>
-          <div class="badge">1Q</div>
-          <div class="summary-copy">
-            <strong data-en="Claim" data-es="Reclamo">Claim</strong>
-            <span data-en="What do your habits say about what you want?" data-es="¿Qué dicen tus hábitos sobre lo que tú quieres?">What do your habits say about what you want?</span>
-            <em class="lock-note" data-en="Locked until Tip-Off is complete." data-es="Bloqueado hasta completar el Salto Inicial.">Locked until Tip-Off is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Coach Challenge" data-es="Reto del Coach">Coach Challenge</span><p data-en="Everybody says they want to get better. The question is what your habits prove." data-es="Todo el mundo dice que quiere mejorar. La pregunta es lo que tus hábitos prueban.">Everybody says they want to get better. The question is what your habits prove.</p><p><strong data-en="Do not sell me dreams. Show me your pattern." data-es="No me vendas sueños. Enséñame tu patrón.">Do not sell me dreams. Show me your pattern.</strong></p></div>
-          <div class="two-col">
-            <div class="box"><span class="box-label" data-en="Talk" data-es="Hablar">Talk</span><ul class="clean"><li data-en="I want more minutes." data-es="Quiero más minutos.">I want more minutes.</li><li data-en="I want to get noticed." data-es="Quiero que me vean.">I want to get noticed.</li><li data-en="I want to play at the next level." data-es="Quiero jugar en el próximo nivel.">I want to play at the next level.</li></ul></div>
-            <div class="box"><span class="box-label" data-en="Proof" data-es="Prueba">Proof</span><ul class="clean"><li data-en="I train with purpose." data-es="Entreno con propósito.">I train with purpose.</li><li data-en="I study the game." data-es="Estudio el juego.">I study the game.</li><li data-en="I repeat the work when nobody claps." data-es="Repito el trabajo aunque nadie aplauda.">I repeat the work when nobody claps.</li></ul></div>
-          </div>
-          <div class="complete-row"><span class="complete-status" data-status="q1" data-en="1st Quarter not completed." data-es="1er Cuarto no completado.">1st Quarter not completed.</span><button class="btn" type="button" data-complete="q1" data-en="Complete 1Q → Unlock 2Q" data-es="Completar 1Q → Desbloquear 2Q">Complete 1Q → Unlock 2Q</button></div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q2" data-section="q2">
-        <summary><div class="badge">2Q</div><div class="summary-copy"><strong data-en="Pattern" data-es="Patrón">Pattern</strong><span data-en="What breaks first: focus, effort, or discipline?" data-es="¿Qué se rompe primero: enfoque, esfuerzo o disciplina?">What breaks first: focus, effort, or discipline?</span><em class="lock-note" data-en="Locked until 1Q is complete." data-es="Bloqueado hasta completar 1Q.">Locked until 1Q is complete.</em></div><div class="plus">+</div></summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label">Bori</span><p data-en="A weak habit pattern always shows up somewhere. When things get hard, what breaks first?" data-es="Un patrón débil de hábitos siempre aparece en algún sitio. Cuando las cosas se ponen difíciles, ¿qué se rompe primero?">A weak habit pattern always shows up somewhere. When things get hard, what breaks first?</p></div>
-          <div class="box purple"><span class="box-label" data-en="Pattern Check" data-es="Chequeo de Patrón">Pattern Check</span><div class="choice-grid"><div class="choice"><b>A</b><span data-en="Focus" data-es="Enfoque">Focus</span></div><div class="choice"><b>B</b><span data-en="Effort" data-es="Esfuerzo">Effort</span></div><div class="choice"><b>C</b><span data-en="Discipline" data-es="Disciplina">Discipline</span></div><div class="choice"><b>D</b><span data-en="Sleep / recovery" data-es="Sueño / recuperación">Sleep / recovery</span></div></div></div>
-          <div class="complete-row"><span class="complete-status" data-status="q2" data-en="2nd Quarter not completed." data-es="2do Cuarto no completado.">2nd Quarter not completed.</span><button class="btn" type="button" data-complete="q2" data-en="Complete 2Q → Unlock Halftime" data-es="Completar 2Q → Desbloquear Medio Tiempo">Complete 2Q → Unlock Halftime</button></div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="half" data-section="half">
-        <summary><div class="badge">HT</div><div class="summary-copy"><strong data-en="Halftime Reality Check" data-es="Chequeo Real de Medio Tiempo">Halftime Reality Check</strong><span data-en="What did the last 7 days prove?" data-es="¿Qué probaron los últimos 7 días?">What did the last 7 days prove?</span><em class="lock-note" data-en="Locked until 2Q is complete." data-es="Bloqueado hasta completar 2Q.">Locked until 2Q is complete.</em></div><div class="plus">+</div></summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Reality Check" data-es="Chequeo de Realidad">Reality Check</span><p data-en="Halftime. No excuses. Pull up the last 7 days. Did your week look like someone who wants more opportunity?" data-es="Medio tiempo. Sin excusas. Mira los últimos 7 días. ¿Tu semana se vio como la de alguien que quiere más oportunidad?">Halftime. No excuses. Pull up the last 7 days. Did your week look like someone who wants more opportunity?</p></div>
-          <div class="box purple"><span class="box-label" data-en="7-Day Check" data-es="Chequeo de 7 Días">7-Day Check</span><div class="choice-grid"><div class="choice"><b>A</b><span data-en="Yes, clearly" data-es="Sí, claramente">Yes, clearly</span></div><div class="choice"><b>B</b><span data-en="Some days" data-es="Algunos días">Some days</span></div><div class="choice"><b>C</b><span data-en="Not really" data-es="Realmente no">Not really</span></div><div class="choice"><b>D</b><span data-en="I wasted time" data-es="Perdí tiempo">I wasted time</span></div></div></div>
-          <div class="complete-row"><span class="complete-status" data-status="half" data-en="Halftime not completed." data-es="Medio Tiempo no completado.">Halftime not completed.</span><button class="btn" type="button" data-complete="half" data-en="Complete Halftime → Unlock 3Q" data-es="Completar Medio Tiempo → Desbloquear 3Q">Complete Halftime → Unlock 3Q</button></div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q3" data-section="q3">
-        <summary><div class="badge">3Q</div><div class="summary-copy"><strong data-en="No Crowd" data-es="Sin Público">No Crowd</strong><span data-en="What do you do when nobody is watching?" data-es="¿Qué haces cuando nadie está mirando?">What do you do when nobody is watching?</span><em class="lock-note" data-en="Locked until Halftime is complete." data-es="Bloqueado hasta completar Medio Tiempo.">Locked until Halftime is complete.</em></div><div class="plus">+</div></summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Pressure Situation" data-es="Situación de Presión">Pressure Situation</span><p data-en="No coach. No crowd. No camera. No trainer. No teammate pushing you. Do your habits still show up?" data-es="Sin coach. Sin público. Sin cámara. Sin entrenador. Sin compañero empujándote. ¿Tus hábitos todavía aparecen?">No coach. No crowd. No camera. No trainer. No teammate pushing you. Do your habits still show up?</p></div>
-          <div class="box"><span class="box-label" data-en="Real Habit Evidence" data-es="Evidencia Real de Hábito">Real Habit Evidence</span><ul class="clean"><li data-en="You do the work without being reminded." data-es="Haces el trabajo sin que te lo recuerden.">You do the work without being reminded.</li><li data-en="You do not need motivation to start." data-es="No necesitas motivación para empezar.">You do not need motivation to start.</li><li data-en="You repeat the boring work because it matters." data-es="Repites el trabajo aburrido porque importa.">You repeat the boring work because it matters.</li></ul></div>
-          <div class="complete-row"><span class="complete-status" data-status="q3" data-en="3rd Quarter not completed." data-es="3er Cuarto no completado.">3rd Quarter not completed.</span><button class="btn" type="button" data-complete="q3" data-en="Complete 3Q → Unlock 4Q" data-es="Completar 3Q → Desbloquear 4Q">Complete 3Q → Unlock 4Q</button></div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q4" data-section="q4">
-        <summary><div class="badge">4Q</div><div class="summary-copy"><strong data-en="Standard" data-es="Estándar">Standard</strong><span data-en="Pick one habit that changes the game this week." data-es="Escoge un hábito que cambie el juego esta semana.">Pick one habit that changes the game this week.</span><em class="lock-note" data-en="Locked until 3Q is complete." data-es="Bloqueado hasta completar 3Q.">Locked until 3Q is complete.</em></div><div class="plus">+</div></summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Decision Point" data-es="Momento de Decisión">Decision Point</span><p data-en="A serious player does not fix everything at once. That is scattered. Pick one habit. Make it measurable. Win that possession." data-es="Un jugador serio no arregla todo a la vez. Eso es disperso. Escoge un hábito. Hazlo medible. Gana esa posesión.">A serious player does not fix everything at once. That is scattered. Pick one habit. Make it measurable. Win that possession.</p></div>
-          <div class="box purple"><span class="box-label" data-en="Habit Target" data-es="Objetivo de Hábito">Habit Target</span><div class="choice-grid"><div class="choice"><b>A</b><span data-en="Daily skill work" data-es="Trabajo diario de habilidad">Daily skill work</span></div><div class="choice"><b>B</b><span data-en="Film study" data-es="Estudio de video">Film study</span></div><div class="choice"><b>C</b><span data-en="Sleep / recovery" data-es="Sueño / recuperación">Sleep / recovery</span></div><div class="choice"><b>D</b><span data-en="Time control" data-es="Control del tiempo">Time control</span></div></div></div>
-          <div class="complete-row"><span class="complete-status" data-status="q4" data-en="4th Quarter not completed." data-es="4to Cuarto no completado.">4th Quarter not completed.</span><button class="btn" type="button" data-complete="q4" data-en="Complete 4Q → Unlock Final Buzzer" data-es="Completar 4Q → Desbloquear Bocina Final">Complete 4Q → Unlock Final Buzzer</button></div>
-        </div>
-      </details>
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-002.png" alt="Game 002 Habits Basketball Money">
     </div>
-  </main>
-
-  <section class="ready-break" aria-label="Get Ready Hoops Final Buzzer Entrance">
-    <iframe src="ready.html" title="Get Ready Hoops Final Buzzer Entrance" loading="lazy"></iframe>
-  </section>
+  </header>
 
   <main class="page">
-    <div class="stack">
-      <section id="final-buzzer" class="card pad">
-        <h2 class="section-title" data-en="Final Buzzer Review" data-es="Repaso de la Bocina Final">Final Buzzer Review</h2>
-        <p class="section-sub" data-en="Review the lesson before Game 003 unlocks." data-es="Repasa la lección antes de desbloquear el Juego 003.">Review the lesson before Game 003 unlocks.</p>
+    <div class="feed">
 
-        <div class="review-grid">
-          <div class="review-card locked-review" data-review="r1"><span class="box-label" data-en="Question 1" data-es="Pregunta 1">Question 1</span><h3 data-en="What tells the truth when nobody is watching?" data-es="¿Qué dice la verdad cuando nadie está mirando?">What tells the truth when nobody is watching?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Your captions" data-es="Tus captions">Your captions</button><button class="review-choice" type="button" data-review-choice="r1" data-correct="true" data-en="Your habits" data-es="Tus hábitos">Your habits</button><button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Your excuses" data-es="Tus excusas">Your excuses</button><button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Your mood" data-es="Tu ánimo">Your mood</button></div><div class="review-explanation" data-review-explanation="r1" data-en="Habits tell the truth when nobody is watching." data-es="Los hábitos dicen la verdad cuando nadie está mirando.">Habits tell the truth when nobody is watching.</div></div>
-          <div class="review-card locked-review" data-review="r2"><span class="box-label" data-en="Question 2" data-es="Pregunta 2">Question 2</span><h3 data-en="What is the difference between talk and proof?" data-es="¿Cuál es la diferencia entre hablar y probar?">What is the difference between talk and proof?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="Talk sounds better" data-es="Hablar suena mejor">Talk sounds better</button><button class="review-choice" type="button" data-review-choice="r2" data-correct="true" data-en="Proof shows repeated behavior" data-es="La prueba muestra conducta repetida">Proof shows repeated behavior</button><button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="Talk is enough" data-es="Hablar es suficiente">Talk is enough</button><button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="Proof is optional" data-es="La prueba es opcional">Proof is optional</button></div><div class="review-explanation" data-review-explanation="r2" data-en="Repeated behavior proves what you actually want." data-es="La conducta repetida prueba lo que realmente quieres.">Repeated behavior proves what you actually want.</div></div>
-          <div class="review-card locked-review" data-review="r3"><span class="box-label" data-en="Question 3" data-es="Pregunta 3">Question 3</span><h3 data-en="What does a weak habit pattern expose?" data-es="¿Qué expone un patrón débil de hábitos?">What does a weak habit pattern expose?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Nothing" data-es="Nada">Nothing</button><button class="review-choice" type="button" data-review-choice="r3" data-correct="true" data-en="Where focus, effort, or discipline breaks" data-es="Dónde se rompe el enfoque, esfuerzo o disciplina">Where focus, effort, or discipline breaks</button><button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only talent" data-es="Solo talento">Only talent</button><button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only confidence" data-es="Solo confianza">Only confidence</button></div><div class="review-explanation" data-review-explanation="r3" data-en="The first thing that breaks shows where the work starts." data-es="Lo primero que se rompe muestra dónde empieza el trabajo.">The first thing that breaks shows where the work starts.</div></div>
-          <div class="review-card locked-review" data-review="r4"><span class="box-label" data-en="Question 4" data-es="Pregunta 4">Question 4</span><h3 data-en="What did halftime force you to check?" data-es="¿Qué te obligó a revisar el medio tiempo?">What did halftime force you to check?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="Your dream only" data-es="Solo tu sueño">Your dream only</button><button class="review-choice" type="button" data-review-choice="r4" data-correct="true" data-en="What the last 7 days proved" data-es="Lo que probaron los últimos 7 días">What the last 7 days proved</button><button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="Your highlights" data-es="Tus highlights">Your highlights</button><button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="Other players" data-es="Otros jugadores">Other players</button></div><div class="review-explanation" data-review-explanation="r4" data-en="The last 7 days are evidence, not opinion." data-es="Los últimos 7 días son evidencia, no opinión.">The last 7 days are evidence, not opinion.</div></div>
-          <div class="review-card locked-review" data-review="r5"><span class="box-label" data-en="Question 5" data-es="Pregunta 5">Question 5</span><h3 data-en="When are habits most real?" data-es="¿Cuándo son más reales los hábitos?">When are habits most real?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="When everyone claps" data-es="Cuando todos aplauden">When everyone claps</button><button class="review-choice" type="button" data-review-choice="r5" data-correct="true" data-en="When nobody is watching" data-es="Cuando nadie está mirando">When nobody is watching</button><button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only on game day" data-es="Solo el día de juego">Only on game day</button><button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only online" data-es="Solo en línea">Only online</button></div><div class="review-explanation" data-review-explanation="r5" data-en="Real habits do not need an audience." data-es="Los hábitos reales no necesitan público.">Real habits do not need an audience.</div></div>
-          <div class="review-card locked-review" data-review="r6"><span class="box-label" data-en="Question 6" data-es="Pregunta 6">Question 6</span><h3 data-en="What makes a habit commitment strong?" data-es="¿Qué hace fuerte un compromiso de hábito?">What makes a habit commitment strong?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="It sounds intense" data-es="Suena intenso">It sounds intense</button><button class="review-choice" type="button" data-review-choice="r6" data-correct="true" data-en="It is specific and measurable" data-es="Es específico y medible">It is specific and measurable</button><button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="It is vague" data-es="Es vago">It is vague</button><button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="It depends on mood" data-es="Depende del ánimo">It depends on mood</button></div><div class="review-explanation" data-review-explanation="r6" data-en="If the habit cannot be tracked, it is not ready." data-es="Si el hábito no se puede medir, no está listo.">If the habit cannot be tracked, it is not ready.</div></div>
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar">002</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 002" data-es="Juego 002">Game 002</span>
+              <span class="handle">@basketballmoney</span>
+              <span class="badge" data-en="Pinned" data-es="Fijado">Pinned</span>
+            </div>
+            <span class="handle" data-en="The Business of Basketball continues." data-es="El Negocio del Baloncesto continúa.">The Business of Basketball continues.</span>
+          </div>
         </div>
 
-        <div class="complete-row" style="margin-top:18px;"><span class="complete-status" data-status="final" data-en="Final Buzzer locked." data-es="Bocina Final bloqueada.">Final Buzzer locked.</span><button class="btn" id="finalBuzzerBtn" type="button" disabled data-en="Complete Final Review" data-es="Completar Repaso Final">Complete Final Review</button></div>
-        <div class="next-box" id="nextGameBox"><span class="box-label" data-en="Game 003 Unlocked" data-es="Juego 003 Desbloqueado">Game 003 Unlocked</span><p data-en="Game 002 complete. Next game: Influence. Now we test who and what is shaping you." data-es="Juego 002 completado. Próximo juego: Influencia. Ahora vamos a probar quién y qué te está formando.">Game 002 complete. Next game: Influence. Now we test who and what is shaping you.</p><div style="margin-top:14px;"><a class="btn" href="game-003.html" data-en="Enter Game 003 →" data-es="Entrar al Juego 003 →">Enter Game 003 →</a></div></div>
+        <h1 class="post-text big" data-en="Do your actions match what you say you want?" data-es="¿Tus acciones van con lo que dices que quieres?">
+          Do your actions match what you say you want?
+        </h1>
+
+        <p class="post-sub" data-en="Game 001 asked why someone would choose you. Game 002 asks if your daily habits give them a reason to believe you." data-es="El Juego 001 preguntó por qué alguien te escogería. El Juego 002 pregunta si tus hábitos diarios les dan razón para creerte.">
+          Game 001 asked why someone would choose you. Game 002 asks if your daily habits give them a reason to believe you.
+        </p>
+
+        <div class="thread-line" data-en="Game 002 teaches that basketball value is not built by what you say. It is built by what you repeat." data-es="El Juego 002 enseña que el valor en el baloncesto no se construye con lo que dices. Se construye con lo que repites.">
+          Game 002 teaches that basketball value is not built by what you say. It is built by what you repeat.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>002</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Habits" data-es="Hábitos">Habits</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Goal" data-es="Meta">Goal</span>
+            <strong data-en="Build Proof" data-es="Crear Evidencia">Build Proof</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="#lesson" data-en="Start Lesson →" data-es="Comenzar Lección →">Start Lesson →</a>
+          <a class="btn secondary" href="#final" data-en="Jump to Final Buzzer" data-es="Ir a Bocina Final">Jump to Final Buzzer</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 002</span>
+          <span>🔁 Habits</span>
+          <span>🔥 Accountability</span>
+        </div>
       </section>
 
-      <section class="card pad coach-close"><p><strong data-en="Coach Close:" data-es="Cierre del Coach:">Coach Close:</strong><span data-en=" Game 002 is not about saying you want it. It is about whether your habits agree with you." data-es=" El Juego 002 no se trata de decir que lo quieres. Se trata de si tus hábitos están de acuerdo contigo."> Game 002 is not about saying you want it. It is about whether your habits agree with you.</span></p></section>
-      <footer data-en="Hoops Money — The Business of Basketball • Game 002" data-es="Hoops Money — El Negocio del Baloncesto • Juego 002">Hoops Money — The Business of Basketball • Game 002</footer>
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@repeatisproof</span>
+            </div>
+            <span class="handle" data-en="What you repeat becomes your reputation." data-es="Lo que repites se convierte en tu reputación.">What you repeat becomes your reputation.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The second business lesson" data-es="La segunda lección de negocio">The second business lesson</p>
+
+        <h2 class="post-text" data-en="In basketball, habits are business evidence." data-es="En el baloncesto, los hábitos son evidencia de negocio.">
+          In basketball, habits are business evidence.
+        </h2>
+
+        <p class="post-sub" data-en="Coaches, teams, sponsors, and brands do not only listen to what you say. They study what you repeat. Your repeated actions tell them if you are serious, reliable, and ready." data-es="Los coaches, equipos, auspiciadores y marcas no solo escuchan lo que tú dices. Estudian lo que repites. Tus acciones repetidas les dicen si eres serio, confiable y preparado.">
+          Coaches, teams, sponsors, and brands do not only listen to what you say. They study what you repeat. Your repeated actions tell them if you are serious, reliable, and ready.
+        </p>
+
+        <div class="quote" data-en="Talent can get you noticed. Habits make people trust you." data-es="El talento puede hacer que te noten. Los hábitos hacen que confíen en ti.">
+          Talent can get you noticed. Habits make people trust you.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@dailydeposit</span>
+            </div>
+            <span class="handle" data-en="Every habit is a deposit." data-es="Cada hábito es un depósito.">Every habit is a deposit.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Habits are deposits" data-es="Los hábitos son depósitos">Habits are deposits</p>
+
+        <h2 class="post-text" data-en="Your habits are deposits into your basketball account." data-es="Tus hábitos son depósitos en tu cuenta de baloncesto.">
+          Your habits are deposits into your basketball account.
+        </h2>
+
+        <p class="post-sub" data-en="Every workout, every film session, every recovery choice, every honest rep, every good decision adds proof. Not all deposits are seen immediately, but they compound." data-es="Cada entrenamiento, cada sesión de video, cada decisión de recuperación, cada repetición honesta y cada buena decisión añade evidencia. No todos los depósitos se ven rápido, pero se acumulan.">
+          Every workout, every film session, every recovery choice, every honest rep, every good decision adds proof. Not all deposits are seen immediately, but they compound.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Training habits" data-es="Hábitos de entrenamiento">Training habits</strong>
+            <p data-en="How often do you actually work on the things you say matter?" data-es="¿Con cuánta frecuencia trabajas de verdad en las cosas que dices que importan?">How often do you actually work on the things you say matter?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Body habits" data-es="Hábitos del cuerpo">Body habits</strong>
+            <p data-en="Sleep, food, recovery, and preparation affect your basketball value." data-es="Dormir, comer, recuperarte y prepararte afectan tu valor en el baloncesto.">Sleep, food, recovery, and preparation affect your basketball value.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Mind habits" data-es="Hábitos mentales">Mind habits</strong>
+            <p data-en="Your focus, response to correction, and emotional control are part of your product." data-es="Tu enfoque, respuesta a la corrección y control emocional son parte de tu producto.">Your focus, response to correction, and emotional control are part of your product.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Communication habits" data-es="Hábitos de comunicación">Communication habits</strong>
+            <p data-en="How you talk, listen, ask, and respond changes how people value you." data-es="Cómo hablas, escuchas, preguntas y respondes cambia cómo la gente te valora.">How you talk, listen, ask, and respond changes how people value you.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@wishisnotwork</span>
+            </div>
+            <span class="handle" data-en="A warning before the second half." data-es="Una advertencia antes de la segunda mitad.">A warning before the second half.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Wanting it is not the same as working for it" data-es="Quererlo no es lo mismo que trabajarlo">Wanting it is not the same as working for it</p>
+
+        <h2 class="post-text" data-en="A lot of players want the result. Fewer players want the routine." data-es="Muchos jugadores quieren el resultado. Menos jugadores quieren la rutina.">
+          A lot of players want the result. Fewer players want the routine.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: your dream creates interest, but your habits create evidence." data-es="Regla de negocio en baloncesto: tu sueño crea interés, pero tus hábitos crean evidencia.">
+          Basketball business rule: your dream creates interest, but your habits create evidence.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@invisiblework</span>
+            </div>
+            <span class="handle" data-en="Invisible work becomes visible value." data-es="El trabajo invisible se convierte en valor visible.">Invisible work becomes visible value.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The invisible work" data-es="El trabajo invisible">The invisible work</p>
+
+        <h2 class="post-text" data-en="Your habits show up before the scoreboard does." data-es="Tus hábitos aparecen antes que el marcador.">
+          Your habits show up before the scoreboard does.
+        </h2>
+
+        <p class="post-sub" data-en="The market may see the game. The coach sees the week. Your teammates see the pattern. Your body feels the routine. Your future receives the result." data-es="El mercado puede ver el juego. El coach ve la semana. Tus compañeros ven el patrón. Tu cuerpo siente la rutina. Tu futuro recibe el resultado.">
+          The market may see the game. The coach sees the week. Your teammates see the pattern. Your body feels the routine. Your future receives the result.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Before practice" data-es="Antes de la práctica">Before practice</strong>
+            <p data-en="Do you arrive prepared or do you need the room to wake you up?" data-es="¿Llegas preparado o necesitas que el ambiente te despierte?">Do you arrive prepared or do you need the room to wake you up?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="During practice" data-es="Durante la práctica">During practice</strong>
+            <p data-en="Do you compete with purpose or just survive the session?" data-es="¿Compites con propósito o solo sobrevives la sesión?">Do you compete with purpose or just survive the session?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="After practice" data-es="Después de la práctica">After practice</strong>
+            <p data-en="Do you review, recover, and improve — or disappear until the next run?" data-es="¿Repasas, te recuperas y mejoras — o desapareces hasta el próximo juego?">Do you review, recover, and improve — or disappear until the next run?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Under pressure" data-es="Bajo presión">Under pressure</strong>
+            <p data-en="Your habits decide faster than your feelings." data-es="Tus hábitos deciden más rápido que tus emociones.">Your habits decide faster than your feelings.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@buildthepattern</span>
+            </div>
+            <span class="handle" data-en="Design the player you want to become." data-es="Diseña el jugador en quien te quieres convertir.">Design the player you want to become.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="How to build a basketball habit system" data-es="Cómo construir un sistema de hábitos de baloncesto">How to build a basketball habit system</p>
+
+        <h2 class="post-text" data-en="Do not only set goals. Build a system that makes the goal believable." data-es="No solamente pongas metas. Construye un sistema que haga la meta creíble.">
+          Do not only set goals. Build a system that makes the goal believable.
+        </h2>
+
+        <p class="post-sub" data-en="A goal says where you want to go. A habit system shows how you are going to get there." data-es="Una meta dice hacia dónde quieres ir. Un sistema de hábitos muestra cómo vas a llegar.">
+          A goal says where you want to go. A habit system shows how you are going to get there.
+        </p>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Choose one habit." data-es="Escoge un hábito.">Choose one habit.</strong>
+              <p data-en="Start small enough that you can repeat it." data-es="Empieza lo suficientemente pequeño para poder repetirlo.">Start small enough that you can repeat it.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Attach it to a time." data-es="Amárralo a una hora.">Attach it to a time.</strong>
+              <p data-en="A habit needs a place in your day." data-es="Un hábito necesita un espacio en tu día.">A habit needs a place in your day.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Track the proof." data-es="Registra la evidencia.">Track the proof.</strong>
+              <p data-en="If you do not track it, you will guess. Guessing is not accountability." data-es="Si no lo registras, vas a adivinar. Adivinar no es accountability.">If you do not track it, you will guess. Guessing is not accountability.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Repeat before you add." data-es="Repite antes de añadir.">Repeat before you add.</strong>
+              <p data-en="Do not build a complicated plan you will quit." data-es="No construyas un plan complicado que vas a abandonar.">Do not build a complicated plan you will quit.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game002review</span>
+              <span class="badge" data-en="Review" data-es="Repaso">Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the lesson." data-es="Asegura la lección.">Lock in the lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 002 Review" data-es="Repaso del Juego 002">Game 002 Review</p>
+
+        <h2 class="post-text" data-en="Before Game 003, answer this honestly: what do your habits say about you?" data-es="Antes del Juego 003, contesta esto con honestidad: ¿qué dicen tus hábitos de ti?">
+          Before Game 003, answer this honestly: what do your habits say about you?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. What habit is helping your basketball value?" data-es="1. ¿Qué hábito está ayudando tu valor en el baloncesto?">1. What habit is helping your basketball value?</strong>
+            <p data-en="Name one repeated action that makes you more dependable." data-es="Nombra una acción repetida que te hace más confiable.">Name one repeated action that makes you more dependable.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What habit is hurting your basketball value?" data-es="2. ¿Qué hábito está afectando tu valor en el baloncesto?">2. What habit is hurting your basketball value?</strong>
+            <p data-en="Be honest. The habit you ignore may be the one holding you back." data-es="Sé honesto. El hábito que ignoras puede ser el que te está frenando.">Be honest. The habit you ignore may be the one holding you back.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. What proof can you show this week?" data-es="3. ¿Qué evidencia puedes demostrar esta semana?">3. What proof can you show this week?</strong>
+            <p data-en="Basketball business respects proof more than promises." data-es="El negocio del baloncesto respeta más la evidencia que las promesas.">Basketball business respects proof more than promises.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. What daily action will you repeat?" data-es="4. ¿Qué acción diaria vas a repetir?">4. What daily action will you repeat?</strong>
+            <p data-en="Pick one. Make it clear. Make it trackable." data-es="Escoge una. Hazla clara. Hazla medible.">Pick one. Make it clear. Make it trackable.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Do your actions match what you say you want?" data-es="5. ¿Tus acciones van con lo que dices que quieres?">5. Do your actions match what you say you want?</strong>
+            <p data-en="This is the question that closes Game 002." data-es="Esta es la pregunta que cierra el Juego 002.">This is the question that closes Game 002.</p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 002. Help me identify the habits that are helping or hurting my basketball value, and help me build one simple daily habit system I can track." data-es="Prompt: Acabo de terminar Basketball Money Juego 002. Ayúdame a identificar los hábitos que están ayudando o afectando mi valor en el baloncesto, y ayúdame a crear un sistema simple de un hábito diario que pueda registrar.">
+            Prompt: I just finished Basketball Money Game 002. Help me identify the habits that are helping or hurting my basketball value, and help me build one simple daily habit system I can track.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn secondary" href="game-003.html" data-en="Continue to Game 003 →" data-es="Continuar al Juego 003 →">Continue to Game 003 →</a>
+          <a class="btn secondary" href="game-001.html" data-en="Back to Game 001" data-es="Volver al Juego 001">Back to Game 001</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>🔁 Repeat</span>
+          <span>🔥 Game 003 Next</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="Your habits are your receipt. They prove what you are buying with your time." data-es="Tus hábitos son tu recibo. Prueban lo que estás comprando con tu tiempo.">
+          Your habits are your receipt. They prove what you are buying with your time.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 002: Habits" data-es="Basketball Money — Juego 002: Hábitos">
+        Basketball Money — Game 002: Habits
+      </footer>
+
     </div>
   </main>
 
   <script>
-    const STORAGE_KEY = 'hm-game-002-purple-v1';
-    const unlockMap = { tipoff:'q1', q1:'q2', q2:'half', half:'q3', q3:'q4', q4:'final' };
-    const reviews = ['r1','r2','r3','r4','r5','r6'];
-
     const langButtons = document.querySelectorAll('.lang-btn');
     const translatable = document.querySelectorAll('[data-en][data-es]');
-    const completeButtons = document.querySelectorAll('[data-complete]');
-    const sections = document.querySelectorAll('[data-section]');
-    const progressSteps = document.querySelectorAll('.step');
-    const reviewChoices = document.querySelectorAll('[data-review-choice]');
-    const reviewCards = document.querySelectorAll('[data-review]');
-    const reviewExplanations = document.querySelectorAll('[data-review-explanation]');
-    const finalBuzzerBtn = document.getElementById('finalBuzzerBtn');
-    const nextGameBox = document.getElementById('nextGameBox');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
 
-    let currentLang = 'en';
-    let progress = normalize(loadProgress());
-
-    function normalize(value){
-      const clean = value && typeof value === 'object' ? value : {};
-      return {
-        completed: Array.isArray(clean.completed) ? clean.completed : [],
-        unlocked: Array.isArray(clean.unlocked) && clean.unlocked.length ? clean.unlocked : ['tipoff'],
-        reviews: Array.isArray(clean.reviews) ? clean.reviews : [],
-        finalComplete: clean.finalComplete === true
-      };
-    }
-
-    function loadProgress(){
-      try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : null; }
-      catch(e) { return null; }
-    }
-
-    function saveProgress(){
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); }
-      catch(e) {}
-    }
-
-    function isCompleted(id){ return progress.completed.includes(id); }
-    function isUnlocked(id){ return progress.unlocked.includes(id); }
-    function unlock(id){ if(id && !progress.unlocked.includes(id)) progress.unlocked.push(id); }
-    function isReviewComplete(){ return reviews.every(id => progress.reviews.includes(id)); }
-
-    function setLanguage(lang){
+    function setLanguage(lang) {
       currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
       document.documentElement.lang = currentLang;
-      translatable.forEach(el => {
+
+      translatable.forEach((el) => {
         const text = el.getAttribute('data-' + currentLang);
-        if(text !== null) el.textContent = text;
-      });
-      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === currentLang));
-      render();
-    }
-
-    function render(){
-      sections.forEach(section => {
-        const id = section.dataset.section;
-        const unlocked = isUnlocked(id);
-        const completed = isCompleted(id);
-        section.classList.toggle('locked', !unlocked);
-        section.classList.toggle('done', completed);
-        const note = section.querySelector('.lock-note');
-        if(note) note.style.display = unlocked ? 'none' : 'inline-block';
-      });
-
-      progressSteps.forEach(step => {
-        const id = step.dataset.step;
-        step.classList.toggle('done', isCompleted(id));
-        step.classList.toggle('active', isUnlocked(id) && !isCompleted(id));
-      });
-
-      completeButtons.forEach(button => {
-        const id = button.dataset.complete;
-        if(isCompleted(id)){
-          button.classList.add('done');
-          button.textContent = currentLang === 'es' ? 'Completado ✓' : 'Completed ✓';
-        } else {
-          button.classList.remove('done');
-          button.textContent = button.getAttribute('data-' + currentLang) || button.textContent;
+        if (text !== null) {
+          el.textContent = text;
         }
       });
 
-      document.querySelectorAll('[data-status]').forEach(status => {
-        const id = status.dataset.status;
-        if(isCompleted(id)){
-          status.classList.add('done');
-          status.textContent = currentLang === 'es' ? 'Completado. Próxima posesión desbloqueada.' : 'Completed. Next possession unlocked.';
-          return;
-        }
-        if(id === 'final' && isUnlocked('final')){
-          status.classList.remove('done');
-          status.textContent = isReviewComplete()
-            ? (currentLang === 'es' ? 'Repaso completo. Bocina Final lista.' : 'Review complete. Final Buzzer ready.')
-            : (currentLang === 'es' ? 'Bocina Final desbloqueada. Completa el repaso.' : 'Final Buzzer unlocked. Complete the review.');
-          return;
-        }
-        status.classList.remove('done');
-        status.textContent = status.getAttribute('data-' + currentLang) || status.textContent;
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
       });
-
-      reviewCards.forEach(card => card.classList.toggle('locked-review', !isUnlocked('final')));
-
-      reviewChoices.forEach(choice => {
-        const id = choice.dataset.reviewChoice;
-        const answered = progress.reviews.includes(id);
-        const correct = choice.dataset.correct === 'true';
-        choice.classList.toggle('selected', answered);
-        choice.classList.toggle('correct', answered && correct);
-      });
-
-      reviewExplanations.forEach(exp => {
-        const id = exp.dataset.reviewExplanation;
-        exp.classList.toggle('show', progress.reviews.includes(id));
-      });
-
-      const ready = isUnlocked('final') && isReviewComplete();
-
-      if(progress.finalComplete){
-        finalBuzzerBtn.disabled = true;
-        finalBuzzerBtn.classList.add('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Juego 002 Completado ✓' : 'Game 002 Complete ✓';
-        nextGameBox.classList.add('unlocked');
-      } else if(ready){
-        finalBuzzerBtn.disabled = false;
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Completar Juego 002 → Desbloquear Juego 003' : 'Complete Game 002 → Unlock Game 003';
-        nextGameBox.classList.remove('unlocked');
-      } else {
-        finalBuzzerBtn.disabled = true;
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = finalBuzzerBtn.getAttribute('data-' + currentLang);
-        nextGameBox.classList.remove('unlocked');
-      }
-
-      saveProgress();
     }
 
-    function completeSection(id){
-      if(!progress.completed.includes(id)) progress.completed.push(id);
-      unlock(unlockMap[id]);
-      saveProgress();
-      render();
-      const next = unlockMap[id];
-      if(next){
-        const el = document.getElementById(next === 'final' ? 'final-buzzer' : next);
-        if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
-      }
-    }
-
-    document.querySelectorAll('details.accordion').forEach(detail => {
-      detail.addEventListener('toggle', () => { if(detail.open && !isUnlocked(detail.id)) detail.open = false; });
-      const summary = detail.querySelector('summary');
-      if(summary){ summary.addEventListener('click', e => { if(!isUnlocked(detail.id)) e.preventDefault(); }); }
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
     });
 
-    completeButtons.forEach(button => button.addEventListener('click', () => completeSection(button.dataset.complete)));
-
-    reviewChoices.forEach(choice => {
-      choice.addEventListener('click', () => {
-        if(!isUnlocked('final')) return;
-        const id = choice.dataset.reviewChoice;
-        if(!progress.reviews.includes(id)) progress.reviews.push(id);
-        saveProgress();
-        render();
-      });
-    });
-
-    finalBuzzerBtn.addEventListener('click', () => {
-      if(!isUnlocked('final') || !isReviewComplete()) return;
-      progress.finalComplete = true;
-      if(!progress.completed.includes('final')) progress.completed.push('final');
-      saveProgress();
-      render();
-      nextGameBox.scrollIntoView({ behavior:'smooth', block:'center' });
-    });
-
-    langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-
-    setLanguage('en');
-    render();
+    setLanguage(currentLang);
   </script>
+
 </body>
 </html>
