@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Game 007 | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --brand-soft:rgba(155,89,182,.18);
+      --green-soft:rgba(0,217,165,.14);
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(155,89,182,.20),transparent 34%),
+        radial-gradient(circle at top right,rgba(0,217,165,.12),transparent 30%),
+        radial-gradient(circle at bottom center,rgba(245,197,66,.08),transparent 34%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--brand);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .hero-image{
+      max-width:var(--max);
+      margin:16px auto 0;
+      padding:0 16px;
+    }
+
+    .hero-image-inner{
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      object-fit:cover;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(245,197,66,.55);
+      background:
+        linear-gradient(135deg,rgba(245,197,66,.16),rgba(155,89,182,.18),rgba(0,217,165,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.lab{
+      border-color:rgba(0,217,165,.50);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.14),rgba(155,89,182,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.warning{
+      border-color:rgba(255,138,61,.45);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(0,217,165,.5);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(155,89,182,.16)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand);
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .avatar.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(0,217,165,.38);
+      background:var(--green-soft);
+      color:#b9ffee;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--gold);
+      background:var(--gold-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .section-label{
+      color:var(--brand-2);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-list,.check-list,.quiz-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,.check-card,.quiz-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,.check-card strong,.quiz-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,.check-card p,.quiz-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .check-card{
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    .check-num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand-2);
+      color:var(--brand-2);
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(0,217,165,.36);
+      background:var(--green-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .orange-note{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:900;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--brand);
+      background:var(--brand);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .stat span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .prompt-box{
+      margin-top:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .prompt-box small{
+      display:block;
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-size:11px;
+    }
+
+    .prompt-box p{
+      margin:0;
+      color:#e8edf2;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .post-actions{
+      display:flex;
+      gap:22px;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 007: Build Proof" data-es="Juego 007: Construye Evidencia">Game 007: Build Proof</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="game-006.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#cog01" data-en="COG 01" data-es="COG 01">COG 01</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-007.png" alt="Game 007 Build Proof Basketball Money">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar gold">007</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 007" data-es="Juego 007">Game 007</span>
+              <span class="handle">@paidseason</span>
+              <span class="badge gold" data-en="Paid Season" data-es="Temporada Paga">Paid Season</span>
+            </div>
+            <span class="handle" data-en="Talk is cheap. Proof gets paid." data-es="Hablar es fácil. La evidencia cobra.">Talk is cheap. Proof gets paid.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="Build value. Document it. Prove it." data-es="Construye valor. Documéntalo. Pruébalo.">
+          Build value. Document it. Prove it.
+        </h1>
+
+        <p class="post-sub" data-en="Game 006 started the money conversation. Game 007 shows what money respects: proof. Not promises. Not potential alone. Proof." data-es="El Juego 006 comenzó la conversación de dinero. El Juego 007 muestra lo que el dinero respeta: evidencia. No promesas. No potencial solamente. Evidencia.">
+          Game 006 started the money conversation. Game 007 shows what money respects: proof. Not promises. Not potential alone. Proof.
+        </p>
+
+        <div class="thread-line" data-en="Basketball business rule: results beat promises. Consistency builds trust. Proof creates value." data-es="Regla de negocio en baloncesto: los resultados vencen las promesas. La consistencia construye confianza. La evidencia crea valor.">
+          Basketball business rule: results beat promises. Consistency builds trust. Proof creates value.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>007</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Build Proof" data-es="Construir Evidencia">Build Proof</strong>
+          </div>
+          <div class="stat">
+            <span data-en="COG Access" data-es="Acceso COG">COG Access</span>
+            <strong data-en="COG 01" data-es="COG 01">COG 01</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn gold" href="#lesson" data-en="Start Paid Lesson →" data-es="Comenzar Lección Paga →">Start Paid Lesson →</a>
+          <a class="btn green" href="#cog01" data-en="Open COG 01 Access" data-es="Abrir Acceso COG 01">Open COG 01 Access</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 007</span>
+          <span>📊 Build Proof</span>
+          <span>🧠 COG 01</span>
+        </div>
+      </section>
+
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@proofbeatsclaims</span>
+            </div>
+            <span class="handle" data-en="Proof beats claims." data-es="La evidencia vence las promesas.">Proof beats claims.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The seventh business lesson" data-es="La séptima lección de negocio">The seventh business lesson</p>
+
+        <h2 class="post-text" data-en="In basketball, proof is what turns belief into trust." data-es="En el baloncesto, la evidencia convierte creencia en confianza.">
+          In basketball, proof is what turns belief into trust.
+        </h2>
+
+        <p class="post-sub" data-en="Everyone can say they work hard. Everyone can say they are serious. Everyone can say they deserve an opportunity. Proof is what separates the player who talks from the player people trust." data-es="Todo el mundo puede decir que trabaja duro. Todo el mundo puede decir que es serio. Todo el mundo puede decir que merece una oportunidad. La evidencia separa al jugador que habla del jugador en quien la gente confía.">
+          Everyone can say they work hard. Everyone can say they are serious. Everyone can say they deserve an opportunity. Proof is what separates the player who talks from the player people trust.
+        </p>
+
+        <div class="quote" data-en="Potential gets attention. Proof gets trusted." data-es="El potencial llama la atención. La evidencia gana confianza.">
+          Potential gets attention. Proof gets trusted.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@documentyourwork</span>
+            </div>
+            <span class="handle" data-en="Document your work." data-es="Documenta tu trabajo.">Document your work.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Documentation creates proof" data-es="La documentación crea evidencia">Documentation creates proof</p>
+
+        <h2 class="post-text" data-en="If nobody can see the work, the work is harder to believe." data-es="Si nadie puede ver el trabajo, el trabajo es más difícil de creer.">
+          If nobody can see the work, the work is harder to believe.
+        </h2>
+
+        <p class="post-sub" data-en="Documentation is not showing off. Documentation is evidence. It helps coaches, teams, sponsors, parents, trainers, brands, and future partners understand what you are building." data-es="Documentar no es estar alardeando. Documentar es evidencia. Ayuda a coaches, equipos, auspiciadores, padres, entrenadores, marcas y futuros aliados a entender lo que estás construyendo.">
+          Documentation is not showing off. Documentation is evidence. It helps coaches, teams, sponsors, parents, trainers, brands, and future partners understand what you are building.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Work sessions" data-es="Sesiones de trabajo">Work sessions</strong>
+            <p data-en="Show that you are putting in consistent work, not random effort." data-es="Muestra que estás trabajando con consistencia, no con esfuerzo al azar.">Show that you are putting in consistent work, not random effort.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Game film" data-es="Video de juego">Game film</strong>
+            <p data-en="Film gives people something real to evaluate." data-es="El video le da a la gente algo real para evaluar.">Film gives people something real to evaluate.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Stats and results" data-es="Estadísticas y resultados">Stats and results</strong>
+            <p data-en="Numbers do not tell everything, but they can support the story." data-es="Los números no lo dicen todo, pero pueden apoyar la historia.">Numbers do not tell everything, but they can support the story.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Growth evidence" data-es="Evidencia de crecimiento">Growth evidence</strong>
+            <p data-en="Show how you are improving, not just where you are today." data-es="Muestra cómo estás mejorando, no solo dónde estás hoy.">Show how you are improving, not just where you are today.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@notjustcontent</span>
+            </div>
+            <span class="handle" data-en="A warning before the second half." data-es="Una advertencia antes de la segunda mitad.">A warning before the second half.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Proof is not fake content" data-es="Evidencia no es contenido falso">Proof is not fake content</p>
+
+        <h2 class="post-text" data-en="Do not confuse proof with pretending." data-es="No confundas evidencia con aparentar.">
+          Do not confuse proof with pretending.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: proof must be real. Fake confidence gets exposed. Real evidence gets respected." data-es="Regla de negocio en baloncesto: la evidencia tiene que ser real. La confianza falsa se expone. La evidencia real se respeta.">
+          Basketball business rule: proof must be real. Fake confidence gets exposed. Real evidence gets respected.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@showresults</span>
+            </div>
+            <span class="handle" data-en="Make results visible." data-es="Haz visible los resultados.">Make results visible.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Make proof visible" data-es="Haz la evidencia visible">Make proof visible</p>
+
+        <h2 class="post-text" data-en="Proof creates value when the right people can understand it." data-es="La evidencia crea valor cuando las personas correctas pueden entenderla.">
+          Proof creates value when the right people can understand it.
+        </h2>
+
+        <p class="post-sub" data-en="A highlight is not always enough. A coach may need film clips. A sponsor may need your story. A trainer may need progress data. A parent may need discipline. A team may need reliability." data-es="Un highlight no siempre es suficiente. Un coach puede necesitar clips de video. Un auspiciador puede necesitar tu historia. Un entrenador puede necesitar data de progreso. Un padre puede necesitar disciplina. Un equipo puede necesitar confiabilidad.">
+          A highlight is not always enough. A coach may need film clips. A sponsor may need your story. A trainer may need progress data. A parent may need discipline. A team may need reliability.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="For coaches" data-es="Para coaches">For coaches</strong>
+            <p data-en="Show execution, coachability, decision-making, and consistency." data-es="Muestra ejecución, coachability, toma de decisiones y consistencia.">Show execution, coachability, decision-making, and consistency.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="For teams" data-es="Para equipos">For teams</strong>
+            <p data-en="Show fit, role value, reliability, and impact." data-es="Muestra encaje, valor de rol, confiabilidad e impacto.">Show fit, role value, reliability, and impact.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="For sponsors" data-es="Para auspiciadores">For sponsors</strong>
+            <p data-en="Show image, behavior, audience, story, and trust." data-es="Muestra imagen, conducta, audiencia, historia y confianza.">Show image, behavior, audience, story, and trust.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="For yourself" data-es="Para ti">For yourself</strong>
+            <p data-en="Show progress so you stop guessing and start improving." data-es="Muestra progreso para dejar de adivinar y empezar a mejorar.">Show progress so you stop guessing and start improving.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@evidencelog</span>
+            </div>
+            <span class="handle" data-en="Build the evidence log." data-es="Construye el registro de evidencia.">Build the evidence log.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Create your proof system" data-es="Crea tu sistema de evidencia">Create your proof system</p>
+
+        <h2 class="post-text" data-en="Do not wait until someone asks for proof. Build it before the door opens." data-es="No esperes a que alguien te pida evidencia. Constrúyela antes de que la puerta abra.">
+          Do not wait until someone asks for proof. Build it before the door opens.
+        </h2>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Track your work." data-es="Registra tu trabajo.">Track your work.</strong>
+              <p data-en="Keep a simple record of training, games, film, recovery, and goals." data-es="Lleva un registro simple de entrenamientos, juegos, video, recuperación y metas.">Keep a simple record of training, games, film, recovery, and goals.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Save your evidence." data-es="Guarda tu evidencia.">Save your evidence.</strong>
+              <p data-en="Film clips, stats, feedback, progress screenshots, and testimonials matter." data-es="Clips de video, estadísticas, feedback, capturas de progreso y testimonios importan.">Film clips, stats, feedback, progress screenshots, and testimonials matter.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Organize it." data-es="Organízala.">Organize it.</strong>
+              <p data-en="Proof loses power when nobody can understand it quickly." data-es="La evidencia pierde fuerza cuando nadie la puede entender rápido.">Proof loses power when nobody can understand it quickly.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Use it with purpose." data-es="Úsala con propósito.">Use it with purpose.</strong>
+              <p data-en="The goal is not to spam people. The goal is to help them believe." data-es="La meta no es spamear a la gente. La meta es ayudarles a creer.">The goal is not to spam people. The goal is to help them believe.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post lab" id="cog01">
+        <div class="post-head">
+          <div class="avatar">COG</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 01 Access" data-es="Acceso COG 01">COG 01 Access</span>
+              <span class="handle">@thereact</span>
+              <span class="badge" data-en="Games 006–010" data-es="Juegos 006–010">Games 006–010</span>
+            </div>
+            <span class="handle" data-en="The React continues." data-es="The React continúa.">The React continues.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Cognitive Training Lab" data-es="Laboratorio de Entrenamiento Cognitivo">Cognitive Training Lab</p>
+
+        <h2 class="post-text" data-en="COG 01 supports Game 007 because proof starts with response." data-es="COG 01 apoya el Juego 007 porque la evidencia empieza con respuesta.">
+          COG 01 supports Game 007 because proof starts with response.
+        </h2>
+
+        <p class="post-sub" data-en="The React tracks score, level, hits, misses, accuracy, reaction time, best score, best level, perfect rounds, and last played. That is proof in action." data-es="The React registra puntuación, nivel, toques correctos, fallos, precisión, tiempo de reacción, mejor puntuación, mejor nivel, rondas perfectas y última jugada. Eso es evidencia en acción.">
+          The React tracks score, level, hits, misses, accuracy, reaction time, best score, best level, perfect rounds, and last played. That is proof in action.
+        </p>
+
+        <div class="gold-note" data-en="This is why the paid season is different: the player is no longer only reading lessons — the player is creating performance evidence." data-es="Por eso la temporada paga es diferente: el jugador ya no solo está leyendo lecciones — está creando evidencia de rendimiento.">
+          This is why the paid season is different: the player is no longer only reading lessons — the player is creating performance evidence.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="cog-01.html" data-en="Train COG 01: The React →" data-es="Entrenar COG 01: The React →">Train COG 01: The React →</a>
+          <a class="btn secondary" href="#final" data-en="Finish Game 007 First" data-es="Terminar Juego 007 Primero">Finish Game 007 First</a>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game007review</span>
+              <span class="badge gold" data-en="Paid Review" data-es="Repaso Pago">Paid Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the paid lesson." data-es="Asegura la lección paga.">Lock in the paid lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 007 Review" data-es="Repaso del Juego 007">Game 007 Review</p>
+
+        <h2 class="post-text" data-en="Before Game 008, answer this honestly: what proof do you have right now?" data-es="Antes del Juego 008, contesta esto con honestidad: ¿qué evidencia tienes ahora mismo?">
+          Before Game 008, answer this honestly: what proof do you have right now?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. What proof already supports your basketball value?" data-es="1. ¿Qué evidencia ya apoya tu valor en el baloncesto?">1. What proof already supports your basketball value?</strong>
+            <p data-en="Name your strongest evidence: film, stats, work, consistency, feedback, or results." data-es="Nombra tu evidencia más fuerte: video, estadísticas, trabajo, consistencia, feedback o resultados.">Name your strongest evidence: film, stats, work, consistency, feedback, or results.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What proof is missing?" data-es="2. ¿Qué evidencia falta?">2. What proof is missing?</strong>
+            <p data-en="Identify the area where you talk more than you can currently show." data-es="Identifica el área donde hablas más de lo que actualmente puedes demostrar.">Identify the area where you talk more than you can currently show.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. Who needs to understand your proof?" data-es="3. ¿Quién necesita entender tu evidencia?">3. Who needs to understand your proof?</strong>
+            <p data-en="Coach, team, sponsor, trainer, parent, brand, league, or future partner." data-es="Coach, equipo, auspiciador, entrenador, padre, marca, liga o futuro aliado.">Coach, team, sponsor, trainer, parent, brand, league, or future partner.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. What will you document this week?" data-es="4. ¿Qué vas a documentar esta semana?">4. What will you document this week?</strong>
+            <p data-en="Make it specific: workout, film, stats, feedback, recovery, leadership, or results." data-es="Hazlo específico: entrenamiento, video, estadísticas, feedback, recuperación, liderazgo o resultados.">Make it specific: workout, film, stats, feedback, recovery, leadership, or results.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Does your evidence match your goals?" data-es="5. ¿Tu evidencia va con tus metas?">5. Does your evidence match your goals?</strong>
+            <p data-en="This is the question that closes Game 007." data-es="Esta es la pregunta que cierra el Juego 007.">This is the question that closes Game 007.</p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 007. Help me build a basketball evidence log. Identify what proof I already have, what proof I need, and what I should document this week to create more trust and opportunity." data-es="Prompt: Acabo de terminar Basketball Money Juego 007. Ayúdame a construir un registro de evidencia de baloncesto. Identifica qué evidencia ya tengo, qué evidencia necesito y qué debo documentar esta semana para crear más confianza y oportunidad.">
+            Prompt: I just finished Basketball Money Game 007. Help me build a basketball evidence log. Identify what proof I already have, what proof I need, and what I should document this week to create more trust and opportunity.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn gold" href="cog-01.html" data-en="Train COG 01: The React →" data-es="Entrenar COG 01: The React →">Train COG 01: The React →</a>
+          <a class="btn secondary" href="game-008.html" data-en="Continue to Game 008 →" data-es="Continuar al Juego 008 →">Continue to Game 008 →</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>📊 Build Proof</span>
+          <span>🧠 The React</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="If you want opportunity, show people what you have done — not just what you plan to do." data-es="Si quieres oportunidad, muéstrale a la gente lo que has hecho — no solo lo que piensas hacer.">
+          If you want opportunity, show people what you have done — not just what you plan to do.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 007: Build Proof" data-es="Basketball Money — Juego 007: Construye Evidencia">
+        Basketball Money — Game 007: Build Proof
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
+  </script>
+
+</body>
+</html>
