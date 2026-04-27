@@ -7,100 +7,6 @@
   <title>Game 001 | Basketball Money</title>
 
   <link rel="stylesheet" href="../css/basketball-money.css">
-
-  <style>
-    .nav-main{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      position:relative;
-    }
-
-    .menu-toggle{
-      width:46px;
-      height:46px;
-      border-radius:50%;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      display:grid;
-      place-items:center;
-      cursor:pointer;
-      transition:.18s ease;
-      flex:0 0 auto;
-    }
-
-    .menu-toggle:hover{
-      border-color:var(--gold);
-      transform:translateY(-1px);
-    }
-
-    .hamburger{
-      width:20px;
-      display:grid;
-      gap:5px;
-    }
-
-    .hamburger span{
-      height:2px;
-      background:var(--text);
-      border-radius:999px;
-      display:block;
-    }
-
-    .nav-menu{
-      display:none;
-      margin-top:14px;
-      border:1px solid var(--line);
-      background:rgba(15,17,21,.98);
-      border-radius:18px;
-      padding:10px;
-      box-shadow:0 20px 60px rgba(0,0,0,.35);
-    }
-
-    .nav-menu.open{
-      display:grid;
-      gap:8px;
-    }
-
-    .nav-menu a{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      padding:13px 14px;
-      border-radius:14px;
-      font-size:14px;
-      font-weight:950;
-      transition:.18s ease;
-    }
-
-    .nav-menu a:hover{
-      border-color:var(--gold);
-      transform:translateY(-1px);
-    }
-
-    @media(min-width:720px){
-      .menu-toggle{
-        display:none;
-      }
-
-      .nav-menu{
-        display:flex;
-        margin-top:0;
-        border:0;
-        background:transparent;
-        box-shadow:none;
-        padding:0;
-        gap:8px;
-      }
-
-      .nav-menu a{
-        border-radius:999px;
-        padding:10px 13px;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -111,7 +17,10 @@
       <div class="nav-main">
         <a class="brand" href="../index.html">
           <div class="brand-copy">
-            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <small data-en="Basketball Money" data-es="Basketball Money">
+              Basketball Money
+            </small>
+
             <strong data-en="Game 001: Basketball Is A Business"
                     data-es="Juego 001: El Baloncesto Es Un Negocio">
               Game 001: Basketball Is A Business
@@ -128,17 +37,41 @@
         </button>
 
         <div class="nav-menu" id="navMenu">
-          <a href="../index.html" data-en="Home" data-es="Inicio">Home</a>
-          <a href="#conversation" data-en="Start Conversation" data-es="Conversación">Start Conversation</a>
-          <a href="game-002.html" data-en="Next Game" data-es="Próximo Juego">Next Game</a>
-          <a href="../paid-gate.html" data-en="Paid Gateway" data-es="Entrada Paga">Paid Gateway</a>
+          <a href="../index.html"
+             data-en="Home"
+             data-es="Inicio">
+            Home
+          </a>
+
+          <a href="#conversation"
+             data-en="Start Conversation"
+             data-es="Conversación">
+            Start Conversation
+          </a>
+
+          <a href="game-002.html"
+             data-en="Next Game"
+             data-es="Próximo Juego">
+            Next Game
+          </a>
+
+          <a href="../paid-gate.html"
+             data-en="Paid Gateway"
+             data-es="Entrada Paga">
+            Paid Gateway
+          </a>
         </div>
       </div>
 
       <div class="lang-row">
         <div class="lang-toggle" aria-label="Language toggle">
-          <button class="lang-btn active" type="button" data-lang="en">English</button>
-          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+          <button class="lang-btn active" type="button" data-lang="en">
+            English
+          </button>
+
+          <button class="lang-btn" type="button" data-lang="es">
+            Español | Puerto Rico
+          </button>
         </div>
       </div>
 
@@ -157,12 +90,20 @@
       <section class="post hero-card">
         <div class="post-head">
           <div class="avatar">001</div>
+
           <div class="post-meta">
             <div class="name-row">
-              <span class="name" data-en="Game 001" data-es="Juego 001">Game 001</span>
+              <span class="name" data-en="Game 001" data-es="Juego 001">
+                Game 001
+              </span>
+
               <span class="handle">@freeseason</span>
-              <span class="badge" data-en="Free Game" data-es="Juego Gratis">Free Game</span>
+
+              <span class="badge" data-en="Free Game" data-es="Juego Gratis">
+                Free Game
+              </span>
             </div>
+
             <span class="handle"
                   data-en="The business of basketball starts here."
                   data-es="El negocio del baloncesto empieza aquí.">
@@ -191,18 +132,33 @@
 
         <div class="mini-grid">
           <div class="mini-card">
-            <span data-en="Core Idea" data-es="Idea Central">Core Idea</span>
-            <strong data-en="Basketball Economy" data-es="Economía del Baloncesto">Basketball Economy</strong>
+            <span data-en="Core Idea" data-es="Idea Central">
+              Core Idea
+            </span>
+
+            <strong data-en="Basketball Economy" data-es="Economía del Baloncesto">
+              Basketball Economy
+            </strong>
           </div>
 
           <div class="mini-card">
-            <span data-en="Player Shift" data-es="Cambio Del Jugador">Player Shift</span>
-            <strong data-en="From Player to Asset" data-es="De Jugador a Activo">From Player to Asset</strong>
+            <span data-en="Player Shift" data-es="Cambio Del Jugador">
+              Player Shift
+            </span>
+
+            <strong data-en="From Player to Asset" data-es="De Jugador a Activo">
+              From Player to Asset
+            </strong>
           </div>
 
           <div class="mini-card">
-            <span data-en="Goal" data-es="Meta">Goal</span>
-            <strong data-en="See Opportunity" data-es="Ver Oportunidad">See Opportunity</strong>
+            <span data-en="Goal" data-es="Meta">
+              Goal
+            </span>
+
+            <strong data-en="See Opportunity" data-es="Ver Oportunidad">
+              See Opportunity
+            </strong>
           </div>
         </div>
       </section>
@@ -210,6 +166,7 @@
       <section class="post conversation-card" id="conversation">
         <div class="post-head">
           <div class="avatar green">GO</div>
+
           <div class="post-meta">
             <div class="name-row">
               <span class="name"
@@ -217,9 +174,14 @@
                     data-es="Empieza La Conversación">
                 Start The Conversation
               </span>
+
               <span class="handle">@basketballmoneygpt</span>
-              <span class="badge green" data-en="Real Lesson" data-es="Lección Real">Real Lesson</span>
+
+              <span class="badge green" data-en="Real Lesson" data-es="Lección Real">
+                Real Lesson
+              </span>
             </div>
+
             <span class="handle"
                   data-en="Copy the prompt, open the GPT, paste it, and begin."
                   data-es="Copia el prompt, abre el GPT, pégalo y comienza.">
@@ -309,25 +271,6 @@
   </main>
 
   <script src="../js/basketball-money.js"></script>
-
-  <script>
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-
-    if(menuToggle && navMenu){
-      menuToggle.addEventListener('click', () => {
-        const isOpen = navMenu.classList.toggle('open');
-        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
-
-      navMenu.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          navMenu.classList.remove('open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-  </script>
 
 </body>
 </html>
