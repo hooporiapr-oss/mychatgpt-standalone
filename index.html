@@ -18,6 +18,8 @@
       --brand-soft: rgba(155, 89, 182, 0.18);
       --green-soft: rgba(0, 217, 165, 0.14);
       --white: #ffffff;
+      --gold: #f5c542;
+      --gold-soft: rgba(245, 197, 66, 0.14);
       --radius: 22px;
       --max: 760px;
       --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
@@ -225,9 +227,9 @@
     }
 
     .post.unlock {
-      border-color: rgba(0, 217, 165, 0.5);
+      border-color: rgba(245, 197, 66, 0.55);
       background:
-        linear-gradient(135deg, rgba(0, 217, 165, 0.16), rgba(155, 89, 182, 0.16)),
+        linear-gradient(135deg, rgba(245, 197, 66, 0.16), rgba(155, 89, 182, 0.16), rgba(0, 217, 165, 0.10)),
         rgba(15, 17, 21, 0.96);
     }
 
@@ -289,6 +291,12 @@
       font-weight: 950;
       text-transform: uppercase;
       letter-spacing: 0.06em;
+    }
+
+    .badge.gold {
+      border-color: rgba(245, 197, 66, 0.48);
+      background: var(--gold-soft);
+      color: #ffe9a6;
     }
 
     .post-text {
@@ -353,6 +361,7 @@
       font-weight: 950;
       cursor: pointer;
       transition: 0.18s ease;
+      text-align: center;
     }
 
     .btn:hover {
@@ -370,6 +379,12 @@
       background: var(--brand-2);
       color: #03110d;
       border-color: var(--brand-2);
+    }
+
+    .btn.gold {
+      background: var(--gold);
+      color: #161000;
+      border-color: var(--gold);
     }
 
     .stats {
@@ -485,6 +500,12 @@
       white-space: nowrap;
     }
 
+    .status.gold {
+      border-color: rgba(245, 197, 66, 0.45);
+      background: var(--gold-soft);
+      color: #ffe9a6;
+    }
+
     .mini-card,
     .drill {
       border: 1px solid var(--line);
@@ -540,6 +561,19 @@
       z-index: 2;
     }
 
+    .gold-note {
+      margin-top: 16px;
+      border: 1px solid rgba(245, 197, 66, 0.38);
+      background: var(--gold-soft);
+      border-radius: 18px;
+      padding: 16px;
+      font-weight: 950;
+      font-size: 18px;
+      position: relative;
+      z-index: 2;
+      color: #fff3c4;
+    }
+
     .post-actions {
       display: flex;
       gap: 22px;
@@ -549,6 +583,7 @@
       font-weight: 900;
       position: relative;
       z-index: 2;
+      flex-wrap: wrap;
     }
 
     .post-actions span {
@@ -666,8 +701,8 @@
           Basketball is not just points. It is value.
         </h1>
 
-        <p class="post-sub" data-en="A 30-game basketball business and accountability system that teaches players how value is built — through habits, influence, confidence, coach perception, opportunity, visibility, brand, decisions, money, and readiness." data-es="Un sistema de 30 juegos sobre negocio, valor y accountability en el baloncesto que enseña a los jugadores cómo se construye su valor — con hábitos, influencia, confianza, percepción del coach, oportunidad, visibilidad, marca, decisiones, dinero y preparación.">
-          A 30-game basketball business and accountability system that teaches players how value is built — through habits, influence, confidence, coach perception, opportunity, visibility, brand, decisions, money, and readiness.
+        <p class="post-sub" data-en="A 30-game basketball business and accountability system that teaches players how value is built — through habits, influence, opportunity, brand, money, visibility, decisions, and readiness." data-es="Un sistema de 30 juegos sobre negocio, valor y accountability en el baloncesto que enseña a los jugadores cómo se construye su valor — con hábitos, influencia, oportunidad, marca, dinero, visibilidad, decisiones y preparación.">
+          A 30-game basketball business and accountability system that teaches players how value is built — through habits, influence, opportunity, brand, money, visibility, decisions, and readiness.
         </p>
 
         <div class="thread-line" data-en="This is not motivation. This is accountability. If you say you want it, prove it." data-es="Esto no es motivación. Esto es accountability. Si dices que lo quieres, pruébalo.">
@@ -696,8 +731,8 @@
 
         <div class="post-actions">
           <span>💬 30</span>
-          <span>🔁 5</span>
-          <span>🔥 001</span>
+          <span>🔁 Free to Paid</span>
+          <span>🔥 Game 001</span>
         </div>
       </section>
 
@@ -715,12 +750,12 @@
 
         <p class="section-label" data-en="Games 001–005" data-es="Juegos 001–005">Games 001–005</p>
 
-        <h2 class="post-text" data-en="The first five games teach the player what value really looks like." data-es="Los primeros cinco juegos enseñan al jugador cómo se ve el valor de verdad.">
-          The first five games teach the player what value really looks like.
+        <h2 class="post-text" data-en="The first five games build the free foundation." data-es="Los primeros cinco juegos construyen la base gratis.">
+          The first five games build the free foundation.
         </h2>
 
-        <p class="post-sub" data-en="Value. Habits. Influence. Confidence. Coach perception. Game 005 becomes the gate into the paid season." data-es="Valor. Hábitos. Influencia. Confianza. Percepción del coach. El Juego 005 se convierte en la puerta hacia la temporada paga.">
-          Value. Habits. Influence. Confidence. Coach perception. Game 005 becomes the gate into the paid season.
+        <p class="post-sub" data-en="Value. Habits. Influence. Opportunity. Brand. Game 005 becomes the gate into the paid season." data-es="Valor. Hábitos. Influencia. Oportunidad. Marca. El Juego 005 se convierte en la puerta hacia la temporada paga.">
+          Value. Habits. Influence. Opportunity. Brand. Game 005 becomes the gate into the paid season.
         </p>
 
         <div class="game-list">
@@ -755,8 +790,8 @@
           <a class="game" href="game-004.html">
             <div class="game-num">004</div>
             <div class="game-title">
-              <strong data-en="Confidence" data-es="Confianza">Confidence</strong>
-              <span data-en="When pressure hits, does your confidence stay or disappear?" data-es="Cuando llega la presión, ¿tu confianza se queda o desaparece?">When pressure hits, does your confidence stay or disappear?</span>
+              <strong data-en="Opportunity" data-es="Oportunidad">Opportunity</strong>
+              <span data-en="Can you see it, create it, and take it?" data-es="¿Puedes verla, crearla y tomarla?">Can you see it, create it, and take it?</span>
             </div>
             <div class="status" data-en="Free" data-es="Gratis">Free</div>
           </a>
@@ -764,10 +799,10 @@
           <a class="game" href="game-005.html">
             <div class="game-num">005</div>
             <div class="game-title">
-              <strong data-en="Coach Perception" data-es="Percepción del Coach">Coach Perception</strong>
-              <span data-en="What does your coach really see?" data-es="¿Qué realmente ve tu coach?">What does your coach really see?</span>
+              <strong data-en="Brand" data-es="Marca">Brand</strong>
+              <span data-en="Your game. Your name. Your future." data-es="Tu juego. Tu nombre. Tu futuro.">Your game. Your name. Your future.</span>
             </div>
-            <div class="status" data-en="Gate" data-es="Puerta">Gate</div>
+            <div class="status gold" data-en="Gate" data-es="Puerta">Gate</div>
           </a>
 
         </div>
@@ -807,15 +842,15 @@
           </div>
 
           <div class="mini-card">
-            <strong data-en="3. Cognitive Drill" data-es="3. Drill Cognitivo">3. Cognitive Drill</strong>
-            <p data-en="The bonus drill trains reaction, memory, vision, sequence, or change detection." data-es="El drill adicional entrena reacción, memoria, visión, secuencia o detección de cambios.">
-              The bonus drill trains reaction, memory, vision, sequence, or change detection.
+            <strong data-en="3. Conversation" data-es="3. Conversación">3. Conversation</strong>
+            <p data-en="The player launches the MyGPT conversation to apply the lesson personally." data-es="El jugador abre la conversación con MyGPT para aplicar la lección de forma personal.">
+              The player launches the MyGPT conversation to apply the lesson personally.
             </p>
           </div>
         </div>
 
-        <div class="quote" data-en="The goal is not to sound smart. The goal is to make better decisions before, during, and after the game." data-es="La meta no es sonar inteligente. La meta es tomar mejores decisiones antes, durante y después del juego.">
-          The goal is not to sound smart. The goal is to make better decisions before, during, and after the game.
+        <div class="quote" data-en="The website teaches. MyGPT coaches. The paid season creates deeper separation." data-es="La página enseña. MyGPT coachea. La temporada paga crea separación más profunda.">
+          The website teaches. MyGPT coaches. The paid season creates deeper separation.
         </div>
       </section>
 
@@ -898,12 +933,12 @@
 
       <section class="post unlock" id="unlock">
         <div class="post-head">
-          <div class="avatar">06</div>
+          <div class="avatar">006</div>
           <div class="post-meta">
             <div class="name-row">
               <span class="name" data-en="Paid Season" data-es="Temporada Paga">Paid Season</span>
               <span class="handle">@games006to030</span>
-              <span class="badge" data-en="Level 2" data-es="Nivel 2">Level 2</span>
+              <span class="badge gold" data-en="Level 2" data-es="Nivel 2">Level 2</span>
             </div>
             <span class="handle" data-en="Separation starts after the gate." data-es="La separación empieza después de la puerta.">Separation starts after the gate.</span>
           </div>
@@ -915,13 +950,17 @@
           Most players stop at the gate. Serious players keep going.
         </h2>
 
-        <p class="post-sub" data-en="Games 006–030 build separation: opportunity, discipline, identity, consistency, productivity, money, brand, visibility, decisions, readiness, and mastery." data-es="Los Juegos 006–030 construyen separación: oportunidad, disciplina, identidad, consistencia, productividad, dinero, marca, visibilidad, decisiones, preparación y dominio.">
-          Games 006–030 build separation: opportunity, discipline, identity, consistency, productivity, money, brand, visibility, decisions, readiness, and mastery.
+        <p class="post-sub" data-en="Games 006–030 build separation: money, visibility, discipline, productivity, identity, relationships, reputation, decisions, readiness, mastery, and long-term basketball value." data-es="Los Juegos 006–030 construyen separación: dinero, visibilidad, disciplina, productividad, identidad, relaciones, reputación, decisiones, preparación, dominio y valor de baloncesto a largo plazo.">
+          Games 006–030 build separation: money, visibility, discipline, productivity, identity, relationships, reputation, decisions, readiness, mastery, and long-term basketball value.
         </p>
+
+        <div class="gold-note" data-en="Games 001–005 are the foundation. Games 006–030 are the separation." data-es="Los Juegos 001–005 son la base. Los Juegos 006–030 son la separación.">
+          Games 001–005 are the foundation. Games 006–030 are the separation.
+        </div>
 
         <div class="cta-row">
           <a class="btn green" href="game-001.html" data-en="Start Free First →" data-es="Empieza Gratis Primero →">Start Free First →</a>
-          <a class="btn secondary" href="#" data-en="Unlock Games 006–030 →" data-es="Desbloquear Juegos 006–030 →">Unlock Games 006–030 →</a>
+          <a class="btn gold" href="game-005.html#paid-gate" data-en="Unlock Games 006–030 →" data-es="Desbloquear Juegos 006–030 →">Unlock Games 006–030 →</a>
         </div>
 
         <div class="post-actions">
@@ -943,8 +982,8 @@
           </div>
         </div>
 
-        <h2 class="post-text" data-en="Basketball Money teaches the business. The cognitive layer trains the decision system. Together, the player gets clearer, faster, and more valuable." data-es="Basketball Money enseña el negocio. La capa cognitiva entrena el sistema de decisión. Juntos, el jugador se vuelve más claro, más rápido y más valioso.">
-          Basketball Money teaches the business. The cognitive layer trains the decision system. Together, the player gets clearer, faster, and more valuable.
+        <h2 class="post-text" data-en="Basketball Money starts with value, habits, influence, opportunity, and brand. After that, the player decides whether to stop at free or enter the real business season." data-es="Basketball Money empieza con valor, hábitos, influencia, oportunidad y marca. Después de eso, el jugador decide si se queda en lo gratis o entra a la verdadera temporada de negocio.">
+          Basketball Money starts with value, habits, influence, opportunity, and brand. After that, the player decides whether to stop at free or enter the real business season.
         </h2>
       </section>
 
@@ -986,4 +1025,3 @@
 
 </body>
 </html>
-```
