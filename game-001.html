@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hoops Money | Game 001 — Value</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Hoops Money | Drill 001 — The React</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -11,29 +11,35 @@
       --muted: #5f6368;
       --line: #e5e7eb;
       --soft: #f8fafc;
-      --green: #9B59B6;
-      --green-dark: #6F3F83;
-      --green-soft: rgba(155, 89, 182, 0.14);
+      --brand: #9B59B6;
+      --brand-dark: #6F3F83;
+      --brand-soft: rgba(155, 89, 182, 0.12);
       --success: #00D9A5;
-      --success-bg: rgba(0, 217, 165, 0.16);
+      --success-soft: rgba(0, 217, 165, 0.16);
+      --danger: #ef4444;
+      --warning: #f59e0b;
       --radius: 22px;
       --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-      --max: 920px;
+      --max: 720px;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
+
+    html, body {
       margin: 0;
+      min-height: 100%;
       background: var(--bg);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
+      line-height: 1.5;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
-    img { max-width: 100%; display: block; }
+    body { user-select: none; }
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; }
+    img { display: block; max-width: 100%; }
 
     .topbar {
       position: sticky;
@@ -54,7 +60,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
@@ -65,32 +71,30 @@
     }
 
     .brand-mark {
-      width: 46px;
-      height: 46px;
-      border: 2px solid var(--green);
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--brand);
       display: grid;
       place-items: center;
-      font-weight: 900;
-      font-size: 18px;
-      letter-spacing: -0.04em;
-      color: var(--green);
+      color: var(--brand);
+      font-weight: 950;
+      letter-spacing: -0.05em;
       background: #fff;
     }
 
     .brand-copy small {
       display: block;
-      color: var(--green);
+      color: var(--brand);
       font-size: 11px;
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      margin-bottom: 2px;
     }
 
     .brand-copy strong {
       display: block;
       font-size: 18px;
-      line-height: 1.15;
+      line-height: 1.1;
     }
 
     .top-links {
@@ -101,10 +105,10 @@
 
     .top-links a {
       border: 1px solid var(--line);
-      padding: 10px 14px;
       border-radius: 999px;
+      padding: 9px 12px;
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 850;
       background: #fff;
     }
 
@@ -137,7 +141,7 @@
     }
 
     .lang-btn.active {
-      background: var(--green);
+      background: var(--brand);
       color: #fff;
     }
 
@@ -158,12 +162,12 @@
     .page {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 22px 18px 80px;
+      padding: 20px 18px 70px;
     }
 
-    .stack { display: grid; gap: 20px; }
+    .stack { display: grid; gap: 16px; }
 
-    .card {
+    .post {
       background: #fff;
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -171,408 +175,311 @@
       overflow: hidden;
     }
 
-    .pad { padding: 24px; }
+    .pad { padding: 22px; }
 
     .eyebrow {
       margin: 0 0 10px;
-      color: var(--green);
+      color: var(--brand);
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: 0.18em;
       text-transform: uppercase;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(42px, 8vw, 78px);
-      line-height: 0.96;
+      font-size: clamp(42px, 9vw, 76px);
+      line-height: 0.95;
       letter-spacing: -0.06em;
     }
 
+    h2 {
+      margin: 0;
+      font-size: clamp(26px, 5vw, 40px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
     .subtitle {
-      margin: 18px 0 0;
-      font-size: clamp(18px, 2.5vw, 24px);
-      line-height: 1.5;
+      margin: 16px 0 0;
+      font-size: clamp(18px, 2.5vw, 23px);
+      line-height: 1.45;
       color: #222;
     }
 
     .rule {
-      margin-top: 18px;
-      border-left: 5px solid var(--green);
-      background: var(--green-soft);
+      margin-top: 16px;
+      border-left: 5px solid var(--brand);
+      background: var(--brand-soft);
       padding: 14px 16px;
-      font-weight: 800;
-      font-size: 17px;
+      font-weight: 850;
     }
 
     .meta-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 20px;
+      gap: 10px;
+      margin-top: 18px;
     }
 
     .meta {
       border: 1px solid var(--line);
       border-radius: 16px;
       background: var(--soft);
-      padding: 14px;
+      padding: 12px;
     }
 
     .meta span {
       display: block;
       color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 850;
       letter-spacing: 0.08em;
-      margin-bottom: 6px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
     }
 
     .meta strong { font-size: 16px; }
 
-    .progress-label {
-      font-weight: 900;
-      margin: 0 0 12px;
-      letter-spacing: -0.02em;
-      font-size: 22px;
-    }
-
-    .progress-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
-    }
-
-    .step {
-      border: 1px solid var(--line);
-      background: var(--soft);
-      border-radius: 14px;
-      padding: 12px 10px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 900;
-      color: #64748b;
-    }
-
-    .step.active {
-      background: var(--green);
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--brand);
+      background: var(--brand);
       color: #fff;
-      border-color: var(--green);
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 950;
+      font-size: 14px;
+      cursor: pointer;
+      min-height: 44px;
+      transition: transform .15s ease, opacity .15s ease;
     }
 
-    .step.done {
-      background: var(--success-bg);
-      border-color: #bbf7d0;
-      color: #166534;
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: .45; cursor: not-allowed; }
+
+    .btn.secondary {
+      background: #fff;
+      color: var(--brand);
     }
 
-    .section-title {
-      margin: 0;
-      font-size: clamp(28px, 4.8vw, 44px);
+    .btn.success {
+      background: var(--success);
+      border-color: var(--success);
+      color: #064e3b;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .court-card {
+      padding: 18px;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .score-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 8px;
+      text-align: center;
+      background: var(--soft);
+    }
+
+    .score-value {
+      display: block;
+      font-size: 26px;
+      font-weight: 950;
       line-height: 1;
-      letter-spacing: -0.04em;
+      color: var(--brand);
     }
 
-    .section-sub {
-      margin: 8px 0 0;
+    .score-label {
+      display: block;
+      margin-top: 4px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
       color: var(--muted);
-      font-size: 15px;
+    }
+
+    .message {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 10px 12px;
+      font-size: 17px;
+      font-weight: 950;
+      margin-bottom: 14px;
+    }
+
+    .message.ready { color: var(--brand); }
+    .message.go { color: var(--warning); }
+    .message.good { color: var(--success); }
+    .message.miss { color: var(--danger); }
+
+    .court-wrap {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .court {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--soft);
+      aspect-ratio: 1;
+    }
+
+    .cell {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      cursor: pointer;
+      min-width: 0;
+      min-height: 0;
+      transition: transform .08s ease, background .08s ease, border-color .08s ease;
+    }
+
+    .cell:active { transform: scale(.95); }
+
+    .cell.target {
+      background: var(--brand);
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px var(--brand-soft);
+      transform: scale(1.04);
+    }
+
+    .cell.correct {
+      background: var(--success);
+      border-color: var(--success);
+      box-shadow: 0 0 0 4px var(--success-soft);
+    }
+
+    .cell.missed {
+      background: rgba(239, 68, 68, 0.16);
+      border-color: var(--danger);
+    }
+
+    .play-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 14px auto 0;
+      max-width: 420px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .play-info strong { color: var(--text); }
+
+    .setup-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .setup-btn {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      padding: 14px 12px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .setup-btn.active {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+    }
+
+    .setup-btn strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 3px;
+    }
+
+    .setup-btn span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
     }
 
     .note {
       border: 1px solid var(--line);
-      border-left: 5px solid var(--green);
+      border-left: 5px solid var(--brand);
       border-radius: 16px;
       background: #fafafa;
-      padding: 18px;
-      margin-top: 16px;
+      padding: 16px;
+      margin-top: 14px;
     }
 
-    .box {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      padding: 18px;
-      margin-top: 16px;
-    }
-
-    .box.green {
-      background: var(--green-soft);
-      border-left: 5px solid var(--green);
-    }
-
-    .box-label {
+    .label {
       display: block;
+      color: var(--brand);
       font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.16em;
+      font-weight: 950;
+      letter-spacing: .16em;
       text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .choice-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .choice {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px;
-      background: #fff;
-      min-height: 74px;
-    }
-
-    .choice b {
-      color: var(--green);
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .complete-row {
-      margin-top: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .complete-status {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .complete-status.done { color: var(--success); }
-
-    .btn,
-    .review-choice {
-      display: inline-block;
-      border: 1px solid var(--green);
-      background: var(--green);
-      color: #fff;
-      padding: 12px 16px;
-      border-radius: 999px;
-      font-weight: 900;
-      font-size: 14px;
-      cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-
-    .btn:hover,
-    .review-choice:hover { transform: translateY(-1px); }
-
-    .btn.secondary {
-      background: #fff;
-      color: var(--green);
-      border-color: var(--green);
-    }
-
-    .btn.done {
-      background: var(--success);
-      border-color: var(--success);
-      color: #fff;
-    }
-
-    details.accordion {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    details.accordion.locked { opacity: 0.62; }
-
-    details.accordion summary {
-      list-style: none;
-      cursor: pointer;
-      display: grid;
-      grid-template-columns: 60px 1fr auto;
-      gap: 14px;
-      align-items: center;
-      padding: 20px;
-    }
-
-    details.accordion summary::-webkit-details-marker { display: none; }
-
-    .badge {
-      width: 52px;
-      height: 52px;
-      border: 2px solid var(--green);
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      background: #fff;
-      color: var(--green);
-    }
-
-    details.accordion.done .badge {
-      background: var(--success-bg);
-      border-color: var(--success);
-      color: var(--success);
-    }
-
-    .summary-copy strong {
-      display: block;
-      font-size: 22px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .summary-copy span {
-      display: block;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .lock-note {
-      display: inline-block;
-      margin-top: 6px;
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .plus {
-      font-size: 28px;
-      color: var(--green);
-      line-height: 1;
-    }
-
-    details[open] .plus { transform: rotate(45deg); }
-
-    .accordion-body {
-      border-top: 1px solid var(--line);
-      padding: 0 20px 20px;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    ul.clean { margin: 8px 0 0; padding-left: 20px; }
-    ul.clean li { margin: 7px 0; }
-
-    .review-grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .review-card {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
-      background: #fff;
-    }
-
-    .review-card.locked-review {
-      opacity: 0.55;
-      pointer-events: none;
-    }
-
-    .review-card h3 {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-    }
-
-    .review-options {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .review-choice {
-      width: 100%;
-      text-align: left;
-      border-radius: 14px;
-      background: #fff;
-      color: #111;
-      border-color: var(--line);
-    }
-
-    .review-choice.selected {
-      background: var(--green-soft);
-      border-color: var(--green);
-      color: var(--green-dark);
-    }
-
-    .review-choice.correct {
-      background: var(--success-bg);
-      border-color: #86efac;
-      color: #166534;
-    }
-
-    .review-explanation {
+    .completion {
       display: none;
-      margin-top: 12px;
-      padding: 14px;
-      border-left: 4px solid var(--green);
-      background: #fafafa;
-      border-radius: 10px;
-      font-weight: 700;
+      background: var(--success-soft);
+      border: 1px solid rgba(0, 217, 165, .35);
     }
 
-    .review-explanation.show { display: block; }
-
-    .next-box {
-      display: none;
-      margin-top: 18px;
-      border: 1px solid #86efac;
-      background: #f0fdf4;
-      border-radius: 18px;
-      padding: 18px;
-    }
-
-    .next-box.unlocked { display: block; }
+    .completion.show { display: block; }
 
     .coach-close {
-      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
       color: #fff;
-      border-color: var(--green);
+      border-color: var(--brand);
     }
 
-    .coach-close p {
-      margin: 0;
-      font-size: 16px;
-    }
+    .coach-close p { margin: 0; }
 
     footer {
       text-align: center;
       color: var(--muted);
       font-size: 13px;
-      margin-top: 24px;
+      margin-top: 18px;
     }
 
     @media (max-width: 760px) {
       .page { padding: 16px 14px 60px; }
       .pad { padding: 18px; }
-      .meta-grid { grid-template-columns: 1fr; }
-      .progress-grid { grid-template-columns: repeat(2, 1fr); }
-      .choice-grid,
-      .review-options,
-      .two-col { grid-template-columns: 1fr; }
-      details.accordion summary {
-        grid-template-columns: 52px 1fr auto;
-        padding: 16px;
-      }
-      .badge { width: 46px; height: 46px; }
       .top-links { width: 100%; }
       .top-links a { flex: 1 1 auto; text-align: center; }
-      .header-image img { width: 100%; height: auto; object-fit: contain; }
+      .meta-grid,
+      .setup-grid { grid-template-columns: 1fr; }
+      .score-row { grid-template-columns: repeat(2, 1fr); }
+      .court { gap: 6px; padding: 8px; border-radius: 18px; }
+      .cell { border-radius: 10px; }
+      .btn { width: 100%; }
+      .btn-row { display: grid; grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -584,13 +491,13 @@
           <div class="brand-mark">HM</div>
           <div class="brand-copy">
             <small>Hoops Money</small>
-            <strong data-en="The Business of Basketball" data-es="El Negocio del Baloncesto">The Business of Basketball</strong>
+            <strong data-en="Drill 001 — The React" data-es="Drill 001 — The React">Drill 001 — The React</strong>
           </div>
         </div>
         <div class="top-links">
-          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-          <a href="#game-start" data-en="Start" data-es="Comenzar">Start</a>
-          <a href="#final-buzzer" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+          <a href="game-001.html" data-en="Back" data-es="Volver">Back</a>
+          <a href="#play" data-en="Play" data-es="Jugar">Play</a>
+          <a href="game-002.html" data-en="Game 002" data-es="Juego 002">Game 002</a>
         </div>
       </div>
       <div class="lang-row">
@@ -603,502 +510,332 @@
   </nav>
 
   <header class="header-image">
-    <img src="./ready.png" alt="Get Ready Hoops header image" />
+    <img src="./image-001.png" alt="Get Ready Hoops header image" />
   </header>
 
   <main class="page">
     <div class="stack">
-      <section class="card pad">
-        <p class="eyebrow" data-en="Free Preview • Game 001" data-es="Vista Gratis • Juego 001">Free Preview • Game 001</p>
-        <h1 data-en="Value" data-es="Valor">Value</h1>
-        <p class="subtitle" data-en="Everybody talks about basketball money. But before offers, NIL, contracts, and exposure, the first question is value: why would someone choose you?" data-es="Todo el mundo habla del dinero en el baloncesto. Pero antes de ofertas, NIL, contratos y exposición, la primera pregunta es valor: ¿por qué alguien te escogería a ti?">
-          Everybody talks about basketball money. But before offers, NIL, contracts, and exposure, the first question is value: why would someone choose you?
+      <section class="post pad">
+        <p class="eyebrow" data-en="Overtime Drill 001" data-es="Overtime Drill 001">Overtime Drill 001</p>
+        <h1 data-en="The React" data-es="The React">The React</h1>
+        <p class="subtitle" data-en="Value is not just knowing the right answer. Value is reacting when the game speeds up." data-es="El valor no es solo saber la respuesta correcta. El valor es reaccionar cuando el juego se acelera.">
+          Value is not just knowing the right answer. Value is reacting when the game speeds up.
         </p>
-        <div class="rule" data-en="Money follows value. Not noise. Not hype. Value." data-es="El dinero sigue al valor. No al ruido. No al hype. Al valor.">Money follows value. Not noise. Not hype. Value.</div>
+        <div class="rule" data-en="See it. Read it. React." data-es="Míralo. Léelo. Reacciona.">See it. Read it. React.</div>
 
         <div class="meta-grid">
-          <div class="meta"><span data-en="Program" data-es="Programa">Program</span><strong>Hoops Money</strong></div>
-          <div class="meta"><span data-en="Game" data-es="Juego">Game</span><strong>001 / 30</strong></div>
-          <div class="meta"><span data-en="Coach" data-es="Coach">Coach</span><strong>Bori</strong></div>
+          <div class="meta"><span data-en="Focus" data-es="Enfoque">Focus</span><strong data-en="Reaction" data-es="Reacción">Reaction</strong></div>
+          <div class="meta"><span data-en="Court" data-es="Cancha">Court</span><strong>5 × 5</strong></div>
+          <div class="meta"><span data-en="Goal" data-es="Meta">Goal</span><strong data-en="1 clean round" data-es="1 ronda limpia">1 clean round</strong></div>
         </div>
       </section>
 
-      <section class="card pad progress-card">
-        <p class="progress-label" data-en="Progress" data-es="Progreso">Progress</p>
-        <div class="progress-grid">
-          <div class="step active" data-step="tipoff">Tip-Off</div>
-          <div class="step" data-step="q1">1Q</div>
-          <div class="step" data-step="q2">2Q</div>
-          <div class="step" data-step="half">HT</div>
-          <div class="step" data-step="q3">3Q</div>
-          <div class="step" data-step="q4">4Q</div>
-        </div>
-      </section>
-
-      <section class="card pad" id="game-start">
-        <h2 class="section-title" data-en="Warmup + Tip-Off" data-es="Calentamiento + Salto Inicial">Warmup + Tip-Off</h2>
-        <p class="section-sub" data-en="Read the setup, choose your answer, then complete Tip-Off to unlock the 1st Quarter." data-es="Lee la entrada, escoge tu respuesta y completa el Salto Inicial para desbloquear el 1er Cuarto.">Read the setup, choose your answer, then complete Tip-Off to unlock the 1st Quarter.</p>
-
+      <section class="post pad">
+        <p class="eyebrow" data-en="Playbook" data-es="Manual">Playbook</p>
+        <h2 data-en="How it works" data-es="Cómo funciona">How it works</h2>
         <div class="note">
-          <span class="box-label">Bori</span>
-          <p data-en="Welcome to Hoops Money. This is not motivation. This is accountability." data-es="Bienvenido a Hoops Money. Esto no es motivación. Esto es accountability.">Welcome to Hoops Money. This is not motivation. This is accountability.</p>
-          <p data-en="Everybody talks about basketball money, but most players skip the first question." data-es="Todo el mundo habla del dinero en el baloncesto, pero la mayoría de los jugadores brincan la primera pregunta.">Everybody talks about basketball money, but most players skip the first question.</p>
-          <p><strong data-en="What actually makes you valuable?" data-es="¿Qué realmente te hace valioso?">What actually makes you valuable?</strong></p>
+          <span class="label" data-en="The Rep" data-es="La Repetición">The Rep</span>
+          <p data-en="A square lights up. Tap it before the next beat. Misses cost lives. A clean round unlocks Game 002." data-es="Un cuadro se prende. Tócalo antes del próximo beat. Los fallos cuestan vidas. Una ronda limpia desbloquea el Juego 002.">
+            A square lights up. Tap it before the next beat. Misses cost lives. A clean round unlocks Game 002.
+          </p>
         </div>
-
-        <div class="box green">
-          <span class="box-label" data-en="Tip-Off Question" data-es="Pregunta del Salto Inicial">Tip-Off Question</span>
-          <p><strong data-en="Why would someone choose you?" data-es="¿Por qué alguien te escogería a ti?">Why would someone choose you?</strong></p>
-          <div class="choice-grid">
-            <div class="choice"><b>A</b><span data-en="Skill" data-es="Habilidad">Skill</span></div>
-            <div class="choice"><b>B</b><span data-en="Work ethic" data-es="Ética de trabajo">Work ethic</span></div>
-            <div class="choice"><b>C</b><span data-en="Trust" data-es="Confianza">Trust</span></div>
-            <div class="choice"><b>D</b><span data-en="I do not know" data-es="No sé">I do not know</span></div>
-          </div>
-        </div>
-
-        <div class="complete-row">
-          <span class="complete-status" data-status="tipoff" data-en="Tip-Off not completed." data-es="Salto Inicial no completado.">Tip-Off not completed.</span>
-          <button class="btn" type="button" data-complete="tipoff" data-en="Complete Tip-Off → Unlock 1Q" data-es="Completar Salto Inicial → Desbloquear 1Q">Complete Tip-Off → Unlock 1Q</button>
+        <div class="setup-grid" aria-label="Speed selection">
+          <button class="setup-btn active" type="button" data-speed="slow">
+            <strong data-en="Training" data-es="Training">Training</strong>
+            <span data-en="60 BPM • controlled" data-es="60 BPM • controlado">60 BPM • controlled</span>
+          </button>
+          <button class="setup-btn" type="button" data-speed="medium">
+            <strong data-en="Tempo" data-es="Tempo">Tempo</strong>
+            <span data-en="90 BPM • faster" data-es="90 BPM • más rápido">90 BPM • faster</span>
+          </button>
+          <button class="setup-btn" type="button" data-speed="fast">
+            <strong data-en="Elite" data-es="Elite">Elite</strong>
+            <span data-en="120 BPM • pressure" data-es="120 BPM • presión">120 BPM • pressure</span>
+          </button>
         </div>
       </section>
 
-      <details class="accordion locked" id="q1" data-section="q1">
-        <summary>
-          <div class="badge">1Q</div>
-          <div class="summary-copy">
-            <strong data-en="Belief" data-es="Creencia">Belief</strong>
-            <span data-en="What do you believe your value is right now?" data-es="¿Qué tú crees que es tu valor ahora mismo?">What do you believe your value is right now?</span>
-            <em class="lock-note" data-en="Locked until Tip-Off is complete." data-es="Bloqueado hasta completar el Salto Inicial.">Locked until Tip-Off is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note">
-            <span class="box-label" data-en="Coach Challenge" data-es="Reto del Coach">Coach Challenge</span>
-            <p data-en="Do not answer with hype. Answer with proof." data-es="No contestes con hype. Contesta con evidencia.">Do not answer with hype. Answer with proof.</p>
-          </div>
-          <div class="two-col">
-            <div class="box">
-              <span class="box-label" data-en="Weak Answers" data-es="Respuestas Débiles">Weak Answers</span>
-              <ul class="clean">
-                <li data-en="I am different." data-es="Soy diferente.">I am different.</li>
-                <li data-en="I work hard." data-es="Trabajo duro.">I work hard.</li>
-                <li data-en="I can score." data-es="Puedo anotar.">I can score.</li>
-              </ul>
-            </div>
-            <div class="box">
-              <span class="box-label" data-en="Stronger Answers" data-es="Respuestas Más Fuertes">Stronger Answers</span>
-              <ul class="clean">
-                <li data-en="I defend full court without fouling." data-es="Defiendo cancha completa sin hacer faltas.">I defend full court without fouling.</li>
-                <li data-en="I make the right read under pressure." data-es="Hago la lectura correcta bajo presión.">I make the right read under pressure.</li>
-                <li data-en="I communicate every defensive possession." data-es="Comunico en cada posesión defensiva.">I communicate every defensive possession.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="complete-row">
-            <span class="complete-status" data-status="q1" data-en="1st Quarter not completed." data-es="1er Cuarto no completado.">1st Quarter not completed.</span>
-            <button class="btn" type="button" data-complete="q1" data-en="Complete 1Q → Unlock 2Q" data-es="Completar 1Q → Desbloquear 2Q">Complete 1Q → Unlock 2Q</button>
-          </div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q2" data-section="q2">
-        <summary>
-          <div class="badge">2Q</div>
-          <div class="summary-copy">
-            <strong data-en="Evidence" data-es="Evidencia">Evidence</strong>
-            <span data-en="Value without evidence is just confidence talking." data-es="El valor sin evidencia es solo confianza hablando.">Value without evidence is just confidence talking.</span>
-            <em class="lock-note" data-en="Locked until 1Q is complete." data-es="Bloqueado hasta completar 1Q.">Locked until 1Q is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label">Bori</span><p data-en="If there is no evidence, create evidence. Proof has to be observable." data-es="Si no hay evidencia, crea evidencia. La prueba tiene que poder observarse.">If there is no evidence, create evidence. Proof has to be observable.</p></div>
-          <div class="box green">
-            <span class="box-label" data-en="Evidence Check" data-es="Chequeo de Evidencia">Evidence Check</span>
-            <p data-en="Where does your value show up most clearly?" data-es="¿Dónde se ve tu valor más claro?">Where does your value show up most clearly?</p>
-            <div class="choice-grid">
-              <div class="choice"><b>A</b><span data-en="Practice" data-es="Práctica">Practice</span></div>
-              <div class="choice"><b>B</b><span data-en="Games" data-es="Juegos">Games</span></div>
-              <div class="choice"><b>C</b><span data-en="Film" data-es="Video">Film</span></div>
-              <div class="choice"><b>D</b><span data-en="Trust" data-es="Confianza">Trust</span></div>
-            </div>
-          </div>
-          <div class="complete-row">
-            <span class="complete-status" data-status="q2" data-en="2nd Quarter not completed." data-es="2do Cuarto no completado.">2nd Quarter not completed.</span>
-            <button class="btn" type="button" data-complete="q2" data-en="Complete 2Q → Unlock Halftime" data-es="Completar 2Q → Desbloquear Medio Tiempo">Complete 2Q → Unlock Halftime</button>
-          </div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="half" data-section="half">
-        <summary>
-          <div class="badge">HT</div>
-          <div class="summary-copy">
-            <strong data-en="Halftime Reality Check" data-es="Chequeo Real de Medio Tiempo">Halftime Reality Check</strong>
-            <span data-en="What can a coach trust today?" data-es="¿Qué puede confiar un coach hoy?">What can a coach trust today?</span>
-            <em class="lock-note" data-en="Locked until 2Q is complete." data-es="Bloqueado hasta completar 2Q.">Locked until 2Q is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Reality Check" data-es="Chequeo de Realidad">Reality Check</span><p data-en="Potential opens the conversation. Trust earns the responsibility." data-es="El potencial abre la conversación. La confianza gana la responsabilidad.">Potential opens the conversation. Trust earns the responsibility.</p></div>
-          <div class="box green">
-            <p data-en="If a coach watched you today, what would they trust?" data-es="Si un coach te viera hoy, ¿qué confiaría de ti?">If a coach watched you today, what would they trust?</p>
-            <div class="choice-grid">
-              <div class="choice"><b>A</b><span data-en="Effort" data-es="Esfuerzo">Effort</span></div>
-              <div class="choice"><b>B</b><span data-en="Defense" data-es="Defensa">Defense</span></div>
-              <div class="choice"><b>C</b><span data-en="Decisions" data-es="Decisiones">Decisions</span></div>
-              <div class="choice"><b>D</b><span data-en="Nothing consistently yet" data-es="Todavía nada consistentemente">Nothing consistently yet</span></div>
-            </div>
-          </div>
-          <div class="complete-row">
-            <span class="complete-status" data-status="half" data-en="Halftime not completed." data-es="Medio Tiempo no completado.">Halftime not completed.</span>
-            <button class="btn" type="button" data-complete="half" data-en="Complete Halftime → Unlock 3Q" data-es="Completar Medio Tiempo → Desbloquear 3Q">Complete Halftime → Unlock 3Q</button>
-          </div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q3" data-section="q3">
-        <summary>
-          <div class="badge">3Q</div>
-          <div class="summary-copy">
-            <strong data-en="Pressure" data-es="Presión">Pressure</strong>
-            <span data-en="Real value shows when the easy option disappears." data-es="El valor real aparece cuando se va la opción fácil.">Real value shows when the easy option disappears.</span>
-            <em class="lock-note" data-en="Locked until Halftime is complete." data-es="Bloqueado hasta completar Medio Tiempo.">Locked until Halftime is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Game Situation" data-es="Situación del Juego">Game Situation</span><p data-en="Score is close. Crowd is loud. Your defender is pressuring you. Your team needs one reliable player." data-es="El juego está cerrado. La gente está encendida. Tu defensor te presiona. Tu equipo necesita un jugador confiable.">Score is close. Crowd is loud. Your defender is pressuring you. Your team needs one reliable player.</p></div>
-          <div class="box green">
-            <p data-en="What do you do when your first option gets taken away?" data-es="¿Qué haces cuando te quitan tu primera opción?">What do you do when your first option gets taken away?</p>
-            <div class="choice-grid">
-              <div class="choice"><b>A</b><span data-en="Force it" data-es="Forzarla">Force it</span></div>
-              <div class="choice"><b>B</b><span data-en="Panic" data-es="Entrar en pánico">Panic</span></div>
-              <div class="choice"><b>C</b><span data-en="Make the next right read" data-es="Hacer la próxima lectura correcta">Make the next right read</span></div>
-              <div class="choice"><b>D</b><span data-en="Blame someone" data-es="Culpar a alguien">Blame someone</span></div>
-            </div>
-          </div>
-          <div class="complete-row">
-            <span class="complete-status" data-status="q3" data-en="3rd Quarter not completed." data-es="3er Cuarto no completado.">3rd Quarter not completed.</span>
-            <button class="btn" type="button" data-complete="q3" data-en="Complete 3Q → Unlock 4Q" data-es="Completar 3Q → Desbloquear 4Q">Complete 3Q → Unlock 4Q</button>
-          </div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q4" data-section="q4">
-        <summary>
-          <div class="badge">4Q</div>
-          <div class="summary-copy">
-            <strong data-en="Decision" data-es="Decisión">Decision</strong>
-            <span data-en="What are you going to prove this week?" data-es="¿Qué tú vas a probar esta semana?">What are you going to prove this week?</span>
-            <em class="lock-note" data-en="Locked until 3Q is complete." data-es="Bloqueado hasta completar 3Q.">Locked until 3Q is complete.</em>
-          </div>
-          <div class="plus">+</div>
-        </summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Decision Point" data-es="Momento de Decisión">Decision Point</span><p data-en="A player who understands value asks: what do I need to prove so opportunity makes sense?" data-es="Un jugador que entiende el valor pregunta: ¿qué necesito probar para que la oportunidad tenga sentido?">A player who understands value asks: what do I need to prove so opportunity makes sense?</p></div>
-          <div class="box green">
-            <p data-en="Pick one value target for this week." data-es="Escoge un objetivo de valor para esta semana.">Pick one value target for this week.</p>
-            <div class="choice-grid">
-              <div class="choice"><b>A</b><span data-en="Reliable effort" data-es="Esfuerzo confiable">Reliable effort</span></div>
-              <div class="choice"><b>B</b><span data-en="One specific skill" data-es="Una habilidad específica">One specific skill</span></div>
-              <div class="choice"><b>C</b><span data-en="Coach trust" data-es="Confianza del coach">Coach trust</span></div>
-              <div class="choice"><b>D</b><span data-en="Better decisions" data-es="Mejores decisiones">Better decisions</span></div>
-            </div>
-          </div>
-          <div class="complete-row">
-            <span class="complete-status" data-status="q4" data-en="4th Quarter not completed." data-es="4to Cuarto no completado.">4th Quarter not completed.</span>
-            <button class="btn" type="button" data-complete="q4" data-en="Complete 4Q → Unlock Final Buzzer" data-es="Completar 4Q → Desbloquear Bocina Final">Complete 4Q → Unlock Final Buzzer</button>
-          </div>
-        </div>
-      </details>
-
-
-      <section id="final-buzzer" class="card pad">
-        <h2 class="section-title" data-en="Final Buzzer Review" data-es="Repaso de la Bocina Final">Final Buzzer Review</h2>
-        <p class="section-sub" data-en="Review the lesson before Game 002 unlocks." data-es="Repasa la lección antes de desbloquear el Juego 002.">Review the lesson before Game 002 unlocks.</p>
-
-        <div class="review-grid">
-          <div class="review-card locked-review" data-review="r1">
-            <span class="box-label" data-en="Question 1" data-es="Pregunta 1">Question 1</span>
-            <h3 data-en="What makes a player valuable?" data-es="¿Qué hace valioso a un jugador?">What makes a player valuable?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Popularity" data-es="Popularidad">Popularity</button>
-              <button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Noise online" data-es="Ruido en línea">Noise online</button>
-              <button class="review-choice" type="button" data-review-choice="r1" data-correct="true" data-en="Value that helps a team win" data-es="Valor que ayuda al equipo a ganar">Value that helps a team win</button>
-              <button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Excuses" data-es="Excusas">Excuses</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r1" data-en="Money follows value, not noise. Real value helps the team and gives coaches something to trust." data-es="El dinero sigue al valor, no al ruido. El valor real ayuda al equipo y le da al coach algo que puede confiar.">Money follows value, not noise. Real value helps the team and gives coaches something to trust.</div>
-          </div>
-
-          <div class="review-card locked-review" data-review="r2">
-            <span class="box-label" data-en="Question 2" data-es="Pregunta 2">Question 2</span>
-            <h3 data-en="What makes a value statement strong?" data-es="¿Qué hace fuerte una declaración de valor?">What makes a value statement strong?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r2" data-correct="true" data-en="It has proof" data-es="Tiene evidencia">It has proof</button>
-              <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It sounds confident" data-es="Suena confiada">It sounds confident</button>
-              <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It sounds different" data-es="Suena diferente">It sounds different</button>
-              <button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It looks popular" data-es="Se ve popular">It looks popular</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r2" data-en="Proof separates real value from talk. If nobody can see it, trust it, or measure it, it is not strong yet." data-es="La evidencia separa el valor real del hablar. Si nadie puede verlo, confiarlo o medirlo, todavía no está fuerte.">Proof separates real value from talk. If nobody can see it, trust it, or measure it, it is not strong yet.</div>
-          </div>
-
-          <div class="review-card locked-review" data-review="r3">
-            <span class="box-label" data-en="Question 3" data-es="Pregunta 3">Question 3</span>
-            <h3 data-en="Where does value need to show up?" data-es="¿Dónde tiene que aparecer el valor?">Where does value need to show up?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only online" data-es="Solo en línea">Only online</button>
-              <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only when things go well" data-es="Solo cuando todo va bien">Only when things go well</button>
-              <button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only in your head" data-es="Solo en tu mente">Only in your head</button>
-              <button class="review-choice" type="button" data-review-choice="r3" data-correct="true" data-en="Practice, games, film, trust, and consistency" data-es="Práctica, juegos, video, confianza y consistencia">Practice, games, film, trust, and consistency</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r3" data-en="Value needs evidence. Practice, games, film, coach trust, teammate trust, and consistency reveal what is real." data-es="El valor necesita evidencia. Práctica, juegos, video, confianza del coach, confianza de compañeros y consistencia revelan lo real.">Value needs evidence. Practice, games, film, coach trust, teammate trust, and consistency reveal what is real.</div>
-          </div>
-
-          <div class="review-card locked-review" data-review="r4">
-            <span class="box-label" data-en="Question 4" data-es="Pregunta 4">Question 4</span>
-            <h3 data-en="What matters most in the halftime reality check?" data-es="¿Qué importa más en el chequeo de realidad del medio tiempo?">What matters most in the halftime reality check?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="What coach hopes you become" data-es="Lo que el coach espera que seas">What coach hopes you become</button>
-              <button class="review-choice" type="button" data-review-choice="r4" data-correct="true" data-en="What coach can trust today" data-es="Lo que el coach puede confiar hoy">What coach can trust today</button>
-              <button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="What you say you can do" data-es="Lo que dices que puedes hacer">What you say you can do</button>
-              <button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="What sounds good" data-es="Lo que suena bonito">What sounds good</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r4" data-en="Trust is built by what repeats. The question is not what sounds good. The question is what can be trusted now." data-es="La confianza se construye con lo que se repite. La pregunta no es lo que suena bonito. La pregunta es qué se puede confiar ahora.">Trust is built by what repeats. The question is not what sounds good. The question is what can be trusted now.</div>
-          </div>
-
-          <div class="review-card locked-review" data-review="r5">
-            <span class="box-label" data-en="Question 5" data-es="Pregunta 5">Question 5</span>
-            <h3 data-en="When does real value get exposed?" data-es="¿Cuándo se expone el valor real?">When does real value get exposed?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r5" data-correct="true" data-en="When pressure hits" data-es="Cuando llega la presión">When pressure hits</button>
-              <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="When everything is easy" data-es="Cuando todo está fácil">When everything is easy</button>
-              <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only during highlights" data-es="Solo en highlights">Only during highlights</button>
-              <button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only when you score" data-es="Solo cuando anotas">Only when you score</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r5" data-en="Pressure shows what is real. Reliable players show value when the game becomes uncomfortable." data-es="La presión muestra lo que es real. Los jugadores confiables muestran valor cuando el juego se pone incómodo.">Pressure shows what is real. Reliable players show value when the game becomes uncomfortable.</div>
-          </div>
-
-          <div class="review-card locked-review" data-review="r6">
-            <span class="box-label" data-en="Question 6" data-es="Pregunta 6">Question 6</span>
-            <h3 data-en="What should a player leave Game 001 with?" data-es="¿Con qué debe salir un jugador del Juego 001?">What should a player leave Game 001 with?</h3>
-            <div class="review-options">
-              <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="A vague goal" data-es="Una meta vaga">A vague goal</button>
-              <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="A good feeling" data-es="Un buen sentimiento">A good feeling</button>
-              <button class="review-choice" type="button" data-review-choice="r6" data-correct="true" data-en="A measurable action" data-es="Una acción medible">A measurable action</button>
-              <button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="More hype" data-es="Más hype">More hype</button>
-            </div>
-            <div class="review-explanation" data-review-explanation="r6" data-en="If it cannot be measured, it is not ready. Serious players turn value into action." data-es="Si no se puede medir, no está listo. Los jugadores serios convierten el valor en acción.">If it cannot be measured, it is not ready. Serious players turn value into action.</div>
-          </div>
+      <section class="post court-card" id="play">
+        <div class="score-row">
+          <div class="score-box"><span class="score-value" id="score">0</span><span class="score-label" data-en="Score" data-es="Puntos">Score</span></div>
+          <div class="score-box"><span class="score-value" id="hits">0</span><span class="score-label" data-en="Hits" data-es="Aciertos">Hits</span></div>
+          <div class="score-box"><span class="score-value" id="lives">3</span><span class="score-label" data-en="Lives" data-es="Vidas">Lives</span></div>
+          <div class="score-box"><span class="score-value" id="round">0</span><span class="score-label" data-en="Round" data-es="Ronda">Round</span></div>
         </div>
 
-        <div class="complete-row" style="margin-top:18px;">
-          <span class="complete-status" data-status="final" data-en="Final Buzzer locked." data-es="Bocina Final bloqueada.">Final Buzzer locked.</span>
-          <button class="btn" id="finalBuzzerBtn" type="button" disabled data-en="Complete Final Review" data-es="Completar Repaso Final">Complete Final Review</button>
+        <div class="message ready" id="message" data-en="Tap Start." data-es="Toca Comenzar.">Tap Start.</div>
+
+        <div class="court-wrap">
+          <div class="court" id="court" aria-label="Reaction grid"></div>
         </div>
 
-        <div class="next-box" id="nextGameBox">
-          <span class="box-label" data-en="Game 002 Unlocked" data-es="Juego 002 Desbloqueado">Game 002 Unlocked</span>
-          <p data-en="Game 001 complete. Next game: Habits. Now we test whether your actions match what you say you want." data-es="Juego 001 completado. Próximo juego: Hábitos. Ahora vamos a probar si tus acciones van con lo que dices que quieres.">Game 001 complete. Next game: Habits. Now we test whether your actions match what you say you want.</p>
-          <div style="margin-top:14px;"><a class="btn" href="game-002.html" data-en="Enter Game 002 →" data-es="Entrar al Juego 002 →">Enter Game 002 →</a></div>
+        <div class="play-info">
+          <span><strong id="speedLabel">60</strong> BPM</span>
+          <span><strong id="targetCount">5</strong> <span data-en="targets" data-es="objetivos">targets</span></span>
+          <span><strong id="tapCount">0</strong>/<strong>5</strong></span>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn" type="button" id="startBtn" data-en="Start Round" data-es="Comenzar Ronda">Start Round</button>
+          <button class="btn secondary" type="button" id="resetBtn" data-en="Reset" data-es="Reiniciar">Reset</button>
         </div>
       </section>
 
-      <section class="card pad coach-close">
+      <section class="post pad completion" id="completionBox">
+        <span class="label" data-en="Drill Complete" data-es="Drill Completado">Drill Complete</span>
+        <h2 data-en="Game 002 unlocked" data-es="Juego 002 desbloqueado">Game 002 unlocked</h2>
+        <p data-en="You finished the reaction bridge. Now enter Game 002 — Habits." data-es="Terminaste el puente de reacción. Ahora entra al Juego 002 — Hábitos.">
+          You finished the reaction bridge. Now enter Game 002 — Habits.
+        </p>
+        <div class="btn-row">
+          <a class="btn success" href="game-002.html" data-en="Enter Game 002 →" data-es="Entrar al Juego 002 →">Enter Game 002 →</a>
+        </div>
+      </section>
+
+      <section class="post pad coach-close">
         <p>
           <strong data-en="Coach Close:" data-es="Cierre del Coach:">Coach Close:</strong>
-          <span data-en=" Game 001 is not about money yet. It is about value. Because if there is no value, there is nothing for money to follow." data-es=" El Juego 001 todavía no se trata del dinero. Se trata del valor. Porque si no hay valor, no hay nada que el dinero pueda seguir."> Game 001 is not about money yet. It is about value. Because if there is no value, there is nothing for money to follow.</span>
+          <span data-en=" Understanding matters. Reaction proves it under speed." data-es=" Entender importa. Reaccionar lo prueba bajo velocidad."> Understanding matters. Reaction proves it under speed.</span>
         </p>
       </section>
 
-      <footer data-en="Hoops Money — The Business of Basketball • Game 001" data-es="Hoops Money — El Negocio del Baloncesto • Juego 001">Hoops Money — The Business of Basketball • Game 001</footer>
+      <footer data-en="Hoops Money — Overtime Drill 001" data-es="Hoops Money — Overtime Drill 001">Hoops Money — Overtime Drill 001</footer>
     </div>
   </main>
 
   <script>
-    const STORAGE_KEY = 'hm-game-001-green-v1';
-    const unlockMap = { tipoff:'q1', q1:'q2', q2:'half', half:'q3', q3:'q4', q4:'final' };
-    const reviews = ['r1','r2','r3','r4','r5','r6'];
+    const STORAGE_KEY = 'hm-drill-001-react-complete-v1';
+    const SPEEDS = {
+      slow: { bpm: 60, interval: 1000 },
+      medium: { bpm: 90, interval: 667 },
+      fast: { bpm: 120, interval: 500 }
+    };
 
+    const court = document.getElementById('court');
+    const cells = [];
     const langButtons = document.querySelectorAll('.lang-btn');
     const translatable = document.querySelectorAll('[data-en][data-es]');
-    const completeButtons = document.querySelectorAll('[data-complete]');
-    const sections = document.querySelectorAll('[data-section]');
-    const progressSteps = document.querySelectorAll('.step');
-    const reviewChoices = document.querySelectorAll('[data-review-choice]');
-    const reviewCards = document.querySelectorAll('[data-review]');
-    const reviewExplanations = document.querySelectorAll('[data-review-explanation]');
-    const finalBuzzerBtn = document.getElementById('finalBuzzerBtn');
-    const nextGameBox = document.getElementById('nextGameBox');
+    const setupButtons = document.querySelectorAll('.setup-btn');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const message = document.getElementById('message');
+    const completionBox = document.getElementById('completionBox');
+    const scoreEl = document.getElementById('score');
+    const hitsEl = document.getElementById('hits');
+    const livesEl = document.getElementById('lives');
+    const roundEl = document.getElementById('round');
+    const speedLabel = document.getElementById('speedLabel');
+    const tapCount = document.getElementById('tapCount');
 
-    let currentLang = 'en';
-    let progress = normalize(loadProgress());
+    let currentLang = localStorage.getItem('hm-lang') || 'en';
+    let speed = 'slow';
+    let score = 0;
+    let hits = 0;
+    let lives = 3;
+    let round = 0;
+    let playing = false;
+    let currentTarget = null;
+    let targetIndex = 0;
+    let targets = [];
+    let timers = [];
+    const targetTotal = 5;
 
-    function normalize(value){
-      const clean = value && typeof value === 'object' ? value : {};
-      return {
-        completed: Array.isArray(clean.completed) ? clean.completed : [],
-        unlocked: Array.isArray(clean.unlocked) && clean.unlocked.length ? clean.unlocked : ['tipoff'],
-        reviews: Array.isArray(clean.reviews) ? clean.reviews : [],
-        finalComplete: clean.finalComplete === true
-      };
+    function text(en, es) {
+      return currentLang === 'es' ? es : en;
     }
 
-    function loadProgress(){
-      try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : null; }
-      catch(e) { return null; }
-    }
-
-    function saveProgress(){
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); }
-      catch(e) {}
-    }
-
-    function isCompleted(id){ return progress.completed.includes(id); }
-    function isUnlocked(id){ return progress.unlocked.includes(id); }
-    function unlock(id){ if(id && !progress.unlocked.includes(id)) progress.unlocked.push(id); }
-    function isReviewComplete(){ return reviews.every(id => progress.reviews.includes(id)); }
-
-    function setLanguage(lang){
+    function setLanguage(lang) {
       currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('hm-lang', currentLang);
       document.documentElement.lang = currentLang;
       translatable.forEach(el => {
-        const text = el.getAttribute('data-' + currentLang);
-        if(text !== null) el.textContent = text;
+        const value = el.getAttribute('data-' + currentLang);
+        if (value !== null) el.textContent = value;
       });
       langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === currentLang));
-      render();
+      if (!playing) setMessage(text('Tap Start.', 'Toca Comenzar.'), 'ready');
     }
 
-    function render(){
-      sections.forEach(section => {
-        const id = section.dataset.section;
-        const unlocked = isUnlocked(id);
-        const completed = isCompleted(id);
-        section.classList.toggle('locked', !unlocked);
-        section.classList.toggle('done', completed);
-        const note = section.querySelector('.lock-note');
-        if(note) note.style.display = unlocked ? 'none' : 'inline-block';
-      });
+    function buildCourt() {
+      court.innerHTML = '';
+      cells.length = 0;
+      for (let i = 0; i < 25; i += 1) {
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'cell';
+        cell.setAttribute('aria-label', 'cell ' + (i + 1));
+        cell.addEventListener('click', () => handleTap(i));
+        court.appendChild(cell);
+        cells.push(cell);
+      }
+    }
 
-      progressSteps.forEach(step => {
-        const id = step.dataset.step;
-        step.classList.toggle('done', isCompleted(id));
-        step.classList.toggle('active', isUnlocked(id) && !isCompleted(id));
-      });
+    function clearTimers() {
+      timers.forEach(timer => clearTimeout(timer));
+      timers = [];
+    }
 
-      completeButtons.forEach(button => {
-        const id = button.dataset.complete;
-        if(isCompleted(id)){
-          button.classList.add('done');
-          button.textContent = currentLang === 'es' ? 'Completado ✓' : 'Completed ✓';
+    function clearCourt() {
+      cells.forEach(cell => { cell.className = 'cell'; });
+    }
+
+    function setMessage(value, type = 'ready') {
+      message.textContent = value;
+      message.className = 'message ' + type;
+    }
+
+    function updateStats() {
+      scoreEl.textContent = score;
+      hitsEl.textContent = hits;
+      livesEl.textContent = lives;
+      roundEl.textContent = round;
+      speedLabel.textContent = SPEEDS[speed].bpm;
+      tapCount.textContent = Math.min(targetIndex, targetTotal);
+    }
+
+    function randomTargets() {
+      const picks = [];
+      while (picks.length < targetTotal) {
+        const index = Math.floor(Math.random() * 25);
+        if (!picks.includes(index)) picks.push(index);
+      }
+      return picks;
+    }
+
+    function beginRound() {
+      if (playing) return;
+      clearTimers();
+      clearCourt();
+      playing = true;
+      score = 0;
+      hits = 0;
+      lives = 3;
+      round += 1;
+      targetIndex = 0;
+      currentTarget = null;
+      targets = randomTargets();
+      completionBox.classList.remove('show');
+      startBtn.disabled = true;
+      updateStats();
+      setMessage(text('Get ready...', 'Prepárate...'), 'ready');
+      timers.push(setTimeout(() => showTarget(), 650));
+    }
+
+    function showTarget() {
+      if (!playing) return;
+      clearCourt();
+
+      if (targetIndex >= targets.length) {
+        finishRound(true);
+        return;
+      }
+
+      currentTarget = targets[targetIndex];
+      cells[currentTarget].classList.add('target');
+      setMessage(text('React.', 'Reacciona.'), 'go');
+
+      const missTimer = setTimeout(() => {
+        if (!playing || currentTarget === null) return;
+        cells[currentTarget].classList.remove('target');
+        cells[currentTarget].classList.add('missed');
+        lives -= 1;
+        currentTarget = null;
+        targetIndex += 1;
+        updateStats();
+        setMessage(text('Late. Keep playing.', 'Tarde. Sigue jugando.'), 'miss');
+        if (lives <= 0) {
+          finishRound(false);
         } else {
-          button.classList.remove('done');
-          button.textContent = button.getAttribute('data-' + currentLang) || button.textContent;
+          timers.push(setTimeout(() => showTarget(), 350));
         }
-      });
+      }, SPEEDS[speed].interval);
 
-      document.querySelectorAll('[data-status]').forEach(status => {
-        const id = status.dataset.status;
-        if(isCompleted(id)){
-          status.classList.add('done');
-          status.textContent = currentLang === 'es' ? 'Completado. Próxima posesión desbloqueada.' : 'Completed. Next possession unlocked.';
-          return;
-        }
-        if(id === 'final' && isUnlocked('final')){
-          status.classList.remove('done');
-          status.textContent = isReviewComplete()
-            ? (currentLang === 'es' ? 'Repaso completo. Bocina Final lista.' : 'Review complete. Final Buzzer ready.')
-            : (currentLang === 'es' ? 'Bocina Final desbloqueada. Completa el repaso.' : 'Final Buzzer unlocked. Complete the review.');
-          return;
-        }
-        status.classList.remove('done');
-        status.textContent = status.getAttribute('data-' + currentLang) || status.textContent;
-      });
-
-      reviewCards.forEach(card => card.classList.toggle('locked-review', !isUnlocked('final')));
-
-      reviewChoices.forEach(choice => {
-        const id = choice.dataset.reviewChoice;
-        const answered = progress.reviews.includes(id);
-        const correct = choice.dataset.correct === 'true';
-        choice.classList.toggle('selected', answered);
-        choice.classList.toggle('correct', answered && correct);
-      });
-
-      reviewExplanations.forEach(exp => {
-        const id = exp.dataset.reviewExplanation;
-        exp.classList.toggle('show', progress.reviews.includes(id));
-      });
-
-      const ready = isUnlocked('final') && isReviewComplete();
-
-      if(progress.finalComplete){
-        finalBuzzerBtn.disabled = true;
-        finalBuzzerBtn.classList.add('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Juego 001 Completado ✓' : 'Game 001 Complete ✓';
-        nextGameBox.classList.add('unlocked');
-      } else if(ready){
-        finalBuzzerBtn.disabled = false;
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Completar Juego 001 → Desbloquear Juego 002' : 'Complete Game 001 → Unlock Game 002';
-        nextGameBox.classList.remove('unlocked');
-      } else {
-        finalBuzzerBtn.disabled = true;
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = finalBuzzerBtn.getAttribute('data-' + currentLang);
-        nextGameBox.classList.remove('unlocked');
-      }
-
-      saveProgress();
+      timers.push(missTimer);
     }
 
-    function completeSection(id){
-      if(!progress.completed.includes(id)) progress.completed.push(id);
-      unlock(unlockMap[id]);
-      saveProgress();
-      render();
-      const next = unlockMap[id];
-      if(next){
-        const el = document.getElementById(next === 'final' ? 'final-buzzer' : next);
-        if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+    function handleTap(index) {
+      if (!playing || currentTarget === null) return;
+
+      if (index === currentTarget) {
+        cells[index].classList.remove('target');
+        cells[index].classList.add('correct');
+        score += 20;
+        hits += 1;
+        currentTarget = null;
+        targetIndex += 1;
+        clearTimers();
+        updateStats();
+        setMessage(text('Good read.', 'Buena lectura.'), 'good');
+        timers.push(setTimeout(() => showTarget(), 260));
+        return;
       }
+
+      cells[index].classList.add('missed');
+      lives -= 1;
+      updateStats();
+      setMessage(text('Wrong read.', 'Lectura incorrecta.'), 'miss');
+      if (lives <= 0) finishRound(false);
     }
 
-    document.querySelectorAll('details.accordion').forEach(detail => {
-      detail.addEventListener('toggle', () => { if(detail.open && !isUnlocked(detail.id)) detail.open = false; });
-      const summary = detail.querySelector('summary');
-      if(summary){ summary.addEventListener('click', e => { if(!isUnlocked(detail.id)) e.preventDefault(); }); }
-    });
+    function finishRound(won) {
+      playing = false;
+      clearTimers();
+      currentTarget = null;
+      startBtn.disabled = false;
+      updateStats();
 
-    completeButtons.forEach(button => button.addEventListener('click', () => completeSection(button.dataset.complete)));
+      if (won && hits >= targetTotal) {
+        localStorage.setItem(STORAGE_KEY, 'complete');
+        setMessage(text('Drill complete.', 'Drill completado.'), 'good');
+        completionBox.classList.add('show');
+        completionBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
 
-    reviewChoices.forEach(choice => {
-      choice.addEventListener('click', () => {
-        if(!isUnlocked('final')) return;
-        const id = choice.dataset.reviewChoice;
-        if(!progress.reviews.includes(id)) progress.reviews.push(id);
-        saveProgress();
-        render();
+      setMessage(text('Run it again.', 'Corre otra vez.'), 'miss');
+    }
+
+    function resetDrill() {
+      clearTimers();
+      clearCourt();
+      playing = false;
+      score = 0;
+      hits = 0;
+      lives = 3;
+      round = 0;
+      targetIndex = 0;
+      currentTarget = null;
+      startBtn.disabled = false;
+      completionBox.classList.remove('show');
+      localStorage.removeItem(STORAGE_KEY);
+      updateStats();
+      setMessage(text('Tap Start.', 'Toca Comenzar.'), 'ready');
+    }
+
+    setupButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (playing) return;
+        speed = button.dataset.speed;
+        setupButtons.forEach(btn => btn.classList.toggle('active', btn === button));
+        updateStats();
       });
     });
 
-    finalBuzzerBtn.addEventListener('click', () => {
-      if(!isUnlocked('final') || !isReviewComplete()) return;
-      progress.finalComplete = true;
-      if(!progress.completed.includes('final')) progress.completed.push('final');
-      saveProgress();
-      render();
-      nextGameBox.scrollIntoView({ behavior:'smooth', block:'center' });
+    langButtons.forEach(button => {
+      button.addEventListener('click', () => setLanguage(button.dataset.lang));
     });
 
-    langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+    startBtn.addEventListener('click', beginRound);
+    resetBtn.addEventListener('click', resetDrill);
 
-    setLanguage('en');
-    render();
+    buildCourt();
+    updateStats();
+    setLanguage(currentLang);
+
+    if (localStorage.getItem(STORAGE_KEY) === 'complete') {
+      completionBox.classList.add('show');
+      setMessage(text('Drill complete.', 'Drill completado.'), 'good');
+    }
   </script>
 </body>
 </html>
