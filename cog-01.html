@@ -1,0 +1,1441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <title>COG 01 | The React | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --panel-2:#151821;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --brand-soft:rgba(155,89,182,.18);
+      --green-soft:rgba(0,217,165,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --pink:#ff1493;
+      --red-soft:rgba(255,20,147,.14);
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(155,89,182,.22),transparent 34%),
+        radial-gradient(circle at top right,rgba(0,217,165,.12),transparent 30%),
+        radial-gradient(circle at bottom center,rgba(245,197,66,.08),transparent 34%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+      touch-action:manipulation;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit}
+    img{max-width:100%;display:block}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--brand);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(0,217,165,.55);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(155,89,182,.18),rgba(245,197,66,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.play{
+      border-color:rgba(155,89,182,.55);
+      background:
+        linear-gradient(135deg,rgba(155,89,182,.18),rgba(0,217,165,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(245,197,66,.55);
+      background:
+        linear-gradient(135deg,rgba(245,197,66,.16),rgba(155,89,182,.14)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand);
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .avatar.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(0,217,165,.38);
+      background:var(--green-soft);
+      color:#b9ffee;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--brand-2);
+      background:var(--green-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      color:#d8fff4;
+    }
+
+    .section-label{
+      color:var(--brand-2);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-list,
+    .speed-list,
+    .stats-grid{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,
+    .speed-card,
+    .stat-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,
+    .speed-card strong,
+    .stat-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,
+    .speed-card p,
+    .stat-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .speed-card{
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .speed-card:hover{
+      border-color:var(--brand);
+      transform:translateY(-1px);
+    }
+
+    .speed-card.active{
+      border-color:var(--gold);
+      background:var(--gold-soft);
+    }
+
+    .speed-card.active strong{
+      color:#ffe9a6;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(0,217,165,.36);
+      background:var(--green-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--brand);
+      background:var(--brand);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    .game-stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .game-stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:12px;
+      text-align:center;
+    }
+
+    .game-stat strong{
+      display:block;
+      font-size:24px;
+      color:var(--brand-2);
+      line-height:1;
+    }
+
+    .game-stat span{
+      display:block;
+      margin-top:6px;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .play-message{
+      margin:16px 0 0;
+      min-height:38px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size:22px;
+      font-weight:950;
+      letter-spacing:-.03em;
+      color:var(--gold);
+      position:relative;
+      z-index:2;
+    }
+
+    .court-wrap{
+      margin-top:14px;
+      display:grid;
+      justify-content:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .court{
+      width:min(340px,88vw);
+      aspect-ratio:1;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:6px;
+      padding:10px;
+      background:#0b0d12;
+      border:2px solid var(--line);
+      border-radius:20px;
+      box-shadow:inset 0 0 30px rgba(0,0,0,.45);
+      transition:.15s ease;
+    }
+
+    .court.pulse{
+      border-color:var(--brand);
+      box-shadow:0 0 24px rgba(155,89,182,.35), inset 0 0 30px rgba(0,0,0,.45);
+    }
+
+    .court.success{
+      border-color:var(--brand-2);
+      box-shadow:0 0 24px rgba(0,217,165,.35), inset 0 0 30px rgba(0,0,0,.45);
+    }
+
+    .court.miss{
+      border-color:var(--pink);
+      box-shadow:0 0 24px rgba(255,20,147,.35), inset 0 0 30px rgba(0,0,0,.45);
+      animation:shake .25s ease;
+    }
+
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-5px)}
+      75%{transform:translateX(5px)}
+    }
+
+    .cell{
+      border-radius:9px;
+      background:rgba(255,255,255,.06);
+      border:2px solid rgba(255,255,255,.12);
+      cursor:pointer;
+      transition:.09s ease;
+      display:grid;
+      place-items:center;
+      color:#050505;
+      font-weight:950;
+      user-select:none;
+    }
+
+    .cell:active{
+      transform:scale(.93);
+    }
+
+    .cell.target{
+      background:var(--brand);
+      border-color:var(--brand);
+      box-shadow:0 0 20px var(--brand);
+      transform:scale(1.04);
+    }
+
+    .cell.correct{
+      background:var(--brand-2);
+      border-color:var(--brand-2);
+      box-shadow:0 0 16px rgba(0,217,165,.7);
+    }
+
+    .cell.good{
+      background:var(--gold);
+      border-color:var(--gold);
+      box-shadow:0 0 16px rgba(245,197,66,.7);
+    }
+
+    .cell.wrong{
+      background:var(--pink);
+      border-color:var(--pink);
+      box-shadow:0 0 16px rgba(255,20,147,.7);
+    }
+
+    .round-info{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      margin-top:12px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+    }
+
+    .round-pill{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:999px;
+      padding:8px 11px;
+    }
+
+    .progress-stars{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      margin-top:12px;
+      position:relative;
+      z-index:2;
+      font-size:22px;
+    }
+
+    .progress-stars span{
+      opacity:.22;
+      transition:.2s ease;
+    }
+
+    .progress-stars span.earned{
+      opacity:1;
+      filter:drop-shadow(0 0 8px var(--gold));
+      transform:scale(1.1);
+    }
+
+    .hidden{
+      display:none!important;
+    }
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.88);
+      z-index:2000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .overlay.show{
+      display:flex;
+    }
+
+    .overlay-card{
+      width:min(340px,94vw);
+      background:var(--panel);
+      border:2px solid var(--brand);
+      border-radius:22px;
+      padding:22px;
+      text-align:center;
+      box-shadow:var(--shadow);
+    }
+
+    .overlay-emoji{
+      font-size:44px;
+      margin-bottom:8px;
+    }
+
+    .overlay-title{
+      margin:0;
+      font-size:34px;
+      line-height:1;
+      letter-spacing:-.055em;
+    }
+
+    .overlay-text{
+      color:var(--muted);
+      margin:12px 0 0;
+      font-size:15px;
+    }
+
+    .overlay-card .cta-row{
+      justify-content:center;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .game-stats{grid-template-columns:repeat(2,1fr)}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="game-006.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money Cognitive Lab" data-es="Basketball Money Lab Cognitivo">Basketball Money Cognitive Lab</small>
+            <strong data-en="COG 01: The React" data-es="COG 01: The React">COG 01: The React</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="game-006.html" data-en="Back to Game 006" data-es="Volver al Juego 006">Back to Game 006</a>
+          <a href="#play" data-en="Play" data-es="Jugar">Play</a>
+          <a href="game-007.html" data-en="Next Game" data-es="Próximo Juego">Next Game</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar">COG</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 01" data-es="COG 01">COG 01</span>
+              <span class="handle">@thereact</span>
+              <span class="badge" data-en="Games 006–010" data-es="Juegos 006–010">Games 006–010</span>
+            </div>
+            <span class="handle" data-en="The first paid cognitive drill." data-es="El primer drill cognitivo pago.">The first paid cognitive drill.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="The React" data-es="The React">
+          The React
+        </h1>
+
+        <p class="post-sub" data-en="A single-beat basketball reaction drill. A cell lights up. You react. The next cue comes fast. This trains visual attention, timing, pressure response, and decision speed." data-es="Un drill de reacción de baloncesto a un solo beat. Una celda se prende. Tú reaccionas. La próxima señal llega rápido. Esto entrena atención visual, timing, respuesta bajo presión y velocidad de decisión.">
+          A single-beat basketball reaction drill. A cell lights up. You react. The next cue comes fast. This trains visual attention, timing, pressure response, and decision speed.
+        </p>
+
+        <div class="thread-line" data-en="Basketball Money connection: money opportunities move fast. The player who reacts late often loses the opening." data-es="Conexión con Basketball Money: las oportunidades de dinero se mueven rápido. El jugador que reacciona tarde muchas veces pierde la apertura.">
+          Basketball Money connection: money opportunities move fast. The player who reacts late often loses the opening.
+        </div>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="What it tests" data-es="Qué prueba">What it tests</strong>
+            <p data-en="Reaction, timing, focus, visual cue recognition, and fast decision execution." data-es="Reacción, timing, enfoque, reconocimiento de señales visuales y ejecución rápida de decisiones.">
+              Reaction, timing, focus, visual cue recognition, and fast decision execution.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="How to play" data-es="Cómo jugar">How to play</strong>
+            <p data-en="Tap the purple cell as fast as possible. Perfect taps score more. Wrong taps or missed cues cost lives." data-es="Toca la celda púrpura lo más rápido posible. Toques perfectos dan más puntos. Toques incorrectos o señales perdidas cuestan vidas.">
+              Tap the purple cell as fast as possible. Perfect taps score more. Wrong taps or missed cues cost lives.
+            </p>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="#play" data-en="Start COG 01 →" data-es="Comenzar COG 01 →">Start COG 01 →</a>
+          <a class="btn secondary" href="game-006.html" data-en="Back to Game 006" data-es="Volver al Juego 006">Back to Game 006</a>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar gold">BPM</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Choose Speed" data-es="Escoge Velocidad">Choose Speed</span>
+              <span class="handle">@bpmlevels</span>
+            </div>
+            <span class="handle" data-en="Select your reaction pace." data-es="Escoge tu ritmo de reacción.">Select your reaction pace.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="BPM Speed Levels" data-es="Niveles de Velocidad BPM">BPM Speed Levels</p>
+
+        <div class="speed-list">
+          <div class="speed-card active" data-speed="training">
+            <strong data-en="Training — 60 BPM" data-es="Entrenamiento — 60 BPM">Training — 60 BPM</strong>
+            <p data-en="Slower pace. Best for learning the grid and building clean reaction habits." data-es="Ritmo más lento. Mejor para aprender la cuadrícula y construir hábitos limpios de reacción.">
+              Slower pace. Best for learning the grid and building clean reaction habits.
+            </p>
+          </div>
+
+          <div class="speed-card" data-speed="tempo">
+            <strong data-en="Tempo — 90 BPM" data-es="Tempo — 90 BPM">Tempo — 90 BPM</strong>
+            <p data-en="Game rhythm. Faster cues and less time to hesitate." data-es="Ritmo de juego. Señales más rápidas y menos tiempo para dudar.">
+              Game rhythm. Faster cues and less time to hesitate.
+            </p>
+          </div>
+
+          <div class="speed-card" data-speed="elite">
+            <strong data-en="Elite — 120 BPM" data-es="Elite — 120 BPM">Elite — 120 BPM</strong>
+            <p data-en="High pressure. Quick cue recognition and immediate response." data-es="Alta presión. Reconocimiento rápido de señales y respuesta inmediata.">
+              High pressure. Quick cue recognition and immediate response.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post play" id="play">
+        <div class="post-head">
+          <div class="avatar">01</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Playfield" data-es="Cancha de Juego">Playfield</span>
+              <span class="handle">@5x5reactgrid</span>
+              <span class="badge" data-en="Live Drill" data-es="Drill Activo">Live Drill</span>
+            </div>
+            <span class="handle" data-en="Tap the target before the next beat." data-es="Toca el objetivo antes del próximo beat.">Tap the target before the next beat.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="COG 01: The React" data-es="COG 01: The React">COG 01: The React</p>
+
+        <div class="game-stats">
+          <div class="game-stat">
+            <strong id="levelDisplay">1</strong>
+            <span data-en="Level" data-es="Nivel">Level</span>
+          </div>
+
+          <div class="game-stat">
+            <strong id="scoreDisplay">0</strong>
+            <span data-en="Score" data-es="Puntos">Score</span>
+          </div>
+
+          <div class="game-stat">
+            <strong id="livesDisplay">♥♥♥</strong>
+            <span data-en="Lives" data-es="Vidas">Lives</span>
+          </div>
+
+          <div class="game-stat">
+            <strong id="roundDisplay">0</strong>
+            <span data-en="Round" data-es="Ronda">Round</span>
+          </div>
+        </div>
+
+        <div class="play-message" id="messageDisplay" data-en="Press Start Round." data-es="Presiona Comenzar Ronda.">
+          Press Start Round.
+        </div>
+
+        <div class="progress-stars">
+          <span id="starOne">⭐</span>
+          <span id="starTwo">⭐</span>
+        </div>
+
+        <div class="court-wrap">
+          <div class="court" id="court"></div>
+        </div>
+
+        <div class="round-info">
+          <div class="round-pill">
+            <span data-en="Speed:" data-es="Velocidad:">Speed:</span>
+            <strong id="speedDisplay">Training</strong>
+          </div>
+
+          <div class="round-pill">
+            <span data-en="Targets:" data-es="Objetivos:">Targets:</span>
+            <strong id="targetsDisplay">3</strong>
+          </div>
+
+          <div class="round-pill">
+            <span data-en="Hits:" data-es="Toques:">Hits:</span>
+            <strong id="hitsDisplay">0/3</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn green" type="button" id="startRoundBtn" data-en="Start Round →" data-es="Comenzar Ronda →">Start Round →</button>
+          <button class="btn secondary" type="button" id="resetBtn" data-en="Reset Score" data-es="Reiniciar Puntos">Reset Score</button>
+        </div>
+      </section>
+
+      <section class="post final">
+        <div class="post-head">
+          <div class="avatar gold">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 01 Close" data-es="Cierre COG 01">COG 01 Close</span>
+              <span class="handle">@thereactreview</span>
+              <span class="badge gold" data-en="Reflection" data-es="Reflexión">Reflection</span>
+            </div>
+            <span class="handle" data-en="Take the drill back to Game 006." data-es="Lleva el drill de vuelta al Juego 006.">Take the drill back to Game 006.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="Reaction is not just physical. It is business readiness." data-es="La reacción no es solo física. Es preparación de negocio.">
+          Reaction is not just physical. It is business readiness.
+        </h2>
+
+        <p class="post-sub" data-en="The player who sees the cue, trusts the read, and moves with discipline has an advantage. On the court, in opportunity, and in money." data-es="El jugador que ve la señal, confía en la lectura y se mueve con disciplina tiene ventaja. En cancha, en oportunidad y en dinero.">
+          The player who sees the cue, trusts the read, and moves with discipline has an advantage. On the court, in opportunity, and in money.
+        </p>
+
+        <div class="gold-note" data-en="After this drill, return to Game 006 and complete the Final Buzzer reflection." data-es="Después de este drill, vuelve al Juego 006 y completa la reflexión de Bocina Final.">
+          After this drill, return to Game 006 and complete the Final Buzzer reflection.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn gold" href="game-006.html#final" data-en="Return to Game 006 Final Buzzer →" data-es="Volver a Bocina Final Juego 006 →">Return to Game 006 Final Buzzer →</a>
+          <a class="btn secondary" href="game-007.html" data-en="Continue to Game 007 →" data-es="Continuar al Juego 007 →">Continue to Game 007 →</a>
+        </div>
+      </section>
+
+      <footer data-en="Basketball Money — COG 01: The React" data-es="Basketball Money — COG 01: The React">
+        Basketball Money — COG 01: The React
+      </footer>
+
+    </div>
+  </main>
+
+  <div class="overlay" id="roundOverlay">
+    <div class="overlay-card">
+      <div class="overlay-emoji" id="overlayEmoji">⭐</div>
+      <h2 class="overlay-title" id="overlayTitle">Round Complete</h2>
+      <p class="overlay-text" id="overlayText">Nice work.</p>
+
+      <div class="cta-row">
+        <button class="btn green" type="button" id="overlayNextBtn" data-en="Next Round" data-es="Próxima Ronda">Next Round</button>
+        <button class="btn secondary" type="button" id="overlayCloseBtn" data-en="Close" data-es="Cerrar">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    const MESSAGES = {
+      en: {
+        start: 'Press Start Round.',
+        ready: 'Get ready...',
+        react: 'React!',
+        perfect: 'Perfect tap!',
+        good: 'Good tap!',
+        wrong: 'Wrong cell.',
+        miss: 'Missed cue.',
+        roundComplete: 'Round complete.',
+        perfectRound: 'Perfect round!',
+        outOfLives: 'Out of lives.',
+        levelUp: 'Level up!',
+        reset: 'Score reset.',
+        nextRound: 'Next Round',
+        close: 'Close',
+        training: 'Training',
+        tempo: 'Tempo',
+        elite: 'Elite',
+        overlayGood: 'You are building faster reaction timing.',
+        overlayPerfect: 'Perfect. Two perfect rounds level you up.',
+        overlayMiss: 'Reset, breathe, and read the next cue.'
+      },
+      es: {
+        start: 'Presiona Comenzar Ronda.',
+        ready: 'Prepárate...',
+        react: '¡Reacciona!',
+        perfect: '¡Toque perfecto!',
+        good: '¡Buen toque!',
+        wrong: 'Celda incorrecta.',
+        miss: 'Perdiste la señal.',
+        roundComplete: 'Ronda completada.',
+        perfectRound: '¡Ronda perfecta!',
+        outOfLives: 'Sin vidas.',
+        levelUp: '¡Subiste de nivel!',
+        reset: 'Puntos reiniciados.',
+        nextRound: 'Próxima Ronda',
+        close: 'Cerrar',
+        training: 'Entrenamiento',
+        tempo: 'Tempo',
+        elite: 'Elite',
+        overlayGood: 'Estás construyendo mejor timing de reacción.',
+        overlayPerfect: 'Perfecto. Dos rondas perfectas te suben de nivel.',
+        overlayMiss: 'Reinicia, respira y lee la próxima señal.'
+      }
+    };
+
+    function msg(key) {
+      return (MESSAGES[currentLang] && MESSAGES[currentLang][key]) || MESSAGES.en[key] || key;
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) el.textContent = text;
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+
+      updateStaticLabels();
+      updateDisplay();
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    const court = document.getElementById('court');
+    const startRoundBtn = document.getElementById('startRoundBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const speedCards = document.querySelectorAll('.speed-card');
+
+    const levelDisplay = document.getElementById('levelDisplay');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const livesDisplay = document.getElementById('livesDisplay');
+    const roundDisplay = document.getElementById('roundDisplay');
+    const speedDisplay = document.getElementById('speedDisplay');
+    const targetsDisplay = document.getElementById('targetsDisplay');
+    const hitsDisplay = document.getElementById('hitsDisplay');
+    const messageDisplay = document.getElementById('messageDisplay');
+    const starOne = document.getElementById('starOne');
+    const starTwo = document.getElementById('starTwo');
+
+    const roundOverlay = document.getElementById('roundOverlay');
+    const overlayEmoji = document.getElementById('overlayEmoji');
+    const overlayTitle = document.getElementById('overlayTitle');
+    const overlayText = document.getElementById('overlayText');
+    const overlayNextBtn = document.getElementById('overlayNextBtn');
+    const overlayCloseBtn = document.getElementById('overlayCloseBtn');
+
+    const SPEEDS = {
+      training: { bpm: 60, interval: 1000, label: 'training' },
+      tempo: { bpm: 90, interval: 667, label: 'tempo' },
+      elite: { bpm: 120, interval: 500, label: 'elite' }
+    };
+
+    const state = {
+      speed: localStorage.getItem('cog01-speed') || 'training',
+      level: parseInt(localStorage.getItem('cog01-level') || '1', 10),
+      score: parseInt(localStorage.getItem('cog01-score') || '0', 10),
+      round: parseInt(localStorage.getItem('cog01-round') || '0', 10),
+      lives: 3,
+      hits: 0,
+      targetsNeeded: 3,
+      perfectRounds: parseInt(localStorage.getItem('cog01-perfect-rounds') || '0', 10),
+      active: false,
+      acceptingTap: false,
+      currentTarget: null,
+      currentStart: 0,
+      timer: null,
+      missTimer: null,
+      usedTargets: [],
+      roundHadMistake: false
+    };
+
+    function saveProgress() {
+      localStorage.setItem('cog01-speed', state.speed);
+      localStorage.setItem('cog01-level', String(state.level));
+      localStorage.setItem('cog01-score', String(state.score));
+      localStorage.setItem('cog01-round', String(state.round));
+      localStorage.setItem('cog01-perfect-rounds', String(state.perfectRounds));
+    }
+
+    function getTargetsNeeded() {
+      return Math.min(12, state.level + 2);
+    }
+
+    function updateStaticLabels() {
+      overlayNextBtn.textContent = msg('nextRound');
+      overlayCloseBtn.textContent = msg('close');
+
+      if (!state.active) {
+        messageDisplay.textContent = msg('start');
+      }
+    }
+
+    function updateDisplay() {
+      state.targetsNeeded = getTargetsNeeded();
+
+      levelDisplay.textContent = state.level;
+      scoreDisplay.textContent = state.score;
+      roundDisplay.textContent = state.round;
+      targetsDisplay.textContent = state.targetsNeeded;
+      hitsDisplay.textContent = `${state.hits}/${state.targetsNeeded}`;
+      speedDisplay.textContent = msg(SPEEDS[state.speed].label);
+
+      let hearts = '';
+      for (let i = 0; i < 3; i++) hearts += i < state.lives ? '♥' : '♡';
+      livesDisplay.textContent = hearts;
+
+      starOne.classList.toggle('earned', state.perfectRounds >= 1);
+      starTwo.classList.toggle('earned', state.perfectRounds >= 2);
+
+      speedCards.forEach(card => {
+        card.classList.toggle('active', card.dataset.speed === state.speed);
+      });
+    }
+
+    function buildCourt() {
+      court.innerHTML = '';
+
+      for (let i = 0; i < 25; i++) {
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'cell';
+        cell.setAttribute('aria-label', `Cell ${i + 1}`);
+        cell.dataset.index = String(i);
+        cell.addEventListener('click', () => handleCellTap(i));
+        court.appendChild(cell);
+      }
+    }
+
+    function clearCells() {
+      document.querySelectorAll('.cell').forEach(cell => {
+        cell.classList.remove('target', 'correct', 'good', 'wrong');
+      });
+    }
+
+    function clearTimers() {
+      if (state.timer) clearTimeout(state.timer);
+      if (state.missTimer) clearTimeout(state.missTimer);
+      state.timer = null;
+      state.missTimer = null;
+    }
+
+    function randomTarget() {
+      let available = [];
+
+      for (let i = 0; i < 25; i++) {
+        if (!state.usedTargets.includes(i)) available.push(i);
+      }
+
+      if (available.length === 0) {
+        state.usedTargets = [];
+        available = Array.from({ length: 25 }, (_, i) => i);
+      }
+
+      const selected = available[Math.floor(Math.random() * available.length)];
+      state.usedTargets.push(selected);
+      return selected;
+    }
+
+    function pulseCourt(type) {
+      court.classList.remove('pulse', 'success', 'miss');
+      void court.offsetWidth;
+      court.classList.add(type);
+
+      setTimeout(() => {
+        court.classList.remove(type);
+      }, 260);
+    }
+
+    function setMessage(text, color) {
+      messageDisplay.textContent = text;
+      if (color) messageDisplay.style.color = color;
+      else messageDisplay.style.color = 'var(--gold)';
+    }
+
+    function startRound() {
+      clearTimers();
+      clearCells();
+
+      state.active = true;
+      state.acceptingTap = false;
+      state.currentTarget = null;
+      state.lives = 3;
+      state.hits = 0;
+      state.roundHadMistake = false;
+      state.usedTargets = [];
+      state.round += 1;
+
+      startRoundBtn.disabled = true;
+      setMessage(msg('ready'), 'var(--gold)');
+      updateDisplay();
+      saveProgress();
+
+      state.timer = setTimeout(() => {
+        fireTarget();
+      }, 700);
+    }
+
+    function fireTarget() {
+      if (!state.active) return;
+
+      clearCells();
+
+      if (state.hits >= state.targetsNeeded) {
+        completeRound();
+        return;
+      }
+
+      const target = randomTarget();
+      const cell = document.querySelector(`.cell[data-index="${target}"]`);
+
+      state.currentTarget = target;
+      state.currentStart = performance.now();
+      state.acceptingTap = true;
+
+      if (cell) cell.classList.add('target');
+
+      setMessage(msg('react'), 'var(--brand-2)');
+      pulseCourt('pulse');
+
+      const interval = SPEEDS[state.speed].interval;
+      const missWindow = Math.max(420, interval * 0.9);
+
+      state.missTimer = setTimeout(() => {
+        if (state.active && state.acceptingTap) {
+          missTarget(target);
+        }
+      }, missWindow);
+    }
+
+    function missTarget(target) {
+      state.acceptingTap = false;
+      state.roundHadMistake = true;
+      state.lives -= 1;
+
+      const cell = document.querySelector(`.cell[data-index="${target}"]`);
+      if (cell) {
+        cell.classList.remove('target');
+        cell.classList.add('wrong');
+      }
+
+      setMessage(msg('miss'), 'var(--pink)');
+      pulseCourt('miss');
+
+      updateDisplay();
+
+      if (state.lives <= 0) {
+        failRound();
+        return;
+      }
+
+      state.timer = setTimeout(() => {
+        fireTarget();
+      }, 420);
+    }
+
+    function handleCellTap(index) {
+      if (!state.active || !state.acceptingTap) return;
+
+      clearTimeout(state.missTimer);
+      state.missTimer = null;
+
+      const tappedCell = document.querySelector(`.cell[data-index="${index}"]`);
+
+      if (index !== state.currentTarget) {
+        state.acceptingTap = false;
+        state.roundHadMistake = true;
+        state.lives -= 1;
+
+        if (tappedCell) tappedCell.classList.add('wrong');
+
+        setMessage(msg('wrong'), 'var(--pink)');
+        pulseCourt('miss');
+        updateDisplay();
+
+        if (state.lives <= 0) {
+          failRound();
+          return;
+        }
+
+        state.timer = setTimeout(() => {
+          fireTarget();
+        }, 420);
+
+        return;
+      }
+
+      const reactionTime = performance.now() - state.currentStart;
+      const targetCell = document.querySelector(`.cell[data-index="${state.currentTarget}"]`);
+
+      state.acceptingTap = false;
+      state.hits += 1;
+
+      if (targetCell) {
+        targetCell.classList.remove('target');
+
+        if (reactionTime <= 280) {
+          targetCell.classList.add('correct');
+          state.score += state.speed === 'elite' ? 35 : state.speed === 'tempo' ? 28 : 22;
+          setMessage(msg('perfect'), 'var(--brand-2)');
+        } else {
+          targetCell.classList.add('good');
+          state.score += state.speed === 'elite' ? 18 : state.speed === 'tempo' ? 15 : 12;
+          setMessage(msg('good'), 'var(--gold)');
+        }
+      }
+
+      pulseCourt('success');
+      updateDisplay();
+      saveProgress();
+
+      state.timer = setTimeout(() => {
+        fireTarget();
+      }, Math.max(260, SPEEDS[state.speed].interval * 0.45));
+    }
+
+    function completeRound() {
+      clearTimers();
+      state.active = false;
+      state.acceptingTap = false;
+      state.currentTarget = null;
+      startRoundBtn.disabled = false;
+
+      if (!state.roundHadMistake) {
+        state.perfectRounds += 1;
+      } else {
+        state.perfectRounds = 0;
+      }
+
+      let title = msg('roundComplete');
+      let text = msg('overlayGood');
+      let emoji = '🔥';
+
+      if (!state.roundHadMistake) {
+        title = msg('perfectRound');
+        text = msg('overlayPerfect');
+        emoji = '⭐';
+      }
+
+      if (state.perfectRounds >= 2) {
+        state.level = Math.min(10, state.level + 1);
+        state.perfectRounds = 0;
+        title = msg('levelUp');
+        text = currentLang === 'es'
+          ? `Ahora estás en Nivel ${state.level}.`
+          : `You are now Level ${state.level}.`;
+        emoji = '🏆';
+      }
+
+      updateDisplay();
+      saveProgress();
+      showOverlay(emoji, title, text);
+    }
+
+    function failRound() {
+      clearTimers();
+      state.active = false;
+      state.acceptingTap = false;
+      state.currentTarget = null;
+      state.perfectRounds = 0;
+      startRoundBtn.disabled = false;
+
+      updateDisplay();
+      saveProgress();
+      showOverlay('💨', msg('outOfLives'), msg('overlayMiss'));
+    }
+
+    function showOverlay(emoji, title, text) {
+      overlayEmoji.textContent = emoji;
+      overlayTitle.textContent = title;
+      overlayText.textContent = text;
+      roundOverlay.classList.add('show');
+    }
+
+    function closeOverlay() {
+      roundOverlay.classList.remove('show');
+      clearCells();
+      setMessage(msg('start'), 'var(--gold)');
+    }
+
+    function resetScore() {
+      clearTimers();
+      clearCells();
+
+      state.score = 0;
+      state.round = 0;
+      state.level = 1;
+      state.lives = 3;
+      state.hits = 0;
+      state.perfectRounds = 0;
+      state.active = false;
+      state.acceptingTap = false;
+      state.currentTarget = null;
+      state.roundHadMistake = false;
+      startRoundBtn.disabled = false;
+
+      saveProgress();
+      updateDisplay();
+      setMessage(msg('reset'), 'var(--gold)');
+    }
+
+    speedCards.forEach(card => {
+      card.addEventListener('click', () => {
+        if (state.active) return;
+        state.speed = card.dataset.speed;
+        saveProgress();
+        updateDisplay();
+      });
+    });
+
+    startRoundBtn.addEventListener('click', startRound);
+    resetBtn.addEventListener('click', resetScore);
+
+    overlayNextBtn.addEventListener('click', () => {
+      closeOverlay();
+      startRound();
+    });
+
+    overlayCloseBtn.addEventListener('click', closeOverlay);
+
+    buildCourt();
+    setLanguage(currentLang);
+    updateDisplay();
+
+    window.COGNITIVE_TEST_NAME = 'react';
+  </script>
+
+</body>
+</html>
