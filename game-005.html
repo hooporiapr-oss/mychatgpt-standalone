@@ -1,0 +1,1040 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game 005 | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --brand-soft:rgba(155,89,182,.18);
+      --green-soft:rgba(0,217,165,.14);
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(155,89,182,.18),transparent 34%),
+        radial-gradient(circle at top right,rgba(0,217,165,.10),transparent 30%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--brand);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .hero-image{
+      max-width:var(--max);
+      margin:16px auto 0;
+      padding:0 16px;
+    }
+
+    .hero-image-inner{
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      object-fit:cover;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(155,89,182,.55);
+      background:
+        linear-gradient(135deg,rgba(155,89,182,.18),rgba(0,217,165,.06)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(0,217,165,.5);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(155,89,182,.16)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.warning{
+      border-color:rgba(255,138,61,.45);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.gate{
+      border-color:rgba(245,197,66,.55);
+      background:
+        linear-gradient(135deg,rgba(245,197,66,.16),rgba(155,89,182,.18),rgba(0,217,165,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand);
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(0,217,165,.38);
+      background:var(--green-soft);
+      color:#b9ffee;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--brand);
+      background:var(--brand-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+    }
+
+    .section-label{
+      color:var(--brand-2);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-list,.check-list,.quiz-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,.check-card,.quiz-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,.check-card strong,.quiz-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,.check-card p,.quiz-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .check-card{
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    .check-num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand-2);
+      color:var(--brand-2);
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(0,217,165,.36);
+      background:var(--green-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .orange-note{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:900;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--brand);
+      background:var(--brand);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .stat span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .prompt-box{
+      margin-top:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .prompt-box small{
+      display:block;
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-size:11px;
+    }
+
+    .prompt-box p{
+      margin:0;
+      color:#e8edf2;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .post-actions{
+      display:flex;
+      gap:22px;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 005: Brand" data-es="Juego 005: Marca">Game 005: Brand</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="game-004.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+          <a href="#paid-gate" data-en="Gate" data-es="Puerta">Gate</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-005.png" alt="Game 005 Brand Basketball Money">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar">005</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 005" data-es="Juego 005">Game 005</span>
+              <span class="handle">@basketballmoney</span>
+              <span class="badge" data-en="Free Finale" data-es="Final Gratis">Free Finale</span>
+            </div>
+            <span class="handle" data-en="The final free game before the paid season." data-es="El último juego gratis antes de la temporada paga.">The final free game before the paid season.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="Your game. Your name. Your future." data-es="Tu juego. Tu nombre. Tu futuro.">
+          Your game. Your name. Your future.
+        </h1>
+
+        <p class="post-sub" data-en="Game 005 teaches brand. Not just logos. Not just followers. Your brand is what people believe about you before they choose you." data-es="El Juego 005 enseña marca. No solo logos. No solo seguidores. Tu marca es lo que la gente cree de ti antes de escogerte.">
+          Game 005 teaches brand. Not just logos. Not just followers. Your brand is what people believe about you before they choose you.
+        </p>
+
+        <div class="thread-line" data-en="Basketball business rule: your brand is built by your value, protected by your decisions, and expanded by your story." data-es="Regla de negocio en baloncesto: tu marca se construye con tu valor, se protege con tus decisiones y se expande con tu historia.">
+          Basketball business rule: your brand is built by your value, protected by your decisions, and expanded by your story.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>005</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Brand" data-es="Marca">Brand</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Status" data-es="Estado">Status</span>
+            <strong data-en="Free Gate" data-es="Puerta Gratis">Free Gate</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="#lesson" data-en="Start Lesson →" data-es="Comenzar Lección →">Start Lesson →</a>
+          <a class="btn secondary" href="#paid-gate" data-en="See The Gate" data-es="Ver La Puerta">See The Gate</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 005</span>
+          <span>🔁 Brand</span>
+          <span>🔥 Free Finale</span>
+        </div>
+      </section>
+
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@brandisbelief</span>
+            </div>
+            <span class="handle" data-en="Brand is what people believe." data-es="Marca es lo que la gente cree.">Brand is what people believe.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The fifth business lesson" data-es="La quinta lección de negocio">The fifth business lesson</p>
+
+        <h2 class="post-text" data-en="In basketball, your brand is your reputation in motion." data-es="En el baloncesto, tu marca es tu reputación en movimiento.">
+          In basketball, your brand is your reputation in motion.
+        </h2>
+
+        <p class="post-sub" data-en="Your brand is not only what you post. It is how you practice, how you compete, how you speak, how you respond, how you treat people, and how you carry your name." data-es="Tu marca no es solo lo que publicas. Es cómo practicas, cómo compites, cómo hablas, cómo respondes, cómo tratas a la gente y cómo cargas tu nombre.">
+          Your brand is not only what you post. It is how you practice, how you compete, how you speak, how you respond, how you treat people, and how you carry your name.
+        </p>
+
+        <div class="quote" data-en="A logo can identify you. A brand makes people believe you." data-es="Un logo te puede identificar. Una marca hace que la gente crea en ti.">
+          A logo can identify you. A brand makes people believe you.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@buildit</span>
+            </div>
+            <span class="handle" data-en="Build it before you sell it." data-es="Constrúyela antes de venderla.">Build it before you sell it.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Build your brand" data-es="Construye tu marca">Build your brand</p>
+
+        <h2 class="post-text" data-en="Before people invest in your brand, they need to understand what you stand for." data-es="Antes de que la gente invierta en tu marca, necesita entender qué tú representas.">
+          Before people invest in your brand, they need to understand what you stand for.
+        </h2>
+
+        <p class="post-sub" data-en="A strong basketball brand has identity, standards, proof, and a story. It tells people what kind of player, teammate, competitor, and person they are dealing with." data-es="Una marca fuerte en el baloncesto tiene identidad, estándares, evidencia e historia. Le dice a la gente con qué tipo de jugador, compañero, competidor y persona están tratando.">
+          A strong basketball brand has identity, standards, proof, and a story. It tells people what kind of player, teammate, competitor, and person they are dealing with.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Identity" data-es="Identidad">Identity</strong>
+            <p data-en="Who are you as a basketball person?" data-es="¿Quién eres tú como persona de baloncesto?">Who are you as a basketball person?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Standards" data-es="Estándares">Standards</strong>
+            <p data-en="What do people consistently experience from you?" data-es="¿Qué la gente experimenta de ti consistentemente?">What do people consistently experience from you?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Proof" data-es="Evidencia">Proof</strong>
+            <p data-en="What evidence backs up what you claim?" data-es="¿Qué evidencia respalda lo que tú dices?">What evidence backs up what you claim?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Story" data-es="Historia">Story</strong>
+            <p data-en="What journey makes your value meaningful?" data-es="¿Qué trayectoria hace que tu valor tenga significado?">What journey makes your value meaningful?</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@protectyourname</span>
+            </div>
+            <span class="handle" data-en="A warning before the second half." data-es="Una advertencia antes de la segunda mitad.">A warning before the second half.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Your name travels before you do" data-es="Tu nombre viaja antes que tú">Your name travels before you do</p>
+
+        <h2 class="post-text" data-en="A brand can open doors, but bad decisions can close them faster." data-es="Una marca puede abrir puertas, pero malas decisiones pueden cerrarlas más rápido.">
+          A brand can open doors, but bad decisions can close them faster.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: protect your name like it is already connected to future money, trust, and opportunity — because it is." data-es="Regla de negocio en baloncesto: protege tu nombre como si ya estuviera conectado a dinero futuro, confianza y oportunidad — porque lo está.">
+          Basketball business rule: protect your name like it is already connected to future money, trust, and opportunity — because it is.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@protectit</span>
+            </div>
+            <span class="handle" data-en="Protect the name." data-es="Protege el nombre.">Protect the name.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Protect your brand" data-es="Protege tu marca">Protect your brand</p>
+
+        <h2 class="post-text" data-en="Your brand is protected by decisions nobody can make for you." data-es="Tu marca se protege con decisiones que nadie puede tomar por ti.">
+          Your brand is protected by decisions nobody can make for you.
+        </h2>
+
+        <p class="post-sub" data-en="What you post, who you follow, how you respond, who you attach your name to, and how you handle pressure all become part of the brand people remember." data-es="Lo que publicas, a quién sigues, cómo respondes, con quién pegas tu nombre y cómo manejas la presión se convierten en parte de la marca que la gente recuerda.">
+          What you post, who you follow, how you respond, who you attach your name to, and how you handle pressure all become part of the brand people remember.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Protect your behavior" data-es="Protege tu conducta">Protect your behavior</strong>
+            <p data-en="People remember how you handle winning, losing, correction, and pressure." data-es="La gente recuerda cómo manejas ganar, perder, la corrección y la presión.">People remember how you handle winning, losing, correction, and pressure.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Protect your online presence" data-es="Protege tu presencia online">Protect your online presence</strong>
+            <p data-en="Your posts can build trust or create questions." data-es="Tus publicaciones pueden construir confianza o crear dudas.">Your posts can build trust or create questions.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Protect your circle" data-es="Protege tu círculo">Protect your circle</strong>
+            <p data-en="The people around your name can affect how your name is judged." data-es="Las personas alrededor de tu nombre pueden afectar cómo se juzga tu nombre.">The people around your name can affect how your name is judged.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Protect your promise" data-es="Protege tu promesa">Protect your promise</strong>
+            <p data-en="Do not brand yourself as something your habits do not support." data-es="No te vendas como algo que tus hábitos no respaldan.">Do not brand yourself as something your habits do not support.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@amplifyit</span>
+            </div>
+            <span class="handle" data-en="Share the story with purpose." data-es="Comparte la historia con propósito.">Share the story with purpose.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Amplify your brand" data-es="Amplifica tu marca">Amplify your brand</p>
+
+        <h2 class="post-text" data-en="A strong brand does not beg for attention. It gives people a reason to pay attention." data-es="Una marca fuerte no ruega por atención. Le da a la gente una razón para prestar atención.">
+          A strong brand does not beg for attention. It gives people a reason to pay attention.
+        </h2>
+
+        <p class="post-sub" data-en="Amplifying your brand means showing your work, telling your story, connecting with the right people, and making your value easier to understand." data-es="Amplificar tu marca significa mostrar tu trabajo, contar tu historia, conectar con las personas correctas y hacer que tu valor sea más fácil de entender.">
+          Amplifying your brand means showing your work, telling your story, connecting with the right people, and making your value easier to understand.
+        </p>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Build it." data-es="Constrúyela.">Build it.</strong>
+              <p data-en="Develop your identity on and off the court." data-es="Desarrolla tu identidad dentro y fuera de la cancha.">Develop your identity on and off the court.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Protect it." data-es="Protégela.">Protect it.</strong>
+              <p data-en="Guard your name, values, behavior, and reputation." data-es="Cuida tu nombre, valores, conducta y reputación.">Guard your name, values, behavior, and reputation.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Profit from it." data-es="Sácale provecho.">Profit from it.</strong>
+              <p data-en="Turn trust and visibility into better opportunities." data-es="Convierte confianza y visibilidad en mejores oportunidades.">Turn trust and visibility into better opportunities.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Amplify it." data-es="Amplifícala.">Amplify it.</strong>
+              <p data-en="Share your story in a way that inspires belief." data-es="Comparte tu historia de una forma que inspire credibilidad.">Share your story in a way that inspires belief.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game005review</span>
+              <span class="badge" data-en="Free Review" data-es="Repaso Gratis">Free Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the free foundation." data-es="Asegura la base gratis.">Lock in the free foundation.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 005 Review" data-es="Repaso del Juego 005">Game 005 Review</p>
+
+        <h2 class="post-text" data-en="Before the paid season, answer this honestly: what does your basketball brand say about you?" data-es="Antes de la temporada paga, contesta esto con honestidad: ¿qué dice tu marca de baloncesto sobre ti?">
+          Before the paid season, answer this honestly: what does your basketball brand say about you?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. What do you want people to believe about your game?" data-es="1. ¿Qué quieres que la gente crea de tu juego?">1. What do you want people to believe about your game?</strong>
+            <p data-en="Your answer should match what your habits can prove." data-es="Tu respuesta debe ir con lo que tus hábitos pueden probar.">Your answer should match what your habits can prove.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What part of your brand already has proof?" data-es="2. ¿Qué parte de tu marca ya tiene evidencia?">2. What part of your brand already has proof?</strong>
+            <p data-en="Name the proof: work, film, results, consistency, reputation, or relationships." data-es="Nombra la evidencia: trabajo, video, resultados, consistencia, reputación o relaciones.">Name the proof: work, film, results, consistency, reputation, or relationships.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. What could damage your name if you do not fix it?" data-es="3. ¿Qué podría dañar tu nombre si no lo corriges?">3. What could damage your name if you do not fix it?</strong>
+            <p data-en="A serious player protects the future before it becomes public." data-es="Un jugador serio protege el futuro antes de que se vuelva público.">A serious player protects the future before it becomes public.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. What story should people know about you?" data-es="4. ¿Qué historia la gente debe conocer de ti?">4. What story should people know about you?</strong>
+            <p data-en="Your story can turn attention into connection." data-es="Tu historia puede convertir atención en conexión.">Your story can turn attention into connection.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Your game. Your name. Your future. What will you build next?" data-es="5. Tu juego. Tu nombre. Tu futuro. ¿Qué vas a construir ahora?">5. Your game. Your name. Your future. What will you build next?</strong>
+            <p data-en="This is the question that closes the free season." data-es="Esta es la pregunta que cierra la temporada gratis.">This is the question that closes the free season.</p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 005. Help me define my basketball brand, identify what I need to protect, and create a simple brand statement that connects my game, my values, and my future opportunities." data-es="Prompt: Acabo de terminar Basketball Money Juego 005. Ayúdame a definir mi marca de baloncesto, identificar lo que necesito proteger y crear una declaración simple de marca que conecte mi juego, mis valores y mis oportunidades futuras.">
+            Prompt: I just finished Basketball Money Game 005. Help me define my basketball brand, identify what I need to protect, and create a simple brand statement that connects my game, my values, and my future opportunities.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn secondary" href="#paid-gate" data-en="Go to Paid Gate →" data-es="Ir a la Puerta Paga →">Go to Paid Gate →</a>
+          <a class="btn secondary" href="game-004.html" data-en="Back to Game 004" data-es="Volver al Juego 004">Back to Game 004</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>🔁 Build Brand</span>
+          <span>🔥 Gate Opens</span>
+        </div>
+      </section>
+
+      <section class="post gate" id="paid-gate">
+        <div class="post-head">
+          <div class="avatar">006</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="The Gate" data-es="La Puerta">The Gate</span>
+              <span class="handle">@games006to030</span>
+              <span class="badge gold" data-en="Paid Season" data-es="Temporada Paga">Paid Season</span>
+            </div>
+            <span class="handle" data-en="The free foundation is complete." data-es="La base gratis está completa.">The free foundation is complete.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Games 006–030" data-es="Juegos 006–030">Games 006–030</p>
+
+        <h2 class="post-text big" data-en="Now the real separation begins." data-es="Ahora empieza la verdadera separación.">
+          Now the real separation begins.
+        </h2>
+
+        <p class="post-sub" data-en="Games 001–005 built the foundation: value, habits, influence, opportunity, and brand. Games 006–030 move into deeper basketball business: money, visibility, discipline, productivity, identity, decision-making, readiness, and mastery." data-es="Los Juegos 001–005 construyeron la base: valor, hábitos, influencia, oportunidad y marca. Los Juegos 006–030 entran en el negocio del baloncesto más profundo: dinero, visibilidad, disciplina, productividad, identidad, toma de decisiones, preparación y dominio.">
+          Games 001–005 built the foundation: value, habits, influence, opportunity, and brand. Games 006–030 move into deeper basketball business: money, visibility, discipline, productivity, identity, decision-making, readiness, and mastery.
+        </p>
+
+        <div class="gold-note" data-en="Most players enjoy the free game. Serious players invest in the next level." data-es="La mayoría de los jugadores disfrutan lo gratis. Los serios invierten en el próximo nivel.">
+          Most players enjoy the free game. Serious players invest in the next level.
+        </div>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Games 006–010" data-es="Juegos 006–010">Games 006–010</strong>
+            <p data-en="Money mindset, discipline, visibility, productivity, and identity." data-es="Mentalidad de dinero, disciplina, visibilidad, productividad e identidad.">Money mindset, discipline, visibility, productivity, and identity.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Games 011–020" data-es="Juegos 011–020">Games 011–020</strong>
+            <p data-en="Deeper player business decisions, reputation, relationships, and opportunity management." data-es="Decisiones más profundas de negocio del jugador, reputación, relaciones y manejo de oportunidades.">Deeper player business decisions, reputation, relationships, and opportunity management.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Games 021–030" data-es="Juegos 021–030">Games 021–030</strong>
+            <p data-en="Readiness, mastery, long-term value, and building your basketball future." data-es="Preparación, dominio, valor a largo plazo y construcción de tu futuro en el baloncesto.">Readiness, mastery, long-term value, and building your basketball future.</p>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn gold" href="#" data-en="Unlock Games 006–030 →" data-es="Desbloquear Juegos 006–030 →">Unlock Games 006–030 →</a>
+          <a class="btn secondary" href="index.html" data-en="Back to Home" data-es="Volver al Inicio">Back to Home</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Paid Season</span>
+          <span>🔁 25 More Games</span>
+          <span>🔥 Separation</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="Your brand is not what you say one time. It is what your value, habits, influence, opportunity, and decisions keep proving." data-es="Tu marca no es lo que dices una vez. Es lo que tu valor, hábitos, influencia, oportunidad y decisiones siguen demostrando.">
+          Your brand is not what you say one time. It is what your value, habits, influence, opportunity, and decisions keep proving.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 005: Brand | Free Season Complete" data-es="Basketball Money — Juego 005: Marca | Temporada Gratis Completada">
+        Basketball Money — Game 005: Brand | Free Season Complete
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
+  </script>
+
+</body>
+</html>
