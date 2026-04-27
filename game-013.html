@@ -1,0 +1,1068 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Game 013 | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --cyan:#20d7ff;
+      --cyan-soft:rgba(32,215,255,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --green-soft:rgba(0,217,165,.14);
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(32,215,255,.18),transparent 34%),
+        radial-gradient(circle at top right,rgba(255,138,61,.16),transparent 30%),
+        radial-gradient(circle at bottom center,rgba(155,89,182,.12),transparent 34%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--cyan),var(--orange));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--cyan);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .hero-image{
+      max-width:var(--max);
+      margin:16px auto 0;
+      padding:0 16px;
+    }
+
+    .hero-image-inner{
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      object-fit:cover;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(32,215,255,.55);
+      background:
+        linear-gradient(135deg,rgba(32,215,255,.16),rgba(255,138,61,.14),rgba(155,89,182,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.lab{
+      border-color:rgba(255,138,61,.50);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.14),rgba(32,215,255,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.warning{
+      border-color:rgba(255,138,61,.45);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(0,217,165,.5);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(32,215,255,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--cyan);
+      color:var(--cyan);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .avatar.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(32,215,255,.38);
+      background:var(--cyan-soft);
+      color:#bcefff;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--cyan);
+      background:var(--cyan-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      color:#d9f8ff;
+    }
+
+    .section-label{
+      color:var(--cyan);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-list,.check-list,.quiz-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,.check-card,.quiz-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,.check-card strong,.quiz-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,.check-card p,.quiz-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .check-card{
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    .check-num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--cyan);
+      color:var(--cyan);
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(32,215,255,.36);
+      background:var(--cyan-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .orange-note{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:900;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--brand);
+      background:var(--brand);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .btn.orange{
+      background:var(--orange);
+      color:#160802;
+      border-color:var(--orange);
+    }
+
+    .btn.cyan{
+      background:var(--cyan);
+      color:#031014;
+      border-color:var(--cyan);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .stat span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .prompt-box{
+      margin-top:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .prompt-box small{
+      display:block;
+      color:var(--cyan);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-size:11px;
+    }
+
+    .prompt-box p{
+      margin:0;
+      color:#e8edf2;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .post-actions{
+      display:flex;
+      gap:22px;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 013: Spatial Awareness" data-es="Juego 013: Conciencia Espacial">Game 013: Spatial Awareness</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="game-012.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#cog02" data-en="COG 02" data-es="COG 02">COG 02</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-013.png" alt="Game 013 Spatial Awareness Basketball Money">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar gold">013</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 013" data-es="Juego 013">Game 013</span>
+              <span class="handle">@paidseason</span>
+              <span class="badge gold" data-en="COG 02 Segment" data-es="Segmento COG 02">COG 02 Segment</span>
+            </div>
+            <span class="handle" data-en="Know your space. Control your space." data-es="Conoce tu espacio. Controla tu espacio.">Know your space. Control your space.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="The floor is talking. Your job is to understand the space before you move." data-es="La cancha está hablando. Tu trabajo es entender el espacio antes de moverte.">
+          The floor is talking. Your job is to understand the space before you move.
+        </h1>
+
+        <p class="post-sub" data-en="Game 013 teaches Spatial Awareness. Great players understand where they are, where others are, where pressure is coming from, and where the next advantage can appear." data-es="El Juego 013 enseña Conciencia Espacial. Los grandes jugadores entienden dónde están, dónde están los demás, de dónde viene la presión y dónde puede aparecer la próxima ventaja.">
+          Game 013 teaches Spatial Awareness. Great players understand where they are, where others are, where pressure is coming from, and where the next advantage can appear.
+        </p>
+
+        <div class="thread-line" data-en="Basketball business rule: more awareness creates better reads, better plays, and better options." data-es="Regla de negocio en baloncesto: más conciencia crea mejores lecturas, mejores jugadas y mejores opciones.">
+          Basketball business rule: more awareness creates better reads, better plays, and better options.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>013</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Spatial Awareness" data-es="Conciencia Espacial">Spatial Awareness</strong>
+          </div>
+          <div class="stat">
+            <span data-en="COG Access" data-es="Acceso COG">COG Access</span>
+            <strong data-en="COG 02" data-es="COG 02">COG 02</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn cyan" href="#lesson" data-en="Start Paid Lesson →" data-es="Comenzar Lección Paga →">Start Paid Lesson →</a>
+          <a class="btn orange" href="#cog02" data-en="Open COG 02 Access" data-es="Abrir Acceso COG 02">Open COG 02 Access</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 013</span>
+          <span>📍 Spatial Awareness</span>
+          <span>🧠 COG 02</span>
+        </div>
+      </section>
+
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@knowwhereyouare</span>
+            </div>
+            <span class="handle" data-en="Know where you are." data-es="Sabe dónde estás.">Know where you are.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The thirteenth business lesson" data-es="La decimotercera lección de negocio">The thirteenth business lesson</p>
+
+        <h2 class="post-text" data-en="Spatial awareness starts with knowing your position before making your decision." data-es="La conciencia espacial empieza con saber tu posición antes de tomar la decisión.">
+          Spatial awareness starts with knowing your position before making your decision.
+        </h2>
+
+        <p class="post-sub" data-en="A player who does not understand space becomes trapped by pressure. A player who reads space can create angles, protect options, and make the next move cleaner." data-es="Un jugador que no entiende el espacio queda atrapado por la presión. Un jugador que lee el espacio puede crear ángulos, proteger opciones y hacer el próximo movimiento más limpio.">
+          A player who does not understand space becomes trapped by pressure. A player who reads space can create angles, protect options, and make the next move cleaner.
+        </p>
+
+        <div class="quote" data-en="Space is information. The prepared player knows how to read it." data-es="El espacio es información. El jugador preparado sabe cómo leerlo.">
+          Space is information. The prepared player knows how to read it.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@controlthespace</span>
+            </div>
+            <span class="handle" data-en="Control the space." data-es="Controla el espacio.">Control the space.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="What space tells you" data-es="Qué te dice el espacio">What space tells you</p>
+
+        <h2 class="post-text" data-en="Every space on the floor has a message." data-es="Cada espacio en la cancha tiene un mensaje.">
+          Every space on the floor has a message.
+        </h2>
+
+        <p class="post-sub" data-en="Open space, crowded space, weak-side space, strong-side pressure, driving lanes, passing windows, and defensive gaps all tell the player what is possible." data-es="Espacio abierto, espacio congestionado, lado débil, presión del lado fuerte, carriles de penetración, ventanas de pase y espacios defensivos le dicen al jugador qué es posible.">
+          Open space, crowded space, weak-side space, strong-side pressure, driving lanes, passing windows, and defensive gaps all tell the player what is possible.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Open space" data-es="Espacio abierto">Open space</strong>
+            <p data-en="A place to attack, cut, pass, relocate, or create advantage." data-es="Un lugar para atacar, cortar, pasar, reubicarse o crear ventaja.">
+              A place to attack, cut, pass, relocate, or create advantage.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Crowded space" data-es="Espacio congestionado">Crowded space</strong>
+            <p data-en="A warning that pressure, help, or poor spacing may limit the next move." data-es="Una advertencia de que la presión, la ayuda o el mal spacing pueden limitar el próximo movimiento.">
+              A warning that pressure, help, or poor spacing may limit the next move.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Weak-side space" data-es="Espacio del lado débil">Weak-side space</strong>
+            <p data-en="A place where the next advantage may quietly form." data-es="Un lugar donde la próxima ventaja puede formarse en silencio.">
+              A place where the next advantage may quietly form.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Pressure space" data-es="Espacio de presión">Pressure space</strong>
+            <p data-en="A signal to protect the ball, move the ball, or change the angle." data-es="Una señal para proteger el balón, mover el balón o cambiar el ángulo.">
+              A signal to protect the ball, move the ball, or change the angle.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@dontdribbleblind</span>
+            </div>
+            <span class="handle" data-en="Do not move blind." data-es="No te muevas a ciegas.">Do not move blind.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Do not move before you read" data-es="No te muevas antes de leer">Do not move before you read</p>
+
+        <h2 class="post-text" data-en="Speed without spatial awareness can run straight into pressure." data-es="La velocidad sin conciencia espacial puede correr directo hacia la presión.">
+          Speed without spatial awareness can run straight into pressure.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: movement is powerful only when the player understands where the advantage is." data-es="Regla de negocio en baloncesto: el movimiento es poderoso solo cuando el jugador entiende dónde está la ventaja.">
+          Basketball business rule: movement is powerful only when the player understands where the advantage is.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@anglescreateadvantage</span>
+            </div>
+            <span class="handle" data-en="Angles create advantage." data-es="Los ángulos crean ventaja.">Angles create advantage.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Angles, lanes, and timing" data-es="Ángulos, carriles y timing">Angles, lanes, and timing</p>
+
+        <h2 class="post-text" data-en="Spatial awareness helps the player create better angles before the defense reacts." data-es="La conciencia espacial ayuda al jugador a crear mejores ángulos antes de que la defensa reaccione.">
+          Spatial awareness helps the player create better angles before the defense reacts.
+        </h2>
+
+        <p class="post-sub" data-en="A small step can change a passing lane. A better angle can protect the ball. A timely cut can open the floor. A smarter relocation can turn pressure into advantage." data-es="Un paso pequeño puede cambiar una línea de pase. Un mejor ángulo puede proteger el balón. Un corte a tiempo puede abrir la cancha. Una reubicación inteligente puede convertir presión en ventaja.">
+          A small step can change a passing lane. A better angle can protect the ball. A timely cut can open the floor. A smarter relocation can turn pressure into advantage.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Passing angles" data-es="Ángulos de pase">Passing angles</strong>
+            <p data-en="Change your position to make the pass easier, safer, and faster." data-es="Cambia tu posición para hacer el pase más fácil, seguro y rápido.">
+              Change your position to make the pass easier, safer, and faster.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Driving lanes" data-es="Carriles de penetración">Driving lanes</strong>
+            <p data-en="Attack the space that gives you the cleanest advantage." data-es="Ataca el espacio que te da la ventaja más limpia.">
+              Attack the space that gives you the cleanest advantage.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Relocation" data-es="Reubicación">Relocation</strong>
+            <p data-en="Move without the ball to create better options for yourself and others." data-es="Muévete sin el balón para crear mejores opciones para ti y para otros.">
+              Move without the ball to create better options for yourself and others.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Timing" data-es="Timing">Timing</strong>
+            <p data-en="The same space can be open or closed depending on when you move." data-es="El mismo espacio puede estar abierto o cerrado dependiendo de cuándo te mueves.">
+              The same space can be open or closed depending on when you move.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@spacehabits</span>
+            </div>
+            <span class="handle" data-en="Build space habits." data-es="Construye hábitos de espacio.">Build space habits.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Spatial awareness checklist" data-es="Checklist de conciencia espacial">Spatial awareness checklist</p>
+
+        <h2 class="post-text" data-en="A serious player studies space before, during, and after the play." data-es="Un jugador serio estudia el espacio antes, durante y después de la jugada.">
+          A serious player studies space before, during, and after the play.
+        </h2>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Scan before receiving." data-es="Escanea antes de recibir.">Scan before receiving.</strong>
+              <p data-en="Know where pressure and options are before the ball arrives." data-es="Sabe dónde están la presión y las opciones antes de que llegue el balón.">
+                Know where pressure and options are before the ball arrives.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Know your outlet." data-es="Conoce tu salida.">Know your outlet.</strong>
+              <p data-en="Every player should know where the safe next option is." data-es="Todo jugador debe saber dónde está la próxima opción segura.">
+                Every player should know where the safe next option is.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Move to create space." data-es="Muévete para crear espacio.">Move to create space.</strong>
+              <p data-en="Do not only use space. Create it for the team." data-es="No solo uses el espacio. Créalo para el equipo.">
+                Do not only use space. Create it for the team.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Review spacing mistakes." data-es="Repasa errores de spacing.">Review spacing mistakes.</strong>
+              <p data-en="Film can show when you were too close, too late, or in the wrong lane." data-es="El video puede mostrar cuándo estabas demasiado cerca, tarde o en el carril equivocado.">
+                Film can show when you were too close, too late, or in the wrong lane.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post lab" id="cog02">
+        <div class="post-head">
+          <div class="avatar">COG</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 02 Access" data-es="Acceso COG 02">COG 02 Access</span>
+              <span class="handle">@therecall</span>
+              <span class="badge" data-en="Games 011–015" data-es="Juegos 011–015">Games 011–015</span>
+            </div>
+            <span class="handle" data-en="Memory supports spatial awareness." data-es="La memoria apoya la conciencia espacial.">Memory supports spatial awareness.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Cognitive Training Lab" data-es="Laboratorio de Entrenamiento Cognitivo">Cognitive Training Lab</p>
+
+        <h2 class="post-text" data-en="COG 02 helps Game 013 because spatial awareness requires remembering where things are." data-es="COG 02 ayuda al Juego 013 porque la conciencia espacial requiere recordar dónde están las cosas.">
+          COG 02 helps Game 013 because spatial awareness requires remembering where things are.
+        </h2>
+
+        <p class="post-sub" data-en="The Recall trains the player to memorize positions and tap them back in order. Spatial Awareness adds the next layer: understand the location, pressure, angle, and next advantage." data-es="The Recall entrena al jugador a memorizar posiciones y tocarlas en orden. Conciencia Espacial añade la próxima capa: entender la ubicación, presión, ángulo y próxima ventaja.">
+          The Recall trains the player to memorize positions and tap them back in order. Spatial Awareness adds the next layer: understand the location, pressure, angle, and next advantage.
+        </p>
+
+        <div class="gold-note" data-en="Paid separator: the player is training the brain to remember space, organize space, and use space." data-es="Separador pago: el jugador está entrenando el cerebro para recordar el espacio, organizar el espacio y usar el espacio.">
+          Paid separator: the player is training the brain to remember space, organize space, and use space.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn orange" href="cog-02.html" data-en="Train COG 02: The Recall →" data-es="Entrenar COG 02: The Recall →">Train COG 02: The Recall →</a>
+          <a class="btn secondary" href="#final" data-en="Finish Game 013 First" data-es="Terminar Juego 013 Primero">Finish Game 013 First</a>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game013review</span>
+              <span class="badge gold" data-en="Paid Review" data-es="Repaso Pago">Paid Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the paid lesson." data-es="Asegura la lección paga.">Lock in the paid lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 013 Review" data-es="Repaso del Juego 013">Game 013 Review</p>
+
+        <h2 class="post-text" data-en="Before Game 014, answer this honestly: do you control space, or does pressure control you?" data-es="Antes del Juego 014, contesta esto con honestidad: ¿controlas el espacio, o la presión te controla a ti?">
+          Before Game 014, answer this honestly: do you control space, or does pressure control you?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. Where do you usually lose space?" data-es="1. ¿Dónde usualmente pierdes espacio?">1. Where do you usually lose space?</strong>
+            <p data-en="On the catch, off the dribble, on cuts, in transition, or under pressure." data-es="Al recibir, dribleando, cortando, en transición o bajo presión.">
+              On the catch, off the dribble, on cuts, in transition, or under pressure.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What space do you read well?" data-es="2. ¿Qué espacio lees bien?">2. What space do you read well?</strong>
+            <p data-en="Open lanes, weak side, defensive gaps, passing windows, or relocation opportunities." data-es="Carriles abiertos, lado débil, espacios defensivos, ventanas de pase o oportunidades de reubicación.">
+              Open lanes, weak side, defensive gaps, passing windows, or relocation opportunities.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. What pressure makes you rush?" data-es="3. ¿Qué presión te hace apresurarte?">3. What pressure makes you rush?</strong>
+            <p data-en="Physical pressure, time pressure, crowd pressure, defensive traps, or mental pressure." data-es="Presión física, presión de tiempo, presión de público, trampas defensivas o presión mental.">
+              Physical pressure, time pressure, crowd pressure, defensive traps, or mental pressure.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. How can COG 02 help your spatial awareness?" data-es="4. ¿Cómo puede COG 02 ayudar tu conciencia espacial?">4. How can COG 02 help your spatial awareness?</strong>
+            <p data-en="Think memory of position, sequence, location, order, and cleaner decisions." data-es="Piensa en memoria de posición, secuencia, ubicación, orden y decisiones más limpias.">
+              Think memory of position, sequence, location, order, and cleaner decisions.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Can you read the space before you move?" data-es="5. ¿Puedes leer el espacio antes de moverte?">5. Can you read the space before you move?</strong>
+            <p data-en="This is the question that closes Game 013." data-es="Esta es la pregunta que cierra el Juego 013.">
+              This is the question that closes Game 013.
+            </p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 013. Help me improve my spatial awareness in basketball and business. Identify where I lose space, how I can create better angles, and how I can train myself to read the space before I move." data-es="Prompt: Acabo de terminar Basketball Money Juego 013. Ayúdame a mejorar mi conciencia espacial en baloncesto y negocio. Identifica dónde pierdo espacio, cómo puedo crear mejores ángulos y cómo puedo entrenarme para leer el espacio antes de moverme.">
+            Prompt: I just finished Basketball Money Game 013. Help me improve my spatial awareness in basketball and business. Identify where I lose space, how I can create better angles, and how I can train myself to read the space before I move.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn orange" href="cog-02.html" data-en="Train COG 02: The Recall →" data-es="Entrenar COG 02: The Recall →">Train COG 02: The Recall →</a>
+          <a class="btn secondary" href="game-014.html" data-en="Continue to Game 014 →" data-es="Continuar al Juego 014 →">Continue to Game 014 →</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>📍 Spatial Awareness</span>
+          <span>🧠 The Recall</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="Know your space. Control your space. Dominate the decision before the defense reacts." data-es="Conoce tu espacio. Controla tu espacio. Domina la decisión antes de que la defensa reaccione.">
+          Know your space. Control your space. Dominate the decision before the defense reacts.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 013: Spatial Awareness | COG 02 Segment" data-es="Basketball Money — Juego 013: Conciencia Espacial | Segmento COG 02">
+        Basketball Money — Game 013: Spatial Awareness | COG 02 Segment
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
+  </script>
+
+</body>
+</html>
