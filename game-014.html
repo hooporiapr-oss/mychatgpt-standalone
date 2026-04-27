@@ -1,0 +1,1068 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Game 014 | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --cyan:#20d7ff;
+      --cyan-soft:rgba(32,215,255,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --green-soft:rgba(0,217,165,.14);
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(32,215,255,.18),transparent 34%),
+        radial-gradient(circle at top right,rgba(255,138,61,.16),transparent 30%),
+        radial-gradient(circle at bottom center,rgba(155,89,182,.12),transparent 34%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--cyan),var(--orange));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--cyan);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .hero-image{
+      max-width:var(--max);
+      margin:16px auto 0;
+      padding:0 16px;
+    }
+
+    .hero-image-inner{
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      object-fit:cover;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(32,215,255,.55);
+      background:
+        linear-gradient(135deg,rgba(32,215,255,.16),rgba(255,138,61,.14),rgba(155,89,182,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.lab{
+      border-color:rgba(255,138,61,.50);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.14),rgba(32,215,255,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.warning{
+      border-color:rgba(255,138,61,.45);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(0,217,165,.5);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(32,215,255,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--cyan);
+      color:var(--cyan);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .avatar.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(32,215,255,.38);
+      background:var(--cyan-soft);
+      color:#bcefff;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--cyan);
+      background:var(--cyan-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      color:#d9f8ff;
+    }
+
+    .section-label{
+      color:var(--cyan);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-list,.check-list,.quiz-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,.check-card,.quiz-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,.check-card strong,.quiz-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,.check-card p,.quiz-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .check-card{
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    .check-num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--cyan);
+      color:var(--cyan);
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(32,215,255,.36);
+      background:var(--cyan-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .orange-note{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:900;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--brand);
+      background:var(--brand);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .btn.orange{
+      background:var(--orange);
+      color:#160802;
+      border-color:var(--orange);
+    }
+
+    .btn.cyan{
+      background:var(--cyan);
+      color:#031014;
+      border-color:var(--cyan);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .stat span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .prompt-box{
+      margin-top:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .prompt-box small{
+      display:block;
+      color:var(--cyan);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-size:11px;
+    }
+
+    .prompt-box p{
+      margin:0;
+      color:#e8edf2;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .post-actions{
+      display:flex;
+      gap:22px;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 014: Decision Speed" data-es="Juego 014: Velocidad de Decisión">Game 014: Decision Speed</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="game-013.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#cog02" data-en="COG 02" data-es="COG 02">COG 02</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-014.png" alt="Game 014 Decision Speed Basketball Money">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar gold">014</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 014" data-es="Juego 014">Game 014</span>
+              <span class="handle">@paidseason</span>
+              <span class="badge gold" data-en="COG 02 Segment" data-es="Segmento COG 02">COG 02 Segment</span>
+            </div>
+            <span class="handle" data-en="Read fast. Choose fast. Play smart." data-es="Lee rápido. Escoge rápido. Juega inteligente.">Read fast. Choose fast. Play smart.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="Fast reads mean nothing without fast, clean decisions." data-es="Las lecturas rápidas no valen si no vienen con decisiones rápidas y limpias.">
+          Fast reads mean nothing without fast, clean decisions.
+        </h1>
+
+        <p class="post-sub" data-en="Game 014 teaches Decision Speed. The goal is not to rush. The goal is to process information quickly, choose the best option, and execute before the moment disappears." data-es="El Juego 014 enseña Velocidad de Decisión. La meta no es apresurarse. La meta es procesar información rápido, escoger la mejor opción y ejecutar antes de que el momento desaparezca.">
+          Game 014 teaches Decision Speed. The goal is not to rush. The goal is to process information quickly, choose the best option, and execute before the moment disappears.
+        </p>
+
+        <div class="thread-line" data-en="Basketball business rule: slow decisions create turnovers. Fast, clean decisions create opportunities." data-es="Regla de negocio en baloncesto: decisiones lentas crean pérdidas. Decisiones rápidas y limpias crean oportunidades.">
+          Basketball business rule: slow decisions create turnovers. Fast, clean decisions create opportunities.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>014</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Decision Speed" data-es="Velocidad de Decisión">Decision Speed</strong>
+          </div>
+          <div class="stat">
+            <span data-en="COG Access" data-es="Acceso COG">COG Access</span>
+            <strong data-en="COG 02" data-es="COG 02">COG 02</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn cyan" href="#lesson" data-en="Start Paid Lesson →" data-es="Comenzar Lección Paga →">Start Paid Lesson →</a>
+          <a class="btn orange" href="#cog02" data-en="Open COG 02 Access" data-es="Abrir Acceso COG 02">Open COG 02 Access</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 014</span>
+          <span>⚡ Decision Speed</span>
+          <span>🧠 COG 02</span>
+        </div>
+      </section>
+
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@fastcleanchoices</span>
+            </div>
+            <span class="handle" data-en="Fast does not mean careless." data-es="Rápido no significa descuidado.">Fast does not mean careless.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The fourteenth business lesson" data-es="La decimocuarta lección de negocio">The fourteenth business lesson</p>
+
+        <h2 class="post-text" data-en="Decision speed is the ability to choose clearly before pressure takes over." data-es="La velocidad de decisión es la habilidad de escoger con claridad antes de que la presión tome control.">
+          Decision speed is the ability to choose clearly before pressure takes over.
+        </h2>
+
+        <p class="post-sub" data-en="A player can see the space, recognize the pattern, and still lose the play by waiting too long. The next level is choosing fast enough to use the advantage." data-es="Un jugador puede ver el espacio, reconocer el patrón y aun así perder la jugada por esperar demasiado. El próximo nivel es escoger lo suficientemente rápido para usar la ventaja.">
+          A player can see the space, recognize the pattern, and still lose the play by waiting too long. The next level is choosing fast enough to use the advantage.
+        </p>
+
+        <div class="quote" data-en="A good read becomes valuable when the decision arrives on time." data-es="Una buena lectura gana valor cuando la decisión llega a tiempo.">
+          A good read becomes valuable when the decision arrives on time.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@seechooseexecute</span>
+            </div>
+            <span class="handle" data-en="See. Choose. Execute." data-es="Ve. Escoge. Ejecuta.">See. Choose. Execute.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The decision chain" data-es="La cadena de decisión">The decision chain</p>
+
+        <h2 class="post-text" data-en="The best players simplify the moment into a decision chain." data-es="Los mejores jugadores simplifican el momento en una cadena de decisión.">
+          The best players simplify the moment into a decision chain.
+        </h2>
+
+        <p class="post-sub" data-en="Decision speed improves when the player knows what to look for, what options matter, and what action must come next." data-es="La velocidad de decisión mejora cuando el jugador sabe qué buscar, qué opciones importan y qué acción viene después.">
+          Decision speed improves when the player knows what to look for, what options matter, and what action must come next.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="1. See it" data-es="1. Velo">1. See it</strong>
+            <p data-en="Scan the floor, the defense, the pressure, and the open space." data-es="Escanea la cancha, la defensa, la presión y el espacio abierto.">
+              Scan the floor, the defense, the pressure, and the open space.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="2. Read it" data-es="2. Léelo">2. Read it</strong>
+            <p data-en="Recognize what the pattern is telling you before it fully develops." data-es="Reconoce lo que el patrón te está diciendo antes de que se desarrolle completo.">
+              Recognize what the pattern is telling you before it fully develops.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="3. Decide it" data-es="3. Decídelo">3. Decide it</strong>
+            <p data-en="Choose the best option without freezing in the middle of the play." data-es="Escoge la mejor opción sin congelarte en medio de la jugada.">
+              Choose the best option without freezing in the middle of the play.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="4. Execute it" data-es="4. Ejecútalo">4. Execute it</strong>
+            <p data-en="Turn the decision into action before the advantage closes." data-es="Convierte la decisión en acción antes de que la ventaja se cierre.">
+              Turn the decision into action before the advantage closes.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@rushingisnotreading</span>
+            </div>
+            <span class="handle" data-en="Rushing is not decision speed." data-es="Apresurarse no es velocidad de decisión.">Rushing is not decision speed.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Fast is not frantic" data-es="Rápido no es desesperado">Fast is not frantic</p>
+
+        <h2 class="post-text" data-en="Bad speed creates panic. Good speed creates control." data-es="La mala velocidad crea pánico. La buena velocidad crea control.">
+          Bad speed creates panic. Good speed creates control.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: the goal is not to do everything fast. The goal is to make the right decision fast enough." data-es="Regla de negocio en baloncesto: la meta no es hacerlo todo rápido. La meta es tomar la decisión correcta lo suficientemente rápido.">
+          Basketball business rule: the goal is not to do everything fast. The goal is to make the right decision fast enough.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@optionsunderpressure</span>
+            </div>
+            <span class="handle" data-en="Options under pressure." data-es="Opciones bajo presión.">Options under pressure.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Decision speed needs options" data-es="La velocidad de decisión necesita opciones">Decision speed needs options</p>
+
+        <h2 class="post-text" data-en="You cannot decide quickly if you do not know your options." data-es="No puedes decidir rápido si no conoces tus opciones.">
+          You cannot decide quickly if you do not know your options.
+        </h2>
+
+        <p class="post-sub" data-en="Fast decisions come from preparation. The player who knows the first option, second option, and emergency option can stay calm when the game speeds up." data-es="Las decisiones rápidas vienen de la preparación. El jugador que conoce la primera opción, segunda opción y opción de emergencia puede mantenerse calmado cuando el juego acelera.">
+          Fast decisions come from preparation. The player who knows the first option, second option, and emergency option can stay calm when the game speeds up.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="First option" data-es="Primera opción">First option</strong>
+            <p data-en="The best read if the defense gives you the advantage immediately." data-es="La mejor lectura si la defensa te da la ventaja inmediatamente.">
+              The best read if the defense gives you the advantage immediately.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Second option" data-es="Segunda opción">Second option</strong>
+            <p data-en="The next read when the first option closes." data-es="La próxima lectura cuando la primera opción se cierra.">
+              The next read when the first option closes.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Emergency option" data-es="Opción de emergencia">Emergency option</strong>
+            <p data-en="The safe decision when pressure removes the clean play." data-es="La decisión segura cuando la presión elimina la jugada limpia.">
+              The safe decision when pressure removes the clean play.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Business option" data-es="Opción de negocio">Business option</strong>
+            <p data-en="The move that protects trust, timing, value, and the next opportunity." data-es="El movimiento que protege confianza, timing, valor y la próxima oportunidad.">
+              The move that protects trust, timing, value, and the next opportunity.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@decisionspeedhabits</span>
+            </div>
+            <span class="handle" data-en="Build decision habits." data-es="Construye hábitos de decisión.">Build decision habits.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Decision speed checklist" data-es="Checklist de velocidad de decisión">Decision speed checklist</p>
+
+        <h2 class="post-text" data-en="A serious player trains the mind to choose cleanly under pressure." data-es="Un jugador serio entrena la mente para escoger limpio bajo presión.">
+          A serious player trains the mind to choose cleanly under pressure.
+        </h2>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Know the read before the ball arrives." data-es="Conoce la lectura antes de que llegue el balón.">Know the read before the ball arrives.</strong>
+              <p data-en="Decision speed starts before the catch." data-es="La velocidad de decisión empieza antes de recibir.">
+                Decision speed starts before the catch.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Limit hesitation." data-es="Limita la duda.">Limit hesitation.</strong>
+              <p data-en="The longer you freeze, the smaller the advantage becomes." data-es="Mientras más te congelas, más pequeña se vuelve la ventaja.">
+                The longer you freeze, the smaller the advantage becomes.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Train simple options." data-es="Entrena opciones simples.">Train simple options.</strong>
+              <p data-en="Simple reads become fast decisions when they are repeated." data-es="Las lecturas simples se convierten en decisiones rápidas cuando se repiten.">
+                Simple reads become fast decisions when they are repeated.
+              </p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Review slow decisions." data-es="Repasa decisiones lentas.">Review slow decisions.</strong>
+              <p data-en="Film can show where the decision was late, forced, or unclear." data-es="El video puede mostrar dónde la decisión fue tarde, forzada o poco clara.">
+                Film can show where the decision was late, forced, or unclear.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post lab" id="cog02">
+        <div class="post-head">
+          <div class="avatar">COG</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 02 Access" data-es="Acceso COG 02">COG 02 Access</span>
+              <span class="handle">@therecall</span>
+              <span class="badge" data-en="Games 011–015" data-es="Juegos 011–015">Games 011–015</span>
+            </div>
+            <span class="handle" data-en="Memory supports faster decisions." data-es="La memoria apoya decisiones más rápidas.">Memory supports faster decisions.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Cognitive Training Lab" data-es="Laboratorio de Entrenamiento Cognitivo">Cognitive Training Lab</p>
+
+        <h2 class="post-text" data-en="COG 02 helps Game 014 because faster decisions come from remembering the right order." data-es="COG 02 ayuda al Juego 014 porque las decisiones más rápidas vienen de recordar el orden correcto.">
+          COG 02 helps Game 014 because faster decisions come from remembering the right order.
+        </h2>
+
+        <p class="post-sub" data-en="The Recall trains the player to watch, remember, and execute a sequence. Decision Speed adds the next layer: process the information quickly and choose the correct action before the advantage disappears." data-es="The Recall entrena al jugador a observar, recordar y ejecutar una secuencia. Velocidad de Decisión añade la próxima capa: procesar la información rápido y escoger la acción correcta antes de que la ventaja desaparezca.">
+          The Recall trains the player to watch, remember, and execute a sequence. Decision Speed adds the next layer: process the information quickly and choose the correct action before the advantage disappears.
+        </p>
+
+        <div class="gold-note" data-en="Paid separator: the player is not only memorizing the sequence — the player is training faster, cleaner decisions." data-es="Separador pago: el jugador no solo está memorizando la secuencia — está entrenando decisiones más rápidas y limpias.">
+          Paid separator: the player is not only memorizing the sequence — the player is training faster, cleaner decisions.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn orange" href="cog-02.html" data-en="Train COG 02: The Recall →" data-es="Entrenar COG 02: The Recall →">Train COG 02: The Recall →</a>
+          <a class="btn secondary" href="#final" data-en="Finish Game 014 First" data-es="Terminar Juego 014 Primero">Finish Game 014 First</a>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game014review</span>
+              <span class="badge gold" data-en="Paid Review" data-es="Repaso Pago">Paid Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the paid lesson." data-es="Asegura la lección paga.">Lock in the paid lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 014 Review" data-es="Repaso del Juego 014">Game 014 Review</p>
+
+        <h2 class="post-text" data-en="Before Game 015, answer this honestly: are your decisions fast because they are trained, or rushed because you are pressured?" data-es="Antes del Juego 015, contesta esto con honestidad: ¿tus decisiones son rápidas porque están entrenadas, o apresuradas porque estás bajo presión?">
+          Before Game 015, answer this honestly: are your decisions fast because they are trained, or rushed because you are pressured?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. Where do you usually hesitate?" data-es="1. ¿Dónde usualmente dudas?">1. Where do you usually hesitate?</strong>
+            <p data-en="On the catch, in transition, against pressure, when passing, or when choosing the next opportunity." data-es="Al recibir, en transición, contra presión, al pasar o al escoger la próxima oportunidad.">
+              On the catch, in transition, against pressure, when passing, or when choosing the next opportunity.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What decision do you make well?" data-es="2. ¿Qué decisión tomas bien?">2. What decision do you make well?</strong>
+            <p data-en="Name the read or action that already feels clear and fast." data-es="Nombra la lectura o acción que ya se siente clara y rápida.">
+              Name the read or action that already feels clear and fast.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. What decision becomes rushed under pressure?" data-es="3. ¿Qué decisión se vuelve apresurada bajo presión?">3. What decision becomes rushed under pressure?</strong>
+            <p data-en="Identify the situation where speed turns into panic." data-es="Identifica la situación donde la velocidad se convierte en pánico.">
+              Identify the situation where speed turns into panic.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. How can COG 02 help your decision speed?" data-es="4. ¿Cómo puede COG 02 ayudar tu velocidad de decisión?">4. How can COG 02 help your decision speed?</strong>
+            <p data-en="Think memory, order, sequence, recall time, accuracy, and cleaner execution." data-es="Piensa en memoria, orden, secuencia, tiempo de recuerdo, precisión y ejecución más limpia.">
+              Think memory, order, sequence, recall time, accuracy, and cleaner execution.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Can you see it, decide it, and execute it?" data-es="5. ¿Puedes verlo, decidirlo y ejecutarlo?">5. Can you see it, decide it, and execute it?</strong>
+            <p data-en="This is the question that closes Game 014." data-es="Esta es la pregunta que cierra el Juego 014.">
+              This is the question that closes Game 014.
+            </p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 014. Help me improve my decision speed in basketball and business. Identify where I hesitate, where I rush, and how I can train faster, cleaner decisions under pressure." data-es="Prompt: Acabo de terminar Basketball Money Juego 014. Ayúdame a mejorar mi velocidad de decisión en baloncesto y negocio. Identifica dónde dudo, dónde me apresuro y cómo puedo entrenar decisiones más rápidas y limpias bajo presión.">
+            Prompt: I just finished Basketball Money Game 014. Help me improve my decision speed in basketball and business. Identify where I hesitate, where I rush, and how I can train faster, cleaner decisions under pressure.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn orange" href="cog-02.html" data-en="Train COG 02: The Recall →" data-es="Entrenar COG 02: The Recall →">Train COG 02: The Recall →</a>
+          <a class="btn secondary" href="game-015.html" data-en="Continue to Game 015 →" data-es="Continuar al Juego 015 →">Continue to Game 015 →</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>⚡ Decision Speed</span>
+          <span>🧠 The Recall</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="Read fast. Choose fast. Play smart. That is decision speed." data-es="Lee rápido. Escoge rápido. Juega inteligente. Eso es velocidad de decisión.">
+          Read fast. Choose fast. Play smart. That is decision speed.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 014: Decision Speed | COG 02 Segment" data-es="Basketball Money — Juego 014: Velocidad de Decisión | Segmento COG 02">
+        Basketball Money — Game 014: Decision Speed | COG 02 Segment
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
+  </script>
+
+</body>
+</html>
