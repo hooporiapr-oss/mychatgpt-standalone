@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Game 016 | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --cyan:#20d7ff;
+      --cyan-soft:rgba(32,215,255,.14);
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --green-soft:rgba(0,217,165,.14);
+      --pink:#ff1493;
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(32,215,255,.20),transparent 34%),
+        radial-gradient(circle at top right,rgba(255,138,61,.18),transparent 30%),
+        radial-gradient(circle at bottom center,rgba(155,89,182,.12),transparent 34%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--cyan),var(--orange));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--cyan);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .hero-image{
+      max-width:var(--max);
+      margin:16px auto 0;
+      padding:0 16px;
+    }
+
+    .hero-image-inner{
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      object-fit:cover;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(32,215,255,.55);
+      background:
+        linear-gradient(135deg,rgba(32,215,255,.16),rgba(255,138,61,.14),rgba(155,89,182,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.lab{
+      border-color:rgba(255,138,61,.50);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.14),rgba(32,215,255,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.warning{
+      border-color:rgba(255,138,61,.45);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(0,217,165,.5);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(32,215,255,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--cyan);
+      color:var(--cyan);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .avatar.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .avatar.orange{
+      border-color:var(--orange);
+      color:var(--orange);
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(32,215,255,.38);
+      background:var(--cyan-soft);
+      color:#bcefff;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .badge.orange{
+      border-color:rgba(255,138,61,.48);
+      background:var(--orange-soft);
+      color:#ffd4bf;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--cyan);
+      background:var(--cyan-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      color:#d9f8ff;
+    }
+
+    .section-label{
+      color:var(--cyan);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .section-label.orange{
+      color:var(--orange);
+    }
+
+    .mini-list,.check-list,.quiz-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,.check-card,.quiz-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,.check-card strong,.quiz-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,.check-card p,.quiz-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .check-card{
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    .check-num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--cyan);
+      color:var(--cyan);
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(32,215,255,.36);
+      background:var(--cyan-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .orange-note{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:900;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--cyan);
+      background:var(--cyan);
+      color:#031014;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .btn.orange{
+      background:var(--orange);
+      color:#160802;
+      border-color:var(--orange);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .stat span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .prompt-box{
+      margin-top:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .prompt-box small{
+      display:block;
+      color:var(--cyan);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-size:11px;
+    }
+
+    .prompt-box p{
+      margin:0;
+      color:#e8edf2;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .post-actions{
+      display:flex;
+      gap:22px;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 016: Multi-Target Vision" data-es="Juego 016: Visión Multi-Objetivo">Game 016: Multi-Target Vision</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="cog-03.html" data-en="COG 03" data-es="COG 03">COG 03</a>
+          <a href="game-015.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-016.png" alt="Game 016 Multi-Target Vision Basketball Money">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar gold">016</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 016" data-es="Juego 016">Game 016</span>
+              <span class="handle">@paidseason</span>
+              <span class="badge gold" data-en="COG 03 Segment" data-es="Segmento COG 03">COG 03 Segment</span>
+            </div>
+            <span class="handle" data-en="See more than one signal." data-es="Ve más de una señal.">See more than one signal.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="The next level is seeing multiple targets before the moment disappears." data-es="El próximo nivel es ver múltiples objetivos antes de que el momento desaparezca.">
+          The next level is seeing multiple targets before the moment disappears.
+        </h1>
+
+        <p class="post-sub" data-en="Game 016 starts the COG 03 segment. The theme is Multi-Target Vision: scanning the full floor, recognizing several signals, and finding the correct targets fast." data-es="El Juego 016 comienza el segmento COG 03. El tema es Visión Multi-Objetivo: escanear toda la cancha, reconocer varias señales y encontrar los objetivos correctos rápido.">
+          Game 016 starts the COG 03 segment. The theme is Multi-Target Vision: scanning the full floor, recognizing several signals, and finding the correct targets fast.
+        </p>
+
+        <div class="thread-line" data-en="Basketball business rule: tunnel vision misses opportunities. Multi-target vision sees the full play." data-es="Regla de negocio en baloncesto: la visión de túnel pierde oportunidades. La visión multi-objetivo ve la jugada completa.">
+          Basketball business rule: tunnel vision misses opportunities. Multi-target vision sees the full play.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>016</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Multi-Target Vision" data-es="Visión Multi-Objetivo">Multi-Target Vision</strong>
+          </div>
+          <div class="stat">
+            <span data-en="COG Access" data-es="Acceso COG">COG Access</span>
+            <strong data-en="COG 03" data-es="COG 03">COG 03</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="#lesson" data-en="Start Paid Lesson →" data-es="Comenzar Lección Paga →">Start Paid Lesson →</a>
+          <a class="btn orange" href="#cog03" data-en="Open COG 03 Access" data-es="Abrir Acceso COG 03">Open COG 03 Access</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 016</span>
+          <span>👁️ Multi-Target Vision</span>
+          <span>⚡ COG 03</span>
+        </div>
+      </section>
+
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@scanfullfloor</span>
+            </div>
+            <span class="handle" data-en="Scan the full floor." data-es="Escanea toda la cancha.">Scan the full floor.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The sixteenth business lesson" data-es="La decimosexta lección de negocio">The sixteenth business lesson</p>
+
+        <h2 class="post-text" data-en="A player with tunnel vision sees one thing. A prepared player sees the full situation." data-es="Un jugador con visión de túnel ve una sola cosa. Un jugador preparado ve la situación completa.">
+          A player with tunnel vision sees one thing. A prepared player sees the full situation.
+        </h2>
+
+        <p class="post-sub" data-en="In basketball, one target is not enough. You need to see the defender, the help, the cutter, the shooter, the space, the clock, and the next option." data-es="En el baloncesto, un solo objetivo no es suficiente. Tienes que ver el defensor, la ayuda, el cortador, el tirador, el espacio, el reloj y la próxima opción.">
+          In basketball, one target is not enough. You need to see the defender, the help, the cutter, the shooter, the space, the clock, and the next option.
+        </p>
+
+        <div class="quote" data-en="The player who scans more sees the answer earlier." data-es="El jugador que escanea más ve la respuesta más temprano.">
+          The player who scans more sees the answer earlier.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar orange">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@multiplesignals</span>
+            </div>
+            <span class="handle" data-en="Multiple signals matter." data-es="Múltiples señales importan.">Multiple signals matter.</span>
+          </div>
+        </div>
+
+        <p class="section-label orange" data-en="What multi-target vision sees" data-es="Qué ve la visión multi-objetivo">What multi-target vision sees</p>
+
+        <h2 class="post-text" data-en="The game rarely gives one clean signal. It gives several signals at once." data-es="El juego rara vez da una sola señal limpia. Da varias señales a la vez.">
+          The game rarely gives one clean signal. It gives several signals at once.
+        </h2>
+
+        <p class="post-sub" data-en="The player has to organize what is important, ignore the noise, and find the correct targets before pressure changes the picture." data-es="El jugador tiene que organizar lo importante, ignorar el ruido y encontrar los objetivos correctos antes de que la presión cambie la imagen.">
+          The player has to organize what is important, ignore the noise, and find the correct targets before pressure changes the picture.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Primary target" data-es="Objetivo principal">Primary target</strong>
+            <p data-en="The most obvious read, action, or opportunity in the moment." data-es="La lectura, acción u oportunidad más obvia del momento.">The most obvious read, action, or opportunity in the moment.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Secondary target" data-es="Objetivo secundario">Secondary target</strong>
+            <p data-en="The next option if the first target closes." data-es="La próxima opción si el primer objetivo se cierra.">The next option if the first target closes.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Hidden target" data-es="Objetivo escondido">Hidden target</strong>
+            <p data-en="The quiet advantage that appears away from the ball or away from attention." data-es="La ventaja silenciosa que aparece lejos del balón o lejos de la atención.">The quiet advantage that appears away from the ball or away from attention.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Business target" data-es="Objetivo de negocio">Business target</strong>
+            <p data-en="The relationship, opening, audience, or brand signal that needs follow-up." data-es="La relación, apertura, audiencia o señal de marca que necesita seguimiento.">The relationship, opening, audience, or brand signal that needs follow-up.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar orange">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@notunnelvision</span>
+            </div>
+            <span class="handle" data-en="Tunnel vision is expensive." data-es="La visión de túnel cuesta caro.">Tunnel vision is expensive.</span>
+          </div>
+        </div>
+
+        <p class="section-label orange" data-en="Do not lock on one target too early" data-es="No te amarres a un solo objetivo demasiado temprano">Do not lock on one target too early</p>
+
+        <h2 class="post-text" data-en="When you lock on one thing, you may miss the better thing." data-es="Cuando te amarras a una sola cosa, puedes perder la mejor opción.">
+          When you lock on one thing, you may miss the better thing.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: attention is a weapon, but narrow attention can become a trap." data-es="Regla de negocio en baloncesto: la atención es un arma, pero una atención demasiado estrecha puede convertirse en trampa.">
+          Basketball business rule: attention is a weapon, but narrow attention can become a trap.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@findtheflash</span>
+            </div>
+            <span class="handle" data-en="Find the flash." data-es="Encuentra el destello.">Find the flash.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The Reflex mindset" data-es="La mentalidad Reflex">The Reflex mindset</p>
+
+        <h2 class="post-text" data-en="COG 03 trains the brain to see several targets, remember them, and find them fast." data-es="COG 03 entrena el cerebro para ver varios objetivos, recordarlos y encontrarlos rápido.">
+          COG 03 trains the brain to see several targets, remember them, and find them fast.
+        </h2>
+
+        <p class="post-sub" data-en="The order no longer matters. What matters is whether the player can recognize the full group and find all correct targets before the moment disappears." data-es="El orden ya no importa. Lo que importa es si el jugador puede reconocer el grupo completo y encontrar todos los objetivos correctos antes de que el momento desaparezca.">
+          The order no longer matters. What matters is whether the player can recognize the full group and find all correct targets before the moment disappears.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Scan wide" data-es="Escanea amplio">Scan wide</strong>
+            <p data-en="Do not stare at one spot. Train your eyes to capture the whole picture." data-es="No mires fijo un solo punto. Entrena tus ojos para capturar la imagen completa.">Do not stare at one spot. Train your eyes to capture the whole picture.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Store fast" data-es="Guarda rápido">Store fast</strong>
+            <p data-en="Remember the targets before they disappear." data-es="Recuerda los objetivos antes de que desaparezcan.">Remember the targets before they disappear.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Find clean" data-es="Encuentra limpio">Find clean</strong>
+            <p data-en="Tap the correct targets without wasting touches on noise." data-es="Toca los objetivos correctos sin gastar toques en ruido.">Tap the correct targets without wasting touches on noise.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Reset fast" data-es="Reinicia rápido">Reset fast</strong>
+            <p data-en="If you miss, reset the mind and prepare for the next flash." data-es="Si fallas, reinicia la mente y prepárate para el próximo destello.">If you miss, reset the mind and prepare for the next flash.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@visionhabits</span>
+            </div>
+            <span class="handle" data-en="Build vision habits." data-es="Construye hábitos de visión.">Build vision habits.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Multi-target vision checklist" data-es="Checklist de visión multi-objetivo">Multi-target vision checklist</p>
+
+        <h2 class="post-text" data-en="A serious player trains the eyes to collect more useful information." data-es="Un jugador serio entrena los ojos para recoger más información útil.">
+          A serious player trains the eyes to collect more useful information.
+        </h2>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Scan before acting." data-es="Escanea antes de actuar.">Scan before acting.</strong>
+              <p data-en="Do not make the first move before seeing the full picture." data-es="No hagas el primer movimiento antes de ver la imagen completa.">Do not make the first move before seeing the full picture.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Identify the group." data-es="Identifica el grupo.">Identify the group.</strong>
+              <p data-en="Find all important targets, not just the loudest one." data-es="Encuentra todos los objetivos importantes, no solo el más obvio.">Find all important targets, not just the loudest one.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Avoid noise touches." data-es="Evita toques de ruido.">Avoid noise touches.</strong>
+              <p data-en="Wrong targets waste time, points, energy, and opportunity." data-es="Objetivos incorrectos gastan tiempo, puntos, energía y oportunidad.">Wrong targets waste time, points, energy, and opportunity.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Recover after misses." data-es="Recupérate después de fallos.">Recover after misses.</strong>
+              <p data-en="The next flash still needs your attention." data-es="El próximo destello todavía necesita tu atención.">The next flash still needs your attention.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post lab" id="cog03">
+        <div class="post-head">
+          <div class="avatar">COG</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 03 Access" data-es="Acceso COG 03">COG 03 Access</span>
+              <span class="handle">@thereflex</span>
+              <span class="badge" data-en="Games 016–020" data-es="Juegos 016–020">Games 016–020</span>
+            </div>
+            <span class="handle" data-en="Multi-target reflex recognition." data-es="Reconocimiento reflejo multi-objetivo.">Multi-target reflex recognition.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Cognitive Training Lab" data-es="Laboratorio de Entrenamiento Cognitivo">Cognitive Training Lab</p>
+
+        <h2 class="post-text" data-en="COG 03 trains the exact skill Game 016 teaches: see multiple targets, remember them, and find them fast." data-es="COG 03 entrena exactamente la habilidad que enseña el Juego 016: ver múltiples objetivos, recordarlos y encontrarlos rápido.">
+          COG 03 trains the exact skill Game 016 teaches: see multiple targets, remember them, and find them fast.
+        </h2>
+
+        <p class="post-sub" data-en="The Reflex flashes several cells at once. The player must remember the full target group and tap all correct cells in any order while tracking score, level, GoStars, accuracy, correct taps, wrong taps, missed targets, find time, best find time, and longest target set." data-es="The Reflex prende varias celdas a la vez. El jugador debe recordar el grupo completo de objetivos y tocar todas las celdas correctas en cualquier orden, mientras registra puntuación, nivel, GoStars, precisión, toques correctos, toques incorrectos, objetivos perdidos, tiempo de búsqueda, mejor tiempo y grupo de objetivos más largo.">
+          The Reflex flashes several cells at once. The player must remember the full target group and tap all correct cells in any order while tracking score, level, GoStars, accuracy, correct taps, wrong taps, missed targets, find time, best find time, and longest target set.
+        </p>
+
+        <div class="gold-note" data-en="Paid separator: the player is no longer just learning about vision — the player is training multi-target vision." data-es="Separador pago: el jugador ya no solo está aprendiendo sobre visión — está entrenando visión multi-objetivo.">
+          Paid separator: the player is no longer just learning about vision — the player is training multi-target vision.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn orange" href="cog-03.html" data-en="Train COG 03: The Reflex →" data-es="Entrenar COG 03: The Reflex →">Train COG 03: The Reflex →</a>
+          <a class="btn secondary" href="#final" data-en="Finish Game 016 First" data-es="Terminar Juego 016 Primero">Finish Game 016 First</a>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game016review</span>
+              <span class="badge gold" data-en="Paid Review" data-es="Repaso Pago">Paid Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the paid lesson." data-es="Asegura la lección paga.">Lock in the paid lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 016 Review" data-es="Repaso del Juego 016">Game 016 Review</p>
+
+        <h2 class="post-text" data-en="Before Game 017, answer this honestly: do you see the full play, or only the first target?" data-es="Antes del Juego 017, contesta esto con honestidad: ¿ves la jugada completa, o solo el primer objetivo?">
+          Before Game 017, answer this honestly: do you see the full play, or only the first target?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. Where do you get tunnel vision?" data-es="1. ¿Dónde te da visión de túnel?">1. Where do you get tunnel vision?</strong>
+            <p data-en="On the ball, on scoring, on one defender, on pressure, or on one opportunity." data-es="En el balón, en anotar, en un defensor, en la presión o en una sola oportunidad.">
+              On the ball, on scoring, on one defender, on pressure, or on one opportunity.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What targets do you need to scan earlier?" data-es="2. ¿Qué objetivos necesitas escanear más temprano?">2. What targets do you need to scan earlier?</strong>
+            <p data-en="Teammates, defenders, weak side, spacing, clock, relationships, or business signals." data-es="Compañeros, defensores, lado débil, spacing, reloj, relaciones o señales de negocio.">
+              Teammates, defenders, weak side, spacing, clock, relationships, or business signals.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. What target do you usually miss?" data-es="3. ¿Qué objetivo usualmente pierdes?">3. What target do you usually miss?</strong>
+            <p data-en="Name the signal that often appears late in your mind." data-es="Nombra la señal que muchas veces aparece tarde en tu mente.">
+              Name the signal that often appears late in your mind.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. How can COG 03 help your vision?" data-es="4. ¿Cómo puede COG 03 ayudar tu visión?">4. How can COG 03 help your vision?</strong>
+            <p data-en="Think scan speed, multiple targets, fewer wrong taps, and faster recovery." data-es="Piensa en velocidad de escaneo, múltiples objetivos, menos toques incorrectos y recuperación más rápida.">
+              Think scan speed, multiple targets, fewer wrong taps, and faster recovery.
+            </p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Can you find the flash?" data-es="5. ¿Puedes encontrar el destello?">5. Can you find the flash?</strong>
+            <p data-en="This is the question that closes Game 016." data-es="Esta es la pregunta que cierra el Juego 016.">
+              This is the question that closes Game 016.
+            </p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 016. Help me improve my multi-target vision in basketball and business. Identify where I get tunnel vision, what signals I should scan earlier, and how I can train myself to see multiple targets under pressure." data-es="Prompt: Acabo de terminar Basketball Money Juego 016. Ayúdame a mejorar mi visión multi-objetivo en baloncesto y negocio. Identifica dónde me da visión de túnel, qué señales debo escanear más temprano y cómo puedo entrenarme para ver múltiples objetivos bajo presión.">
+            Prompt: I just finished Basketball Money Game 016. Help me improve my multi-target vision in basketball and business. Identify where I get tunnel vision, what signals I should scan earlier, and how I can train myself to see multiple targets under pressure.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn orange" href="cog-03.html" data-en="Train COG 03: The Reflex →" data-es="Entrenar COG 03: The Reflex →">Train COG 03: The Reflex →</a>
+          <a class="btn secondary" href="game-017.html" data-en="Continue to Game 017 →" data-es="Continuar al Juego 017 →">Continue to Game 017 →</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>👁️ Multi-Target Vision</span>
+          <span>⚡ The Reflex</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="The full play is bigger than the first thing you see. Scan wide. Store fast. Find the flash." data-es="La jugada completa es más grande que lo primero que ves. Escanea amplio. Guarda rápido. Encuentra el destello.">
+          The full play is bigger than the first thing you see. Scan wide. Store fast. Find the flash.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 016: Multi-Target Vision | COG 03 Segment Begins" data-es="Basketball Money — Juego 016: Visión Multi-Objetivo | Comienza Segmento COG 03">
+        Basketball Money — Game 016: Multi-Target Vision | COG 03 Segment Begins
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
+  </script>
+
+</body>
+</html>
