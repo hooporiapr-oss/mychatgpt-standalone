@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Basketball Money | The Business of Basketball</title>
+  <title>Basketball Money TeamGPT</title>
 
   <style>
-    :root {
+    :root{
       --bg:#050505;
       --panel:#0f1115;
       --text:#f5f7fa;
@@ -20,13 +20,13 @@
       --orange:#ff8a3d;
       --orange-soft:rgba(255,138,61,.14);
       --purple:#9B59B6;
+      --purple-soft:rgba(155,89,182,.16);
       --radius:22px;
-      --max:760px;
+      --max:800px;
       --shadow:0 24px 80px rgba(0,0,0,.45);
     }
 
     *{box-sizing:border-box}
-
     html{scroll-behavior:smooth}
 
     body{
@@ -41,19 +41,9 @@
       line-height:1.45;
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    button{
-      font-family:inherit;
-    }
-
-    img{
-      max-width:100%;
-      display:block;
-    }
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit}
+    img{max-width:100%;display:block}
 
     .topbar{
       position:sticky;
@@ -68,7 +58,6 @@
       max-width:var(--max);
       margin:0 auto;
       padding:14px 16px 16px;
-      position:relative;
     }
 
     .nav-main{
@@ -226,7 +215,7 @@
       background:
         linear-gradient(135deg,rgba(245,197,66,.16),rgba(0,217,165,.12),rgba(155,89,182,.12)),
         rgba(15,17,21,.96);
-      min-height:420px;
+      min-height:430px;
       display:grid;
       align-content:end;
     }
@@ -252,8 +241,8 @@
       position:relative;
       z-index:2;
       margin:0;
-      font-size:clamp(48px,12vw,92px);
-      line-height:.88;
+      font-size:clamp(50px,12vw,98px);
+      line-height:.86;
       letter-spacing:-.085em;
       font-weight:950;
     }
@@ -266,7 +255,7 @@
       font-size:clamp(18px,4vw,24px);
       line-height:1.18;
       font-weight:850;
-      max-width:620px;
+      max-width:650px;
     }
 
     .hero-line{
@@ -330,11 +319,10 @@
       border-color:var(--line);
     }
 
-    .section-card{
-      border-color:rgba(0,217,165,.45);
-      background:
-        linear-gradient(135deg,rgba(0,217,165,.12),rgba(255,255,255,.03)),
-        rgba(15,17,21,.96);
+    .btn.purple{
+      background:var(--purple);
+      color:#fff;
+      border-color:var(--purple);
     }
 
     .section-label{
@@ -352,8 +340,8 @@
       position:relative;
       z-index:2;
       margin:0;
-      font-size:clamp(28px,7vw,54px);
-      line-height:.98;
+      font-size:clamp(30px,7vw,58px);
+      line-height:.96;
       letter-spacing:-.065em;
       font-weight:950;
     }
@@ -365,6 +353,94 @@
       color:#cfd6dd;
       font-size:16px;
       font-weight:750;
+    }
+
+    .center-card{
+      border-color:rgba(155,89,182,.55);
+      background:
+        linear-gradient(135deg,rgba(155,89,182,.18),rgba(0,217,165,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .lineup{
+      display:grid;
+      gap:14px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .coach-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:20px;
+      padding:16px;
+      display:grid;
+      gap:12px;
+    }
+
+    .coach-top{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    .coach-number{
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--gold);
+      color:var(--gold);
+      font-weight:950;
+      flex:0 0 auto;
+    }
+
+    .coach-number.green{
+      border-color:var(--green);
+      color:var(--green);
+    }
+
+    .coach-number.orange{
+      border-color:var(--orange);
+      color:var(--orange);
+    }
+
+    .coach-number.purple{
+      border-color:var(--purple);
+      color:#d9b8ff;
+    }
+
+    .coach-meta small{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:950;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:4px;
+    }
+
+    .coach-meta strong{
+      display:block;
+      font-size:24px;
+      line-height:1;
+      letter-spacing:-.045em;
+    }
+
+    .coach-meta p{
+      margin:8px 0 0;
+      color:#cfd6dd;
+      font-size:14px;
+      font-weight:750;
+    }
+
+    .coach-actions{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
     }
 
     .formula-grid{
@@ -400,59 +476,6 @@
       letter-spacing:-.04em;
     }
 
-    .games-card{
-      border-color:rgba(255,138,61,.45);
-      background:
-        linear-gradient(135deg,rgba(255,138,61,.13),rgba(245,197,66,.08)),
-        rgba(15,17,21,.96);
-    }
-
-    .games-list{
-      position:relative;
-      z-index:2;
-      display:grid;
-      gap:10px;
-      margin-top:16px;
-    }
-
-    .game-link{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.035);
-      border-radius:16px;
-      padding:14px;
-      transition:.18s ease;
-      display:block;
-    }
-
-    .game-link:hover{
-      border-color:var(--gold);
-      transform:translateY(-1px);
-    }
-
-    .game-link small{
-      display:block;
-      color:var(--gold);
-      font-size:11px;
-      font-weight:950;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      margin-bottom:6px;
-    }
-
-    .game-link strong{
-      display:block;
-      font-size:20px;
-      letter-spacing:-.04em;
-      line-height:1.08;
-    }
-
-    .game-link p{
-      margin:7px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      font-weight:750;
-    }
-
     footer{
       text-align:center;
       color:var(--muted);
@@ -462,9 +485,7 @@
     }
 
     @media(min-width:720px){
-      .menu-toggle{
-        display:none;
-      }
+      .menu-toggle{display:none}
 
       .nav-menu{
         display:flex;
@@ -485,6 +506,10 @@
         grid-template-columns:1fr 1fr;
       }
 
+      .coach-actions{
+        grid-template-columns:1fr 1fr;
+      }
+
       .formula-grid{
         grid-template-columns:repeat(4,1fr);
       }
@@ -501,9 +526,7 @@
         <a class="brand" href="index.html">
           <div class="brand-copy">
             <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
-            <strong data-en="The Business of Basketball" data-es="El Negocio del Baloncesto">
-              The Business of Basketball
-            </strong>
+            <strong data-en="TeamGPT" data-es="TeamGPT">TeamGPT</strong>
           </div>
         </a>
 
@@ -516,10 +539,10 @@
         </button>
 
         <div class="nav-menu" id="navMenu">
-          <a href="games/game-001.html" data-en="Start Game 001" data-es="Comenzar Juego 001">Start Game 001</a>
-          <a href="paid-gate.html" data-en="Paid Gateway" data-es="Entrada Paga">Paid Gateway</a>
-          <a href="#formula" data-en="Formula" data-es="Fórmula">Formula</a>
-          <a href="#games" data-en="Games" data-es="Juegos">Games</a>
+          <a href="#center" data-en="The Center" data-es="El Center">The Center</a>
+          <a href="#lineup" data-en="Starting Five" data-es="Cinco Inicial">Starting Five</a>
+          <a href="#cogs" data-en="COG Drills" data-es="Drills COG">COG Drills</a>
+          <a href="game-001.html" data-en="Game 001" data-es="Juego 001">Game 001</a>
         </div>
       </div>
 
@@ -538,135 +561,298 @@
 
       <section class="post hero-card">
         <span class="eyebrow"
-              data-en="Basketball Money"
-              data-es="Basketball Money">
-          Basketball Money
+              data-en="Basketball Money TeamGPT"
+              data-es="Basketball Money TeamGPT">
+          Basketball Money TeamGPT
         </span>
 
         <h1 class="hero-title"
-            data-en="The Business of Basketball"
-            data-es="El Negocio del Baloncesto">
-          The Business of Basketball
+            data-en="Give The GPT The Ball."
+            data-es="Dale El Balón Al GPT.">
+          Give The GPT The Ball.
         </h1>
 
         <p class="hero-sub"
-           data-en="A conversation-powered basketball intelligence system built around value, opportunity, cognition, and player development."
-           data-es="Un sistema de inteligencia de baloncesto impulsado por conversación, construido alrededor de valor, oportunidad, cognición y desarrollo del jugador.">
-          A conversation-powered basketball intelligence system built around value, opportunity, cognition, and player development.
+           data-en="A 5-game basketball business system powered by specialist GPT coaches and cognitive training drills."
+           data-es="Un sistema de negocio del baloncesto de 5 juegos impulsado por coaches GPT especialistas y drills cognitivos.">
+          A 5-game basketball business system powered by specialist GPT coaches and cognitive training drills.
         </p>
 
         <div class="hero-line"
-             data-en="Image + Definition + Conversation + Drill. That is the Basketball Money system."
-             data-es="Imagen + Definición + Conversación + Drill. Ese es el sistema Basketball Money.">
-          Image + Definition + Conversation + Drill. That is the Basketball Money system.
+             data-en="The page creates the moment. The coach runs the conversation. The COG trains the mind."
+             data-es="La página crea el momento. El coach corre la conversación. El COG entrena la mente.">
+          The page creates the moment. The coach runs the conversation. The COG trains the mind.
         </div>
 
         <div class="cta-row">
           <a class="btn gold"
-             href="games/game-001.html"
-             data-en="Start Game 001 →"
-             data-es="Comenzar Juego 001 →">
-            Start Game 001 →
+             href="https://chatgpt.com/g/g-69efcaa307c48191ab208d61c01064fa-basketball-money-dream-team-the-center"
+             target="_blank"
+             rel="noopener"
+             data-en="Enter TeamGPT Center →"
+             data-es="Entrar al Center TeamGPT →">
+            Enter TeamGPT Center →
           </a>
 
           <a class="btn secondary"
-             href="#formula"
-             data-en="See The Formula"
-             data-es="Ver La Fórmula">
-            See The Formula
+             href="#lineup"
+             data-en="Meet The Starting Five"
+             data-es="Conoce El Cinco Inicial">
+            Meet The Starting Five
           </a>
         </div>
       </section>
 
-      <section class="post section-card" id="formula">
-        <p class="section-label"
-           data-en="The Formula"
-           data-es="La Fórmula">
-          The Formula
-        </p>
+      <section class="post center-card" id="center">
+        <p class="section-label" data-en="The Anchor" data-es="El Ancla">The Anchor</p>
 
         <h2 class="section-title"
-            data-en="The page is not the lesson. The conversation is the lesson."
-            data-es="La página no es la lección. La conversación es la lección.">
-          The page is not the lesson. The conversation is the lesson.
+            data-en="The Center explains the system and sends you to the right coach."
+            data-es="El Center explica el sistema y te envía al coach correcto.">
+          The Center explains the system and sends you to the right coach.
         </h2>
 
         <p class="section-text"
-           data-en="Each game gives the player a strong visual, one clear definition, and a coached prompt that opens the real Basketball Money conversation."
-           data-es="Cada juego le da al jugador una imagen fuerte, una definición clara y un prompt guiado que abre la verdadera conversación de Basketball Money.">
-          Each game gives the player a strong visual, one clear definition, and a coached prompt that opens the real Basketball Money conversation.
+           data-en="Start here if you are new. The Center introduces TeamGPT, explains the lineup, and helps you choose which coach gets the ball first."
+           data-es="Empieza aquí si eres nuevo. El Center presenta TeamGPT, explica la alineación y te ayuda a escoger qué coach recibe el balón primero.">
+          Start here if you are new. The Center introduces TeamGPT, explains the lineup, and helps you choose which coach gets the ball first.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn purple"
+             href="https://chatgpt.com/g/g-69efcaa307c48191ab208d61c01064fa-basketball-money-dream-team-the-center"
+             target="_blank"
+             rel="noopener"
+             data-en="Talk To The Center →"
+             data-es="Hablar Con El Center →">
+            Talk To The Center →
+          </a>
+
+          <a class="btn secondary"
+             href="#lineup"
+             data-en="View The Lineup"
+             data-es="Ver La Alineación">
+            View The Lineup
+          </a>
+        </div>
+      </section>
+
+      <section class="post" id="lineup">
+        <p class="section-label" data-en="Starting Five" data-es="Cinco Inicial">Starting Five</p>
+
+        <h2 class="section-title"
+            data-en="Meet the Basketball Money TeamGPT lineup."
+            data-es="Conoce la alineación Basketball Money TeamGPT.">
+          Meet the Basketball Money TeamGPT lineup.
+        </h2>
+
+        <p class="section-text"
+           data-en="Each game gives you a specialist GPT coach. Each coach focuses on one part of your basketball value."
+           data-es="Cada juego te da un coach GPT especialista. Cada coach se enfoca en una parte de tu valor en el baloncesto.">
+          Each game gives you a specialist GPT coach. Each coach focuses on one part of your basketball value.
+        </p>
+
+        <div class="lineup">
+
+          <article class="coach-card">
+            <div class="coach-top">
+              <div class="coach-number green">PG</div>
+              <div class="coach-meta">
+                <small data-en="Game 001 · Free Entry" data-es="Juego 001 · Entrada Gratis">Game 001 · Free Entry</small>
+                <strong data-en="The Business Coach" data-es="The Business Coach">The Business Coach</strong>
+                <p data-en="Basketball Is A Business. Understand how skill, attention, trust, relationships, proof, and opportunity create value beyond the court."
+                   data-es="El Baloncesto Es Un Negocio. Entiende cómo habilidad, atención, confianza, relaciones, evidencia y oportunidad crean valor más allá de la cancha.">
+                  Basketball Is A Business. Understand how skill, attention, trust, relationships, proof, and opportunity create value beyond the court.
+                </p>
+              </div>
+            </div>
+            <div class="coach-actions">
+              <a class="btn"
+                 href="https://chatgpt.com/g/g-69efcd006920819180b46f821b4a23b1-basketball-money-dream-team-the-business-coach"
+                 target="_blank"
+                 rel="noopener"
+                 data-en="Give The Business Coach The Ball →"
+                 data-es="Dale El Balón Al Business Coach →">
+                Give The Business Coach The Ball →
+              </a>
+              <a class="btn secondary"
+                 href="001-react.html"
+                 data-en="Train COG 01: The React"
+                 data-es="Entrenar COG 01: The React">
+                Train COG 01: The React
+              </a>
+            </div>
+          </article>
+
+          <article class="coach-card">
+            <div class="coach-top">
+              <div class="coach-number">SG</div>
+              <div class="coach-meta">
+                <small data-en="Game 002 · Paid Game" data-es="Juego 002 · Juego Pago">Game 002 · Paid Game</small>
+                <strong data-en="The Value Coach" data-es="The Value Coach">The Value Coach</strong>
+                <p data-en="Your Value Is Bigger Than Points. Define your complete player value beyond scoring."
+                   data-es="Tu Valor Es Más Grande Que Tus Puntos. Define tu valor completo como jugador más allá de anotar.">
+                  Your Value Is Bigger Than Points. Define your complete player value beyond scoring.
+                </p>
+              </div>
+            </div>
+            <div class="coach-actions">
+              <a class="btn gold"
+                 href="https://chatgpt.com/g/g-69efcf096a2081919d7caa80495d1acc-basketball-money-dream-team-the-value-coach"
+                 target="_blank"
+                 rel="noopener"
+                 data-en="Give The Value Coach The Ball →"
+                 data-es="Dale El Balón Al Value Coach →">
+                Give The Value Coach The Ball →
+              </a>
+              <a class="btn secondary"
+                 href="002-recall.html"
+                 data-en="Train COG 02: The Recall"
+                 data-es="Entrenar COG 02: The Recall">
+                Train COG 02: The Recall
+              </a>
+            </div>
+          </article>
+
+          <article class="coach-card">
+            <div class="coach-top">
+              <div class="coach-number orange">W</div>
+              <div class="coach-meta">
+                <small data-en="Game 003 · Paid Game" data-es="Juego 003 · Juego Pago">Game 003 · Paid Game</small>
+                <strong data-en="The Attention Coach" data-es="The Attention Coach">The Attention Coach</strong>
+                <p data-en="Attention Creates Opportunity. Learn how visibility, story, platform, and reputation create new doors."
+                   data-es="La Atención Crea Oportunidad. Aprende cómo visibilidad, historia, plataforma y reputación abren nuevas puertas.">
+                  Attention Creates Opportunity. Learn how visibility, story, platform, and reputation create new doors.
+                </p>
+              </div>
+            </div>
+            <div class="coach-actions">
+              <a class="btn orange"
+                 href="https://chatgpt.com/g/g-69efd00652048191a0405be9c243e387-basketball-money-dream-team-the-attention-coach"
+                 target="_blank"
+                 rel="noopener"
+                 data-en="Give The Attention Coach The Ball →"
+                 data-es="Dale El Balón Al Attention Coach →">
+                Give The Attention Coach The Ball →
+              </a>
+              <a class="btn secondary"
+                 href="003-reflex.html"
+                 data-en="Train COG 03: The Reflex"
+                 data-es="Entrenar COG 03: The Reflex">
+                Train COG 03: The Reflex
+              </a>
+            </div>
+          </article>
+
+          <article class="coach-card">
+            <div class="coach-top">
+              <div class="coach-number purple">PF</div>
+              <div class="coach-meta">
+                <small data-en="Game 004 · Paid Game" data-es="Juego 004 · Juego Pago">Game 004 · Paid Game</small>
+                <strong data-en="The Relationship Coach" data-es="The Relationship Coach">The Relationship Coach</strong>
+                <p data-en="Relationships Are Basketball Currency. Map the trust, contacts, follow-up, and people who can open doors."
+                   data-es="Las Relaciones Son Moneda En El Baloncesto. Mapea la confianza, contactos, seguimiento y personas que pueden abrir puertas.">
+                  Relationships Are Basketball Currency. Map the trust, contacts, follow-up, and people who can open doors.
+                </p>
+              </div>
+            </div>
+            <div class="coach-actions">
+              <a class="btn purple"
+                 href="https://chatgpt.com/g/g-69efd0ed8424819189b27ec58c7a812a-basketball-money-dream-team-relationship-coach"
+                 target="_blank"
+                 rel="noopener"
+                 data-en="Give The Relationship Coach The Ball →"
+                 data-es="Dale El Balón Al Relationship Coach →">
+                Give The Relationship Coach The Ball →
+              </a>
+              <a class="btn secondary"
+                 href="004-replay.html"
+                 data-en="Train COG 04: The Replay"
+                 data-es="Entrenar COG 04: The Replay">
+                Train COG 04: The Replay
+              </a>
+            </div>
+          </article>
+
+          <article class="coach-card">
+            <div class="coach-top">
+              <div class="coach-number">CL</div>
+              <div class="coach-meta">
+                <small data-en="Game 005 · Paid Game" data-es="Juego 005 · Juego Pago">Game 005 · Paid Game</small>
+                <strong data-en="The Proof Coach" data-es="The Proof Coach">The Proof Coach</strong>
+                <p data-en="Proof Turns Talent Into Value. Build evidence through stats, film, progress, story, testimonials, and cognitive strengths."
+                   data-es="La Evidencia Convierte Talento En Valor. Construye evidencia con estadísticas, video, progreso, historia, testimonios y fortalezas cognitivas.">
+                  Proof Turns Talent Into Value. Build evidence through stats, film, progress, story, testimonials, and cognitive strengths.
+                </p>
+              </div>
+            </div>
+            <div class="coach-actions">
+              <a class="btn gold"
+                 href="https://chatgpt.com/g/g-69efd28aa3588191a7c765ab3929edd1-basketball-money-dream-team-the-proof-coach"
+                 target="_blank"
+                 rel="noopener"
+                 data-en="Give The Proof Coach The Ball →"
+                 data-es="Dale El Balón Al Proof Coach →">
+                Give The Proof Coach The Ball →
+              </a>
+              <a class="btn secondary"
+                 href="005-ritmo.html"
+                 data-en="Train COG 05: The Ritmo"
+                 data-es="Entrenar COG 05: The Ritmo">
+                Train COG 05: The Ritmo
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="post" id="cogs">
+        <p class="section-label" data-en="COG Training Lab" data-es="Laboratorio COG">COG Training Lab</p>
+
+        <h2 class="section-title"
+            data-en="Conversation first. Training second."
+            data-es="Conversación primero. Entrenamiento segundo.">
+          Conversation first. Training second.
+        </h2>
+
+        <p class="section-text"
+           data-en="The TeamGPT coaches teach the lesson through conversation. The COG drills train the mind behind the lesson."
+           data-es="Los coaches TeamGPT enseñan la lección por conversación. Los drills COG entrenan la mente detrás de la lección.">
+          The TeamGPT coaches teach the lesson through conversation. The COG drills train the mind behind the lesson.
         </p>
 
         <div class="formula-grid">
-          <div class="formula-card">
-            <span data-en="Step 1" data-es="Paso 1">Step 1</span>
-            <strong data-en="Image" data-es="Imagen">Image</strong>
-          </div>
-
-          <div class="formula-card">
-            <span data-en="Step 2" data-es="Paso 2">Step 2</span>
-            <strong data-en="Definition" data-es="Definición">Definition</strong>
-          </div>
-
-          <div class="formula-card">
-            <span data-en="Step 3" data-es="Paso 3">Step 3</span>
-            <strong data-en="Conversation" data-es="Conversación">Conversation</strong>
-          </div>
-
-          <div class="formula-card">
-            <span data-en="Step 4" data-es="Paso 4">Step 4</span>
-            <strong data-en="Drill" data-es="Drill">Drill</strong>
-          </div>
-        </div>
-      </section>
-
-      <section class="post games-card" id="games">
-        <p class="section-label"
-           data-en="Start Here"
-           data-es="Empieza Aquí">
-          Start Here
-        </p>
-
-        <h2 class="section-title"
-            data-en="Free Season begins with Game 001."
-            data-es="La Temporada Gratis comienza con el Juego 001.">
-          Free Season begins with Game 001.
-        </h2>
-
-        <p class="section-text"
-           data-en="Game 001 teaches the foundation: basketball is not only a game. Basketball is an economy."
-           data-es="El Juego 001 enseña la base: el baloncesto no es solo un juego. El baloncesto es una economía.">
-          Game 001 teaches the foundation: basketball is not only a game. Basketball is an economy.
-        </p>
-
-        <div class="games-list">
-          <a class="game-link" href="games/game-001.html">
-            <small data-en="Game 001" data-es="Juego 001">Game 001</small>
-            <strong data-en="Basketball Is A Business" data-es="El Baloncesto Es Un Negocio">
-              Basketball Is A Business
-            </strong>
-            <p data-en="Start the Basketball Money system with the core business definition."
-               data-es="Comienza el sistema Basketball Money con la definición central de negocio.">
-              Start the Basketball Money system with the core business definition.
-            </p>
+          <a class="formula-card" href="001-react.html">
+            <span>COG 01</span>
+            <strong>The React</strong>
           </a>
 
-          <a class="game-link" href="paid-gate.html">
-            <small data-en="Paid Gateway" data-es="Entrada Paga">Paid Gateway</small>
-            <strong data-en="Games 006–030 + Cognitive Training Lab" data-es="Juegos 006–030 + Laboratorio Cognitivo">
-              Games 006–030 + Cognitive Training Lab
-            </strong>
-            <p data-en="The paid layer adds cognitive drills and deeper player-value training."
-               data-es="La capa paga añade drills cognitivos y entrenamiento más profundo de valor del jugador.">
-              The paid layer adds cognitive drills and deeper player-value training.
-            </p>
+          <a class="formula-card" href="002-recall.html">
+            <span>COG 02</span>
+            <strong>The Recall</strong>
+          </a>
+
+          <a class="formula-card" href="003-reflex.html">
+            <span>COG 03</span>
+            <strong>The Reflex</strong>
+          </a>
+
+          <a class="formula-card" href="004-replay.html">
+            <span>COG 04</span>
+            <strong>The Replay</strong>
+          </a>
+
+          <a class="formula-card" href="005-ritmo.html">
+            <span>COG 05</span>
+            <strong>The Ritmo</strong>
           </a>
         </div>
       </section>
 
-      <footer data-en="Basketball Money — The Business of Basketball"
-              data-es="Basketball Money — El Negocio del Baloncesto">
-        Basketball Money — The Business of Basketball
+      <footer data-en="Basketball Money TeamGPT — Give The GPT The Ball"
+              data-es="Basketball Money TeamGPT — Dale El Balón Al GPT">
+        Basketball Money TeamGPT — Give The GPT The Ball
       </footer>
 
     </div>
@@ -680,14 +866,14 @@
 
     let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
 
-    function setLanguage(lang) {
+    function setLanguage(lang){
       currentLang = lang === 'es' ? 'es' : 'en';
       localStorage.setItem('basketball-money-lang', currentLang);
       document.documentElement.lang = currentLang;
 
       translatable.forEach((el) => {
         const text = el.getAttribute('data-' + currentLang);
-        if (text !== null) {
+        if(text !== null){
           el.textContent = text;
         }
       });
