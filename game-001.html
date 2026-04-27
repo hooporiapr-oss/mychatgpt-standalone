@@ -2,65 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Hoops Money | Drill 001 — The React</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game 001 | Basketball Money</title>
+
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --muted: #5f6368;
-      --line: #e5e7eb;
-      --soft: #f8fafc;
+      --bg: #050505;
+      --panel: #0f1115;
+      --panel-2: #151821;
+      --text: #f5f7fa;
+      --muted: #8b98a5;
+      --line: #242833;
       --brand: #9B59B6;
-      --brand-dark: #6F3F83;
-      --brand-soft: rgba(155, 89, 182, 0.12);
-      --success: #00D9A5;
-      --success-soft: rgba(0, 217, 165, 0.16);
-      --danger: #ef4444;
-      --warning: #f59e0b;
+      --brand-2: #00D9A5;
+      --brand-soft: rgba(155, 89, 182, 0.18);
+      --green-soft: rgba(0, 217, 165, 0.14);
+      --orange: #ff8a3d;
+      --orange-soft: rgba(255, 138, 61, 0.14);
+      --white: #ffffff;
       --radius: 22px;
-      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-      --max: 720px;
+      --max: 760px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html, body {
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
       margin: 0;
-      min-height: 100%;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(155, 89, 182, 0.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(0, 217, 165, 0.10), transparent 30%),
+        var(--bg);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.5;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
+      line-height: 1.45;
     }
 
-    body { user-select: none; }
-    a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; }
-    img { display: block; max-width: 100%; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      font-family: inherit;
+    }
 
     .topbar {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 5, 0.88);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
     }
 
     .topbar-inner {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 14px 18px 16px;
+      padding: 14px 16px 16px;
     }
 
     .brand-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      justify-content: space-between;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
@@ -71,30 +88,31 @@
     }
 
     .brand-mark {
-      width: 44px;
-      height: 44px;
-      border: 2px solid var(--brand);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
       display: grid;
       place-items: center;
-      color: var(--brand);
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #050505;
       font-weight: 950;
-      letter-spacing: -0.05em;
-      background: #fff;
+      letter-spacing: -0.08em;
+      border: 2px solid rgba(255, 255, 255, 0.18);
     }
 
     .brand-copy small {
       display: block;
-      color: var(--brand);
-      font-size: 11px;
-      font-weight: 950;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
     }
 
     .brand-copy strong {
       display: block;
       font-size: 18px;
-      line-height: 1.1;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
     }
 
     .top-links {
@@ -105,11 +123,18 @@
 
     .top-links a {
       border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      padding: 10px 13px;
       border-radius: 999px;
-      padding: 9px 12px;
       font-size: 13px;
-      font-weight: 850;
-      background: #fff;
+      font-weight: 900;
+      transition: 0.18s ease;
+    }
+
+    .top-links a:hover {
+      border-color: var(--brand);
+      transform: translateY(-1px);
     }
 
     .lang-row {
@@ -117,129 +142,304 @@
       display: flex;
       justify-content: center;
       padding-top: 14px;
-      border-top: 1px solid #f1f5f9;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .lang-toggle {
-      background: var(--soft);
+      display: inline-flex;
+      gap: 4px;
+      background: #0b0d12;
       border: 1px solid var(--line);
       border-radius: 999px;
       padding: 4px;
-      display: inline-flex;
-      gap: 4px;
     }
 
     .lang-btn {
       border: 0;
       background: transparent;
+      color: var(--muted);
       padding: 10px 14px;
       border-radius: 999px;
-      font-weight: 900;
       font-size: 13px;
+      font-weight: 950;
       cursor: pointer;
-      color: #334155;
     }
 
     .lang-btn.active {
-      background: var(--brand);
-      color: #fff;
+      background: var(--text);
+      color: #050505;
     }
 
-    .header-image {
-      width: 100%;
-      background: #fff;
-      border-bottom: 1px solid var(--line);
+    .hero-image {
+      max-width: var(--max);
+      margin: 16px auto 0;
+      padding: 0 16px;
     }
 
-    .header-image img {
+    .hero-image-inner {
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-image img {
       width: 100%;
       height: auto;
-      object-fit: contain;
-      object-position: center;
-      background: #fff;
+      object-fit: cover;
     }
 
     .page {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 20px 18px 70px;
+      padding: 16px 16px 80px;
     }
 
-    .stack { display: grid; gap: 16px; }
+    .feed {
+      display: grid;
+      gap: 14px;
+    }
 
     .post {
-      background: #fff;
+      background: rgba(15, 17, 21, 0.94);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+      padding: 18px;
+      position: relative;
       overflow: hidden;
     }
 
-    .pad { padding: 22px; }
-
-    .eyebrow {
-      margin: 0 0 10px;
-      color: var(--brand);
-      font-size: 12px;
-      font-weight: 950;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+    .post::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.045), transparent 42%);
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(42px, 9vw, 76px);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
+    .post.pinned {
+      border-color: rgba(155, 89, 182, 0.55);
+      background:
+        linear-gradient(135deg, rgba(155, 89, 182, 0.18), rgba(0, 217, 165, 0.06)),
+        rgba(15, 17, 21, 0.96);
     }
 
-    h2 {
-      margin: 0;
-      font-size: clamp(26px, 5vw, 40px);
-      line-height: 1;
-      letter-spacing: -0.04em;
+    .post.final {
+      border-color: rgba(0, 217, 165, 0.5);
+      background:
+        linear-gradient(135deg, rgba(0, 217, 165, 0.16), rgba(155, 89, 182, 0.16)),
+        rgba(15, 17, 21, 0.96);
     }
 
-    .subtitle {
-      margin: 16px 0 0;
-      font-size: clamp(18px, 2.5vw, 23px);
-      line-height: 1.45;
-      color: #222;
+    .post.warning {
+      border-color: rgba(255, 138, 61, 0.45);
+      background:
+        linear-gradient(135deg, rgba(255, 138, 61, 0.13), rgba(155, 89, 182, 0.08)),
+        rgba(15, 17, 21, 0.96);
     }
 
-    .rule {
-      margin-top: 16px;
-      border-left: 5px solid var(--brand);
-      background: var(--brand-soft);
-      padding: 14px 16px;
-      font-weight: 850;
+    .post-head {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      position: relative;
+      z-index: 2;
     }
 
-    .meta-grid {
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      flex: 0 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      place-items: center;
+      background: #050505;
+      border: 2px solid var(--brand);
+      color: var(--brand-2);
+      font-weight: 950;
+      letter-spacing: -0.05em;
+      font-size: 13px;
+    }
+
+    .post-meta {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .name-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 2px;
+    }
+
+    .name {
+      font-weight: 950;
+      letter-spacing: -0.03em;
+    }
+
+    .handle {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 217, 165, 0.38);
+      background: var(--green-soft);
+      color: #b9ffee;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .post-text {
+      margin: 12px 0 0;
+      font-size: clamp(21px, 4.2vw, 32px);
+      line-height: 1.1;
+      font-weight: 950;
+      letter-spacing: -0.055em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .post-text.big {
+      font-size: clamp(40px, 10vw, 76px);
+      line-height: 0.92;
+      letter-spacing: -0.08em;
+    }
+
+    .post-sub {
+      margin: 14px 0 0;
+      color: #cfd6dd;
+      font-size: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .post-sub strong {
+      color: var(--white);
+    }
+
+    .thread-line {
+      margin: 16px 0 0;
+      padding: 14px 16px;
+      border-left: 4px solid var(--brand);
+      background: var(--brand-soft);
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: 900;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-label {
+      color: var(--brand-2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 950;
+      margin: 0 0 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mini-list,
+    .check-list,
+    .quiz-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mini-card,
+    .check-card,
+    .quiz-card {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 18px;
+      padding: 15px;
+    }
+
+    .mini-card strong,
+    .check-card strong,
+    .quiz-card strong {
+      display: block;
+      font-size: 20px;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+    }
+
+    .mini-card p,
+    .check-card p,
+    .quiz-card p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .check-card {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .check-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #050505;
+      border: 2px solid var(--brand-2);
+      color: var(--brand-2);
+      font-weight: 950;
+      font-size: 13px;
+    }
+
+    .quote {
+      margin-top: 16px;
+      border: 1px solid rgba(0, 217, 165, 0.36);
+      background: var(--green-soft);
+      border-radius: 18px;
+      padding: 16px;
+      font-weight: 950;
+      font-size: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .orange-note {
+      margin-top: 16px;
+      border: 1px solid rgba(255, 138, 61, 0.36);
+      background: var(--orange-soft);
+      border-radius: 18px;
+      padding: 16px;
+      font-weight: 900;
+      font-size: 17px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
       margin-top: 18px;
+      position: relative;
+      z-index: 2;
     }
-
-    .meta {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--soft);
-      padding: 12px;
-    }
-
-    .meta span {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 850;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .meta strong { font-size: 16px; }
 
     .btn {
       display: inline-flex;
@@ -248,594 +448,565 @@
       border: 1px solid var(--brand);
       background: var(--brand);
       color: #fff;
-      padding: 12px 16px;
+      padding: 13px 16px;
       border-radius: 999px;
-      font-weight: 950;
       font-size: 14px;
+      font-weight: 950;
       cursor: pointer;
-      min-height: 44px;
-      transition: transform .15s ease, opacity .15s ease;
+      transition: 0.18s ease;
+      text-align: center;
     }
 
-    .btn:active { transform: scale(0.98); }
-    .btn:disabled { opacity: .45; cursor: not-allowed; }
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
 
     .btn.secondary {
-      background: #fff;
-      color: var(--brand);
+      background: transparent;
+      color: var(--text);
+      border-color: var(--line);
     }
 
-    .btn.success {
-      background: var(--success);
-      border-color: var(--success);
-      color: #064e3b;
+    .btn.green {
+      background: var(--brand-2);
+      color: #03110d;
+      border-color: var(--brand-2);
     }
 
-    .btn-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
+    .btn.orange {
+      background: var(--orange);
+      color: #111;
+      border-color: var(--orange);
     }
 
-    .court-card {
-      padding: 18px;
-    }
-
-    .score-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .score-box {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 12px 8px;
-      text-align: center;
-      background: var(--soft);
-    }
-
-    .score-value {
-      display: block;
-      font-size: 26px;
-      font-weight: 950;
-      line-height: 1;
-      color: var(--brand);
-    }
-
-    .score-label {
-      display: block;
-      margin-top: 4px;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .message {
-      min-height: 38px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 10px 12px;
-      font-size: 17px;
-      font-weight: 950;
-      margin-bottom: 14px;
-    }
-
-    .message.ready { color: var(--brand); }
-    .message.go { color: var(--warning); }
-    .message.good { color: var(--success); }
-    .message.miss { color: var(--danger); }
-
-    .court-wrap {
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    .court {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: var(--soft);
-      aspect-ratio: 1;
-    }
-
-    .cell {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #fff;
-      cursor: pointer;
-      min-width: 0;
-      min-height: 0;
-      transition: transform .08s ease, background .08s ease, border-color .08s ease;
-    }
-
-    .cell:active { transform: scale(.95); }
-
-    .cell.target {
-      background: var(--brand);
-      border-color: var(--brand);
-      box-shadow: 0 0 0 4px var(--brand-soft);
-      transform: scale(1.04);
-    }
-
-    .cell.correct {
-      background: var(--success);
-      border-color: var(--success);
-      box-shadow: 0 0 0 4px var(--success-soft);
-    }
-
-    .cell.missed {
-      background: rgba(239, 68, 68, 0.16);
-      border-color: var(--danger);
-    }
-
-    .play-info {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin: 14px auto 0;
-      max-width: 420px;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 850;
-    }
-
-    .play-info strong { color: var(--text); }
-
-    .setup-grid {
+    .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-top: 16px;
+      margin-top: 18px;
+      position: relative;
+      z-index: 2;
     }
 
-    .setup-btn {
+    .stat {
       border: 1px solid var(--line);
-      border-radius: 18px;
-      background: #fff;
-      padding: 14px 12px;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .setup-btn.active {
-      border-color: var(--brand);
-      background: var(--brand-soft);
-    }
-
-    .setup-btn strong {
-      display: block;
-      font-size: 16px;
-      margin-bottom: 3px;
-    }
-
-    .setup-btn span {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 750;
-    }
-
-    .note {
-      border: 1px solid var(--line);
-      border-left: 5px solid var(--brand);
+      background: rgba(255, 255, 255, 0.035);
       border-radius: 16px;
-      background: #fafafa;
-      padding: 16px;
-      margin-top: 14px;
+      padding: 13px;
     }
 
-    .label {
+    .stat span {
       display: block;
-      color: var(--brand);
+      color: var(--muted);
       font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 17px;
+      line-height: 1.1;
+    }
+
+    .prompt-box {
+      margin-top: 16px;
+      border: 1px dashed rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.04);
+      border-radius: 18px;
+      padding: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .prompt-box small {
+      display: block;
+      color: var(--brand-2);
       font-weight: 950;
-      letter-spacing: .16em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 8px;
+      font-size: 11px;
     }
 
-    .completion {
-      display: none;
-      background: var(--success-soft);
-      border: 1px solid rgba(0, 217, 165, .35);
+    .prompt-box p {
+      margin: 0;
+      color: #e8edf2;
+      font-size: 15px;
+      font-weight: 800;
     }
 
-    .completion.show { display: block; }
-
-    .coach-close {
-      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
-      color: #fff;
-      border-color: var(--brand);
+    .post-actions {
+      display: flex;
+      gap: 22px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
     }
 
-    .coach-close p { margin: 0; }
+    .post-actions span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
 
     footer {
       text-align: center;
       color: var(--muted);
       font-size: 13px;
-      margin-top: 18px;
+      margin-top: 20px;
+      padding-bottom: 20px;
     }
 
-    @media (max-width: 760px) {
-      .page { padding: 16px 14px 60px; }
-      .pad { padding: 18px; }
-      .top-links { width: 100%; }
-      .top-links a { flex: 1 1 auto; text-align: center; }
-      .meta-grid,
-      .setup-grid { grid-template-columns: 1fr; }
-      .score-row { grid-template-columns: repeat(2, 1fr); }
-      .court { gap: 6px; padding: 8px; border-radius: 18px; }
-      .cell { border-radius: 10px; }
-      .btn { width: 100%; }
-      .btn-row { display: grid; grid-template-columns: 1fr; }
+    @media (max-width: 720px) {
+      .brand-row {
+        align-items: flex-start;
+      }
+
+      .top-links {
+        width: 100%;
+      }
+
+      .top-links a {
+        flex: 1 1 auto;
+        text-align: center;
+      }
+
+      .post {
+        padding: 16px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-row {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
+
   <nav class="topbar">
     <div class="topbar-inner">
+
       <div class="brand-row">
-        <div class="brand">
-          <div class="brand-mark">HM</div>
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
           <div class="brand-copy">
-            <small>Hoops Money</small>
-            <strong data-en="Drill 001 — The React" data-es="Drill 001 — The React">Drill 001 — The React</strong>
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 001: Value" data-es="Juego 001: Valor">Game 001: Value</strong>
           </div>
-        </div>
+        </a>
+
         <div class="top-links">
-          <a href="game-001.html" data-en="Back" data-es="Volver">Back</a>
-          <a href="#play" data-en="Play" data-es="Jugar">Play</a>
-          <a href="game-002.html" data-en="Game 002" data-es="Juego 002">Game 002</a>
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+          <a href="game-002.html" data-en="Next" data-es="Próximo">Next</a>
         </div>
       </div>
+
       <div class="lang-row">
-        <div class="lang-toggle">
+        <div class="lang-toggle" aria-label="Language toggle">
           <button class="lang-btn active" type="button" data-lang="en">English</button>
           <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
         </div>
       </div>
+
     </div>
   </nav>
 
-  <header class="header-image">
-    <img src="./image-001.png" alt="Get Ready Hoops header image" />
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-001.png" alt="Game 001 Basketball Money">
+    </div>
   </header>
 
   <main class="page">
-    <div class="stack">
-      <section class="post pad">
-        <p class="eyebrow" data-en="Overtime Drill 001" data-es="Overtime Drill 001">Overtime Drill 001</p>
-        <h1 data-en="The React" data-es="The React">The React</h1>
-        <p class="subtitle" data-en="Value is not just knowing the right answer. Value is reacting when the game speeds up." data-es="El valor no es solo saber la respuesta correcta. El valor es reaccionar cuando el juego se acelera.">
-          Value is not just knowing the right answer. Value is reacting when the game speeds up.
-        </p>
-        <div class="rule" data-en="See it. Read it. React." data-es="Míralo. Léelo. Reacciona.">See it. Read it. React.</div>
+    <div class="feed">
 
-        <div class="meta-grid">
-          <div class="meta"><span data-en="Focus" data-es="Enfoque">Focus</span><strong data-en="Reaction" data-es="Reacción">Reaction</strong></div>
-          <div class="meta"><span data-en="Court" data-es="Cancha">Court</span><strong>5 × 5</strong></div>
-          <div class="meta"><span data-en="Goal" data-es="Meta">Goal</span><strong data-en="1 clean round" data-es="1 ronda limpia">1 clean round</strong></div>
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar">001</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 001" data-es="Juego 001">Game 001</span>
+              <span class="handle">@basketballmoney</span>
+              <span class="badge" data-en="Pinned" data-es="Fijado">Pinned</span>
+            </div>
+            <span class="handle" data-en="The Business of Basketball starts here." data-es="El Negocio del Baloncesto empieza aquí.">The Business of Basketball starts here.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="Why would someone choose you?" data-es="¿Por qué alguien te escogería a ti?">
+          Why would someone choose you?
+        </h1>
+
+        <p class="post-sub" data-en="That is the first business question in basketball. Not your highlights. Not your excuses. Not what you almost did. Your value." data-es="Esa es la primera pregunta de negocio en el baloncesto. No tus highlights. No tus excusas. No lo que casi hiciste. Tu valor.">
+          That is the first business question in basketball. Not your highlights. Not your excuses. Not what you almost did. Your value.
+        </p>
+
+        <div class="thread-line" data-en="Game 001 teaches the difference between talent, attention, and real basketball value." data-es="El Juego 001 enseña la diferencia entre talento, atención y valor real en el baloncesto.">
+          Game 001 teaches the difference between talent, attention, and real basketball value.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>001</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Value" data-es="Valor">Value</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Goal" data-es="Meta">Goal</span>
+            <strong data-en="Think Business" data-es="Pensar Negocio">Think Business</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="#lesson" data-en="Start Lesson →" data-es="Comenzar Lección →">Start Lesson →</a>
+          <a class="btn secondary" href="#final" data-en="Jump to Final Buzzer" data-es="Ir a Bocina Final">Jump to Final Buzzer</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 001</span>
+          <span>🔁 Value</span>
+          <span>🔥 Business</span>
         </div>
       </section>
 
-      <section class="post pad">
-        <p class="eyebrow" data-en="Playbook" data-es="Manual">Playbook</p>
-        <h2 data-en="How it works" data-es="Cómo funciona">How it works</h2>
-        <div class="note">
-          <span class="label" data-en="The Rep" data-es="La Repetición">The Rep</span>
-          <p data-en="A square lights up. Tap it before the next beat. Misses cost lives. A clean round unlocks Game 002." data-es="Un cuadro se prende. Tócalo antes del próximo beat. Los fallos cuestan vidas. Una ronda limpia desbloquea el Juego 002.">
-            A square lights up. Tap it before the next beat. Misses cost lives. A clean round unlocks Game 002.
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@valuebeforemoney</span>
+            </div>
+            <span class="handle" data-en="Money follows value." data-es="El dinero sigue al valor.">Money follows value.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The first business lesson" data-es="La primera lección de negocio">The first business lesson</p>
+
+        <h2 class="post-text" data-en="In basketball, money does not chase noise. Money chases value." data-es="En el baloncesto, el dinero no persigue ruido. El dinero persigue valor.">
+          In basketball, money does not chase noise. Money chases value.
+        </h2>
+
+        <p class="post-sub" data-en="A player can have talent and still not be valuable to a coach, team, sponsor, program, league, or brand. Talent gets attention. Value creates trust." data-es="Un jugador puede tener talento y todavía no ser valioso para un coach, equipo, auspiciador, programa, liga o marca. El talento llama la atención. El valor crea confianza.">
+          A player can have talent and still not be valuable to a coach, team, sponsor, program, league, or brand. Talent gets attention. Value creates trust.
+        </p>
+
+        <div class="quote" data-en="Talent says: look at me. Value says: you can count on me." data-es="El talento dice: mírame. El valor dice: puedes contar conmigo.">
+          Talent says: look at me. Value says: you can count on me.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@whatisyourproduct</span>
+            </div>
+            <span class="handle" data-en="Every player is a product." data-es="Todo jugador es un producto.">Every player is a product.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The player product" data-es="El producto del jugador">The player product</p>
+
+        <h2 class="post-text" data-en="Your product is not just your jump shot." data-es="Tu producto no es solamente tu tiro.">
+          Your product is not just your jump shot.
+        </h2>
+
+        <p class="post-sub" data-en="Your basketball product is the full package people experience when they deal with you: skill, decisions, attitude, consistency, communication, preparation, and trust." data-es="Tu producto de baloncesto es el paquete completo que las personas experimentan cuando tratan contigo: habilidad, decisiones, actitud, consistencia, comunicación, preparación y confianza.">
+          Your basketball product is the full package people experience when they deal with you: skill, decisions, attitude, consistency, communication, preparation, and trust.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Skill" data-es="Habilidad">Skill</strong>
+            <p data-en="What can you actually do on the court?" data-es="¿Qué realmente puedes hacer en cancha?">What can you actually do on the court?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Trust" data-es="Confianza">Trust</strong>
+            <p data-en="Can coaches and teammates depend on you?" data-es="¿Los coaches y compañeros pueden depender de ti?">Can coaches and teammates depend on you?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Consistency" data-es="Consistencia">Consistency</strong>
+            <p data-en="Do you bring the same standard when nobody is clapping?" data-es="¿Traes el mismo estándar cuando nadie está aplaudiendo?">Do you bring the same standard when nobody is clapping?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Visibility" data-es="Visibilidad">Visibility</strong>
+            <p data-en="Can the right people see what you bring?" data-es="¿Las personas correctas pueden ver lo que tú traes?">Can the right people see what you bring?</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@attentionisnotvalue</span>
+            </div>
+            <span class="handle" data-en="A warning before the second half." data-es="Una advertencia antes de la segunda mitad.">A warning before the second half.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Attention is not the same as value" data-es="Atención no es lo mismo que valor">Attention is not the same as value</p>
+
+        <h2 class="post-text" data-en="Views are not value. Hype is not value. Being known is not the same as being trusted." data-es="Vistas no son valor. Hype no es valor. Ser conocido no es lo mismo que ser confiable.">
+          Views are not value. Hype is not value. Being known is not the same as being trusted.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: attention may open the door, but value is what keeps you in the room." data-es="Regla de negocio en baloncesto: la atención puede abrir la puerta, pero el valor es lo que te mantiene dentro del cuarto.">
+          Basketball business rule: attention may open the door, but value is what keeps you in the room.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@basketballmarket</span>
+            </div>
+            <span class="handle" data-en="Who is buying what you bring?" data-es="¿Quién compra lo que tú traes?">Who is buying what you bring?</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The basketball market" data-es="El mercado del baloncesto">The basketball market</p>
+
+        <h2 class="post-text" data-en="The business of basketball is about solving problems for the people who choose players." data-es="El negocio del baloncesto se trata de resolver problemas para las personas que escogen jugadores.">
+          The business of basketball is about solving problems for the people who choose players.
+        </h2>
+
+        <p class="post-sub" data-en="A coach needs trust. A team needs fit. A league needs quality. A sponsor needs image. A fan needs connection. A brand needs belief. Your value changes depending on who is looking." data-es="Un coach necesita confianza. Un equipo necesita encaje. Una liga necesita calidad. Un auspiciador necesita imagen. Un fan necesita conexión. Una marca necesita credibilidad. Tu valor cambia dependiendo de quién está mirando.">
+          A coach needs trust. A team needs fit. A league needs quality. A sponsor needs image. A fan needs connection. A brand needs belief. Your value changes depending on who is looking.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="To a coach" data-es="Para un coach">To a coach</strong>
+            <p data-en="Value means trust, execution, discipline, and fit." data-es="Valor significa confianza, ejecución, disciplina y encaje.">Value means trust, execution, discipline, and fit.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="To a team" data-es="Para un equipo">To a team</strong>
+            <p data-en="Value means helping the group win, not just helping yourself look good." data-es="Valor significa ayudar al grupo a ganar, no solo ayudarte a ti a lucir bien.">Value means helping the group win, not just helping yourself look good.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="To a sponsor" data-es="Para un auspiciador">To a sponsor</strong>
+            <p data-en="Value means image, behavior, story, audience, and trust." data-es="Valor significa imagen, conducta, historia, audiencia y confianza.">Value means image, behavior, story, audience, and trust.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="To your future" data-es="Para tu futuro">To your future</strong>
+            <p data-en="Value means using basketball to build options, not just memories." data-es="Valor significa usar el baloncesto para construir opciones, no solo recuerdos.">Value means using basketball to build options, not just memories.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@provevalue</span>
+            </div>
+            <span class="handle" data-en="Value must be shown." data-es="El valor se tiene que demostrar.">Value must be shown.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="How value is proven" data-es="Cómo se demuestra el valor">How value is proven</p>
+
+        <h2 class="post-text" data-en="You do not prove value by saying you are serious. You prove it by patterns." data-es="Tú no demuestras valor diciendo que eres serio. Lo demuestras con patrones.">
+          You do not prove value by saying you are serious. You prove it by patterns.
+        </h2>
+
+        <p class="post-sub" data-en="The business of basketball watches patterns: how you train, how you respond, how you communicate, how you prepare, how you recover, and how you handle pressure." data-es="El negocio del baloncesto observa patrones: cómo entrenas, cómo respondes, cómo comunicas, cómo te preparas, cómo te recuperas y cómo manejas la presión.">
+          The business of basketball watches patterns: how you train, how you respond, how you communicate, how you prepare, how you recover, and how you handle pressure.
+        </p>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Show up." data-es="Preséntate.">Show up.</strong>
+              <p data-en="Availability is part of value." data-es="Estar disponible es parte del valor.">Availability is part of value.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Be coachable." data-es="Déjate coachear.">Be coachable.</strong>
+              <p data-en="Correction is not disrespect. It is information." data-es="La corrección no es falta de respeto. Es información.">Correction is not disrespect. It is information.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Do the invisible work." data-es="Haz el trabajo invisible.">Do the invisible work.</strong>
+              <p data-en="Your habits speak before your highlights do." data-es="Tus hábitos hablan antes que tus highlights.">Your habits speak before your highlights do.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Make people better." data-es="Haz mejores a los demás.">Make people better.</strong>
+              <p data-en="A valuable player raises the room." data-es="Un jugador valioso eleva el ambiente.">A valuable player raises the room.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game001review</span>
+              <span class="badge" data-en="Review" data-es="Repaso">Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the lesson." data-es="Asegura la lección.">Lock in the lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 001 Review" data-es="Repaso del Juego 001">Game 001 Review</p>
+
+        <h2 class="post-text" data-en="Before Game 002, answer this honestly: what is your current basketball value?" data-es="Antes del Juego 002, contesta esto con honestidad: ¿cuál es tu valor actual en el baloncesto?">
+          Before Game 002, answer this honestly: what is your current basketball value?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. What do people trust you to do?" data-es="1. ¿Qué la gente confía que tú puedes hacer?">1. What do people trust you to do?</strong>
+            <p data-en="Do not answer with what you hope. Answer with what you have shown." data-es="No contestes con lo que esperas. Contesta con lo que has demostrado.">Do not answer with what you hope. Answer with what you have shown.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What problem do you solve for a coach?" data-es="2. ¿Qué problema tú resuelves para un coach?">2. What problem do you solve for a coach?</strong>
+            <p data-en="Scoring is one answer. It is not the only answer." data-es="Anotar es una respuesta. No es la única respuesta.">Scoring is one answer. It is not the only answer.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. What makes you dependable?" data-es="3. ¿Qué te hace confiable?">3. What makes you dependable?</strong>
+            <p data-en="Dependability is business value." data-es="Ser confiable es valor de negocio.">Dependability is business value.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. What part of your value needs proof?" data-es="4. ¿Qué parte de tu valor necesita evidencia?">4. What part of your value needs proof?</strong>
+            <p data-en="The market does not believe everything you say. It believes what you can show." data-es="El mercado no cree todo lo que dices. Cree lo que puedes demostrar.">The market does not believe everything you say. It believes what you can show.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Why would someone choose you?" data-es="5. ¿Por qué alguien te escogería a ti?">5. Why would someone choose you?</strong>
+            <p data-en="This is the question that starts Basketball Money." data-es="Esta es la pregunta que comienza Basketball Money.">This is the question that starts Basketball Money.</p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 001. Help me define my current basketball value and explain why a coach, team, sponsor, or brand would choose me." data-es="Prompt: Acabo de terminar Basketball Money Juego 001. Ayúdame a definir mi valor actual en el baloncesto y explicar por qué un coach, equipo, auspiciador o marca me escogería.">
+            Prompt: I just finished Basketball Money Game 001. Help me define my current basketball value and explain why a coach, team, sponsor, or brand would choose me.
           </p>
         </div>
-        <div class="setup-grid" aria-label="Speed selection">
-          <button class="setup-btn active" type="button" data-speed="slow">
-            <strong data-en="Training" data-es="Training">Training</strong>
-            <span data-en="60 BPM • controlled" data-es="60 BPM • controlado">60 BPM • controlled</span>
-          </button>
-          <button class="setup-btn" type="button" data-speed="medium">
-            <strong data-en="Tempo" data-es="Tempo">Tempo</strong>
-            <span data-en="90 BPM • faster" data-es="90 BPM • más rápido">90 BPM • faster</span>
-          </button>
-          <button class="setup-btn" type="button" data-speed="fast">
-            <strong data-en="Elite" data-es="Elite">Elite</strong>
-            <span data-en="120 BPM • pressure" data-es="120 BPM • presión">120 BPM • pressure</span>
-          </button>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn secondary" href="game-002.html" data-en="Continue to Game 002 →" data-es="Continuar al Juego 002 →">Continue to Game 002 →</a>
+          <a class="btn secondary" href="index.html" data-en="Back to Home" data-es="Volver al Inicio">Back to Home</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>🔁 Prove Value</span>
+          <span>🔥 Game 002 Next</span>
         </div>
       </section>
 
-      <section class="post court-card" id="play">
-        <div class="score-row">
-          <div class="score-box"><span class="score-value" id="score">0</span><span class="score-label" data-en="Score" data-es="Puntos">Score</span></div>
-          <div class="score-box"><span class="score-value" id="hits">0</span><span class="score-label" data-en="Hits" data-es="Aciertos">Hits</span></div>
-          <div class="score-box"><span class="score-value" id="lives">3</span><span class="score-label" data-en="Lives" data-es="Vidas">Lives</span></div>
-          <div class="score-box"><span class="score-value" id="round">0</span><span class="score-label" data-en="Round" data-es="Ronda">Round</span></div>
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
         </div>
 
-        <div class="message ready" id="message" data-en="Tap Start." data-es="Toca Comenzar.">Tap Start.</div>
-
-        <div class="court-wrap">
-          <div class="court" id="court" aria-label="Reaction grid"></div>
-        </div>
-
-        <div class="play-info">
-          <span><strong id="speedLabel">60</strong> BPM</span>
-          <span><strong id="targetCount">5</strong> <span data-en="targets" data-es="objetivos">targets</span></span>
-          <span><strong id="tapCount">0</strong>/<strong>5</strong></span>
-        </div>
-
-        <div class="btn-row">
-          <button class="btn" type="button" id="startBtn" data-en="Start Round" data-es="Comenzar Ronda">Start Round</button>
-          <button class="btn secondary" type="button" id="resetBtn" data-en="Reset" data-es="Reiniciar">Reset</button>
-        </div>
+        <h2 class="post-text" data-en="Your value is not what you claim. Your value is what your habits, decisions, and impact make believable." data-es="Tu valor no es lo que tú reclamas. Tu valor es lo que tus hábitos, decisiones e impacto hacen creíble.">
+          Your value is not what you claim. Your value is what your habits, decisions, and impact make believable.
+        </h2>
       </section>
 
-      <section class="post pad completion" id="completionBox">
-        <span class="label" data-en="Drill Complete" data-es="Drill Completado">Drill Complete</span>
-        <h2 data-en="Game 002 unlocked" data-es="Juego 002 desbloqueado">Game 002 unlocked</h2>
-        <p data-en="You finished the reaction bridge. Now enter Game 002 — Habits." data-es="Terminaste el puente de reacción. Ahora entra al Juego 002 — Hábitos.">
-          You finished the reaction bridge. Now enter Game 002 — Habits.
-        </p>
-        <div class="btn-row">
-          <a class="btn success" href="game-002.html" data-en="Enter Game 002 →" data-es="Entrar al Juego 002 →">Enter Game 002 →</a>
-        </div>
-      </section>
+      <footer data-en="Basketball Money — Game 001: Value" data-es="Basketball Money — Juego 001: Valor">
+        Basketball Money — Game 001: Value
+      </footer>
 
-      <section class="post pad coach-close">
-        <p>
-          <strong data-en="Coach Close:" data-es="Cierre del Coach:">Coach Close:</strong>
-          <span data-en=" Understanding matters. Reaction proves it under speed." data-es=" Entender importa. Reaccionar lo prueba bajo velocidad."> Understanding matters. Reaction proves it under speed.</span>
-        </p>
-      </section>
-
-      <footer data-en="Hoops Money — Overtime Drill 001" data-es="Hoops Money — Overtime Drill 001">Hoops Money — Overtime Drill 001</footer>
     </div>
   </main>
 
   <script>
-    const STORAGE_KEY = 'hm-drill-001-react-complete-v1';
-    const SPEEDS = {
-      slow: { bpm: 60, interval: 1000 },
-      medium: { bpm: 90, interval: 667 },
-      fast: { bpm: 120, interval: 500 }
-    };
-
-    const court = document.getElementById('court');
-    const cells = [];
     const langButtons = document.querySelectorAll('.lang-btn');
     const translatable = document.querySelectorAll('[data-en][data-es]');
-    const setupButtons = document.querySelectorAll('.setup-btn');
-    const startBtn = document.getElementById('startBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const message = document.getElementById('message');
-    const completionBox = document.getElementById('completionBox');
-    const scoreEl = document.getElementById('score');
-    const hitsEl = document.getElementById('hits');
-    const livesEl = document.getElementById('lives');
-    const roundEl = document.getElementById('round');
-    const speedLabel = document.getElementById('speedLabel');
-    const tapCount = document.getElementById('tapCount');
-
-    let currentLang = localStorage.getItem('hm-lang') || 'en';
-    let speed = 'slow';
-    let score = 0;
-    let hits = 0;
-    let lives = 3;
-    let round = 0;
-    let playing = false;
-    let currentTarget = null;
-    let targetIndex = 0;
-    let targets = [];
-    let timers = [];
-    const targetTotal = 5;
-
-    function text(en, es) {
-      return currentLang === 'es' ? es : en;
-    }
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
 
     function setLanguage(lang) {
       currentLang = lang === 'es' ? 'es' : 'en';
-      localStorage.setItem('hm-lang', currentLang);
+      localStorage.setItem('basketball-money-lang', currentLang);
       document.documentElement.lang = currentLang;
-      translatable.forEach(el => {
-        const value = el.getAttribute('data-' + currentLang);
-        if (value !== null) el.textContent = value;
-      });
-      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === currentLang));
-      if (!playing) setMessage(text('Tap Start.', 'Toca Comenzar.'), 'ready');
-    }
 
-    function buildCourt() {
-      court.innerHTML = '';
-      cells.length = 0;
-      for (let i = 0; i < 25; i += 1) {
-        const cell = document.createElement('button');
-        cell.type = 'button';
-        cell.className = 'cell';
-        cell.setAttribute('aria-label', 'cell ' + (i + 1));
-        cell.addEventListener('click', () => handleTap(i));
-        court.appendChild(cell);
-        cells.push(cell);
-      }
-    }
-
-    function clearTimers() {
-      timers.forEach(timer => clearTimeout(timer));
-      timers = [];
-    }
-
-    function clearCourt() {
-      cells.forEach(cell => { cell.className = 'cell'; });
-    }
-
-    function setMessage(value, type = 'ready') {
-      message.textContent = value;
-      message.className = 'message ' + type;
-    }
-
-    function updateStats() {
-      scoreEl.textContent = score;
-      hitsEl.textContent = hits;
-      livesEl.textContent = lives;
-      roundEl.textContent = round;
-      speedLabel.textContent = SPEEDS[speed].bpm;
-      tapCount.textContent = Math.min(targetIndex, targetTotal);
-    }
-
-    function randomTargets() {
-      const picks = [];
-      while (picks.length < targetTotal) {
-        const index = Math.floor(Math.random() * 25);
-        if (!picks.includes(index)) picks.push(index);
-      }
-      return picks;
-    }
-
-    function beginRound() {
-      if (playing) return;
-      clearTimers();
-      clearCourt();
-      playing = true;
-      score = 0;
-      hits = 0;
-      lives = 3;
-      round += 1;
-      targetIndex = 0;
-      currentTarget = null;
-      targets = randomTargets();
-      completionBox.classList.remove('show');
-      startBtn.disabled = true;
-      updateStats();
-      setMessage(text('Get ready...', 'Prepárate...'), 'ready');
-      timers.push(setTimeout(() => showTarget(), 650));
-    }
-
-    function showTarget() {
-      if (!playing) return;
-      clearCourt();
-
-      if (targetIndex >= targets.length) {
-        finishRound(true);
-        return;
-      }
-
-      currentTarget = targets[targetIndex];
-      cells[currentTarget].classList.add('target');
-      setMessage(text('React.', 'Reacciona.'), 'go');
-
-      const missTimer = setTimeout(() => {
-        if (!playing || currentTarget === null) return;
-        cells[currentTarget].classList.remove('target');
-        cells[currentTarget].classList.add('missed');
-        lives -= 1;
-        currentTarget = null;
-        targetIndex += 1;
-        updateStats();
-        setMessage(text('Late. Keep playing.', 'Tarde. Sigue jugando.'), 'miss');
-        if (lives <= 0) {
-          finishRound(false);
-        } else {
-          timers.push(setTimeout(() => showTarget(), 350));
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
         }
-      }, SPEEDS[speed].interval);
-
-      timers.push(missTimer);
-    }
-
-    function handleTap(index) {
-      if (!playing || currentTarget === null) return;
-
-      if (index === currentTarget) {
-        cells[index].classList.remove('target');
-        cells[index].classList.add('correct');
-        score += 20;
-        hits += 1;
-        currentTarget = null;
-        targetIndex += 1;
-        clearTimers();
-        updateStats();
-        setMessage(text('Good read.', 'Buena lectura.'), 'good');
-        timers.push(setTimeout(() => showTarget(), 260));
-        return;
-      }
-
-      cells[index].classList.add('missed');
-      lives -= 1;
-      updateStats();
-      setMessage(text('Wrong read.', 'Lectura incorrecta.'), 'miss');
-      if (lives <= 0) finishRound(false);
-    }
-
-    function finishRound(won) {
-      playing = false;
-      clearTimers();
-      currentTarget = null;
-      startBtn.disabled = false;
-      updateStats();
-
-      if (won && hits >= targetTotal) {
-        localStorage.setItem(STORAGE_KEY, 'complete');
-        setMessage(text('Drill complete.', 'Drill completado.'), 'good');
-        completionBox.classList.add('show');
-        completionBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return;
-      }
-
-      setMessage(text('Run it again.', 'Corre otra vez.'), 'miss');
-    }
-
-    function resetDrill() {
-      clearTimers();
-      clearCourt();
-      playing = false;
-      score = 0;
-      hits = 0;
-      lives = 3;
-      round = 0;
-      targetIndex = 0;
-      currentTarget = null;
-      startBtn.disabled = false;
-      completionBox.classList.remove('show');
-      localStorage.removeItem(STORAGE_KEY);
-      updateStats();
-      setMessage(text('Tap Start.', 'Toca Comenzar.'), 'ready');
-    }
-
-    setupButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        if (playing) return;
-        speed = button.dataset.speed;
-        setupButtons.forEach(btn => btn.classList.toggle('active', btn === button));
-        updateStats();
       });
-    });
 
-    langButtons.forEach(button => {
-      button.addEventListener('click', () => setLanguage(button.dataset.lang));
-    });
-
-    startBtn.addEventListener('click', beginRound);
-    resetBtn.addEventListener('click', resetDrill);
-
-    buildCourt();
-    updateStats();
-    setLanguage(currentLang);
-
-    if (localStorage.getItem(STORAGE_KEY) === 'complete') {
-      completionBox.classList.add('show');
-      setMessage(text('Drill complete.', 'Drill completado.'), 'good');
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
     }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
   </script>
+
 </body>
 </html>
