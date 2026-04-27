@@ -157,31 +157,11 @@ html,body{height:100%;overflow-x:hidden;overflow-y:auto;font-family:'Outfit',san
 @media(max-height:550px){.demo-court{width:180px;height:180px}.play-court-wrap{max-width:260px}.play-stat-value{font-size:1.3rem}.play-message-text{font-size:.8rem}.play-action-btn{padding:10px;font-size:1rem}}
 @media(max-width:360px){.play-court-wrap{max-width:280px}.play-court{gap:3px;padding:6px}.demo-court{width:180px;height:180px}}
 </style>
-<script>
-  // Reset Game 001 when returning from the reaction drill
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    const shouldReset = params.get("reset") === "1";
-
-    if (shouldReset) {
-      Object.keys(localStorage).forEach(function (key) {
-        if (
-          key.includes("game-001") ||
-          key.includes("hm-game-001") ||
-          key.includes("question-flow")
-        ) {
-          localStorage.removeItem(key);
-        }
-      });
-
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  })()
 </head>
 <body>
 <nav class="mini-nav">
 <div class="nav-row">
-<a href="./game-001.html?reset=1" class="back-btn" id="backBtn">← Game 001</a>
+<a href="/index.html" class="back-btn" id="backBtn">← Back</a>
 <div class="nav-title">THE REACT</div>
 <div class="nav-right">
 <div class="nav-lang">
@@ -419,97 +399,5 @@ initDC();uUI();startDemo();uTr();
 </script>
 <script>window.COGNITIVE_TEST_NAME='react';</script>
 <script src="/cognitive-sync.js"></script>
-<script>
-  // Hoops Money routing only — does not change drill mechanics
-  document.addEventListener("DOMContentLoaded", function () {
-    const backBtn = document.getElementById("backBtn");
-    const demoCta = document.querySelector(".demo-cta");
-
-    if (backBtn) {
-      backBtn.href = "./game-001.html?reset=1";
-      backBtn.textContent = "← Home";
-    }
-
-    if (demoCta) {
-      const nextGameBtn = document.createElement("button");
-      nextGameBtn.textContent = "GO TO GAME 002";
-      nextGameBtn.type = "button";
-      nextGameBtn.style.cssText = `
-        width: 100%;
-        margin-top: 10px;
-        padding: 14px 20px;
-        border: 1px solid rgba(255,255,255,0.18);
-        border-radius: 10px;
-        background: transparent;
-        color: #FFD700;
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 1.05rem;
-        letter-spacing: 3px;
-        cursor: pointer;
-      `;
-
-      nextGameBtn.addEventListener("click", function () {
-        window.location.href = "./game-002.html";
-      });
-
-      demoCta.appendChild(nextGameBtn);
-    }
-  });
-</script>
-
-<script>
-  // Hard reset Game 001 when returning from 001-react.html
-  (function () {
-    const url = new URL(window.location.href);
-    const shouldReset = url.searchParams.get("reset") === "1";
-
-    function clearGame001State() {
-      try {
-        Object.keys(localStorage).forEach(function (key) {
-          if (
-            key.toLowerCase().includes("001") ||
-            key.toLowerCase().includes("game") ||
-            key.toLowerCase().includes("question") ||
-            key.toLowerCase().includes("flow") ||
-            key.toLowerCase().includes("hm")
-          ) {
-            localStorage.removeItem(key);
-          }
-        });
-      } catch (e) {}
-
-      document.querySelectorAll(".correct, .wrong, .disabled, .selected, .show, .completed, .done").forEach(function (el) {
-        el.classList.remove("correct", "wrong", "disabled", "selected", "show", "completed", "done");
-      });
-
-      document.querySelectorAll("[data-explanation]").forEach(function (el) {
-        el.classList.remove("show");
-      });
-
-      document.querySelectorAll("[data-question]").forEach(function (card, index) {
-        card.classList.remove("active", "completed");
-        if (index === 0) card.classList.add("active");
-      });
-
-      document.querySelectorAll("[data-step]").forEach(function (step, index) {
-        step.classList.remove("done", "active");
-        if (index === 0) step.classList.add("active");
-      });
-    }
-
-    if (shouldReset) {
-      clearGame001State();
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-
-    window.addEventListener("pageshow", function (event) {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("reset") === "1" || event.persisted) {
-        clearGame001State();
-        window.history.replaceState({}, document.title, window.location.pathname);
-      }
-    });
-  })();
-</script>
 </body>
 </html>
