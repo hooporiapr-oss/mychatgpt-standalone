@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Game 010 | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --brand-soft:rgba(155,89,182,.18);
+      --green-soft:rgba(0,217,165,.14);
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(155,89,182,.20),transparent 34%),
+        radial-gradient(circle at top right,rgba(0,217,165,.12),transparent 30%),
+        radial-gradient(circle at bottom center,rgba(245,197,66,.08),transparent 34%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--brand);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .hero-image{
+      max-width:var(--max);
+      margin:16px auto 0;
+      padding:0 16px;
+    }
+
+    .hero-image-inner{
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      object-fit:cover;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(245,197,66,.55);
+      background:
+        linear-gradient(135deg,rgba(245,197,66,.16),rgba(155,89,182,.18),rgba(0,217,165,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.lab{
+      border-color:rgba(0,217,165,.50);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.14),rgba(155,89,182,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.warning{
+      border-color:rgba(255,138,61,.45);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(0,217,165,.5);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(155,89,182,.16)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.transition{
+      border-color:rgba(245,197,66,.55);
+      background:
+        linear-gradient(135deg,rgba(245,197,66,.16),rgba(0,217,165,.12),rgba(155,89,182,.14)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand);
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .avatar.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(0,217,165,.38);
+      background:var(--green-soft);
+      color:#b9ffee;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--gold);
+      background:var(--gold-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .section-label{
+      color:var(--brand-2);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-list,.check-list,.quiz-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,.check-card,.quiz-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,.check-card strong,.quiz-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,.check-card p,.quiz-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .check-card{
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    .check-num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand-2);
+      color:var(--brand-2);
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(0,217,165,.36);
+      background:var(--green-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .orange-note{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:900;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--brand);
+      background:var(--brand);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .stat span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .prompt-box{
+      margin-top:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .prompt-box small{
+      display:block;
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-size:11px;
+    }
+
+    .prompt-box p{
+      margin:0;
+      color:#e8edf2;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .post-actions{
+      display:flex;
+      gap:22px;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 010: Connections Create Options" data-es="Juego 010: Las Conexiones Crean Opciones">Game 010: Connections Create Options</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="game-009.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#cog01" data-en="COG 01" data-es="COG 01">COG 01</a>
+          <a href="#next" data-en="Next COG" data-es="Próximo COG">Next COG</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-010.png" alt="Game 010 Connections Create Options Basketball Money">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar gold">010</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 010" data-es="Juego 010">Game 010</span>
+              <span class="handle">@paidseason</span>
+              <span class="badge gold" data-en="Paid Season" data-es="Temporada Paga">Paid Season</span>
+            </div>
+            <span class="handle" data-en="Build real relationships. Create more doors." data-es="Construye relaciones reales. Crea más puertas.">Build real relationships. Create more doors.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="Your network can open doors your talent cannot see alone." data-es="Tu red puede abrir puertas que tu talento no puede ver solo.">
+          Your network can open doors your talent cannot see alone.
+        </h1>
+
+        <p class="post-sub" data-en="Game 010 teaches connections. No one builds anything great alone. Relationships create access, information, trust, timing, momentum, and options." data-es="El Juego 010 enseña conexiones. Nadie construye algo grande solo. Las relaciones crean acceso, información, confianza, timing, momentum y opciones.">
+          Game 010 teaches connections. No one builds anything great alone. Relationships create access, information, trust, timing, momentum, and options.
+        </p>
+
+        <div class="thread-line" data-en="Basketball business rule: relationships are built, trust is earned, value is given, and doors are opened." data-es="Regla de negocio en baloncesto: las relaciones se construyen, la confianza se gana, el valor se da y las puertas se abren.">
+          Basketball business rule: relationships are built, trust is earned, value is given, and doors are opened.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>010</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Connections" data-es="Conexiones">Connections</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Season" data-es="Temporada">Season</span>
+            <strong data-en="Paid 006–030" data-es="Paga 006–030">Paid 006–030</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn gold" href="#lesson" data-en="Start Paid Lesson →" data-es="Comenzar Lección Paga →">Start Paid Lesson →</a>
+          <a class="btn green" href="#next" data-en="See COG 02 Unlock" data-es="Ver Desbloqueo COG 02">See COG 02 Unlock</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 010</span>
+          <span>🤝 Connections</span>
+          <span>🧠 COG 02 Next</span>
+        </div>
+      </section>
+
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@relationshipsopenrooms</span>
+            </div>
+            <span class="handle" data-en="Relationships open rooms." data-es="Las relaciones abren espacios.">Relationships open rooms.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The tenth business lesson" data-es="La décima lección de negocio">The tenth business lesson</p>
+
+        <h2 class="post-text" data-en="In basketball, connections are not shortcuts. They are bridges." data-es="En el baloncesto, las conexiones no son atajos. Son puentes.">
+          In basketball, connections are not shortcuts. They are bridges.
+        </h2>
+
+        <p class="post-sub" data-en="A real connection is not using people. A real connection is building trust, giving value, listening first, following through, and becoming someone people are willing to recommend." data-es="Una conexión real no es usar a la gente. Una conexión real es construir confianza, dar valor, escuchar primero, cumplir y convertirte en alguien que la gente esté dispuesta a recomendar.">
+          A real connection is not using people. A real connection is building trust, giving value, listening first, following through, and becoming someone people are willing to recommend.
+        </p>
+
+        <div class="quote" data-en="People open doors for people they know, like, trust, and believe will follow through." data-es="La gente abre puertas para personas que conocen, aprecian, confían y creen que van a cumplir.">
+          People open doors for people they know, like, trust, and believe will follow through.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@buildrealconnections</span>
+            </div>
+            <span class="handle" data-en="Build better connections." data-es="Construye mejores conexiones.">Build better connections.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="How to build real connections" data-es="Cómo construir conexiones reales">How to build real connections</p>
+
+        <h2 class="post-text" data-en="The strongest connections are built through value, not noise." data-es="Las conexiones más fuertes se construyen con valor, no con ruido.">
+          The strongest connections are built through value, not noise.
+        </h2>
+
+        <p class="post-sub" data-en="Players sometimes chase attention before they build trust. But the relationship that creates opportunity usually begins with respect, consistency, and value." data-es="A veces los jugadores persiguen atención antes de construir confianza. Pero la relación que crea oportunidad usualmente comienza con respeto, consistencia y valor.">
+          Players sometimes chase attention before they build trust. But the relationship that creates opportunity usually begins with respect, consistency, and value.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Be real" data-es="Sé real">Be real</strong>
+            <p data-en="Authenticity attracts the right people and filters out the wrong rooms." data-es="La autenticidad atrae a las personas correctas y filtra los espacios equivocados.">Authenticity attracts the right people and filters out the wrong rooms.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Listen first" data-es="Escucha primero">Listen first</strong>
+            <p data-en="Listening helps you understand before you ask." data-es="Escuchar te ayuda a entender antes de pedir.">Listening helps you understand before you ask.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Give value" data-es="Da valor">Give value</strong>
+            <p data-en="Look for ways to help first, not for ways to get first." data-es="Busca maneras de ayudar primero, no maneras de recibir primero.">Look for ways to help first, not for ways to get first.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Stay consistent" data-es="Sé consistente">Stay consistent</strong>
+            <p data-en="Relationships grow with consistent communication and repeated trust." data-es="Las relaciones crecen con comunicación consistente y confianza repetida.">Relationships grow with consistent communication and repeated trust.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Follow through" data-es="Cumple">Follow through</strong>
+            <p data-en="Do what you said you would do. Reputation is currency." data-es="Haz lo que dijiste que ibas a hacer. La reputación es moneda.">Do what you said you would do. Reputation is currency.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@dontnetworkfake</span>
+            </div>
+            <span class="handle" data-en="A warning before the second half." data-es="Una advertencia antes de la segunda mitad.">A warning before the second half.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Do not network fake" data-es="No conectes de forma falsa">Do not network fake</p>
+
+        <h2 class="post-text" data-en="People can feel when you only show up because you want something." data-es="La gente puede sentir cuando solo apareces porque quieres algo.">
+          People can feel when you only show up because you want something.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: weak connections ask before giving. Strong connections give value, build trust, and create options over time." data-es="Regla de negocio en baloncesto: las conexiones débiles piden antes de dar. Las conexiones fuertes dan valor, construyen confianza y crean opciones con el tiempo.">
+          Basketball business rule: weak connections ask before giving. Strong connections give value, build trust, and create options over time.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@networkmap</span>
+            </div>
+            <span class="handle" data-en="Know your network." data-es="Conoce tu red.">Know your network.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Types of connections" data-es="Tipos de conexiones">Types of connections</p>
+
+        <h2 class="post-text" data-en="Different connections create different options." data-es="Diferentes conexiones crean diferentes opciones.">
+          Different connections create different options.
+        </h2>
+
+        <p class="post-sub" data-en="A serious player learns to recognize the role of mentors, peers, coaches, industry people, community leaders, brands, trainers, event organizers, and former players." data-es="Un jugador serio aprende a reconocer el rol de mentores, compañeros, coaches, personas de la industria, líderes comunitarios, marcas, entrenadores, organizadores de eventos y exjugadores.">
+          A serious player learns to recognize the role of mentors, peers, coaches, industry people, community leaders, brands, trainers, event organizers, and former players.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Mentors" data-es="Mentores">Mentors</strong>
+            <p data-en="Guide your growth and help you avoid mistakes." data-es="Guían tu crecimiento y te ayudan a evitar errores.">Guide your growth and help you avoid mistakes.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Peers" data-es="Compañeros">Peers</strong>
+            <p data-en="Grow with you, challenge you, and share rooms with you." data-es="Crecen contigo, te retan y comparten espacios contigo.">Grow with you, challenge you, and share rooms with you.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Coaches" data-es="Coaches">Coaches</strong>
+            <p data-en="Open levels through trust, role clarity, and recommendation." data-es="Abren niveles mediante confianza, claridad de rol y recomendación.">Open levels through trust, role clarity, and recommendation.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Industry" data-es="Industria">Industry</strong>
+            <p data-en="Creates access to events, brands, training, media, leagues, and business opportunities." data-es="Crea acceso a eventos, marcas, entrenamiento, medios, ligas y oportunidades de negocio.">Creates access to events, brands, training, media, leagues, and business opportunities.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Community" data-es="Comunidad">Community</strong>
+            <p data-en="Builds your platform, reputation, and impact beyond the court." data-es="Construye tu plataforma, reputación e impacto más allá de la cancha.">Builds your platform, reputation, and impact beyond the court.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@connectionchecklist</span>
+            </div>
+            <span class="handle" data-en="Build today. Access tomorrow." data-es="Construye hoy. Accede mañana.">Build today. Access tomorrow.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Daily connection checklist" data-es="Checklist diario de conexiones">Daily connection checklist</p>
+
+        <h2 class="post-text" data-en="Connections create options when you treat relationships like a responsibility." data-es="Las conexiones crean opciones cuando tratas las relaciones como una responsabilidad.">
+          Connections create options when you treat relationships like a responsibility.
+        </h2>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Who can I learn from today?" data-es="¿De quién puedo aprender hoy?">Who can I learn from today?</strong>
+              <p data-en="Learning makes the relationship valuable before you ask for anything." data-es="Aprender hace que la relación tenga valor antes de pedir algo.">Learning makes the relationship valuable before you ask for anything.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Who can I help today?" data-es="¿A quién puedo ayudar hoy?">Who can I help today?</strong>
+              <p data-en="Helping builds trust faster than talking about yourself." data-es="Ayudar construye confianza más rápido que hablar de ti mismo.">Helping builds trust faster than talking about yourself.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Who can I follow up with today?" data-es="¿Con quién puedo dar seguimiento hoy?">Who can I follow up with today?</strong>
+              <p data-en="Follow-up shows maturity, respect, and seriousness." data-es="Dar seguimiento muestra madurez, respeto y seriedad.">Follow-up shows maturity, respect, and seriousness.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="How can I add value today?" data-es="¿Cómo puedo añadir valor hoy?">How can I add value today?</strong>
+              <p data-en="Your network grows when people associate your name with value." data-es="Tu red crece cuando la gente asocia tu nombre con valor.">Your network grows when people associate your name with value.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post lab" id="cog01">
+        <div class="post-head">
+          <div class="avatar">COG</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 01 Segment" data-es="Segmento COG 01">COG 01 Segment</span>
+              <span class="handle">@thereact</span>
+              <span class="badge" data-en="Games 006–010" data-es="Juegos 006–010">Games 006–010</span>
+            </div>
+            <span class="handle" data-en="The React segment completes here." data-es="El segmento The React se completa aquí.">The React segment completes here.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Cognitive Training Lab" data-es="Laboratorio de Entrenamiento Cognitivo">Cognitive Training Lab</p>
+
+        <h2 class="post-text" data-en="Game 010 completes the COG 01 segment, not the paid season." data-es="El Juego 010 completa el segmento COG 01, no la temporada paga.">
+          Game 010 completes the COG 01 segment, not the paid season.
+        </h2>
+
+        <p class="post-sub" data-en="Games 006–010 used COG 01: The React to train fast response, readiness, and action. The paid season continues through Game 030." data-es="Los Juegos 006–010 usaron COG 01: The React para entrenar respuesta rápida, preparación y acción. La temporada paga continúa hasta el Juego 030.">
+          Games 006–010 used COG 01: The React to train fast response, readiness, and action. The paid season continues through Game 030.
+        </p>
+
+        <div class="gold-note" data-en="You are not done. You are advancing. Next comes COG 02: The Recall for Games 011–015." data-es="No has terminado. Estás avanzando. Lo próximo es COG 02: The Recall para los Juegos 011–015.">
+          You are not done. You are advancing. Next comes COG 02: The Recall for Games 011–015.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="cog-01.html" data-en="Train COG 01 One More Time →" data-es="Entrenar COG 01 Una Vez Más →">Train COG 01 One More Time →</a>
+          <a class="btn secondary" href="#next" data-en="See COG 02 Next" data-es="Ver COG 02 Próximo">See COG 02 Next</a>
+        </div>
+      </section>
+
+      <section class="post transition" id="next">
+        <div class="post-head">
+          <div class="avatar gold">02</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Next Unlock" data-es="Próximo Desbloqueo">Next Unlock</span>
+              <span class="handle">@cog02therecall</span>
+              <span class="badge gold" data-en="Games 011–015" data-es="Juegos 011–015">Games 011–015</span>
+            </div>
+            <span class="handle" data-en="The Recall begins after Game 010." data-es="The Recall comienza después del Juego 010.">The Recall begins after Game 010.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="COG 02: The Recall" data-es="COG 02: The Recall">COG 02: The Recall</p>
+
+        <h2 class="post-text big" data-en="Next: remember the read." data-es="Próximo: recuerda la lectura.">
+          Next: remember the read.
+        </h2>
+
+        <p class="post-sub" data-en="COG 01 trained reaction. COG 02 trains memory. The player will watch numbered cells, remember the pattern, then tap the sequence back in order." data-es="COG 01 entrenó reacción. COG 02 entrena memoria. El jugador va a observar celdas numeradas, recordar el patrón y tocar la secuencia en orden.">
+          COG 01 trained reaction. COG 02 trains memory. The player will watch numbered cells, remember the pattern, then tap the sequence back in order.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Games 006–010" data-es="Juegos 006–010">Games 006–010</strong>
+            <p data-en="COG 01: The React — reaction, timing, awareness, and action." data-es="COG 01: The React — reacción, timing, conciencia y acción.">COG 01: The React — reaction, timing, awareness, and action.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Games 011–015" data-es="Juegos 011–015">Games 011–015</strong>
+            <p data-en="COG 02: The Recall — memory, order, sequence, and possession-long focus." data-es="COG 02: The Recall — memoria, orden, secuencia y enfoque durante toda la posesión.">COG 02: The Recall — memory, order, sequence, and possession-long focus.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Paid Season" data-es="Temporada Paga">Paid Season</strong>
+            <p data-en="The paid season continues from Game 011 through Game 030." data-es="La temporada paga continúa desde el Juego 011 hasta el Juego 030.">The paid season continues from Game 011 through Game 030.</p>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn gold" href="cog-02.html" data-en="Unlock COG 02: The Recall →" data-es="Desbloquear COG 02: The Recall →">Unlock COG 02: The Recall →</a>
+          <a class="btn secondary" href="game-011.html" data-en="Continue to Game 011 →" data-es="Continuar al Juego 011 →">Continue to Game 011 →</a>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game010review</span>
+              <span class="badge gold" data-en="Paid Review" data-es="Repaso Pago">Paid Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the paid lesson." data-es="Asegura la lección paga.">Lock in the paid lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 010 Review" data-es="Repaso del Juego 010">Game 010 Review</p>
+
+        <h2 class="post-text" data-en="Before COG 02, answer this honestly: are you building relationships or just collecting contacts?" data-es="Antes de COG 02, contesta esto con honestidad: ¿estás construyendo relaciones o solo coleccionando contactos?">
+          Before COG 02, answer this honestly: are you building relationships or just collecting contacts?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. Who can I learn from today?" data-es="1. ¿De quién puedo aprender hoy?">1. Who can I learn from today?</strong>
+            <p data-en="Choose one person who can help you see the game, business, or opportunity better." data-es="Escoge una persona que pueda ayudarte a ver mejor el juego, el negocio o la oportunidad.">Choose one person who can help you see the game, business, or opportunity better.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. Who can I help today?" data-es="2. ¿A quién puedo ayudar hoy?">2. Who can I help today?</strong>
+            <p data-en="Real relationships grow when value moves both ways." data-es="Las relaciones reales crecen cuando el valor se mueve en ambas direcciones.">Real relationships grow when value moves both ways.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. Who should I follow up with?" data-es="3. ¿Con quién debo dar seguimiento?">3. Who should I follow up with?</strong>
+            <p data-en="Follow-up turns a moment into a relationship." data-es="El seguimiento convierte un momento en una relación.">Follow-up turns a moment into a relationship.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. What relationship can create future options?" data-es="4. ¿Qué relación puede crear opciones futuras?">4. What relationship can create future options?</strong>
+            <p data-en="Think mentors, peers, coaches, brands, community, training, or industry." data-es="Piensa en mentores, compañeros, coaches, marcas, comunidad, entrenamiento o industria.">Think mentors, peers, coaches, brands, community, training, or industry.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Am I adding value before asking for access?" data-es="5. ¿Estoy añadiendo valor antes de pedir acceso?">5. Am I adding value before asking for access?</strong>
+            <p data-en="This is the question that closes Game 010." data-es="Esta es la pregunta que cierra el Juego 010.">This is the question that closes Game 010.</p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 010. Help me build real connections that create options for my basketball career, business, and future. Who should I connect with, how should I add value first, and what follow-up system should I use?" data-es="Prompt: Acabo de terminar Basketball Money Juego 010. Ayúdame a construir conexiones reales que creen opciones para mi carrera de baloncesto, negocio y futuro. ¿Con quién debo conectar, cómo debo añadir valor primero y qué sistema de seguimiento debo usar?">
+            Prompt: I just finished Basketball Money Game 010. Help me build real connections that create options for my basketball career, business, and future. Who should I connect with, how should I add value first, and what follow-up system should I use?
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn gold" href="cog-02.html" data-en="Continue to COG 02: The Recall →" data-es="Continuar a COG 02: The Recall →">Continue to COG 02: The Recall →</a>
+          <a class="btn secondary" href="game-011.html" data-en="Continue to Game 011 →" data-es="Continuar al Juego 011 →">Continue to Game 011 →</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>🤝 Connections</span>
+          <span>🧠 COG 02 Next</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="Connections create options. Options create freedom. Build today. Access tomorrow." data-es="Las conexiones crean opciones. Las opciones crean libertad. Construye hoy. Accede mañana.">
+          Connections create options. Options create freedom. Build today. Access tomorrow.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 010: Connections Create Options | Paid Season Continues to Game 030" data-es="Basketball Money — Juego 010: Las Conexiones Crean Opciones | La Temporada Paga Continúa Hasta el Juego 030">
+        Basketball Money — Game 010: Connections Create Options | Paid Season Continues to Game 030
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
+  </script>
+
+</body>
+</html>
