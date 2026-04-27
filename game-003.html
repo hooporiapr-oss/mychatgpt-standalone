@@ -3,58 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hoops Money | Game 003 — Influence</title>
+  <title>Game 003 | Basketball Money</title>
+
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --muted: #5f6368;
-      --line: #e5e7eb;
-      --soft: #f8fafc;
-      --purple: #6d28d9;
-      --purple-dark: #4c1d95;
-      --purple-soft: #f3e8ff;
-      --success: #15803d;
-      --success-bg: #dcfce7;
+      --bg: #050505;
+      --panel: #0f1115;
+      --text: #f5f7fa;
+      --muted: #8b98a5;
+      --line: #242833;
+      --brand: #9B59B6;
+      --brand-2: #00D9A5;
+      --brand-soft: rgba(155, 89, 182, 0.18);
+      --green-soft: rgba(0, 217, 165, 0.14);
+      --orange: #ff8a3d;
+      --orange-soft: rgba(255, 138, 61, 0.14);
       --radius: 22px;
-      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-      --max: 920px;
+      --max: 760px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
     }
 
     * { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(155, 89, 182, 0.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(0, 217, 165, 0.10), transparent 30%),
+        var(--bg);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
+      line-height: 1.45;
     }
 
-    iframe { display: block; border: 0; width: 100%; }
     a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
     button { font-family: inherit; }
 
     .topbar {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 5, 0.88);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
     }
 
     .topbar-inner {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 14px 18px 16px;
+      padding: 14px 16px 16px;
     }
 
     .brand-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      justify-content: space-between;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
@@ -67,30 +74,29 @@
     .brand-mark {
       width: 46px;
       height: 46px;
-      border: 2px solid var(--purple);
+      border-radius: 50%;
       display: grid;
       place-items: center;
-      font-weight: 900;
-      font-size: 18px;
-      letter-spacing: -0.04em;
-      color: var(--purple);
-      background: #fff;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #050505;
+      font-weight: 950;
+      letter-spacing: -0.08em;
+      border: 2px solid rgba(255, 255, 255, 0.18);
     }
 
     .brand-copy small {
       display: block;
-      color: var(--purple);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
     }
 
     .brand-copy strong {
       display: block;
       font-size: 18px;
-      line-height: 1.15;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
     }
 
     .top-links {
@@ -101,11 +107,18 @@
 
     .top-links a {
       border: 1px solid var(--line);
-      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      padding: 10px 13px;
       border-radius: 999px;
       font-size: 13px;
-      font-weight: 800;
-      background: #fff;
+      font-weight: 900;
+      transition: 0.18s ease;
+    }
+
+    .top-links a:hover {
+      border-color: var(--brand);
+      transform: translateY(-1px);
     }
 
     .lang-row {
@@ -113,829 +126,854 @@
       display: flex;
       justify-content: center;
       padding-top: 14px;
-      border-top: 1px solid #f1f5f9;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .lang-toggle {
-      background: var(--soft);
+      display: inline-flex;
+      gap: 4px;
+      background: #0b0d12;
       border: 1px solid var(--line);
       border-radius: 999px;
       padding: 4px;
-      display: inline-flex;
-      gap: 4px;
     }
 
     .lang-btn {
       border: 0;
       background: transparent;
+      color: var(--muted);
       padding: 10px 14px;
       border-radius: 999px;
-      font-weight: 900;
       font-size: 13px;
+      font-weight: 950;
       cursor: pointer;
-      color: #334155;
     }
 
     .lang-btn.active {
-      background: var(--purple);
-      color: #fff;
+      background: var(--text);
+      color: #050505;
+    }
+
+    .hero-image {
+      max-width: var(--max);
+      margin: 16px auto 0;
+      padding: 0 16px;
+    }
+
+    .hero-image-inner {
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
     }
 
     .page {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 22px 18px 80px;
+      padding: 16px 16px 80px;
     }
 
-    .stack { display: grid; gap: 20px; }
-
-    .card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .pad { padding: 24px; }
-
-    .eyebrow {
-      margin: 0 0 10px;
-      color: var(--purple);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(42px, 8vw, 78px);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-    }
-
-    .subtitle {
-      margin: 18px 0 0;
-      font-size: clamp(18px, 2.5vw, 24px);
-      line-height: 1.5;
-      color: #222;
-    }
-
-    .rule {
-      margin-top: 18px;
-      border-left: 5px solid var(--purple);
-      background: var(--purple-soft);
-      padding: 14px 16px;
-      font-weight: 800;
-      font-size: 17px;
-    }
-
-    .meta-grid {
+    .feed {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .meta {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--soft);
-      padding: 14px;
-    }
-
-    .meta span {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
-    }
-
-    .meta strong { font-size: 16px; }
-
-    .progress-label {
-      font-weight: 900;
-      margin: 0 0 12px;
-      letter-spacing: -0.02em;
-      font-size: 22px;
-    }
-
-    .progress-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
-    }
-
-    .step {
-      border: 1px solid var(--line);
-      background: var(--soft);
-      border-radius: 14px;
-      padding: 12px 10px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 900;
-      color: #64748b;
-    }
-
-    .step.active {
-      background: var(--purple);
-      color: #fff;
-      border-color: var(--purple);
-    }
-
-    .step.done {
-      background: var(--success-bg);
-      border-color: #bbf7d0;
-      color: #166534;
-    }
-
-    .section-title {
-      margin: 0;
-      font-size: clamp(28px, 4.8vw, 44px);
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-
-    .section-sub {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .note {
-      border: 1px solid var(--line);
-      border-left: 5px solid var(--purple);
-      border-radius: 16px;
-      background: #fafafa;
-      padding: 18px;
-      margin-top: 16px;
-    }
-
-    .box {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      padding: 18px;
-      margin-top: 16px;
-    }
-
-    .box.purple {
-      background: var(--purple-soft);
-      border-left: 5px solid var(--purple);
-    }
-
-    .box-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--purple);
-      margin-bottom: 10px;
-    }
-
-    .choice-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .choice {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px;
-      background: #fff;
-      min-height: 74px;
-    }
-
-    .choice b {
-      color: var(--purple);
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .complete-row {
-      margin-top: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .complete-status {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .complete-status.done { color: var(--success); }
-
-    .btn,
-    .review-choice {
-      display: inline-block;
-      border: 1px solid var(--purple);
-      background: var(--purple);
-      color: #fff;
-      padding: 12px 16px;
-      border-radius: 999px;
-      font-weight: 900;
-      font-size: 14px;
-      cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-
-    .btn:hover,
-    .review-choice:hover { transform: translateY(-1px); }
-
-    .btn.done {
-      background: var(--success);
-      border-color: var(--success);
-      color: #fff;
-    }
-
-    details.accordion {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    details.accordion.locked { opacity: 0.62; }
-
-    details.accordion summary {
-      list-style: none;
-      cursor: pointer;
-      display: grid;
-      grid-template-columns: 60px 1fr auto;
       gap: 14px;
-      align-items: center;
-      padding: 20px;
     }
 
-    details.accordion summary::-webkit-details-marker { display: none; }
+    .post {
+      background: rgba(15, 17, 21, 0.94);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
 
-    .badge {
-      width: 52px;
-      height: 52px;
-      border: 2px solid var(--purple);
-      border-radius: 14px;
+    .post::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.045), transparent 42%);
+    }
+
+    .post.pinned {
+      border-color: rgba(155, 89, 182, 0.55);
+      background:
+        linear-gradient(135deg, rgba(155, 89, 182, 0.18), rgba(0, 217, 165, 0.06)),
+        rgba(15, 17, 21, 0.96);
+    }
+
+    .post.final {
+      border-color: rgba(0, 217, 165, 0.5);
+      background:
+        linear-gradient(135deg, rgba(0, 217, 165, 0.16), rgba(155, 89, 182, 0.16)),
+        rgba(15, 17, 21, 0.96);
+    }
+
+    .post.warning {
+      border-color: rgba(255, 138, 61, 0.45);
+      background:
+        linear-gradient(135deg, rgba(255, 138, 61, 0.13), rgba(155, 89, 182, 0.08)),
+        rgba(15, 17, 21, 0.96);
+    }
+
+    .post-head {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      position: relative;
+      z-index: 2;
+    }
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      flex: 0 0 auto;
       display: grid;
       place-items: center;
-      font-weight: 900;
-      background: #fff;
-      color: var(--purple);
+      background: #050505;
+      border: 2px solid var(--brand);
+      color: var(--brand-2);
+      font-weight: 950;
+      letter-spacing: -0.05em;
+      font-size: 13px;
     }
 
-    details.accordion.done .badge {
-      background: var(--success-bg);
-      border-color: var(--success);
-      color: var(--success);
+    .post-meta {
+      min-width: 0;
+      flex: 1;
     }
 
-    .summary-copy strong {
-      display: block;
-      font-size: 22px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+    .name-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 2px;
     }
 
-    .summary-copy span {
-      display: block;
+    .name {
+      font-weight: 950;
+      letter-spacing: -0.03em;
+    }
+
+    .handle {
       color: var(--muted);
-      margin-top: 4px;
+      font-size: 14px;
     }
 
-    .lock-note {
-      display: inline-block;
-      margin-top: 6px;
-      color: var(--purple);
-      font-size: 12px;
-      font-weight: 900;
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(0, 217, 165, 0.38);
+      background: var(--green-soft);
+      color: #b9ffee;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
-    .plus {
-      font-size: 28px;
-      color: var(--purple);
-      line-height: 1;
+    .post-text {
+      margin: 12px 0 0;
+      font-size: clamp(21px, 4.2vw, 32px);
+      line-height: 1.1;
+      font-weight: 950;
+      letter-spacing: -0.055em;
+      position: relative;
+      z-index: 2;
     }
 
-    details[open] .plus { transform: rotate(45deg); }
-
-    .accordion-body {
-      border-top: 1px solid var(--line);
-      padding: 0 20px 20px;
+    .post-text.big {
+      font-size: clamp(40px, 10vw, 76px);
+      line-height: 0.92;
+      letter-spacing: -0.08em;
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 14px;
+    .post-sub {
+      margin: 14px 0 0;
+      color: #cfd6dd;
+      font-size: 16px;
+      position: relative;
+      z-index: 2;
     }
 
-    ul.clean { margin: 8px 0 0; padding-left: 20px; }
-    ul.clean li { margin: 7px 0; }
-
-    .ready-break {
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      background: #fff;
-      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.06);
-      overflow: hidden;
-    }
-
-    .ready-break iframe {
-      width: 100%;
-      height: clamp(220px, 32vw, 430px);
-      background: #fff;
-    }
-
-    .review-grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 14px;
-    }
-
-    .review-card {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
-      background: #fff;
-    }
-
-    .review-card.locked-review {
-      opacity: 0.55;
-      pointer-events: none;
-    }
-
-    .review-card h3 {
-      margin: 0;
-      font-size: 20px;
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-    }
-
-    .review-options {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .review-choice {
-      width: 100%;
-      text-align: left;
+    .thread-line {
+      margin: 16px 0 0;
+      padding: 14px 16px;
+      border-left: 4px solid var(--brand);
+      background: var(--brand-soft);
       border-radius: 14px;
-      background: #fff;
-      color: #111;
+      font-size: 17px;
+      font-weight: 900;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-label {
+      color: var(--brand-2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 950;
+      margin: 0 0 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mini-list,
+    .check-list,
+    .quiz-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mini-card,
+    .check-card,
+    .quiz-card {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 18px;
+      padding: 15px;
+    }
+
+    .mini-card strong,
+    .check-card strong,
+    .quiz-card strong {
+      display: block;
+      font-size: 20px;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+    }
+
+    .mini-card p,
+    .check-card p,
+    .quiz-card p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .check-card {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .check-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #050505;
+      border: 2px solid var(--brand-2);
+      color: var(--brand-2);
+      font-weight: 950;
+      font-size: 13px;
+    }
+
+    .quote {
+      margin-top: 16px;
+      border: 1px solid rgba(0, 217, 165, 0.36);
+      background: var(--green-soft);
+      border-radius: 18px;
+      padding: 16px;
+      font-weight: 950;
+      font-size: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .orange-note {
+      margin-top: 16px;
+      border: 1px solid rgba(255, 138, 61, 0.36);
+      background: var(--orange-soft);
+      border-radius: 18px;
+      padding: 16px;
+      font-weight: 900;
+      font-size: 17px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--brand);
+      background: var(--brand);
+      color: #fff;
+      padding: 13px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 950;
+      cursor: pointer;
+      transition: 0.18s ease;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--text);
       border-color: var(--line);
     }
 
-    .review-choice.selected {
-      background: var(--purple-soft);
-      border-color: var(--purple);
-      color: var(--purple-dark);
+    .btn.green {
+      background: var(--brand-2);
+      color: #03110d;
+      border-color: var(--brand-2);
     }
 
-    .review-choice.correct {
-      background: var(--success-bg);
-      border-color: #86efac;
-      color: #166534;
-    }
-
-    .review-explanation {
-      display: none;
-      margin-top: 12px;
-      padding: 14px;
-      border-left: 4px solid var(--purple);
-      background: #fafafa;
-      border-radius: 10px;
-      font-weight: 700;
-    }
-
-    .review-explanation.show { display: block; }
-
-    .next-box {
-      display: none;
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
       margin-top: 18px;
-      border: 1px solid #86efac;
-      background: #f0fdf4;
-      border-radius: 18px;
-      padding: 18px;
+      position: relative;
+      z-index: 2;
     }
 
-    .next-box.unlocked { display: block; }
-
-    .paid-box {
-      display: none;
-      margin-top: 18px;
-      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
-      color: #fff;
-      border-radius: 18px;
-      padding: 22px;
+    .stat {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 16px;
+      padding: 13px;
     }
 
-    .paid-box.unlocked { display: block; }
-    .paid-box .box-label { color: #ddd6fe; }
-    .paid-box p { margin: 12px 0 0; color: #f5f3ff; }
-    .paid-box .btn {
-      background: #fff;
-      color: var(--purple-dark);
-      border-color: #fff;
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 17px;
+      line-height: 1.1;
+    }
+
+    .prompt-box {
       margin-top: 16px;
+      border: 1px dashed rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.04);
+      border-radius: 18px;
+      padding: 16px;
+      position: relative;
+      z-index: 2;
     }
 
-    .coach-close {
-      background: linear-gradient(135deg, var(--purple), var(--purple-dark));
-      color: #fff;
-      border-color: var(--purple);
+    .prompt-box small {
+      display: block;
+      color: var(--brand-2);
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-size: 11px;
     }
 
-    .coach-close p {
+    .prompt-box p {
       margin: 0;
-      font-size: 16px;
+      color: #e8edf2;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 22px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
     }
 
     footer {
       text-align: center;
       color: var(--muted);
       font-size: 13px;
-      margin-top: 24px;
+      margin-top: 20px;
+      padding-bottom: 20px;
     }
 
-    @media (max-width: 760px) {
-      .page { padding: 16px 14px 60px; }
-      .pad { padding: 18px; }
-      .meta-grid { grid-template-columns: 1fr; }
-      .progress-grid { grid-template-columns: repeat(2, 1fr); }
-      .choice-grid,
-      .review-options,
-      .two-col { grid-template-columns: 1fr; }
-      details.accordion summary {
-        grid-template-columns: 52px 1fr auto;
+    @media (max-width: 720px) {
+      .brand-row { align-items: flex-start; }
+
+      .top-links {
+        width: 100%;
+      }
+
+      .top-links a {
+        flex: 1 1 auto;
+        text-align: center;
+      }
+
+      .post {
         padding: 16px;
       }
-      .badge { width: 46px; height: 46px; }
-      .top-links { width: 100%; }
-      .top-links a { flex: 1 1 auto; text-align: center; }
-      .ready-break iframe { height: clamp(210px, 56vw, 360px); }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-row {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
+
   <nav class="topbar">
     <div class="topbar-inner">
+
       <div class="brand-row">
-        <div class="brand">
-          <div class="brand-mark">HM</div>
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
           <div class="brand-copy">
-            <small>Hoops Money</small>
-            <strong data-en="The Business of Basketball" data-es="El Negocio del Baloncesto">The Business of Basketball</strong>
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 003: Influence" data-es="Juego 003: Influencia">Game 003: Influence</strong>
           </div>
-        </div>
+        </a>
+
         <div class="top-links">
           <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
-          <a href="#game-start" data-en="Start" data-es="Comenzar">Start</a>
-          <a href="#final-buzzer" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+          <a href="game-002.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+          <a href="game-004.html" data-en="Next" data-es="Próximo">Next</a>
         </div>
       </div>
+
       <div class="lang-row">
-        <div class="lang-toggle">
+        <div class="lang-toggle" aria-label="Language toggle">
           <button class="lang-btn active" type="button" data-lang="en">English</button>
           <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
         </div>
       </div>
+
     </div>
   </nav>
 
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-003.png" alt="Game 003 Influence Basketball Money">
+    </div>
+  </header>
+
   <main class="page">
-    <div class="stack">
-      <section class="card pad">
-        <p class="eyebrow" data-en="Free Preview • Game 003" data-es="Vista Gratis • Juego 003">Free Preview • Game 003</p>
-        <h1 data-en="Influence" data-es="Influencia">Influence</h1>
-        <p class="subtitle" data-en="You are not building yourself alone. Game 003 tests who and what is shaping your habits, standards, discipline, and decisions." data-es="Tú no te estás construyendo solo. El Juego 003 prueba quién y qué está formando tus hábitos, estándares, disciplina y decisiones.">
-          You are not building yourself alone. Game 003 tests who and what is shaping your habits, standards, discipline, and decisions.
-        </p>
-        <div class="rule" data-en="Influence does not need permission. It only needs access." data-es="La influencia no necesita permiso. Solo necesita acceso.">Influence does not need permission. It only needs access.</div>
+    <div class="feed">
 
-        <div class="meta-grid">
-          <div class="meta"><span data-en="Program" data-es="Programa">Program</span><strong>Hoops Money</strong></div>
-          <div class="meta"><span data-en="Game" data-es="Juego">Game</span><strong>003 / 30</strong></div>
-          <div class="meta"><span data-en="Coach" data-es="Coach">Coach</span><strong>Bori</strong></div>
-        </div>
-      </section>
-
-      <section class="card pad progress-card">
-        <p class="progress-label" data-en="Progress" data-es="Progreso">Progress</p>
-        <div class="progress-grid">
-          <div class="step active" data-step="tipoff">Tip-Off</div>
-          <div class="step" data-step="q1">1Q</div>
-          <div class="step" data-step="q2">2Q</div>
-          <div class="step" data-step="half">HT</div>
-          <div class="step" data-step="q3">3Q</div>
-          <div class="step" data-step="q4">4Q</div>
-        </div>
-      </section>
-
-      <section class="card pad" id="game-start">
-        <h2 class="section-title" data-en="Warmup + Tip-Off" data-es="Calentamiento + Salto Inicial">Warmup + Tip-Off</h2>
-        <p class="section-sub" data-en="Read the setup, choose your answer, then complete Tip-Off to unlock the 1st Quarter." data-es="Lee la entrada, escoge tu respuesta y completa el Salto Inicial para desbloquear el 1er Cuarto.">Read the setup, choose your answer, then complete Tip-Off to unlock the 1st Quarter.</p>
-
-        <div class="note">
-          <span class="box-label">Bori</span>
-          <p data-en="Game 001 was value. Game 002 was habits. Now we look at who and what is shaping those habits." data-es="El Juego 001 fue valor. El Juego 002 fue hábitos. Ahora miramos quién y qué está formando esos hábitos.">Game 001 was value. Game 002 was habits. Now we look at who and what is shaping those habits.</p>
-          <p><strong data-en="You are not building yourself alone." data-es="Tú no te estás construyendo solo.">You are not building yourself alone.</strong></p>
-        </div>
-
-        <div class="box purple">
-          <span class="box-label" data-en="Tip-Off Question" data-es="Pregunta del Salto Inicial">Tip-Off Question</span>
-          <p><strong data-en="Who is influencing you?" data-es="¿Quién te está influenciando?">Who is influencing you?</strong></p>
-          <div class="choice-grid">
-            <div class="choice"><b>A</b><span data-en="Positive people" data-es="Gente positiva">Positive people</span></div>
-            <div class="choice"><b>B</b><span data-en="Negative people" data-es="Gente negativa">Negative people</span></div>
-            <div class="choice"><b>C</b><span data-en="I am not aware" data-es="No estoy pendiente">I am not aware</span></div>
-            <div class="choice"><b>D</b><span data-en="I ignore it" data-es="Lo ignoro">I ignore it</span></div>
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar">003</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 003" data-es="Juego 003">Game 003</span>
+              <span class="handle">@basketballmoney</span>
+              <span class="badge" data-en="Pinned" data-es="Fijado">Pinned</span>
+            </div>
+            <span class="handle" data-en="The Business of Basketball continues." data-es="El Negocio del Baloncesto continúa.">The Business of Basketball continues.</span>
           </div>
         </div>
 
-        <div class="complete-row">
-          <span class="complete-status" data-status="tipoff" data-en="Tip-Off not completed." data-es="Salto Inicial no completado.">Tip-Off not completed.</span>
-          <button class="btn" type="button" data-complete="tipoff" data-en="Complete Tip-Off → Unlock 1Q" data-es="Completar Salto Inicial → Desbloquear 1Q">Complete Tip-Off → Unlock 1Q</button>
+        <h1 class="post-text big" data-en="Who and what is shaping you?" data-es="¿Quién y qué te está formando?">
+          Who and what is shaping you?
+        </h1>
+
+        <p class="post-sub" data-en="Game 001 taught value. Game 002 taught habits. Game 003 teaches influence — because your environment can raise your value or drain it." data-es="El Juego 001 enseñó valor. El Juego 002 enseñó hábitos. El Juego 003 enseña influencia — porque tu ambiente puede subir tu valor o drenarlo.">
+          Game 001 taught value. Game 002 taught habits. Game 003 teaches influence — because your environment can raise your value or drain it.
+        </p>
+
+        <div class="thread-line" data-en="Game 003 teaches that influence is not just popularity. Influence is what shapes your decisions, standards, reputation, and opportunities." data-es="El Juego 003 enseña que influencia no es solo popularidad. Influencia es lo que forma tus decisiones, estándares, reputación y oportunidades.">
+          Game 003 teaches that influence is not just popularity. Influence is what shapes your decisions, standards, reputation, and opportunities.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>003</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Influence" data-es="Influencia">Influence</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Goal" data-es="Meta">Goal</span>
+            <strong data-en="Choose Better Inputs" data-es="Escoger Mejores Influencias">Choose Better Inputs</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="#lesson" data-en="Start Lesson →" data-es="Comenzar Lección →">Start Lesson →</a>
+          <a class="btn secondary" href="#final" data-en="Jump to Final Buzzer" data-es="Ir a Bocina Final">Jump to Final Buzzer</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 003</span>
+          <span>🔁 Influence</span>
+          <span>🔥 Decisions</span>
         </div>
       </section>
 
-      <details class="accordion locked" id="q1" data-section="q1">
-        <summary><div class="badge">1Q</div><div class="summary-copy"><strong data-en="Awareness" data-es="Conciencia">Awareness</strong><span data-en="Who gets your attention most?" data-es="¿Quién recibe más tu atención?">Who gets your attention most?</span><em class="lock-note" data-en="Locked until Tip-Off is complete." data-es="Bloqueado hasta completar el Salto Inicial.">Locked until Tip-Off is complete.</em></div><div class="plus">+</div></summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Coach Challenge" data-es="Reto del Coach">Coach Challenge</span><p data-en="Influence does not need permission. It only needs access. If they get your attention, they get to shape you." data-es="La influencia no necesita permiso. Solo necesita acceso. Si reciben tu atención, te pueden formar.">Influence does not need permission. It only needs access. If they get your attention, they get to shape you.</p></div>
-          <div class="box purple"><span class="box-label" data-en="Attention Check" data-es="Chequeo de Atención">Attention Check</span><div class="choice-grid"><div class="choice"><b>A</b><span data-en="Coaches / trainers" data-es="Coaches / entrenadores">Coaches / trainers</span></div><div class="choice"><b>B</b><span data-en="Teammates" data-es="Compañeros">Teammates</span></div><div class="choice"><b>C</b><span data-en="Friends" data-es="Amistades">Friends</span></div><div class="choice"><b>D</b><span data-en="Social media" data-es="Redes sociales">Social media</span></div></div></div>
-          <div class="complete-row"><span class="complete-status" data-status="q1" data-en="1st Quarter not completed." data-es="1er Cuarto no completado.">1st Quarter not completed.</span><button class="btn" type="button" data-complete="q1" data-en="Complete 1Q → Unlock 2Q" data-es="Completar 1Q → Desbloquear 2Q">Complete 1Q → Unlock 2Q</button></div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q2" data-section="q2">
-        <summary><div class="badge">2Q</div><div class="summary-copy"><strong data-en="Direction" data-es="Dirección">Direction</strong><span data-en="Are they challenging you or just supporting you?" data-es="¿Te están retando o solo apoyando?">Are they challenging you or just supporting you?</span><em class="lock-note" data-en="Locked until 1Q is complete." data-es="Bloqueado hasta completar 1Q.">Locked until 1Q is complete.</em></div><div class="plus">+</div></summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label">Bori</span><p data-en="Positive influence is not just people who cheer for you. Real influence challenges your standard." data-es="La influencia positiva no es solo gente que te aplaude. La influencia real reta tu estándar.">Positive influence is not just people who cheer for you. Real influence challenges your standard.</p></div>
-          <div class="two-col"><div class="box"><span class="box-label" data-en="Support Only" data-es="Solo Apoyo">Support Only</span><ul class="clean"><li data-en="They like everything you do." data-es="Les gusta todo lo que haces.">They like everything you do.</li><li data-en="They never call out weak habits." data-es="Nunca señalan hábitos flojos.">They never call out weak habits.</li><li data-en="They protect your excuses." data-es="Protegen tus excusas.">They protect your excuses.</li></ul></div><div class="box"><span class="box-label" data-en="Challenge" data-es="Reto">Challenge</span><ul class="clean"><li data-en="They raise your standard." data-es="Suben tu estándar.">They raise your standard.</li><li data-en="They tell you the truth." data-es="Te dicen la verdad.">They tell you the truth.</li><li data-en="They push better decisions." data-es="Empujan mejores decisiones.">They push better decisions.</li></ul></div></div>
-          <div class="complete-row"><span class="complete-status" data-status="q2" data-en="2nd Quarter not completed." data-es="2do Cuarto no completado.">2nd Quarter not completed.</span><button class="btn" type="button" data-complete="q2" data-en="Complete 2Q → Unlock Halftime" data-es="Completar 2Q → Desbloquear Medio Tiempo">Complete 2Q → Unlock Halftime</button></div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="half" data-section="half">
-        <summary><div class="badge">HT</div><div class="summary-copy"><strong data-en="Halftime Reality Check" data-es="Chequeo Real de Medio Tiempo">Halftime Reality Check</strong><span data-en="What is your environment shaping?" data-es="¿Qué está formando tu ambiente?">What is your environment shaping?</span><em class="lock-note" data-en="Locked until 2Q is complete." data-es="Bloqueado hasta completar 2Q.">Locked until 2Q is complete.</em></div><div class="plus">+</div></summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Reality Check" data-es="Chequeo de Realidad">Reality Check</span><p data-en="Halftime. Look around. Your environment is training something: discipline, distraction, confidence, excuses, or standards." data-es="Medio tiempo. Mira alrededor. Tu ambiente está entrenando algo: disciplina, distracción, confianza, excusas o estándares.">Halftime. Look around. Your environment is training something: discipline, distraction, confidence, excuses, or standards.</p></div>
-          <div class="box purple"><span class="box-label" data-en="Environment Check" data-es="Chequeo de Ambiente">Environment Check</span><div class="choice-grid"><div class="choice"><b>A</b><span data-en="Discipline" data-es="Disciplina">Discipline</span></div><div class="choice"><b>B</b><span data-en="Distraction" data-es="Distracción">Distraction</span></div><div class="choice"><b>C</b><span data-en="Excuses" data-es="Excusas">Excuses</span></div><div class="choice"><b>D</b><span data-en="Higher standards" data-es="Estándares más altos">Higher standards</span></div></div></div>
-          <div class="complete-row"><span class="complete-status" data-status="half" data-en="Halftime not completed." data-es="Medio Tiempo no completado.">Halftime not completed.</span><button class="btn" type="button" data-complete="half" data-en="Complete Halftime → Unlock 3Q" data-es="Completar Medio Tiempo → Desbloquear 3Q">Complete Halftime → Unlock 3Q</button></div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q3" data-section="q3">
-        <summary><div class="badge">3Q</div><div class="summary-copy"><strong data-en="Pressure" data-es="Presión">Pressure</strong><span data-en="Who influences you when things go bad?" data-es="¿Quién te influencia cuando las cosas van mal?">Who influences you when things go bad?</span><em class="lock-note" data-en="Locked until Halftime is complete." data-es="Bloqueado hasta completar Medio Tiempo.">Locked until Halftime is complete.</em></div><div class="plus">+</div></summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Pressure Situation" data-es="Situación de Presión">Pressure Situation</span><p data-en="You lose minutes. You miss shots. Coach is hard on you. Someone says you are not that good. Who gets in your head then?" data-es="Pierdes minutos. Fallas tiros. El coach te aprieta. Alguien dice que no eres tan bueno. ¿Quién entra en tu mente ahí?">You lose minutes. You miss shots. Coach is hard on you. Someone says you are not that good. Who gets in your head then?</p></div>
-          <div class="box purple"><span class="box-label" data-en="Pressure Check" data-es="Chequeo de Presión">Pressure Check</span><div class="choice-grid"><div class="choice"><b>A</b><span data-en="A coach who tells truth" data-es="Un coach que dice la verdad">A coach who tells truth</span></div><div class="choice"><b>B</b><span data-en="Friends who feed excuses" data-es="Amigos que alimentan excusas">Friends who feed excuses</span></div><div class="choice"><b>C</b><span data-en="Social media noise" data-es="Ruido de redes">Social media noise</span></div><div class="choice"><b>D</b><span data-en="My own standard" data-es="Mi propio estándar">My own standard</span></div></div></div>
-          <div class="complete-row"><span class="complete-status" data-status="q3" data-en="3rd Quarter not completed." data-es="3er Cuarto no completado.">3rd Quarter not completed.</span><button class="btn" type="button" data-complete="q3" data-en="Complete 3Q → Unlock 4Q" data-es="Completar 3Q → Desbloquear 4Q">Complete 3Q → Unlock 4Q</button></div>
-        </div>
-      </details>
-
-      <details class="accordion locked" id="q4" data-section="q4">
-        <summary><div class="badge">4Q</div><div class="summary-copy"><strong data-en="Decision" data-es="Decisión">Decision</strong><span data-en="Who moves closer, and who moves farther?" data-es="¿Quién se acerca y quién se aleja?">Who moves closer, and who moves farther?</span><em class="lock-note" data-en="Locked until 3Q is complete." data-es="Bloqueado hasta completar 3Q.">Locked until 3Q is complete.</em></div><div class="plus">+</div></summary>
-        <div class="accordion-body">
-          <div class="note"><span class="box-label" data-en="Decision Point" data-es="Momento de Decisión">Decision Point</span><p data-en="You do not need to hate people to create distance. You just need to protect the standard you say you want." data-es="No tienes que odiar a la gente para crear distancia. Solo tienes que proteger el estándar que dices que quieres.">You do not need to hate people to create distance. You just need to protect the standard you say you want.</p></div>
-          <div class="box purple"><span class="box-label" data-en="Access Decision" data-es="Decisión de Acceso">Access Decision</span><div class="choice-grid"><div class="choice"><b>A</b><span data-en="Move closer to discipline" data-es="Acercarme a la disciplina">Move closer to discipline</span></div><div class="choice"><b>B</b><span data-en="Move away from excuses" data-es="Alejarme de excusas">Move away from excuses</span></div><div class="choice"><b>C</b><span data-en="Limit distraction" data-es="Limitar distracción">Limit distraction</span></div><div class="choice"><b>D</b><span data-en="Find stronger standards" data-es="Buscar estándares más fuertes">Find stronger standards</span></div></div></div>
-          <div class="complete-row"><span class="complete-status" data-status="q4" data-en="4th Quarter not completed." data-es="4to Cuarto no completado.">4th Quarter not completed.</span><button class="btn" type="button" data-complete="q4" data-en="Complete 4Q → Unlock Final Buzzer" data-es="Completar 4Q → Desbloquear Bocina Final">Complete 4Q → Unlock Final Buzzer</button></div>
-        </div>
-      </details>
-    </div>
-  </main>
-
-  <section class="ready-break" aria-label="Get Ready Hoops Final Buzzer Entrance">
-    <iframe src="ready.html" title="Get Ready Hoops Final Buzzer Entrance" loading="lazy"></iframe>
-  </section>
-
-  <main class="page">
-    <div class="stack">
-      <section id="final-buzzer" class="card pad">
-        <h2 class="section-title" data-en="Final Buzzer Review" data-es="Repaso de la Bocina Final">Final Buzzer Review</h2>
-        <p class="section-sub" data-en="Review the free preview before Level 2 unlocks." data-es="Repasa la vista gratis antes de desbloquear Nivel 2.">Review the free preview before Level 2 unlocks.</p>
-
-        <div class="review-grid">
-          <div class="review-card locked-review" data-review="r1"><span class="box-label" data-en="Question 1" data-es="Pregunta 1">Question 1</span><h3 data-en="What is the main truth of Game 003?" data-es="¿Cuál es la verdad principal del Juego 003?">What is the main truth of Game 003?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="You build alone" data-es="Te construyes solo">You build alone</button><button class="review-choice" type="button" data-review-choice="r1" data-correct="true" data-en="You are being shaped" data-es="Te están formando">You are being shaped</button><button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Influence does not matter" data-es="La influencia no importa">Influence does not matter</button><button class="review-choice" type="button" data-review-choice="r1" data-correct="false" data-en="Only talent matters" data-es="Solo importa el talento">Only talent matters</button></div><div class="review-explanation" data-review-explanation="r1" data-en="You are not building yourself alone." data-es="Tú no te estás construyendo solo.">You are not building yourself alone.</div></div>
-          <div class="review-card locked-review" data-review="r2"><span class="box-label" data-en="Question 2" data-es="Pregunta 2">Question 2</span><h3 data-en="Why does attention matter?" data-es="¿Por qué importa la atención?">Why does attention matter?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r2" data-correct="true" data-en="What gets attention can shape you" data-es="Lo que recibe atención te puede formar">What gets attention can shape you</button><button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="Attention is harmless" data-es="La atención no afecta">Attention is harmless</button><button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It only matters online" data-es="Solo importa en línea">It only matters online</button><button class="review-choice" type="button" data-review-choice="r2" data-correct="false" data-en="It is just entertainment" data-es="Solo es entretenimiento">It is just entertainment</button></div><div class="review-explanation" data-review-explanation="r2" data-en="If something gets your attention repeatedly, it can shape your standard." data-es="Si algo recibe tu atención repetidamente, puede formar tu estándar.">If something gets your attention repeatedly, it can shape your standard.</div></div>
-          <div class="review-card locked-review" data-review="r3"><span class="box-label" data-en="Question 3" data-es="Pregunta 3">Question 3</span><h3 data-en="What does real positive influence do?" data-es="¿Qué hace la influencia positiva real?">What does real positive influence do?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Only supports you" data-es="Solo te apoya">Only supports you</button><button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Protects excuses" data-es="Protege excusas">Protects excuses</button><button class="review-choice" type="button" data-review-choice="r3" data-correct="true" data-en="Challenges your standard" data-es="Reta tu estándar">Challenges your standard</button><button class="review-choice" type="button" data-review-choice="r3" data-correct="false" data-en="Lets you stay comfortable" data-es="Te deja cómodo">Lets you stay comfortable</button></div><div class="review-explanation" data-review-explanation="r3" data-en="Real influence tells truth and raises standards." data-es="La influencia real dice la verdad y sube estándares.">Real influence tells truth and raises standards.</div></div>
-          <div class="review-card locked-review" data-review="r4"><span class="box-label" data-en="Question 4" data-es="Pregunta 4">Question 4</span><h3 data-en="What is your environment always training?" data-es="¿Qué siempre está entrenando tu ambiente?">What is your environment always training?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="Nothing" data-es="Nada">Nothing</button><button class="review-choice" type="button" data-review-choice="r4" data-correct="true" data-en="Discipline, distraction, excuses, or standards" data-es="Disciplina, distracción, excusas o estándares">Discipline, distraction, excuses, or standards</button><button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="Only basketball skill" data-es="Solo habilidad de baloncesto">Only basketball skill</button><button class="review-choice" type="button" data-review-choice="r4" data-correct="false" data-en="Only confidence" data-es="Solo confianza">Only confidence</button></div><div class="review-explanation" data-review-explanation="r4" data-en="Your environment is training something, even when you ignore it." data-es="Tu ambiente está entrenando algo, aunque lo ignores.">Your environment is training something, even when you ignore it.</div></div>
-          <div class="review-card locked-review" data-review="r5"><span class="box-label" data-en="Question 5" data-es="Pregunta 5">Question 5</span><h3 data-en="When does influence get dangerous?" data-es="¿Cuándo se vuelve peligrosa la influencia?">When does influence get dangerous?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="When you are strong" data-es="Cuando estás fuerte">When you are strong</button><button class="review-choice" type="button" data-review-choice="r5" data-correct="true" data-en="When pressure hits and excuses sound good" data-es="Cuando llega la presión y las excusas suenan bien">When pressure hits and excuses sound good</button><button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Only after a win" data-es="Solo después de ganar">Only after a win</button><button class="review-choice" type="button" data-review-choice="r5" data-correct="false" data-en="Never" data-es="Nunca">Never</button></div><div class="review-explanation" data-review-explanation="r5" data-en="Pressure makes weak influence easier to follow." data-es="La presión hace más fácil seguir influencias débiles.">Pressure makes weak influence easier to follow.</div></div>
-          <div class="review-card locked-review" data-review="r6"><span class="box-label" data-en="Question 6" data-es="Pregunta 6">Question 6</span><h3 data-en="What is the decision of Game 003?" data-es="¿Cuál es la decisión del Juego 003?">What is the decision of Game 003?</h3><div class="review-options"><button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="Ignore influence" data-es="Ignorar la influencia">Ignore influence</button><button class="review-choice" type="button" data-review-choice="r6" data-correct="true" data-en="Move closer to standards and away from excuses" data-es="Acercarte a estándares y alejarte de excusas">Move closer to standards and away from excuses</button><button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="Stay comfortable" data-es="Quedarte cómodo">Stay comfortable</button><button class="review-choice" type="button" data-review-choice="r6" data-correct="false" data-en="Let everyone stay close" data-es="Dejar que todos sigan cerca">Let everyone stay close</button></div><div class="review-explanation" data-review-explanation="r6" data-en="Protect your standard by choosing what gets access to you." data-es="Protege tu estándar escogiendo qué tiene acceso a ti.">Protect your standard by choosing what gets access to you.</div></div>
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@influenceisinput</span>
+            </div>
+            <span class="handle" data-en="Your inputs shape your output." data-es="Tus influencias forman tu resultado.">Your inputs shape your output.</span>
+          </div>
         </div>
 
-        <div class="complete-row" style="margin-top:18px;"><span class="complete-status" data-status="final" data-en="Final Buzzer locked." data-es="Bocina Final bloqueada.">Final Buzzer locked.</span><button class="btn" id="finalBuzzerBtn" type="button" disabled data-en="Complete Final Review" data-es="Completar Repaso Final">Complete Final Review</button></div>
+        <p class="section-label" data-en="The third business lesson" data-es="La tercera lección de negocio">The third business lesson</p>
 
-        <div class="paid-box" id="paidBox">
-          <span class="box-label" data-en="Free Preview Complete" data-es="Vista Gratis Completada">Free Preview Complete</span>
-          <h2 class="section-title" data-en="Level 2: Separation" data-es="Nivel 2: Separación">Level 2: Separation</h2>
-          <p data-en="You completed Games 001–003. Most players stop here. If you are serious, the paid series begins with Game 004 — Confidence." data-es="Completaste los Juegos 001–003. La mayoría de los jugadores se detienen aquí. Si vas en serio, la serie paga comienza con el Juego 004 — Confianza.">You completed Games 001–003. Most players stop here. If you are serious, the paid series begins with Game 004 — Confidence.</p>
-          <a class="btn" href="https://getreadyhoops.podia.com/hoops-money-level-2-separation/buy" data-en="Unlock Level 2 — Separation →" data-es="Desbloquear Nivel 2 — Separación →">Unlock Level 2 — Separation →</a>
+        <h2 class="post-text" data-en="In basketball, influence is an asset — or a liability." data-es="En el baloncesto, la influencia es un activo — o una deuda.">
+          In basketball, influence is an asset — or a liability.
+        </h2>
+
+        <p class="post-sub" data-en="The people, voices, habits, music, feeds, coaches, teammates, and environments around you are not neutral. They are training you. The question is: training you for what?" data-es="Las personas, voces, hábitos, música, redes, coaches, compañeros y ambientes a tu alrededor no son neutrales. Te están entrenando. La pregunta es: ¿entrenándote para qué?">
+          The people, voices, habits, music, feeds, coaches, teammates, and environments around you are not neutral. They are training you. The question is: training you for what?
+        </p>
+
+        <div class="quote" data-en="Your circle is either building your standard or negotiating it down." data-es="Tu círculo está construyendo tu estándar o bajándolo poco a poco.">
+          Your circle is either building your standard or negotiating it down.
         </div>
       </section>
 
-      <section class="card pad coach-close"><p><strong data-en="Coach Close:" data-es="Cierre del Coach:">Coach Close:</strong><span data-en=" Game 003 is not about blaming people. It is about protecting what shapes you." data-es=" El Juego 003 no se trata de culpar gente. Se trata de proteger lo que te forma."> Game 003 is not about blaming people. It is about protecting what shapes you.</span></p></section>
-      <footer data-en="Hoops Money — The Business of Basketball • Game 003" data-es="Hoops Money — El Negocio del Baloncesto • Juego 003">Hoops Money — The Business of Basketball • Game 003</footer>
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@yourcirclecounts</span>
+            </div>
+            <span class="handle" data-en="The circle becomes the standard." data-es="El círculo se convierte en el estándar.">The circle becomes the standard.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Influence becomes behavior" data-es="La influencia se convierte en conducta">Influence becomes behavior</p>
+
+        <h2 class="post-text" data-en="Who you listen to changes how you move." data-es="A quién tú escuchas cambia cómo tú te mueves.">
+          Who you listen to changes how you move.
+        </h2>
+
+        <p class="post-sub" data-en="If your circle normalizes excuses, you will defend excuses. If your circle normalizes work, you will feel lazy when you are not working. Influence changes what feels normal." data-es="Si tu círculo normaliza excusas, vas a defender excusas. Si tu círculo normaliza trabajo, te vas a sentir flojo cuando no estás trabajando. La influencia cambia lo que se siente normal.">
+          If your circle normalizes excuses, you will defend excuses. If your circle normalizes work, you will feel lazy when you are not working. Influence changes what feels normal.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="People" data-es="Personas">People</strong>
+            <p data-en="Who has access to your decisions, confidence, attitude, and time?" data-es="¿Quién tiene acceso a tus decisiones, confianza, actitud y tiempo?">Who has access to your decisions, confidence, attitude, and time?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Content" data-es="Contenido">Content</strong>
+            <p data-en="What are you watching, hearing, and copying every day?" data-es="¿Qué estás viendo, escuchando y copiando todos los días?">What are you watching, hearing, and copying every day?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Standards" data-es="Estándares">Standards</strong>
+            <p data-en="What does your environment call normal?" data-es="¿Qué tu ambiente llama normal?">What does your environment call normal?</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Opportunities" data-es="Oportunidades">Opportunities</strong>
+            <p data-en="Who puts you closer to better rooms, better habits, and better decisions?" data-es="¿Quién te acerca a mejores ambientes, mejores hábitos y mejores decisiones?">Who puts you closer to better rooms, better habits, and better decisions?</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@notallattentionhelps</span>
+            </div>
+            <span class="handle" data-en="A warning before the second half." data-es="Una advertencia antes de la segunda mitad.">A warning before the second half.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Not every voice deserves access" data-es="No toda voz merece acceso">Not every voice deserves access</p>
+
+        <h2 class="post-text" data-en="Some people clap for your talent but pull down your discipline." data-es="Algunas personas aplauden tu talento pero bajan tu disciplina.">
+          Some people clap for your talent but pull down your discipline.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: access to your attention is access to your future." data-es="Regla de negocio en baloncesto: acceso a tu atención es acceso a tu futuro.">
+          Basketball business rule: access to your attention is access to your future.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@influencemap</span>
+            </div>
+            <span class="handle" data-en="Map the voices." data-es="Mapa las voces.">Map the voices.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Your influence map" data-es="Tu mapa de influencia">Your influence map</p>
+
+        <h2 class="post-text" data-en="Every player needs to know who is shaping the way they think." data-es="Todo jugador necesita saber quién está formando su manera de pensar.">
+          Every player needs to know who is shaping the way they think.
+        </h2>
+
+        <p class="post-sub" data-en="Influence can come from a coach, parent, friend, trainer, teammate, brand, fan, algorithm, or even a rival. The danger is not influence. The danger is unconscious influence." data-es="La influencia puede venir de un coach, padre, amigo, entrenador, compañero, marca, fan, algoritmo o hasta un rival. El peligro no es la influencia. El peligro es la influencia inconsciente.">
+          Influence can come from a coach, parent, friend, trainer, teammate, brand, fan, algorithm, or even a rival. The danger is not influence. The danger is unconscious influence.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Who raises your standard?" data-es="¿Quién sube tu estándar?">Who raises your standard?</strong>
+            <p data-en="These are the people who make you want to prepare better." data-es="Estas son las personas que te hacen querer prepararte mejor.">These are the people who make you want to prepare better.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Who drains your focus?" data-es="¿Quién drena tu enfoque?">Who drains your focus?</strong>
+            <p data-en="These are the people or feeds that leave you distracted, negative, or lazy." data-es="Estas son las personas o redes que te dejan distraído, negativo o flojo.">These are the people or feeds that leave you distracted, negative, or lazy.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Who tells you the truth?" data-es="¿Quién te dice la verdad?">Who tells you the truth?</strong>
+            <p data-en="Truth is not always comfortable, but it protects your value." data-es="La verdad no siempre es cómoda, pero protege tu valor.">Truth is not always comfortable, but it protects your value.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Who opens better rooms?" data-es="¿Quién abre mejores puertas?">Who opens better rooms?</strong>
+            <p data-en="Some influence connects you to opportunity, wisdom, and better competition." data-es="Hay influencia que te conecta con oportunidad, sabiduría y mejor competencia.">Some influence connects you to opportunity, wisdom, and better competition.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@chooseyourinputs</span>
+            </div>
+            <span class="handle" data-en="Build the environment on purpose." data-es="Construye el ambiente a propósito.">Build the environment on purpose.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="How to upgrade your influence" data-es="Cómo mejorar tu influencia">How to upgrade your influence</p>
+
+        <h2 class="post-text" data-en="Do not wait for a better circle. Start becoming the standard." data-es="No esperes por un mejor círculo. Empieza a convertirte en el estándar.">
+          Do not wait for a better circle. Start becoming the standard.
+        </h2>
+
+        <p class="post-sub" data-en="Influence is not only what affects you. It is also what you become for others. A serious player does not just look for better energy — they bring it." data-es="La influencia no es solo lo que te afecta. También es lo que tú te conviertes para otros. Un jugador serio no solo busca mejor energía — la trae.">
+          Influence is not only what affects you. It is also what you become for others. A serious player does not just look for better energy — they bring it.
+        </p>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Audit your circle." data-es="Evalúa tu círculo.">Audit your circle.</strong>
+              <p data-en="Name who is helping your value and who is lowering your standard." data-es="Nombra quién está ayudando tu valor y quién está bajando tu estándar.">Name who is helping your value and who is lowering your standard.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Protect your attention." data-es="Protege tu atención.">Protect your attention.</strong>
+              <p data-en="What you give attention to starts shaping your decisions." data-es="A lo que le das atención empieza a formar tus decisiones.">What you give attention to starts shaping your decisions.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Follow better examples." data-es="Sigue mejores ejemplos.">Follow better examples.</strong>
+              <p data-en="Study people who live the standards you claim to want." data-es="Estudia personas que viven los estándares que dices querer.">Study people who live the standards you claim to want.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Become good influence." data-es="Conviértete en buena influencia.">Become good influence.</strong>
+              <p data-en="The strongest players raise the room without needing attention." data-es="Los jugadores más fuertes elevan el ambiente sin necesitar atención.">The strongest players raise the room without needing attention.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game003review</span>
+              <span class="badge" data-en="Review" data-es="Repaso">Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the lesson." data-es="Asegura la lección.">Lock in the lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 003 Review" data-es="Repaso del Juego 003">Game 003 Review</p>
+
+        <h2 class="post-text" data-en="Before Game 004, answer this honestly: who and what is shaping your value?" data-es="Antes del Juego 004, contesta esto con honestidad: ¿quién y qué está formando tu valor?">
+          Before Game 004, answer this honestly: who and what is shaping your value?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. Who raises your basketball standard?" data-es="1. ¿Quién sube tu estándar de baloncesto?">1. Who raises your basketball standard?</strong>
+            <p data-en="Name the person, coach, teammate, or voice that pushes you higher." data-es="Nombra la persona, coach, compañero o voz que te empuja más alto.">Name the person, coach, teammate, or voice that pushes you higher.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What influence is lowering your focus?" data-es="2. ¿Qué influencia está bajando tu enfoque?">2. What influence is lowering your focus?</strong>
+            <p data-en="This can be a person, habit, app, feed, or environment." data-es="Puede ser una persona, hábito, aplicación, red o ambiente.">This can be a person, habit, app, feed, or environment.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. What voice do you need more of?" data-es="3. ¿Qué voz necesitas más?">3. What voice do you need more of?</strong>
+            <p data-en="Do you need more truth, structure, confidence, discipline, or opportunity?" data-es="¿Necesitas más verdad, estructura, confianza, disciplina u oportunidad?">Do you need more truth, structure, confidence, discipline, or opportunity?</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. How are you influencing others?" data-es="4. ¿Cómo estás influenciando a otros?">4. How are you influencing others?</strong>
+            <p data-en="Are you raising the room or just reacting to it?" data-es="¿Estás elevando el ambiente o solo reaccionando a él?">Are you raising the room or just reacting to it?</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Who and what is shaping you?" data-es="5. ¿Quién y qué te está formando?">5. Who and what is shaping you?</strong>
+            <p data-en="This is the question that closes Game 003." data-es="Esta es la pregunta que cierra el Juego 003.">This is the question that closes Game 003.</p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 003. Help me map the people, content, habits, and environments influencing my basketball value. Show me which influences are helping, which are hurting, and what I should change first." data-es="Prompt: Acabo de terminar Basketball Money Juego 003. Ayúdame a mapear las personas, contenido, hábitos y ambientes que están influenciando mi valor en el baloncesto. Muéstrame cuáles influencias me ayudan, cuáles me afectan y qué debo cambiar primero.">
+            Prompt: I just finished Basketball Money Game 003. Help me map the people, content, habits, and environments influencing my basketball value. Show me which influences are helping, which are hurting, and what I should change first.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn secondary" href="game-004.html" data-en="Continue to Game 004 →" data-es="Continuar al Juego 004 →">Continue to Game 004 →</a>
+          <a class="btn secondary" href="game-002.html" data-en="Back to Game 002" data-es="Volver al Juego 002">Back to Game 002</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>🔁 Choose Influence</span>
+          <span>🔥 Game 004 Next</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="Your future is being influenced every day. The business move is to stop letting random voices manage your value." data-es="Tu futuro está siendo influenciado todos los días. El movimiento de negocio es dejar de permitir que voces al azar manejen tu valor.">
+          Your future is being influenced every day. The business move is to stop letting random voices manage your value.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 003: Influence" data-es="Basketball Money — Juego 003: Influencia">
+        Basketball Money — Game 003: Influence
+      </footer>
+
     </div>
   </main>
 
   <script>
-    const STORAGE_KEY = 'hm-game-003-paid-gate-purple-v1';
-    const unlockMap = { tipoff:'q1', q1:'q2', q2:'half', half:'q3', q3:'q4', q4:'final' };
-    const reviews = ['r1','r2','r3','r4','r5','r6'];
-
     const langButtons = document.querySelectorAll('.lang-btn');
     const translatable = document.querySelectorAll('[data-en][data-es]');
-    const completeButtons = document.querySelectorAll('[data-complete]');
-    const sections = document.querySelectorAll('[data-section]');
-    const progressSteps = document.querySelectorAll('.step');
-    const reviewChoices = document.querySelectorAll('[data-review-choice]');
-    const reviewCards = document.querySelectorAll('[data-review]');
-    const reviewExplanations = document.querySelectorAll('[data-review-explanation]');
-    const finalBuzzerBtn = document.getElementById('finalBuzzerBtn');
-    const paidBox = document.getElementById('paidBox');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
 
-    let currentLang = 'en';
-    let progress = normalize(loadProgress());
-
-    function normalize(value){
-      const clean = value && typeof value === 'object' ? value : {};
-      return {
-        completed: Array.isArray(clean.completed) ? clean.completed : [],
-        unlocked: Array.isArray(clean.unlocked) && clean.unlocked.length ? clean.unlocked : ['tipoff'],
-        reviews: Array.isArray(clean.reviews) ? clean.reviews : [],
-        finalComplete: clean.finalComplete === true
-      };
-    }
-
-    function loadProgress(){
-      try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : null; }
-      catch(e) { return null; }
-    }
-
-    function saveProgress(){
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); }
-      catch(e) {}
-    }
-
-    function isCompleted(id){ return progress.completed.includes(id); }
-    function isUnlocked(id){ return progress.unlocked.includes(id); }
-    function unlock(id){ if(id && !progress.unlocked.includes(id)) progress.unlocked.push(id); }
-    function isReviewComplete(){ return reviews.every(id => progress.reviews.includes(id)); }
-
-    function setLanguage(lang){
+    function setLanguage(lang) {
       currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
       document.documentElement.lang = currentLang;
-      translatable.forEach(el => {
+
+      translatable.forEach((el) => {
         const text = el.getAttribute('data-' + currentLang);
-        if(text !== null) el.textContent = text;
-      });
-      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === currentLang));
-      render();
-    }
-
-    function render(){
-      sections.forEach(section => {
-        const id = section.dataset.section;
-        const unlocked = isUnlocked(id);
-        const completed = isCompleted(id);
-        section.classList.toggle('locked', !unlocked);
-        section.classList.toggle('done', completed);
-        const note = section.querySelector('.lock-note');
-        if(note) note.style.display = unlocked ? 'none' : 'inline-block';
-      });
-
-      progressSteps.forEach(step => {
-        const id = step.dataset.step;
-        step.classList.toggle('done', isCompleted(id));
-        step.classList.toggle('active', isUnlocked(id) && !isCompleted(id));
-      });
-
-      completeButtons.forEach(button => {
-        const id = button.dataset.complete;
-        if(isCompleted(id)){
-          button.classList.add('done');
-          button.textContent = currentLang === 'es' ? 'Completado ✓' : 'Completed ✓';
-        } else {
-          button.classList.remove('done');
-          button.textContent = button.getAttribute('data-' + currentLang) || button.textContent;
+        if (text !== null) {
+          el.textContent = text;
         }
       });
 
-      document.querySelectorAll('[data-status]').forEach(status => {
-        const id = status.dataset.status;
-        if(isCompleted(id)){
-          status.classList.add('done');
-          status.textContent = currentLang === 'es' ? 'Completado. Próxima posesión desbloqueada.' : 'Completed. Next possession unlocked.';
-          return;
-        }
-        if(id === 'final' && isUnlocked('final')){
-          status.classList.remove('done');
-          status.textContent = isReviewComplete()
-            ? (currentLang === 'es' ? 'Repaso completo. Bocina Final lista.' : 'Review complete. Final Buzzer ready.')
-            : (currentLang === 'es' ? 'Bocina Final desbloqueada. Completa el repaso.' : 'Final Buzzer unlocked. Complete the review.');
-          return;
-        }
-        status.classList.remove('done');
-        status.textContent = status.getAttribute('data-' + currentLang) || status.textContent;
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
       });
-
-      reviewCards.forEach(card => card.classList.toggle('locked-review', !isUnlocked('final')));
-
-      reviewChoices.forEach(choice => {
-        const id = choice.dataset.reviewChoice;
-        const answered = progress.reviews.includes(id);
-        const correct = choice.dataset.correct === 'true';
-        choice.classList.toggle('selected', answered);
-        choice.classList.toggle('correct', answered && correct);
-      });
-
-      reviewExplanations.forEach(exp => {
-        const id = exp.dataset.reviewExplanation;
-        exp.classList.toggle('show', progress.reviews.includes(id));
-      });
-
-      const ready = isUnlocked('final') && isReviewComplete();
-
-      if(progress.finalComplete){
-        finalBuzzerBtn.disabled = true;
-        finalBuzzerBtn.classList.add('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Vista Gratis Completada ✓' : 'Free Preview Complete ✓';
-        paidBox.classList.add('unlocked');
-      } else if(ready){
-        finalBuzzerBtn.disabled = false;
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = currentLang === 'es' ? 'Completar Vista Gratis → Desbloquear Nivel 2' : 'Complete Free Preview → Unlock Level 2';
-        paidBox.classList.remove('unlocked');
-      } else {
-        finalBuzzerBtn.disabled = true;
-        finalBuzzerBtn.classList.remove('done');
-        finalBuzzerBtn.textContent = finalBuzzerBtn.getAttribute('data-' + currentLang);
-        paidBox.classList.remove('unlocked');
-      }
-
-      saveProgress();
     }
 
-    function completeSection(id){
-      if(!progress.completed.includes(id)) progress.completed.push(id);
-      unlock(unlockMap[id]);
-      saveProgress();
-      render();
-      const next = unlockMap[id];
-      if(next){
-        const el = document.getElementById(next === 'final' ? 'final-buzzer' : next);
-        if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
-      }
-    }
-
-    document.querySelectorAll('details.accordion').forEach(detail => {
-      detail.addEventListener('toggle', () => { if(detail.open && !isUnlocked(detail.id)) detail.open = false; });
-      const summary = detail.querySelector('summary');
-      if(summary){ summary.addEventListener('click', e => { if(!isUnlocked(detail.id)) e.preventDefault(); }); }
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
     });
 
-    completeButtons.forEach(button => button.addEventListener('click', () => completeSection(button.dataset.complete)));
-
-    reviewChoices.forEach(choice => {
-      choice.addEventListener('click', () => {
-        if(!isUnlocked('final')) return;
-        const id = choice.dataset.reviewChoice;
-        if(!progress.reviews.includes(id)) progress.reviews.push(id);
-        saveProgress();
-        render();
-      });
-    });
-
-    finalBuzzerBtn.addEventListener('click', () => {
-      if(!isUnlocked('final') || !isReviewComplete()) return;
-      progress.finalComplete = true;
-      if(!progress.completed.includes('final')) progress.completed.push('final');
-      saveProgress();
-      render();
-      paidBox.scrollIntoView({ behavior:'smooth', block:'center' });
-    });
-
-    langButtons.forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-
-    setLanguage('en');
-    render();
+    setLanguage(currentLang);
   </script>
+
 </body>
 </html>
