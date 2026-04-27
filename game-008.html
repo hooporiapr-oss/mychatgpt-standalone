@@ -1,0 +1,1025 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Game 008 | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --brand-soft:rgba(155,89,182,.18);
+      --green-soft:rgba(0,217,165,.14);
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(155,89,182,.20),transparent 34%),
+        radial-gradient(circle at top right,rgba(0,217,165,.12),transparent 30%),
+        radial-gradient(circle at bottom center,rgba(245,197,66,.08),transparent 34%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--brand);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .hero-image{
+      max-width:var(--max);
+      margin:16px auto 0;
+      padding:0 16px;
+    }
+
+    .hero-image-inner{
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      object-fit:cover;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(245,197,66,.55);
+      background:
+        linear-gradient(135deg,rgba(245,197,66,.16),rgba(155,89,182,.18),rgba(0,217,165,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.lab{
+      border-color:rgba(0,217,165,.50);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.14),rgba(155,89,182,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.warning{
+      border-color:rgba(255,138,61,.45);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(0,217,165,.5);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(155,89,182,.16)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand);
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .avatar.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(0,217,165,.38);
+      background:var(--green-soft);
+      color:#b9ffee;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--gold);
+      background:var(--gold-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .section-label{
+      color:var(--brand-2);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-list,.check-list,.quiz-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,.check-card,.quiz-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,.check-card strong,.quiz-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,.check-card p,.quiz-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .check-card{
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    .check-num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand-2);
+      color:var(--brand-2);
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(0,217,165,.36);
+      background:var(--green-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .orange-note{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:900;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--brand);
+      background:var(--brand);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .stat span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .prompt-box{
+      margin-top:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .prompt-box small{
+      display:block;
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-size:11px;
+    }
+
+    .prompt-box p{
+      margin:0;
+      color:#e8edf2;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .post-actions{
+      display:flex;
+      gap:22px;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 008: The Compound Effect" data-es="Juego 008: El Efecto Compuesto">Game 008: The Compound Effect</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="game-007.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#cog01" data-en="COG 01" data-es="COG 01">COG 01</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-008.png" alt="Game 008 The Compound Effect Basketball Money">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar gold">008</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 008" data-es="Juego 008">Game 008</span>
+              <span class="handle">@paidseason</span>
+              <span class="badge gold" data-en="Paid Season" data-es="Temporada Paga">Paid Season</span>
+            </div>
+            <span class="handle" data-en="Small actions. Consistently. Over time." data-es="Acciones pequeñas. Consistentemente. Con el tiempo.">Small actions. Consistently. Over time.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="Stack today. Win later." data-es="Acumula hoy. Gana después.">
+          Stack today. Win later.
+        </h1>
+
+        <p class="post-sub" data-en="Game 008 teaches the compound effect. The player who repeats small actions daily builds results that look impossible later." data-es="El Juego 008 enseña el efecto compuesto. El jugador que repite acciones pequeñas todos los días construye resultados que después parecen imposibles.">
+          Game 008 teaches the compound effect. The player who repeats small actions daily builds results that look impossible later.
+        </p>
+
+        <div class="thread-line" data-en="Basketball business rule: the game is not won in one day. It is won in the process you repeat." data-es="Regla de negocio en baloncesto: el juego no se gana en un día. Se gana en el proceso que repites.">
+          Basketball business rule: the game is not won in one day. It is won in the process you repeat.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>008</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Compound Effect" data-es="Efecto Compuesto">Compound Effect</strong>
+          </div>
+          <div class="stat">
+            <span data-en="COG Access" data-es="Acceso COG">COG Access</span>
+            <strong data-en="COG 01" data-es="COG 01">COG 01</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn gold" href="#lesson" data-en="Start Paid Lesson →" data-es="Comenzar Lección Paga →">Start Paid Lesson →</a>
+          <a class="btn green" href="#cog01" data-en="Open COG 01 Access" data-es="Abrir Acceso COG 01">Open COG 01 Access</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 008</span>
+          <span>📈 Compound Effect</span>
+          <span>🧠 COG 01</span>
+        </div>
+      </section>
+
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@smallactionsbigresults</span>
+            </div>
+            <span class="handle" data-en="Small actions create big results." data-es="Acciones pequeñas crean resultados grandes.">Small actions create big results.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The eighth business lesson" data-es="La octava lección de negocio">The eighth business lesson</p>
+
+        <h2 class="post-text" data-en="In basketball, success compounds when actions repeat." data-es="En el baloncesto, el éxito se compone cuando las acciones se repiten.">
+          In basketball, success compounds when actions repeat.
+        </h2>
+
+        <p class="post-sub" data-en="One workout helps. One film session helps. One recovery day helps. But the real power comes when those actions repeat long enough to become a system." data-es="Un entrenamiento ayuda. Una sesión de video ayuda. Un día de recuperación ayuda. Pero el verdadero poder llega cuando esas acciones se repiten lo suficiente para convertirse en un sistema.">
+          One workout helps. One film session helps. One recovery day helps. But the real power comes when those actions repeat long enough to become a system.
+        </p>
+
+        <div class="quote" data-en="You do not rise to the level of your goals. You fall to the level of your systems." data-es="No subes al nivel de tus metas. Caes al nivel de tus sistemas.">
+          You do not rise to the level of your goals. You fall to the level of your systems.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@dailycompoundstack</span>
+            </div>
+            <span class="handle" data-en="Build your daily stack." data-es="Construye tu stack diario.">Build your daily stack.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Your daily compound stack" data-es="Tu stack compuesto diario">Your daily compound stack</p>
+
+        <h2 class="post-text" data-en="Your future is being built by what you repeat when nobody is impressed yet." data-es="Tu futuro se está construyendo con lo que repites cuando todavía nadie está impresionado.">
+          Your future is being built by what you repeat when nobody is impressed yet.
+        </h2>
+
+        <p class="post-sub" data-en="The compound effect is not glamorous at first. It looks like boring discipline. Then it becomes separation." data-es="El efecto compuesto no se ve glamoroso al principio. Se ve como disciplina aburrida. Después se convierte en separación.">
+          The compound effect is not glamorous at first. It looks like boring discipline. Then it becomes separation.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Train" data-es="Entrena">Train</strong>
+            <p data-en="Get one percent better in your skills, body, and execution." data-es="Mejora uno por ciento en tus destrezas, cuerpo y ejecución.">Get one percent better in your skills, body, and execution.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Learn" data-es="Aprende">Learn</strong>
+            <p data-en="Study the game, your role, your decisions, and your opportunities." data-es="Estudia el juego, tu rol, tus decisiones y tus oportunidades.">Study the game, your role, your decisions, and your opportunities.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Document" data-es="Documenta">Document</strong>
+            <p data-en="Record your work so proof compounds with your progress." data-es="Registra tu trabajo para que la evidencia se acumule con tu progreso.">Record your work so proof compounds with your progress.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Recover" data-es="Recupérate">Recover</strong>
+            <p data-en="Protect your body and mind so the system can continue." data-es="Protege tu cuerpo y tu mente para que el sistema pueda continuar.">Protect your body and mind so the system can continue.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Discipline" data-es="Disciplina">Discipline</strong>
+            <p data-en="Do what others skip when the reward is not immediate." data-es="Haz lo que otros evitan cuando la recompensa no es inmediata.">Do what others skip when the reward is not immediate.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@processbeatsmood</span>
+            </div>
+            <span class="handle" data-en="A warning before the second half." data-es="Una advertencia antes de la segunda mitad.">A warning before the second half.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Process beats mood" data-es="El proceso vence el ánimo">Process beats mood</p>
+
+        <h2 class="post-text" data-en="If your system depends on feeling motivated, your results will be inconsistent." data-es="Si tu sistema depende de sentirte motivado, tus resultados serán inconsistentes.">
+          If your system depends on feeling motivated, your results will be inconsistent.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: discipline today creates freedom tomorrow." data-es="Regla de negocio en baloncesto: la disciplina de hoy crea libertad mañana.">
+          Basketball business rule: discipline today creates freedom tomorrow.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@compoundmath</span>
+            </div>
+            <span class="handle" data-en="The math becomes the edge." data-es="La matemática se convierte en ventaja.">The math becomes the edge.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The compound math" data-es="La matemática compuesta">The compound math</p>
+
+        <h2 class="post-text" data-en="Small steps are not small forever." data-es="Los pasos pequeños no son pequeños para siempre.">
+          Small steps are not small forever.
+        </h2>
+
+        <p class="post-sub" data-en="A player who improves a little every day is not only adding progress. They are building momentum, identity, evidence, and confidence at the same time." data-es="Un jugador que mejora un poco todos los días no solo está sumando progreso. Está construyendo momentum, identidad, evidencia y confianza al mismo tiempo.">
+          A player who improves a little every day is not only adding progress. They are building momentum, identity, evidence, and confidence at the same time.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Short term — 3 months" data-es="Corto plazo — 3 meses">Short term — 3 months</strong>
+            <p data-en="Build the habit. See the change." data-es="Construye el hábito. Ve el cambio.">Build the habit. See the change.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Mid term — 6 months" data-es="Mediano plazo — 6 meses">Mid term — 6 months</strong>
+            <p data-en="Build the results. Gain the edge." data-es="Construye los resultados. Gana la ventaja.">Build the results. Gain the edge.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Long term — 1 year" data-es="Largo plazo — 1 año">Long term — 1 year</strong>
+            <p data-en="Build the identity. Live the standard." data-es="Construye la identidad. Vive el estándar.">Build the identity. Live the standard.</p>
+          </div>
+        </div>
+
+        <div class="quote" data-en="The players who win with money are the players who win with consistency." data-es="Los jugadores que ganan con el dinero son los jugadores que ganan con la consistencia.">
+          The players who win with money are the players who win with consistency.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@buildyoursystem</span>
+            </div>
+            <span class="handle" data-en="Build the system." data-es="Construye el sistema.">Build the system.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Create your compound system" data-es="Crea tu sistema compuesto">Create your compound system</p>
+
+        <h2 class="post-text" data-en="Do not build a giant plan you will quit. Build a simple system you can repeat." data-es="No construyas un plan gigante que vas a abandonar. Construye un sistema simple que puedas repetir.">
+          Do not build a giant plan you will quit. Build a simple system you can repeat.
+        </h2>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="Pick one daily action." data-es="Escoge una acción diaria.">Pick one daily action.</strong>
+              <p data-en="Start with something clear enough to repeat." data-es="Empieza con algo lo suficientemente claro para repetirlo.">Start with something clear enough to repeat.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Attach it to time." data-es="Amárrala a un tiempo.">Attach it to time.</strong>
+              <p data-en="A habit needs a place in your day." data-es="Un hábito necesita un espacio en tu día.">A habit needs a place in your day.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Track it." data-es="Regístrala.">Track it.</strong>
+              <p data-en="What you track becomes easier to improve." data-es="Lo que registras se vuelve más fácil de mejorar.">What you track becomes easier to improve.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Repeat before adding." data-es="Repite antes de añadir.">Repeat before adding.</strong>
+              <p data-en="Master the small system before expanding the system." data-es="Domina el sistema pequeño antes de expandirlo.">Master the small system before expanding the system.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post lab" id="cog01">
+        <div class="post-head">
+          <div class="avatar">COG</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 01 Access" data-es="Acceso COG 01">COG 01 Access</span>
+              <span class="handle">@thereact</span>
+              <span class="badge" data-en="Games 006–010" data-es="Juegos 006–010">Games 006–010</span>
+            </div>
+            <span class="handle" data-en="The React becomes part of the stack." data-es="The React se convierte en parte del stack.">The React becomes part of the stack.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Cognitive Training Lab" data-es="Laboratorio de Entrenamiento Cognitivo">Cognitive Training Lab</p>
+
+        <h2 class="post-text" data-en="COG 01 is your daily reaction stack." data-es="COG 01 es tu stack diario de reacción.">
+          COG 01 is your daily reaction stack.
+        </h2>
+
+        <p class="post-sub" data-en="The React is not only a game. It is a small repeated action that creates measurable proof: score, level, hits, misses, accuracy, reaction time, best score, and last played." data-es="The React no es solo un juego. Es una acción pequeña repetida que crea evidencia medible: puntuación, nivel, toques, fallos, precisión, tiempo de reacción, mejor puntuación y última jugada.">
+          The React is not only a game. It is a small repeated action that creates measurable proof: score, level, hits, misses, accuracy, reaction time, best score, and last played.
+        </p>
+
+        <div class="gold-note" data-en="Compound rule: train the reaction, track the progress, repeat the system." data-es="Regla compuesta: entrena la reacción, registra el progreso, repite el sistema.">
+          Compound rule: train the reaction, track the progress, repeat the system.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="cog-01.html" data-en="Train COG 01: The React →" data-es="Entrenar COG 01: The React →">Train COG 01: The React →</a>
+          <a class="btn secondary" href="#final" data-en="Finish Game 008 First" data-es="Terminar Juego 008 Primero">Finish Game 008 First</a>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game008review</span>
+              <span class="badge gold" data-en="Paid Review" data-es="Repaso Pago">Paid Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the paid lesson." data-es="Asegura la lección paga.">Lock in the paid lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 008 Review" data-es="Repaso del Juego 008">Game 008 Review</p>
+
+        <h2 class="post-text" data-en="Before Game 009, answer this honestly: what are you repeating every day?" data-es="Antes del Juego 009, contesta esto con honestidad: ¿qué estás repitiendo todos los días?">
+          Before Game 009, answer this honestly: what are you repeating every day?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. What daily action is helping your basketball future?" data-es="1. ¿Qué acción diaria está ayudando tu futuro en el baloncesto?">1. What daily action is helping your basketball future?</strong>
+            <p data-en="Name the repeated behavior that is building value." data-es="Nombra la conducta repetida que está construyendo valor.">Name the repeated behavior that is building value.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What daily action is hurting your future?" data-es="2. ¿Qué acción diaria está afectando tu futuro?">2. What daily action is hurting your future?</strong>
+            <p data-en="Small bad habits also compound." data-es="Los malos hábitos pequeños también se acumulan.">Small bad habits also compound.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. What can you track for the next 30 days?" data-es="3. ¿Qué puedes registrar por los próximos 30 días?">3. What can you track for the next 30 days?</strong>
+            <p data-en="Training, film, recovery, COG score, shooting, conditioning, or documentation." data-es="Entrenamiento, video, recuperación, puntuación COG, tiros, condición o documentación.">Training, film, recovery, COG score, shooting, conditioning, or documentation.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. What result do you want in 3 months, 6 months, and 1 year?" data-es="4. ¿Qué resultado quieres en 3 meses, 6 meses y 1 año?">4. What result do you want in 3 months, 6 months, and 1 year?</strong>
+            <p data-en="Compound systems need a direction." data-es="Los sistemas compuestos necesitan dirección.">Compound systems need a direction.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Are you stacking today or just hoping for later?" data-es="5. ¿Estás acumulando hoy o solo esperando por después?">5. Are you stacking today or just hoping for later?</strong>
+            <p data-en="This is the question that closes Game 008." data-es="Esta es la pregunta que cierra el Juego 008.">This is the question that closes Game 008.</p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 008. Help me build my daily compound system. What are the small actions I should repeat every day to create the results I want in 3 months, 6 months, and 1 year?" data-es="Prompt: Acabo de terminar Basketball Money Juego 008. Ayúdame a construir mi sistema compuesto diario. ¿Cuáles son las acciones pequeñas que debo repetir todos los días para crear los resultados que quiero en 3 meses, 6 meses y 1 año?">
+            Prompt: I just finished Basketball Money Game 008. Help me build my daily compound system. What are the small actions I should repeat every day to create the results I want in 3 months, 6 months, and 1 year?
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn gold" href="cog-01.html" data-en="Train COG 01: The React →" data-es="Entrenar COG 01: The React →">Train COG 01: The React →</a>
+          <a class="btn secondary" href="game-009.html" data-en="Continue to Game 009 →" data-es="Continuar al Juego 009 →">Continue to Game 009 →</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>📈 Compound Effect</span>
+          <span>🧠 The React</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="The compound effect creates legends because consistency keeps working long after motivation disappears." data-es="El efecto compuesto crea leyendas porque la consistencia sigue trabajando mucho después de que desaparece la motivación.">
+          The compound effect creates legends because consistency keeps working long after motivation disappears.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 008: The Compound Effect" data-es="Basketball Money — Juego 008: El Efecto Compuesto">
+        Basketball Money — Game 008: The Compound Effect
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
+  </script>
+
+</body>
+</html>
