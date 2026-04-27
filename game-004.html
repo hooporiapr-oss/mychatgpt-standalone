@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game 004 | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --brand:#9B59B6;
+      --brand-2:#00D9A5;
+      --brand-soft:rgba(155,89,182,.18);
+      --green-soft:rgba(0,217,165,.14);
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(155,89,182,.18),transparent 34%),
+        radial-gradient(circle at top right,rgba(0,217,165,.10),transparent 30%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button{font-family:inherit}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--brand);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .hero-image{
+      max-width:var(--max);
+      margin:16px auto 0;
+      padding:0 16px;
+    }
+
+    .hero-image-inner{
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-image img{
+      width:100%;
+      height:auto;
+      object-fit:cover;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(155,89,182,.55);
+      background:
+        linear-gradient(135deg,rgba(155,89,182,.18),rgba(0,217,165,.06)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(0,217,165,.5);
+      background:
+        linear-gradient(135deg,rgba(0,217,165,.16),rgba(155,89,182,.16)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.warning{
+      border-color:rgba(255,138,61,.45);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.13),rgba(155,89,182,.08)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand);
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(0,217,165,.38);
+      background:var(--green-soft);
+      color:#b9ffee;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--brand);
+      background:var(--brand-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+    }
+
+    .section-label{
+      color:var(--brand-2);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-list,.check-list,.quiz-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,.check-card,.quiz-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,.check-card strong,.quiz-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,.check-card p,.quiz-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .check-card{
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    .check-num{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--brand-2);
+      color:var(--brand-2);
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(0,217,165,.36);
+      background:var(--green-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .orange-note{
+      margin-top:16px;
+      border:1px solid rgba(255,138,61,.36);
+      background:var(--orange-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:900;
+      font-size:17px;
+      position:relative;
+      z-index:2;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--brand);
+      background:var(--brand);
+      color:#fff;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--brand-2);
+      color:#03110d;
+      border-color:var(--brand-2);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .stat span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .prompt-box{
+      margin-top:16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .prompt-box small{
+      display:block;
+      color:var(--brand-2);
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      font-size:11px;
+    }
+
+    .prompt-box p{
+      margin:0;
+      color:#e8edf2;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .post-actions{
+      display:flex;
+      gap:22px;
+      margin-top:16px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money" data-es="Basketball Money">Basketball Money</small>
+            <strong data-en="Game 004: Opportunity" data-es="Juego 004: Oportunidad">Game 004: Opportunity</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="index.html" data-en="Home" data-es="Inicio">Home</a>
+          <a href="game-003.html" data-en="Back" data-es="Atrás">Back</a>
+          <a href="#lesson" data-en="Lesson" data-es="Lección">Lesson</a>
+          <a href="#final" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</a>
+          <a href="game-005.html" data-en="Next" data-es="Próximo">Next</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <header class="hero-image">
+    <div class="hero-image-inner">
+      <img src="./image-004.png" alt="Game 004 Opportunity Basketball Money">
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar">004</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Game 004" data-es="Juego 004">Game 004</span>
+              <span class="handle">@basketballmoney</span>
+              <span class="badge" data-en="Pinned" data-es="Fijado">Pinned</span>
+            </div>
+            <span class="handle" data-en="The Business of Basketball continues." data-es="El Negocio del Baloncesto continúa.">The Business of Basketball continues.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="Can you see it, create it, and take it?" data-es="¿Puedes verla, crearla y tomarla?">
+          Can you see it, create it, and take it?
+        </h1>
+
+        <p class="post-sub" data-en="Game 004 teaches opportunity. Not every opportunity is obvious. Not every opportunity is given. Some opportunities must be recognized, created, and earned." data-es="El Juego 004 enseña oportunidad. No toda oportunidad es obvia. No toda oportunidad se regala. Algunas oportunidades se reconocen, se crean y se ganan.">
+          Game 004 teaches opportunity. Not every opportunity is obvious. Not every opportunity is given. Some opportunities must be recognized, created, and earned.
+        </p>
+
+        <div class="thread-line" data-en="Basketball business rule: opportunity does not reward the player who only waits. It rewards the player who is ready when the door opens." data-es="Regla de negocio en baloncesto: la oportunidad no premia al jugador que solo espera. Premia al jugador que está listo cuando la puerta abre.">
+          Basketball business rule: opportunity does not reward the player who only waits. It rewards the player who is ready when the door opens.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span data-en="Game" data-es="Juego">Game</span>
+            <strong>004</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Concept" data-es="Concepto">Concept</span>
+            <strong data-en="Opportunity" data-es="Oportunidad">Opportunity</strong>
+          </div>
+          <div class="stat">
+            <span data-en="Goal" data-es="Meta">Goal</span>
+            <strong data-en="Act Ready" data-es="Actuar Listo">Act Ready</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="#lesson" data-en="Start Lesson →" data-es="Comenzar Lección →">Start Lesson →</a>
+          <a class="btn secondary" href="#final" data-en="Jump to Final Buzzer" data-es="Ir a Bocina Final">Jump to Final Buzzer</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Game 004</span>
+          <span>🔁 Opportunity</span>
+          <span>🔥 Readiness</span>
+        </div>
+      </section>
+
+      <section class="post" id="lesson">
+        <div class="post-head">
+          <div class="avatar">Q1</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 1" data-es="Primer Quarter">Quarter 1</span>
+              <span class="handle">@seeitfirst</span>
+            </div>
+            <span class="handle" data-en="First, you have to see it." data-es="Primero, tienes que verla.">First, you have to see it.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="The fourth business lesson" data-es="La cuarta lección de negocio">The fourth business lesson</p>
+
+        <h2 class="post-text" data-en="In basketball, opportunity is not always loud." data-es="En el baloncesto, la oportunidad no siempre hace ruido.">
+          In basketball, opportunity is not always loud.
+        </h2>
+
+        <p class="post-sub" data-en="Sometimes opportunity looks like extra reps, a new role, a coach watching quietly, a teammate needing help, a small tournament, a conversation, or a chance to prove trust." data-es="A veces la oportunidad se ve como repeticiones extra, un rol nuevo, un coach observando en silencio, un compañero que necesita ayuda, un torneo pequeño, una conversación o una oportunidad de demostrar confianza.">
+          Sometimes opportunity looks like extra reps, a new role, a coach watching quietly, a teammate needing help, a small tournament, a conversation, or a chance to prove trust.
+        </p>
+
+        <div class="quote" data-en="If you only recognize big doors, you will miss the small ones that open them." data-es="Si solo reconoces puertas grandes, vas a perder las pequeñas que las abren.">
+          If you only recognize big doors, you will miss the small ones that open them.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q2</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 2" data-es="Segundo Quarter">Quarter 2</span>
+              <span class="handle">@createit</span>
+            </div>
+            <span class="handle" data-en="Some opportunities are built." data-es="Algunas oportunidades se construyen.">Some opportunities are built.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Opportunity can be created" data-es="La oportunidad se puede crear">Opportunity can be created</p>
+
+        <h2 class="post-text" data-en="Do not wait for someone to discover you. Build reasons to be seen." data-es="No esperes a que alguien te descubra. Construye razones para que te vean.">
+          Do not wait for someone to discover you. Build reasons to be seen.
+        </h2>
+
+        <p class="post-sub" data-en="Opportunity grows when value becomes visible. A player creates opportunity by improving, documenting, showing up, communicating, building relationships, and making it easier for the right people to trust them." data-es="La oportunidad crece cuando el valor se vuelve visible. Un jugador crea oportunidad mejorando, documentando, presentándose, comunicando, construyendo relaciones y haciendo más fácil que las personas correctas confíen en él.">
+          Opportunity grows when value becomes visible. A player creates opportunity by improving, documenting, showing up, communicating, building relationships, and making it easier for the right people to trust them.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Build skill" data-es="Construye habilidad">Build skill</strong>
+            <p data-en="Opportunity is easier to claim when your work is real." data-es="La oportunidad es más fácil de reclamar cuando tu trabajo es real.">Opportunity is easier to claim when your work is real.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Build visibility" data-es="Construye visibilidad">Build visibility</strong>
+            <p data-en="The right people cannot choose what they cannot see." data-es="Las personas correctas no pueden escoger lo que no pueden ver.">The right people cannot choose what they cannot see.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Build relationships" data-es="Construye relaciones">Build relationships</strong>
+            <p data-en="Relationships carry trust faster than noise does." data-es="Las relaciones cargan confianza más rápido que el ruido.">Relationships carry trust faster than noise does.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Build proof" data-es="Construye evidencia">Build proof</strong>
+            <p data-en="Proof makes your opportunity believable." data-es="La evidencia hace que tu oportunidad sea creíble.">Proof makes your opportunity believable.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post warning">
+        <div class="post-head">
+          <div class="avatar">HT</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Halftime" data-es="Medio Tiempo">Halftime</span>
+              <span class="handle">@readyornot</span>
+            </div>
+            <span class="handle" data-en="A warning before the second half." data-es="Una advertencia antes de la segunda mitad.">A warning before the second half.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Opportunity without readiness becomes regret" data-es="Oportunidad sin preparación se convierte en arrepentimiento">Opportunity without readiness becomes regret</p>
+
+        <h2 class="post-text" data-en="The door can open and still expose that you were not ready." data-es="La puerta puede abrir y aun así exponer que no estabas listo.">
+          The door can open and still expose that you were not ready.
+        </h2>
+
+        <div class="orange-note" data-en="Basketball business rule: opportunity is not the finish line. Opportunity is the test." data-es="Regla de negocio en baloncesto: la oportunidad no es la meta final. La oportunidad es la prueba.">
+          Basketball business rule: opportunity is not the finish line. Opportunity is the test.
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q3</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 3" data-es="Tercer Quarter">Quarter 3</span>
+              <span class="handle">@takeit</span>
+            </div>
+            <span class="handle" data-en="Confidence must become action." data-es="La confianza tiene que convertirse en acción.">Confidence must become action.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Taking the opportunity" data-es="Tomar la oportunidad">Taking the opportunity</p>
+
+        <h2 class="post-text" data-en="When opportunity appears, hesitation can cost you." data-es="Cuando aparece la oportunidad, dudar demasiado te puede costar.">
+          When opportunity appears, hesitation can cost you.
+        </h2>
+
+        <p class="post-sub" data-en="Taking an opportunity does not mean being reckless. It means being prepared enough to move when the moment asks for courage, discipline, communication, and execution." data-es="Tomar una oportunidad no significa ser imprudente. Significa estar lo suficientemente preparado para moverte cuando el momento pide valentía, disciplina, comunicación y ejecución.">
+          Taking an opportunity does not mean being reckless. It means being prepared enough to move when the moment asks for courage, discipline, communication, and execution.
+        </p>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="Speak up" data-es="Habla">Speak up</strong>
+            <p data-en="Sometimes opportunity starts with asking the right question." data-es="A veces la oportunidad empieza haciendo la pregunta correcta.">Sometimes opportunity starts with asking the right question.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Step in" data-es="Entra">Step in</strong>
+            <p data-en="When your number is called, do not act surprised that the moment arrived." data-es="Cuando te llamen, no actúes sorprendido de que el momento llegó.">When your number is called, do not act surprised that the moment arrived.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Follow through" data-es="Completa">Follow through</strong>
+            <p data-en="Opportunity respects the player who finishes what they start." data-es="La oportunidad respeta al jugador que termina lo que empieza.">Opportunity respects the player who finishes what they start.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="Learn fast" data-es="Aprende rápido">Learn fast</strong>
+            <p data-en="Every opportunity teaches you how to handle the next one better." data-es="Cada oportunidad te enseña cómo manejar mejor la próxima.">Every opportunity teaches you how to handle the next one better.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">Q4</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Quarter 4" data-es="Cuarto Quarter">Quarter 4</span>
+              <span class="handle">@ownit</span>
+            </div>
+            <span class="handle" data-en="Turn opportunity into freedom." data-es="Convierte oportunidad en libertad.">Turn opportunity into freedom.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Owning the opportunity" data-es="Adueñarte de la oportunidad">Owning the opportunity</p>
+
+        <h2 class="post-text" data-en="The goal is not just to get one chance. The goal is to become someone opportunities can trust." data-es="La meta no es solo recibir una oportunidad. La meta es convertirte en alguien en quien las oportunidades pueden confiar.">
+          The goal is not just to get one chance. The goal is to become someone opportunities can trust.
+        </h2>
+
+        <p class="post-sub" data-en="When players handle opportunity with maturity, they earn more rooms, more trust, more visibility, and more choices." data-es="Cuando los jugadores manejan la oportunidad con madurez, ganan más espacios, más confianza, más visibilidad y más opciones.">
+          When players handle opportunity with maturity, they earn more rooms, more trust, more visibility, and more choices.
+        </p>
+
+        <div class="check-list">
+          <div class="check-card">
+            <div class="check-num">1</div>
+            <div>
+              <strong data-en="See it." data-es="Vela.">See it.</strong>
+              <p data-en="Recognize the open door before it closes." data-es="Reconoce la puerta abierta antes de que cierre.">Recognize the open door before it closes.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">2</div>
+            <div>
+              <strong data-en="Create it." data-es="Créala.">Create it.</strong>
+              <p data-en="Build value, proof, relationships, and visibility." data-es="Construye valor, evidencia, relaciones y visibilidad.">Build value, proof, relationships, and visibility.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">3</div>
+            <div>
+              <strong data-en="Take it." data-es="Tómala.">Take it.</strong>
+              <p data-en="Move with preparation, discipline, and confidence." data-es="Muévete con preparación, disciplina y confianza.">Move with preparation, discipline, and confidence.</p>
+            </div>
+          </div>
+
+          <div class="check-card">
+            <div class="check-num">4</div>
+            <div>
+              <strong data-en="Own it." data-es="Hazla tuya.">Own it.</strong>
+              <p data-en="Turn one chance into a stronger future." data-es="Convierte una oportunidad en un futuro más fuerte.">Turn one chance into a stronger future.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="post final" id="final">
+        <div class="post-head">
+          <div class="avatar">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Final Buzzer" data-es="Bocina Final">Final Buzzer</span>
+              <span class="handle">@game004review</span>
+              <span class="badge" data-en="Review" data-es="Repaso">Review</span>
+            </div>
+            <span class="handle" data-en="Lock in the lesson." data-es="Asegura la lección.">Lock in the lesson.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="Game 004 Review" data-es="Repaso del Juego 004">Game 004 Review</p>
+
+        <h2 class="post-text" data-en="Before Game 005, answer this honestly: are you waiting for opportunity or building it?" data-es="Antes del Juego 005, contesta esto con honestidad: ¿estás esperando la oportunidad o la estás construyendo?">
+          Before Game 005, answer this honestly: are you waiting for opportunity or building it?
+        </h2>
+
+        <div class="quiz-list">
+          <div class="quiz-card">
+            <strong data-en="1. What opportunity is already near you?" data-es="1. ¿Qué oportunidad ya está cerca de ti?">1. What opportunity is already near you?</strong>
+            <p data-en="Look for small doors: people, practices, leagues, conversations, roles, or projects." data-es="Busca puertas pequeñas: personas, prácticas, ligas, conversaciones, roles o proyectos.">Look for small doors: people, practices, leagues, conversations, roles, or projects.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="2. What opportunity do you need to create?" data-es="2. ¿Qué oportunidad necesitas crear?">2. What opportunity do you need to create?</strong>
+            <p data-en="Do not wait to be picked if there is a way to build value now." data-es="No esperes que te escojan si hay una forma de construir valor ahora.">Do not wait to be picked if there is a way to build value now.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="3. What proof would make you more ready?" data-es="3. ¿Qué evidencia te haría más preparado?">3. What proof would make you more ready?</strong>
+            <p data-en="Opportunity trusts players who can show preparation." data-es="La oportunidad confía en jugadores que pueden demostrar preparación.">Opportunity trusts players who can show preparation.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="4. What action can you take this week?" data-es="4. ¿Qué acción puedes tomar esta semana?">4. What action can you take this week?</strong>
+            <p data-en="Make it specific. A message, a workout, a video, a meeting, a tryout, or a follow-up." data-es="Hazlo específico. Un mensaje, un entrenamiento, un video, una reunión, una prueba o un seguimiento.">Make it specific. A message, a workout, a video, a meeting, a tryout, or a follow-up.</p>
+          </div>
+
+          <div class="quiz-card">
+            <strong data-en="5. Can you see it, create it, and take it?" data-es="5. ¿Puedes verla, crearla y tomarla?">5. Can you see it, create it, and take it?</strong>
+            <p data-en="This is the question that closes Game 004." data-es="Esta es la pregunta que cierra el Juego 004.">This is the question that closes Game 004.</p>
+          </div>
+        </div>
+
+        <div class="prompt-box">
+          <small data-en="Start The Conversation" data-es="Empieza La Conversación">Start The Conversation</small>
+          <p data-en="Prompt: I just finished Basketball Money Game 004. Help me identify the basketball opportunities around me, the opportunities I can create, and the action I should take this week to become more ready and visible." data-es="Prompt: Acabo de terminar Basketball Money Juego 004. Ayúdame a identificar las oportunidades de baloncesto que tengo cerca, las oportunidades que puedo crear y la acción que debo tomar esta semana para estar más preparado y visible.">
+            Prompt: I just finished Basketball Money Game 004. Help me identify the basketball opportunities around me, the opportunities I can create, and the action I should take this week to become more ready and visible.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn green" href="https://chatgpt.com/g/g-69edeb730b3c8191b4f438b058ecc2e2-get-ready-for-basketball-money" target="_blank" rel="noopener" data-en="Start The Conversation →" data-es="Empezar La Conversación →">Start The Conversation →</a>
+          <a class="btn secondary" href="game-005.html" data-en="Continue to Game 005 →" data-es="Continuar al Juego 005 →">Continue to Game 005 →</a>
+          <a class="btn secondary" href="game-003.html" data-en="Back to Game 003" data-es="Volver al Juego 003">Back to Game 003</a>
+        </div>
+
+        <div class="post-actions">
+          <span>💬 Reflect</span>
+          <span>🔁 Build Opportunity</span>
+          <span>🔥 Game 005 Next</span>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar">CB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Coach Bori" data-es="Coach Bori">Coach Bori</span>
+              <span class="handle">@coachclose</span>
+            </div>
+            <span class="handle" data-en="Final word." data-es="Palabra final.">Final word.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="Opportunity is not luck when preparation, visibility, and courage meet at the right moment." data-es="La oportunidad no es suerte cuando preparación, visibilidad y valentía se encuentran en el momento correcto.">
+          Opportunity is not luck when preparation, visibility, and courage meet at the right moment.
+        </h2>
+      </section>
+
+      <footer data-en="Basketball Money — Game 004: Opportunity" data-es="Basketball Money — Juego 004: Oportunidad">
+        Basketball Money — Game 004: Opportunity
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) {
+          el.textContent = text;
+        }
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    setLanguage(currentLang);
+  </script>
+
+</body>
+</html>
+```
