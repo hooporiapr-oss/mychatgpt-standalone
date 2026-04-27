@@ -1,0 +1,1716 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <title>COG 03 | The Reflex | Basketball Money</title>
+
+  <style>
+    :root {
+      --bg:#050505;
+      --panel:#0f1115;
+      --panel-2:#151821;
+      --text:#f5f7fa;
+      --muted:#8b98a5;
+      --line:#242833;
+      --cyan:#20d7ff;
+      --cyan-soft:rgba(32,215,255,.14);
+      --orange:#ff8a3d;
+      --orange-soft:rgba(255,138,61,.14);
+      --gold:#f5c542;
+      --gold-soft:rgba(245,197,66,.14);
+      --green:#00D9A5;
+      --green-soft:rgba(0,217,165,.14);
+      --pink:#ff1493;
+      --purple:#9B59B6;
+      --radius:22px;
+      --max:760px;
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top left,rgba(32,215,255,.22),transparent 34%),
+        radial-gradient(circle at top right,rgba(255,138,61,.18),transparent 30%),
+        radial-gradient(circle at bottom center,rgba(155,89,182,.12),transparent 34%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial,Helvetica,sans-serif;
+      line-height:1.45;
+      touch-action:manipulation;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit}
+    img{max-width:100%;display:block}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,5,5,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px 16px;
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--cyan),var(--orange));
+      color:#050505;
+      font-weight:950;
+      letter-spacing:-.08em;
+      border:2px solid rgba(255,255,255,.18);
+    }
+
+    .brand-copy small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:18px;
+      line-height:1.05;
+      letter-spacing:-.04em;
+    }
+
+    .top-links{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .top-links a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .top-links a:hover{
+      border-color:var(--cyan);
+      transform:translateY(-1px);
+    }
+
+    .lang-row{
+      margin-top:14px;
+      display:flex;
+      justify-content:center;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    .lang-toggle{
+      display:inline-flex;
+      gap:4px;
+      background:#0b0d12;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:4px;
+    }
+
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      cursor:pointer;
+    }
+
+    .lang-btn.active{
+      background:var(--text);
+      color:#050505;
+    }
+
+    .page{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 16px 80px;
+    }
+
+    .feed{
+      display:grid;
+      gap:14px;
+    }
+
+    .post{
+      background:rgba(15,17,21,.94);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 18px 48px rgba(0,0,0,.28);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .post::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 42%);
+    }
+
+    .post.pinned{
+      border-color:rgba(32,215,255,.55);
+      background:
+        linear-gradient(135deg,rgba(32,215,255,.16),rgba(255,138,61,.14),rgba(155,89,182,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.play{
+      border-color:rgba(255,138,61,.55);
+      background:
+        linear-gradient(135deg,rgba(255,138,61,.16),rgba(32,215,255,.10)),
+        rgba(15,17,21,.96);
+    }
+
+    .post.final{
+      border-color:rgba(245,197,66,.55);
+      background:
+        linear-gradient(135deg,rgba(245,197,66,.16),rgba(32,215,255,.12)),
+        rgba(15,17,21,.96);
+    }
+
+    .post-head{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      position:relative;
+      z-index:2;
+    }
+
+    .avatar{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      border:2px solid var(--cyan);
+      color:var(--cyan);
+      font-weight:950;
+      letter-spacing:-.05em;
+      font-size:13px;
+    }
+
+    .avatar.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .post-meta{
+      min-width:0;
+      flex:1;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:2px;
+    }
+
+    .name{
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+
+    .handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(32,215,255,.38);
+      background:var(--cyan-soft);
+      color:#bcefff;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
+    .badge.gold{
+      border-color:rgba(245,197,66,.48);
+      background:var(--gold-soft);
+      color:#ffe9a6;
+    }
+
+    .post-text{
+      margin:12px 0 0;
+      font-size:clamp(21px,4.2vw,32px);
+      line-height:1.1;
+      font-weight:950;
+      letter-spacing:-.055em;
+      position:relative;
+      z-index:2;
+    }
+
+    .post-text.big{
+      font-size:clamp(40px,10vw,76px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .post-sub{
+      margin:14px 0 0;
+      color:#cfd6dd;
+      font-size:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .thread-line{
+      margin:16px 0 0;
+      padding:14px 16px;
+      border-left:4px solid var(--cyan);
+      background:var(--cyan-soft);
+      border-radius:14px;
+      font-size:17px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+      color:#d9f8ff;
+    }
+
+    .section-label{
+      color:var(--cyan);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-weight:950;
+      margin:0 0 8px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-list,
+    .speed-list{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .mini-card,
+    .speed-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .mini-card strong,
+    .speed-card strong{
+      display:block;
+      font-size:20px;
+      letter-spacing:-.035em;
+      line-height:1.08;
+    }
+
+    .mini-card p,
+    .speed-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .speed-card{
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .speed-card:hover{
+      border-color:var(--cyan);
+      transform:translateY(-1px);
+    }
+
+    .speed-card.active{
+      border-color:var(--gold);
+      background:var(--gold-soft);
+    }
+
+    .speed-card.active strong{
+      color:#ffe9a6;
+    }
+
+    .quote{
+      margin-top:16px;
+      border:1px solid rgba(32,215,255,.36);
+      background:var(--cyan-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .gold-note{
+      margin-top:16px;
+      border:1px solid rgba(245,197,66,.38);
+      background:var(--gold-soft);
+      border-radius:18px;
+      padding:16px;
+      font-weight:950;
+      font-size:18px;
+      position:relative;
+      z-index:2;
+      color:#fff3c4;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--cyan);
+      background:var(--cyan);
+      color:#031014;
+      padding:13px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:950;
+      cursor:pointer;
+      transition:.18s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.08);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn.green{
+      background:var(--green);
+      color:#03110d;
+      border-color:var(--green);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#161000;
+      border-color:var(--gold);
+    }
+
+    .btn.orange{
+      background:var(--orange);
+      color:#160802;
+      border-color:var(--orange);
+    }
+
+    .btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    .game-stats{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .game-stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:12px;
+      text-align:center;
+    }
+
+    .game-stat strong{
+      display:block;
+      font-size:22px;
+      color:var(--cyan);
+      line-height:1;
+    }
+
+    .game-stat span{
+      display:block;
+      margin-top:6px;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .tracking-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .tracking-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:13px;
+    }
+
+    .tracking-card span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .tracking-card strong{
+      display:block;
+      font-size:19px;
+      line-height:1.1;
+      color:var(--cyan);
+    }
+
+    .play-message{
+      margin:16px 0 0;
+      min-height:38px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size:22px;
+      font-weight:950;
+      letter-spacing:-.03em;
+      color:var(--gold);
+      position:relative;
+      z-index:2;
+    }
+
+    .court-wrap{
+      margin-top:14px;
+      display:grid;
+      justify-content:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .court{
+      width:min(340px,88vw);
+      aspect-ratio:1;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:6px;
+      padding:10px;
+      background:#0b0d12;
+      border:2px solid var(--line);
+      border-radius:20px;
+      box-shadow:inset 0 0 30px rgba(0,0,0,.45);
+      transition:.15s ease;
+    }
+
+    .court.pulse{
+      border-color:var(--cyan);
+      box-shadow:0 0 24px rgba(32,215,255,.35), inset 0 0 30px rgba(0,0,0,.45);
+    }
+
+    .court.success{
+      border-color:var(--green);
+      box-shadow:0 0 24px rgba(0,217,165,.35), inset 0 0 30px rgba(0,0,0,.45);
+    }
+
+    .court.miss{
+      border-color:var(--pink);
+      box-shadow:0 0 24px rgba(255,20,147,.35), inset 0 0 30px rgba(0,0,0,.45);
+      animation:shake .25s ease;
+    }
+
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-5px)}
+      75%{transform:translateX(5px)}
+    }
+
+    .cell{
+      border-radius:9px;
+      background:rgba(255,255,255,.06);
+      border:2px solid rgba(255,255,255,.12);
+      cursor:pointer;
+      transition:.09s ease;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-weight:950;
+      user-select:none;
+      font-size:clamp(16px,4vw,26px);
+    }
+
+    .cell:active{
+      transform:scale(.93);
+    }
+
+    .cell.lit{
+      background:var(--cyan);
+      border-color:var(--gold);
+      box-shadow:0 0 20px rgba(32,215,255,.8);
+      transform:scale(1.04);
+    }
+
+    .cell.correct{
+      background:var(--green);
+      border-color:var(--green);
+      box-shadow:0 0 16px rgba(0,217,165,.7);
+    }
+
+    .cell.wrong{
+      background:var(--pink);
+      border-color:var(--pink);
+      box-shadow:0 0 16px rgba(255,20,147,.7);
+    }
+
+    .cell.missed{
+      border:3px dashed var(--cyan);
+      background:rgba(32,215,255,.16);
+      box-shadow:0 0 12px rgba(32,215,255,.45);
+    }
+
+    .cell.selected{
+      background:rgba(32,215,255,.28);
+      border-color:var(--cyan);
+    }
+
+    .round-info{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      margin-top:12px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:900;
+      position:relative;
+      z-index:2;
+    }
+
+    .round-pill{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:999px;
+      padding:8px 11px;
+    }
+
+    .star-meter{
+      display:flex;
+      justify-content:center;
+      gap:4px;
+      margin-top:12px;
+      position:relative;
+      z-index:2;
+      font-size:18px;
+      letter-spacing:1px;
+      color:var(--gold);
+      flex-wrap:wrap;
+    }
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.88);
+      z-index:2000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .overlay.show{
+      display:flex;
+    }
+
+    .overlay-card{
+      width:min(340px,94vw);
+      background:var(--panel);
+      border:2px solid var(--cyan);
+      border-radius:22px;
+      padding:22px;
+      text-align:center;
+      box-shadow:var(--shadow);
+    }
+
+    .overlay-emoji{
+      font-size:44px;
+      margin-bottom:8px;
+    }
+
+    .overlay-title{
+      margin:0;
+      font-size:34px;
+      line-height:1;
+      letter-spacing:-.055em;
+    }
+
+    .overlay-text{
+      color:var(--muted);
+      margin:12px 0 0;
+      font-size:15px;
+    }
+
+    .overlay-card .cta-row{
+      justify-content:center;
+    }
+
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:20px;
+      padding-bottom:20px;
+    }
+
+    @media(max-width:720px){
+      .brand-row{align-items:flex-start}
+      .top-links{width:100%}
+      .top-links a{flex:1 1 auto;text-align:center}
+      .post{padding:16px}
+      .game-stats{grid-template-columns:repeat(2,1fr)}
+      .cta-row{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+    }
+
+    @media(max-width:420px){
+      .tracking-grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+
+      <div class="brand-row">
+        <a class="brand" href="game-015.html">
+          <div class="brand-mark">BM</div>
+          <div class="brand-copy">
+            <small data-en="Basketball Money Cognitive Lab" data-es="Basketball Money Lab Cognitivo">Basketball Money Cognitive Lab</small>
+            <strong data-en="COG 03: The Reflex" data-es="COG 03: The Reflex">COG 03: The Reflex</strong>
+          </div>
+        </a>
+
+        <div class="top-links">
+          <a href="game-015.html" data-en="Back to Game 015" data-es="Volver al Juego 015">Back to Game 015</a>
+          <a href="#play" data-en="Play" data-es="Jugar">Play</a>
+          <a href="game-016.html" data-en="Next Game" data-es="Próximo Juego">Next Game</a>
+        </div>
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" type="button" data-lang="en">English</button>
+          <button class="lang-btn" type="button" data-lang="es">Español | Puerto Rico</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="feed">
+
+      <section class="post pinned">
+        <div class="post-head">
+          <div class="avatar">COG</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 03" data-es="COG 03">COG 03</span>
+              <span class="handle">@thereflex</span>
+              <span class="badge" data-en="Games 016–020" data-es="Juegos 016–020">Games 016–020</span>
+            </div>
+            <span class="handle" data-en="The third paid cognitive drill." data-es="El tercer drill cognitivo pago.">The third paid cognitive drill.</span>
+          </div>
+        </div>
+
+        <h1 class="post-text big" data-en="The Reflex" data-es="The Reflex">
+          The Reflex
+        </h1>
+
+        <p class="post-sub" data-en="A multi-target basketball reflex drill. Several cells flash at once. You remember which cells lit up, then find all targets by tapping them in any order." data-es="Un drill de reflejo de baloncesto con múltiples objetivos. Varias celdas prenden a la vez. Recuerdas cuáles se iluminaron y luego encuentras todos los objetivos tocándolos en cualquier orden.">
+          A multi-target basketball reflex drill. Several cells flash at once. You remember which cells lit up, then find all targets by tapping them in any order.
+        </p>
+
+        <div class="thread-line" data-en="Basketball Money connection: COG 02 trained ordered recall. COG 03 trains reflex recall — seeing multiple signals, remembering them, and finding the right targets fast." data-es="Conexión con Basketball Money: COG 02 entrenó memoria en orden. COG 03 entrena memoria de reflejo — ver múltiples señales, recordarlas y encontrar los objetivos correctos rápido.">
+          Basketball Money connection: COG 02 trained ordered recall. COG 03 trains reflex recall — seeing multiple signals, remembering them, and finding the right targets fast.
+        </div>
+
+        <div class="mini-list">
+          <div class="mini-card">
+            <strong data-en="What it tests" data-es="Qué prueba">What it tests</strong>
+            <p data-en="Multi-target memory, reflex recognition, visual scanning, fast target finding, accuracy, and pressure recovery." data-es="Memoria de múltiples objetivos, reconocimiento reflejo, escaneo visual, búsqueda rápida, precisión y recuperación bajo presión.">
+              Multi-target memory, reflex recognition, visual scanning, fast target finding, accuracy, and pressure recovery.
+            </p>
+          </div>
+
+          <div class="mini-card">
+            <strong data-en="How to play" data-es="Cómo jugar">How to play</strong>
+            <p data-en="Watch the flash. Remember every target. When they disappear, tap all correct cells in any order." data-es="Mira el destello. Recuerda cada objetivo. Cuando desaparezcan, toca todas las celdas correctas en cualquier orden.">
+              Watch the flash. Remember every target. When they disappear, tap all correct cells in any order.
+            </p>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="#play" data-en="Start COG 03 →" data-es="Comenzar COG 03 →">Start COG 03 →</a>
+          <a class="btn secondary" href="game-015.html" data-en="Back to Game 015" data-es="Volver al Juego 015">Back to Game 015</a>
+        </div>
+      </section>
+
+      <section class="post">
+        <div class="post-head">
+          <div class="avatar gold">BPM</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Choose Speed" data-es="Escoge Velocidad">Choose Speed</span>
+              <span class="handle">@bpmlevels</span>
+            </div>
+            <span class="handle" data-en="Select your reflex pace." data-es="Escoge tu ritmo de reflejo.">Select your reflex pace.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="BPM Speed Levels" data-es="Niveles de Velocidad BPM">BPM Speed Levels</p>
+
+        <div class="speed-list">
+          <div class="speed-card active" data-speed="training">
+            <strong data-en="Training — 60 BPM" data-es="Entrenamiento — 60 BPM">Training — 60 BPM</strong>
+            <p data-en="Long flash window. Best for learning how to scan the full grid." data-es="Ventana larga de destello. Mejor para aprender a escanear toda la cuadrícula.">
+              Long flash window. Best for learning how to scan the full grid.
+            </p>
+          </div>
+
+          <div class="speed-card" data-speed="tempo">
+            <strong data-en="Tempo — 90 BPM" data-es="Tempo — 90 BPM">Tempo — 90 BPM</strong>
+            <p data-en="Game rhythm. Less time to process multiple targets." data-es="Ritmo de juego. Menos tiempo para procesar múltiples objetivos.">
+              Game rhythm. Less time to process multiple targets.
+            </p>
+          </div>
+
+          <div class="speed-card" data-speed="elite">
+            <strong data-en="Elite — 120 BPM" data-es="Elite — 120 BPM">Elite — 120 BPM</strong>
+            <p data-en="High-pressure flash. Quick look, fast memory, clean target finding." data-es="Destello de alta presión. Mirada rápida, memoria rápida y búsqueda limpia.">
+              High-pressure flash. Quick look, fast memory, clean target finding.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="post play" id="play">
+        <div class="post-head">
+          <div class="avatar">03</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="Playfield" data-es="Cancha de Juego">Playfield</span>
+              <span class="handle">@5x5reflexgrid</span>
+              <span class="badge" data-en="Live Drill" data-es="Drill Activo">Live Drill</span>
+            </div>
+            <span class="handle" data-en="Remember the flash. Find all targets." data-es="Recuerda el destello. Encuentra todos los objetivos.">Remember the flash. Find all targets.</span>
+          </div>
+        </div>
+
+        <p class="section-label" data-en="COG 03: The Reflex" data-es="COG 03: The Reflex">COG 03: The Reflex</p>
+
+        <div class="game-stats">
+          <div class="game-stat">
+            <strong id="levelDisplay">1</strong>
+            <span data-en="Level" data-es="Nivel">Level</span>
+          </div>
+
+          <div class="game-stat">
+            <strong id="scoreDisplay">0</strong>
+            <span data-en="Score" data-es="Puntos">Score</span>
+          </div>
+
+          <div class="game-stat">
+            <strong id="livesDisplay">♥♥♥</strong>
+            <span data-en="Lives" data-es="Vidas">Lives</span>
+          </div>
+
+          <div class="game-stat">
+            <strong id="roundDisplay">0</strong>
+            <span data-en="Round" data-es="Ronda">Round</span>
+          </div>
+
+          <div class="game-stat">
+            <strong id="goStarDisplay">0/10</strong>
+            <span data-en="GoStars" data-es="GoStars">GoStars</span>
+          </div>
+        </div>
+
+        <div class="tracking-grid">
+          <div class="tracking-card">
+            <span data-en="Best Score" data-es="Mejor Puntuación">Best Score</span>
+            <strong id="bestScoreDisplay">0</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Best Level" data-es="Mejor Nivel">Best Level</span>
+            <strong id="bestLevelDisplay">1</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Total Rounds" data-es="Rondas Totales">Total Rounds</span>
+            <strong id="totalRoundsDisplay">0</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Perfect Rounds" data-es="Rondas Perfectas">Perfect Rounds</span>
+            <strong id="perfectRoundsDisplay">0</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Failed Rounds" data-es="Rondas Fallidas">Failed Rounds</span>
+            <strong id="failedRoundsDisplay">0</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Accuracy" data-es="Precisión">Accuracy</span>
+            <strong id="accuracyDisplay">0%</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Correct Taps" data-es="Toques Correctos">Correct Taps</span>
+            <strong id="correctTapsDisplay">0</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Wrong Taps" data-es="Toques Incorrectos">Wrong Taps</span>
+            <strong id="wrongTapsDisplay">0</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Missed Targets" data-es="Objetivos Perdidos">Missed Targets</span>
+            <strong id="missedTargetsDisplay">0</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Avg Find Time" data-es="Tiempo Promedio">Avg Find Time</span>
+            <strong id="avgFindDisplay">0.0s</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Best Find Time" data-es="Mejor Tiempo">Best Find Time</span>
+            <strong id="bestFindDisplay">0.0s</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Longest Target Set" data-es="Mayor Grupo">Longest Target Set</span>
+            <strong id="longestTargetDisplay">0</strong>
+          </div>
+
+          <div class="tracking-card">
+            <span data-en="Last Played" data-es="Última Jugada">Last Played</span>
+            <strong id="lastPlayedDisplay">—</strong>
+          </div>
+        </div>
+
+        <div class="play-message" id="messageDisplay" data-en="Press Start Round." data-es="Presiona Comenzar Ronda.">
+          Press Start Round.
+        </div>
+
+        <div class="star-meter" id="starMeter">☆☆☆☆☆☆☆☆☆☆</div>
+
+        <div class="court-wrap">
+          <div class="court" id="court"></div>
+        </div>
+
+        <div class="round-info">
+          <div class="round-pill">
+            <span data-en="Speed:" data-es="Velocidad:">Speed:</span>
+            <strong id="speedDisplay">Training</strong>
+          </div>
+
+          <div class="round-pill">
+            <span data-en="Targets:" data-es="Objetivos:">Targets:</span>
+            <strong id="targetsDisplay">5</strong>
+          </div>
+
+          <div class="round-pill">
+            <span data-en="Found:" data-es="Encontrados:">Found:</span>
+            <strong id="foundDisplay">0/5</strong>
+          </div>
+
+          <div class="round-pill">
+            <span data-en="Perfects to GoStar:" data-es="Perfectas para GoStar:">Perfects to GoStar:</span>
+            <strong id="perfectsToStarDisplay">0/2</strong>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn" type="button" id="startRoundBtn" data-en="Start Round →" data-es="Comenzar Ronda →">Start Round →</button>
+          <button class="btn secondary" type="button" id="resetBtn" data-en="Reset Score" data-es="Reiniciar Puntos">Reset Score</button>
+          <button class="btn secondary" type="button" id="resetTrackingBtn" data-en="Reset Tracking" data-es="Reiniciar Tracking">Reset Tracking</button>
+        </div>
+      </section>
+
+      <section class="post final">
+        <div class="post-head">
+          <div class="avatar gold">FB</div>
+          <div class="post-meta">
+            <div class="name-row">
+              <span class="name" data-en="COG 03 Close" data-es="Cierre COG 03">COG 03 Close</span>
+              <span class="handle">@thereflexreview</span>
+              <span class="badge gold" data-en="Reflection" data-es="Reflexión">Reflection</span>
+            </div>
+            <span class="handle" data-en="Take the drill into Game 016." data-es="Lleva el drill al Juego 016.">Take the drill into Game 016.</span>
+          </div>
+        </div>
+
+        <h2 class="post-text" data-en="Reflex is not random. Reflex is trained recognition under pressure." data-es="El reflejo no es al azar. El reflejo es reconocimiento entrenado bajo presión.">
+          Reflex is not random. Reflex is trained recognition under pressure.
+        </h2>
+
+        <p class="post-sub" data-en="COG 03 prepares Games 016–020. The player now trains how to see multiple signals, remember the targets, and find the right answer quickly." data-es="COG 03 prepara los Juegos 016–020. El jugador ahora entrena cómo ver múltiples señales, recordar los objetivos y encontrar la respuesta correcta rápido.">
+          COG 03 prepares Games 016–020. The player now trains how to see multiple signals, remember the targets, and find the right answer quickly.
+        </p>
+
+        <div class="gold-note" data-en="After this drill, continue to Game 016. Games 016–020 now connect to COG 03: The Reflex." data-es="Después de este drill, continúa al Juego 016. Los Juegos 016–020 ahora conectan con COG 03: The Reflex.">
+          After this drill, continue to Game 016. Games 016–020 now connect to COG 03: The Reflex.
+        </div>
+
+        <div class="cta-row">
+          <a class="btn gold" href="game-016.html" data-en="Continue to Game 016 →" data-es="Continuar al Juego 016 →">Continue to Game 016 →</a>
+          <a class="btn secondary" href="game-015.html#next" data-en="Back to Game 015 Transition" data-es="Volver a la Transición del Juego 015">Back to Game 015 Transition</a>
+        </div>
+      </section>
+
+      <footer data-en="Basketball Money — COG 03: The Reflex" data-es="Basketball Money — COG 03: The Reflex">
+        Basketball Money — COG 03: The Reflex
+      </footer>
+
+    </div>
+  </main>
+
+  <div class="overlay" id="roundOverlay">
+    <div class="overlay-card">
+      <div class="overlay-emoji" id="overlayEmoji">⭐</div>
+      <h2 class="overlay-title" id="overlayTitle">Round Complete</h2>
+      <p class="overlay-text" id="overlayText">Nice work.</p>
+
+      <div class="cta-row">
+        <button class="btn" type="button" id="overlayNextBtn" data-en="Next Round" data-es="Próxima Ronda">Next Round</button>
+        <button class="btn secondary" type="button" id="overlayCloseBtn" data-en="Close" data-es="Cerrar">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-en][data-es]');
+    let currentLang = localStorage.getItem('basketball-money-lang') || 'en';
+
+    const MESSAGES = {
+      en: {
+        start: 'Press Start Round.',
+        ready: 'Get ready...',
+        watch: 'Watch the flash.',
+        find: 'Find all targets in any order.',
+        correct: 'Target found.',
+        wrong: 'Wrong target.',
+        missed: 'Targets missed.',
+        roundComplete: 'Round complete.',
+        perfectRound: 'Perfect reflex!',
+        failedRound: 'Round failed.',
+        goStar: 'GoStar earned!',
+        levelUp: 'Level up!',
+        reset: 'Score reset.',
+        trackingReset: 'Tracking reset.',
+        nextRound: 'Next Round',
+        close: 'Close',
+        training: 'Training',
+        tempo: 'Tempo',
+        elite: 'Elite',
+        overlayGood: 'Good work. You found the targets under pressure.',
+        overlayPerfect: 'Perfect. Clean scan. Clean memory. Clean reflex.',
+        overlayFail: 'Scan the full grid, reset, and find the flash again.',
+        overlayGoStar: 'Two perfect rounds earned a GoStar.',
+        overlayLevel: 'Ten GoStars moved you up a level.'
+      },
+      es: {
+        start: 'Presiona Comenzar Ronda.',
+        ready: 'Prepárate...',
+        watch: 'Mira el destello.',
+        find: 'Encuentra todos los objetivos en cualquier orden.',
+        correct: 'Objetivo encontrado.',
+        wrong: 'Objetivo incorrecto.',
+        missed: 'Objetivos perdidos.',
+        roundComplete: 'Ronda completada.',
+        perfectRound: '¡Reflejo perfecto!',
+        failedRound: 'Ronda fallida.',
+        goStar: '¡GoStar ganado!',
+        levelUp: '¡Subiste de nivel!',
+        reset: 'Puntos reiniciados.',
+        trackingReset: 'Tracking reiniciado.',
+        nextRound: 'Próxima Ronda',
+        close: 'Cerrar',
+        training: 'Entrenamiento',
+        tempo: 'Tempo',
+        elite: 'Elite',
+        overlayGood: 'Buen trabajo. Encontraste los objetivos bajo presión.',
+        overlayPerfect: 'Perfecto. Escaneo limpio. Memoria limpia. Reflejo limpio.',
+        overlayFail: 'Escanea toda la cuadrícula, reinicia y encuentra el destello otra vez.',
+        overlayGoStar: 'Dos rondas perfectas ganaron un GoStar.',
+        overlayLevel: 'Diez GoStars te subieron de nivel.'
+      }
+    };
+
+    function msg(key) {
+      return (MESSAGES[currentLang] && MESSAGES[currentLang][key]) || MESSAGES.en[key] || key;
+    }
+
+    const court = document.getElementById('court');
+    const startRoundBtn = document.getElementById('startRoundBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const resetTrackingBtn = document.getElementById('resetTrackingBtn');
+    const speedCards = document.querySelectorAll('.speed-card');
+
+    const levelDisplay = document.getElementById('levelDisplay');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const livesDisplay = document.getElementById('livesDisplay');
+    const roundDisplay = document.getElementById('roundDisplay');
+    const goStarDisplay = document.getElementById('goStarDisplay');
+    const speedDisplay = document.getElementById('speedDisplay');
+    const targetsDisplay = document.getElementById('targetsDisplay');
+    const foundDisplay = document.getElementById('foundDisplay');
+    const perfectsToStarDisplay = document.getElementById('perfectsToStarDisplay');
+    const messageDisplay = document.getElementById('messageDisplay');
+    const starMeter = document.getElementById('starMeter');
+
+    const roundOverlay = document.getElementById('roundOverlay');
+    const overlayEmoji = document.getElementById('overlayEmoji');
+    const overlayTitle = document.getElementById('overlayTitle');
+    const overlayText = document.getElementById('overlayText');
+    const overlayNextBtn = document.getElementById('overlayNextBtn');
+    const overlayCloseBtn = document.getElementById('overlayCloseBtn');
+
+    const bestScoreDisplay = document.getElementById('bestScoreDisplay');
+    const bestLevelDisplay = document.getElementById('bestLevelDisplay');
+    const totalRoundsDisplay = document.getElementById('totalRoundsDisplay');
+    const perfectRoundsDisplay = document.getElementById('perfectRoundsDisplay');
+    const failedRoundsDisplay = document.getElementById('failedRoundsDisplay');
+    const accuracyDisplay = document.getElementById('accuracyDisplay');
+    const correctTapsDisplay = document.getElementById('correctTapsDisplay');
+    const wrongTapsDisplay = document.getElementById('wrongTapsDisplay');
+    const missedTargetsDisplay = document.getElementById('missedTargetsDisplay');
+    const avgFindDisplay = document.getElementById('avgFindDisplay');
+    const bestFindDisplay = document.getElementById('bestFindDisplay');
+    const longestTargetDisplay = document.getElementById('longestTargetDisplay');
+    const lastPlayedDisplay = document.getElementById('lastPlayedDisplay');
+
+    const SPEEDS = {
+      training: { bpm: 60, flash: 2500, label: 'training', multiplier: 1 },
+      tempo: { bpm: 90, flash: 1500, label: 'tempo', multiplier: 2 },
+      elite: { bpm: 120, flash: 800, label: 'elite', multiplier: 3 }
+    };
+
+    const state = {
+      speed: localStorage.getItem('cog03-speed') || 'training',
+      level: parseInt(localStorage.getItem('cog03-level') || '1', 10),
+      score: parseInt(localStorage.getItem('cog03-score') || '0', 10),
+      round: parseInt(localStorage.getItem('cog03-round') || '0', 10),
+      goStars: parseInt(localStorage.getItem('cog03-gostars') || '0', 10),
+      perfectsToStar: parseInt(localStorage.getItem('cog03-perfects-to-star') || '0', 10),
+      lives: 3,
+      active: false,
+      canTap: false,
+      phase: 'idle',
+      targetCount: 5,
+      targets: [],
+      foundTargets: [],
+      roundStart: 0,
+      roundHadMistake: false,
+      timer: null
+    };
+
+    const TRACKING_KEY = 'bm-cog03-strong-tracking-v1';
+
+    function getDefaultTracking() {
+      return {
+        bestScore: 0,
+        bestLevel: 1,
+        totalRounds: 0,
+        perfectRounds: 0,
+        failedRounds: 0,
+        correctTaps: 0,
+        wrongTaps: 0,
+        missedTargets: 0,
+        totalFindTime: 0,
+        findSamples: 0,
+        bestFindTime: null,
+        longestTargetSet: 0,
+        lastPlayed: null
+      };
+    }
+
+    function loadTracking() {
+      const saved = localStorage.getItem(TRACKING_KEY);
+
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (error) {
+          console.warn('Could not load COG 03 tracking data.', error);
+        }
+      }
+
+      return getDefaultTracking();
+    }
+
+    let tracking = loadTracking();
+
+    function saveTracking() {
+      localStorage.setItem(TRACKING_KEY, JSON.stringify(tracking));
+    }
+
+    function formatSeconds(ms) {
+      if (!ms || !Number.isFinite(ms)) return '0.0s';
+      return (ms / 1000).toFixed(1) + 's';
+    }
+
+    function formatLastPlayed(value) {
+      if (!value) return '—';
+
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '—';
+
+      return date.toLocaleDateString(currentLang === 'es' ? 'es-PR' : 'en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    }
+
+    function updateTrackingDisplay() {
+      const attempts = tracking.correctTaps + tracking.wrongTaps;
+      const accuracy = attempts > 0 ? Math.round((tracking.correctTaps / attempts) * 100) : 0;
+      const avgFind = tracking.findSamples > 0
+        ? tracking.totalFindTime / tracking.findSamples
+        : 0;
+
+      bestScoreDisplay.textContent = tracking.bestScore;
+      bestLevelDisplay.textContent = tracking.bestLevel;
+      totalRoundsDisplay.textContent = tracking.totalRounds;
+      perfectRoundsDisplay.textContent = tracking.perfectRounds;
+      failedRoundsDisplay.textContent = tracking.failedRounds;
+      accuracyDisplay.textContent = accuracy + '%';
+      correctTapsDisplay.textContent = tracking.correctTaps;
+      wrongTapsDisplay.textContent = tracking.wrongTaps;
+      missedTargetsDisplay.textContent = tracking.missedTargets;
+      avgFindDisplay.textContent = formatSeconds(avgFind);
+      bestFindDisplay.textContent = formatSeconds(tracking.bestFindTime);
+      longestTargetDisplay.textContent = tracking.longestTargetSet;
+      lastPlayedDisplay.textContent = formatLastPlayed(tracking.lastPlayed);
+    }
+
+    function touchTracking() {
+      tracking.bestScore = Math.max(tracking.bestScore, state.score);
+      tracking.bestLevel = Math.max(tracking.bestLevel, state.level);
+      tracking.lastPlayed = new Date().toISOString();
+      saveTracking();
+      updateTrackingDisplay();
+    }
+
+    function recordCorrectTap() {
+      tracking.correctTaps += 1;
+      touchTracking();
+    }
+
+    function recordWrongTap() {
+      tracking.wrongTaps += 1;
+      touchTracking();
+    }
+
+    function recordRoundComplete(success, findTime, wasPerfect, missedTargets) {
+      tracking.totalRounds += 1;
+
+      if (success && wasPerfect) {
+        tracking.perfectRounds += 1;
+        tracking.longestTargetSet = Math.max(tracking.longestTargetSet, state.targetCount);
+
+        if (findTime && Number.isFinite(findTime)) {
+          tracking.totalFindTime += findTime;
+          tracking.findSamples += 1;
+
+          if (tracking.bestFindTime === null || findTime < tracking.bestFindTime) {
+            tracking.bestFindTime = findTime;
+          }
+        }
+      }
+
+      if (!success || !wasPerfect) {
+        tracking.failedRounds += 1;
+      }
+
+      if (missedTargets && missedTargets > 0) {
+        tracking.missedTargets += missedTargets;
+      }
+
+      touchTracking();
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang === 'es' ? 'es' : 'en';
+      localStorage.setItem('basketball-money-lang', currentLang);
+      document.documentElement.lang = currentLang;
+
+      translatable.forEach((el) => {
+        const text = el.getAttribute('data-' + currentLang);
+        if (text !== null) el.textContent = text;
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLang);
+      });
+
+      updateStaticLabels();
+      updateDisplay();
+      updateTrackingDisplay();
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    function saveProgress() {
+      localStorage.setItem('cog03-speed', state.speed);
+      localStorage.setItem('cog03-level', String(state.level));
+      localStorage.setItem('cog03-score', String(state.score));
+      localStorage.setItem('cog03-round', String(state.round));
+      localStorage.setItem('cog03-gostars', String(state.goStars));
+      localStorage.setItem('cog03-perfects-to-star', String(state.perfectsToStar));
+
+      touchTracking();
+    }
+
+    function getTargetCount() {
+      return Math.min(14, state.level + 4);
+    }
+
+    function updateStaticLabels() {
+      overlayNextBtn.textContent = msg('nextRound');
+      overlayCloseBtn.textContent = msg('close');
+
+      if (!state.active) {
+        messageDisplay.textContent = msg('start');
+      }
+    }
+
+    function renderStarMeter() {
+      let output = '';
+      for (let i = 0; i < 10; i++) {
+        output += i < state.goStars ? '★' : '☆';
+      }
+      starMeter.textContent = output;
+    }
+
+    function updateDisplay() {
+      state.targetCount = getTargetCount();
+
+      levelDisplay.textContent = state.level;
+      scoreDisplay.textContent = state.score;
+      roundDisplay.textContent = state.round;
+      goStarDisplay.textContent = `${state.goStars}/10`;
+      targetsDisplay.textContent = state.targetCount;
+      foundDisplay.textContent = `${state.foundTargets.length}/${state.targetCount}`;
+      perfectsToStarDisplay.textContent = `${state.perfectsToStar}/2`;
+      speedDisplay.textContent = msg(SPEEDS[state.speed].label);
+
+      let hearts = '';
+      for (let i = 0; i < 3; i++) hearts += i < state.lives ? '♥' : '♡';
+      livesDisplay.textContent = hearts;
+
+      speedCards.forEach(card => {
+        card.classList.toggle('active', card.dataset.speed === state.speed);
+      });
+
+      renderStarMeter();
+      updateTrackingDisplay();
+    }
+
+    function buildCourt() {
+      court.innerHTML = '';
+
+      for (let i = 0; i < 25; i++) {
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'cell';
+        cell.setAttribute('aria-label', `Cell ${i + 1}`);
+        cell.dataset.index = String(i);
+
+        cell.addEventListener('click', () => handleCellTap(i));
+        court.appendChild(cell);
+      }
+    }
+
+    function clearCells() {
+      document.querySelectorAll('.cell').forEach(cell => {
+        cell.classList.remove('lit', 'correct', 'wrong', 'selected', 'missed');
+        cell.textContent = '';
+      });
+    }
+
+    function clearTimer() {
+      if (state.timer) clearTimeout(state.timer);
+      state.timer = null;
+    }
+
+    function randomTargets(count) {
+      const arr = Array.from({ length: 25 }, (_, i) => i);
+
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+
+      return arr.slice(0, count);
+    }
+
+    function pulseCourt(type) {
+      court.classList.remove('pulse', 'success', 'miss');
+      void court.offsetWidth;
+      court.classList.add(type);
+
+      setTimeout(() => {
+        court.classList.remove(type);
+      }, 260);
+    }
+
+    function setMessage(text, color) {
+      messageDisplay.textContent = text;
+      if (color) messageDisplay.style.color = color;
+      else messageDisplay.style.color = 'var(--gold)';
+    }
+
+    function showTargets() {
+      clearCells();
+
+      state.targets.forEach((cellIndex) => {
+        const cell = document.querySelector(`.cell[data-index="${cellIndex}"]`);
+        if (!cell) return;
+        cell.classList.add('lit');
+      });
+
+      pulseCourt('pulse');
+    }
+
+    function hideTargetsForFind() {
+      state.targets.forEach((cellIndex) => {
+        const cell = document.querySelector(`.cell[data-index="${cellIndex}"]`);
+        if (!cell) return;
+        cell.classList.remove('lit');
+      });
+
+      state.phase = 'find';
+      state.canTap = true;
+      state.roundStart = performance.now();
+      setMessage(msg('find'), 'var(--cyan)');
+      updateDisplay();
+    }
+
+    function revealMissedTargets() {
+      state.targets.forEach((cellIndex) => {
+        if (state.foundTargets.includes(cellIndex)) return;
+
+        const cell = document.querySelector(`.cell[data-index="${cellIndex}"]`);
+        if (!cell) return;
+
+        cell.classList.add('missed');
+      });
+    }
+
+    function startRound() {
+      clearTimer();
+      clearCells();
+
+      state.active = true;
+      state.canTap = false;
+      state.phase = 'watch';
+      state.foundTargets = [];
+      state.lives = 3;
+      state.roundHadMistake = false;
+      state.targetCount = getTargetCount();
+      state.targets = randomTargets(state.targetCount);
+      state.round += 1;
+
+      startRoundBtn.disabled = true;
+      setMessage(msg('ready'), 'var(--gold)');
+      updateDisplay();
+      saveProgress();
+
+      state.timer = setTimeout(() => {
+        if (!state.active) return;
+
+        setMessage(msg('watch'), 'var(--gold)');
+        showTargets();
+
+        state.timer = setTimeout(() => {
+          if (!state.active) return;
+          hideTargetsForFind();
+        }, SPEEDS[state.speed].flash);
+      }, 700);
+    }
+
+    function handleCellTap(index) {
+      if (!state.active || !state.canTap || state.phase !== 'find') return;
+
+      const tappedCell = document.querySelector(`.cell[data-index="${index}"]`);
+      const isTarget = state.targets.includes(index);
+      const alreadyFound = state.foundTargets.includes(index);
+
+      if (alreadyFound) return;
+
+      if (isTarget) {
+        state.foundTargets.push(index);
+        recordCorrectTap();
+
+        if (tappedCell) {
+          tappedCell.classList.add('correct');
+          tappedCell.textContent = '✓';
+        }
+
+        setMessage(msg('correct'), 'var(--green)');
+        pulseCourt('success');
+        updateDisplay();
+
+        if (state.foundTargets.length >= state.targets.length) {
+          completeRound();
+        }
+
+        return;
+      }
+
+      recordWrongTap();
+
+      state.roundHadMistake = true;
+      state.lives -= 1;
+
+      if (tappedCell) {
+        tappedCell.classList.add('wrong');
+        tappedCell.textContent = '×';
+      }
+
+      setMessage(msg('wrong'), 'var(--pink)');
+      pulseCourt('miss');
+      updateDisplay();
+
+      if (state.lives <= 0) {
+        failRound();
+      }
+    }
+
+    function completeRound() {
+      clearTimer();
+
+      state.active = false;
+      state.canTap = false;
+      state.phase = 'idle';
+      startRoundBtn.disabled = false;
+
+      const findTime = performance.now() - state.roundStart;
+      const wasPerfect = !state.roundHadMistake && state.lives === 3;
+
+      const speedMultiplier = SPEEDS[state.speed].multiplier;
+      const perfectBonus = wasPerfect ? 100 : 25;
+      const lifeBonus = state.lives * 10;
+      const levelBonus = state.level * 5;
+
+      state.score += (state.targetCount * 25 * speedMultiplier) + perfectBonus + lifeBonus + levelBonus;
+
+      let title = wasPerfect ? msg('perfectRound') : msg('roundComplete');
+      let text = wasPerfect ? msg('overlayPerfect') : msg('overlayGood');
+      let emoji = wasPerfect ? '⚡' : '🔥';
+
+      recordRoundComplete(true, findTime, wasPerfect, 0);
+
+      if (wasPerfect) {
+        state.perfectsToStar += 1;
+      } else {
+        state.perfectsToStar = 0;
+      }
+
+      if (state.perfectsToStar >= 2) {
+        state.perfectsToStar = 0;
+        state.goStars += 1;
+
+        title = msg('goStar');
+        text = msg('overlayGoStar');
+        emoji = '🏀';
+      }
+
+      if (state.goStars >= 10) {
+        state.goStars = 0;
+        state.level = Math.min(10, state.level + 1);
+
+        title = msg('levelUp');
+        text = msg('overlayLevel');
+        emoji = '🏆';
+      }
+
+      updateDisplay();
+      saveProgress();
+      showOverlay(emoji, title, text);
+    }
+
+    function failRound() {
+      clearTimer();
+
+      state.active = false;
+      state.canTap = false;
+      state.phase = 'idle';
+      startRoundBtn.disabled = false;
+      state.perfectsToStar = 0;
+
+      const missedCount = state.targets.length - state.foundTargets.length;
+      recordRoundComplete(false, null, false, missedCount);
+      revealMissedTargets();
+
+      updateDisplay();
+      saveProgress();
+      showOverlay('💨', msg('failedRound'), msg('overlayFail'));
+    }
+
+    function showOverlay(emoji, title, text) {
+      overlayEmoji.textContent = emoji;
+      overlayTitle.textContent = title;
+      overlayText.textContent = text;
+      roundOverlay.classList.add('show');
+    }
+
+    function closeOverlay() {
+      roundOverlay.classList.remove('show');
+      clearCells();
+      setMessage(msg('start'), 'var(--gold)');
+    }
+
+    function resetScore() {
+      clearTimer();
+      clearCells();
+
+      state.score = 0;
+      state.round = 0;
+      state.level = 1;
+      state.goStars = 0;
+      state.perfectsToStar = 0;
+      state.lives = 3;
+      state.active = false;
+      state.canTap = false;
+      state.phase = 'idle';
+      state.foundTargets = [];
+      state.targets = [];
+      state.roundHadMistake = false;
+      startRoundBtn.disabled = false;
+
+      saveProgress();
+      updateDisplay();
+      setMessage(msg('reset'), 'var(--gold)');
+    }
+
+    function resetTracking() {
+      tracking = getDefaultTracking();
+      saveTracking();
+      updateTrackingDisplay();
+      setMessage(msg('trackingReset'), 'var(--gold)');
+    }
+
+    speedCards.forEach(card => {
+      card.addEventListener('click', () => {
+        if (state.active) return;
+        state.speed = card.dataset.speed;
+        saveProgress();
+        updateDisplay();
+      });
+    });
+
+    startRoundBtn.addEventListener('click', startRound);
+    resetBtn.addEventListener('click', resetScore);
+    resetTrackingBtn.addEventListener('click', resetTracking);
+
+    overlayNextBtn.addEventListener('click', () => {
+      closeOverlay();
+      startRound();
+    });
+
+    overlayCloseBtn.addEventListener('click', closeOverlay);
+
+    buildCourt();
+    setLanguage(currentLang);
+    updateDisplay();
+    updateTrackingDisplay();
+
+    window.COGNITIVE_TEST_NAME = 'reflex';
+  </script>
+
+</body>
+</html>
