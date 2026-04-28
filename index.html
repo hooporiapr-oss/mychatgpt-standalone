@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Basketball Money — Home Court</title>
-  <meta name="description" content="Basketball Money Home Court — the command center for the full Basketball Money MyGPT coaching system." />
+  <title>Basketball Money — Cognitive Proof System</title>
+  <meta name="description" content="Basketball Money turns cognitive skill into player value. Free COG coaches explain it. Paid COG drills prove it." />
   <style>
     :root{
       --bg:#050507;
       --panel:#0d0d12;
-      --panel2:#14141c;
+      --panel2:#15151d;
+      --text:#f7f2e8;
+      --muted:#bcb5a8;
       --line:rgba(255,255,255,.12);
-      --text:#f5f2ea;
-      --muted:#b9b3a6;
       --gold:#f0b84a;
       --orange:#ff7a1a;
       --green:#66ff99;
       --red:#ff5b45;
-      --shadow:0 18px 60px rgba(0,0,0,.45);
-      --radius:22px;
+      --blue:#76a9ff;
+      --shadow:0 20px 70px rgba(0,0,0,.45);
+      --radius:24px;
       --max:1120px;
     }
 
@@ -26,13 +27,14 @@
     html{scroll-behavior:smooth}
 
     body{
+      min-height:100vh;
       font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(240,184,74,.15), transparent 32%),
-        radial-gradient(circle at 85% 5%, rgba(255,122,26,.12), transparent 26%),
-        linear-gradient(180deg, #050507 0%, #09090d 48%, #050507 100%);
+        radial-gradient(circle at top left, rgba(240,184,74,.18), transparent 31%),
+        radial-gradient(circle at 88% 6%, rgba(255,122,26,.14), transparent 26%),
+        radial-gradient(circle at 55% 52%, rgba(118,169,255,.07), transparent 34%),
+        linear-gradient(180deg, #050507 0%, #0a0a0f 47%, #050507 100%);
       color:var(--text);
-      min-height:100vh;
       overflow-x:hidden;
     }
 
@@ -40,14 +42,14 @@
       content:"";
       position:fixed;
       inset:0;
+      z-index:-1;
       pointer-events:none;
       opacity:.06;
       background-image:
-        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
-      background-size:40px 40px;
-      mask-image:linear-gradient(to bottom, black, transparent 82%);
-      z-index:-1;
+        linear-gradient(rgba(255,255,255,.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.09) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:linear-gradient(to bottom, black, transparent 78%);
     }
 
     a{color:inherit;text-decoration:none}
@@ -57,24 +59,23 @@
     [data-lang="es"] .en,
     [data-lang="en"] .es{display:none!important}
 
-    /* NAV */
     .nav{
       position:sticky;
       top:0;
       z-index:50;
       backdrop-filter:blur(18px);
-      background:rgba(5,5,7,.84);
+      background:rgba(5,5,7,.86);
       border-bottom:1px solid var(--line);
     }
 
     .nav-inner{
       width:min(var(--max), calc(100% - 24px));
+      min-height:72px;
       margin:auto;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:14px;
-      min-height:70px;
     }
 
     .brand-mark{
@@ -89,23 +90,24 @@
       height:46px;
       border-radius:14px;
       object-fit:cover;
-      box-shadow:0 0 0 2px rgba(240,184,74,.2), 0 0 28px rgba(240,184,74,.24);
       background:#111;
+      box-shadow:0 0 0 2px rgba(240,184,74,.22), 0 0 34px rgba(240,184,74,.22);
     }
 
     .brand-copy small{
       display:block;
       color:var(--gold);
-      font-weight:900;
+      font-size:.66rem;
+      font-weight:1000;
       letter-spacing:.16em;
       text-transform:uppercase;
-      font-size:.66rem;
     }
 
     .brand-copy strong{
+      display:block;
       font-size:1rem;
-      letter-spacing:-.02em;
       line-height:1.1;
+      letter-spacing:-.02em;
     }
 
     .nav-links{
@@ -114,25 +116,16 @@
       gap:16px;
       color:var(--muted);
       font-size:.92rem;
+      font-weight:800;
     }
 
     .nav-links a:hover{color:var(--text)}
 
-    .nav-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
+    .nav-actions{display:flex;align-items:center;gap:10px}
 
-    .lang-inline,
-    .lang-menu{
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
+    .lang-inline,.lang-menu{display:flex;align-items:center;gap:8px}
 
-    .lang-inline button,
-    .lang-menu button{
+    .lang-inline button,.lang-menu button{
       border:1px solid var(--line);
       background:rgba(255,255,255,.05);
       color:var(--muted);
@@ -140,14 +133,12 @@
       border-radius:999px;
       cursor:pointer;
       transition:.2s ease;
-      font-weight:900;
       font-size:.82rem;
+      font-weight:1000;
     }
 
-    .lang-inline button.active,
-    .lang-inline button:hover,
-    .lang-menu button.active,
-    .lang-menu button:hover{
+    .lang-inline button.active,.lang-inline button:hover,
+    .lang-menu button.active,.lang-menu button:hover{
       color:#100a02;
       background:linear-gradient(135deg, var(--gold), var(--orange));
       border-color:transparent;
@@ -159,33 +150,30 @@
       height:46px;
       border-radius:14px;
       border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
+      background:rgba(255,255,255,.055);
       cursor:pointer;
-      align-items:center;
-      justify-content:center;
       position:relative;
       flex-shrink:0;
     }
 
-    .menu-toggle span,
-    .menu-toggle::before,
-    .menu-toggle::after{
+    .menu-toggle span,.menu-toggle::before,.menu-toggle::after{
       content:"";
       position:absolute;
+      left:50%;
       width:20px;
       height:2px;
       background:var(--text);
       border-radius:999px;
+      transform:translateX(-50%);
       transition:.22s ease;
     }
 
-    .menu-toggle span{transform:translateY(0)}
-    .menu-toggle::before{transform:translateY(-6px)}
-    .menu-toggle::after{transform:translateY(6px)}
+    .menu-toggle span{top:22px}
+    .menu-toggle::before{top:16px}
+    .menu-toggle::after{top:28px}
     .menu-toggle.active span{opacity:0}
-    .menu-toggle.active::before{transform:rotate(45deg)}
-    .menu-toggle.active::after{transform:rotate(-45deg)}
+    .menu-toggle.active::before{top:22px;transform:translateX(-50%) rotate(45deg)}
+    .menu-toggle.active::after{top:22px;transform:translateX(-50%) rotate(-45deg)}
 
     .mobile-menu{
       display:none;
@@ -205,57 +193,51 @@
     }
 
     .mobile-menu a{
-      padding:12px 14px;
+      padding:13px 14px;
       border:1px solid var(--line);
-      border-radius:14px;
-      background:rgba(255,255,255,.04);
+      border-radius:15px;
+      background:rgba(255,255,255,.045);
       color:var(--text);
-      font-weight:800;
+      font-weight:900;
     }
 
     .lang-menu{flex-wrap:wrap;padding-top:2px}
 
-    /* HERO */
-    .hero{padding:38px 0 28px}
+    .hero{padding:42px 0 32px}
 
     .hero-grid{
       display:grid;
-      grid-template-columns:minmax(0,1.12fr) minmax(290px,.88fr);
-      gap:26px;
+      grid-template-columns:minmax(0,1.07fr) minmax(290px,.93fr);
+      gap:28px;
       align-items:center;
     }
 
     .hero-logo-wrap{
-      width:min(340px, 78vw);
+      width:min(344px, 78vw);
       margin:0 0 22px;
-      border-radius:30px;
       padding:10px;
-      background:linear-gradient(135deg, rgba(240,184,74,.26), rgba(255,122,26,.1), rgba(255,255,255,.04));
+      border-radius:30px;
+      background:linear-gradient(135deg, rgba(240,184,74,.28), rgba(255,122,26,.11), rgba(255,255,255,.04));
       border:1px solid rgba(240,184,74,.22);
-      box-shadow:0 22px 70px rgba(0,0,0,.42), 0 0 70px rgba(240,184,74,.12);
+      box-shadow:0 22px 70px rgba(0,0,0,.42), 0 0 80px rgba(240,184,74,.14);
     }
 
-    .hero-logo{
-      display:block;
-      width:100%;
-      border-radius:24px;
-      object-fit:cover;
-    }
+    .hero-logo{display:block;width:100%;border-radius:24px;object-fit:cover}
 
     .eyebrow{
       display:inline-flex;
       align-items:center;
       gap:10px;
       color:var(--gold);
-      background:rgba(240,184,74,.08);
+      background:rgba(240,184,74,.085);
       border:1px solid rgba(240,184,74,.22);
       border-radius:999px;
       padding:9px 14px;
-      font-size:.78rem;
+      margin-bottom:16px;
+      font-size:.77rem;
       font-weight:1000;
       letter-spacing:.13em;
       text-transform:uppercase;
-      margin-bottom:16px;
     }
 
     .dot{
@@ -263,29 +245,29 @@
       height:9px;
       border-radius:50%;
       background:var(--green);
-      box-shadow:0 0 18px rgba(102,255,153,.75);
+      box-shadow:0 0 18px rgba(102,255,153,.8);
     }
 
     h1{
-      font-size:clamp(2.45rem, 8vw, 6.8rem);
-      line-height:.9;
-      letter-spacing:-.07em;
+      max-width:800px;
+      font-size:clamp(2.55rem, 8.2vw, 7rem);
+      line-height:.88;
+      letter-spacing:-.075em;
       text-transform:uppercase;
-      max-width:760px;
     }
 
     .grad{
-      background:linear-gradient(135deg, #fff 8%, var(--gold) 42%, var(--orange) 78%);
+      background:linear-gradient(135deg, #fff 4%, var(--gold) 42%, var(--orange) 78%);
       -webkit-background-clip:text;
       color:transparent;
     }
 
     .hero p{
+      max-width:720px;
+      margin-top:18px;
       color:var(--muted);
       font-size:clamp(1rem, 1.65vw, 1.18rem);
       line-height:1.6;
-      max-width:720px;
-      margin-top:18px;
     }
 
     .hero-actions{
@@ -299,8 +281,7 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
-      min-height:46px;
+      min-height:47px;
       padding:0 18px;
       border-radius:999px;
       border:1px solid var(--line);
@@ -308,6 +289,7 @@
       transition:.2s ease;
       font-weight:1000;
       font-size:.92rem;
+      text-align:center;
     }
 
     .btn-primary{
@@ -320,9 +302,9 @@
     .btn-secondary{background:rgba(255,255,255,.06);color:var(--text)}
     .btn:hover{transform:translateY(-2px)}
 
-    .scoreboard{
+    .proof-panel{
       border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)), rgba(13,13,18,.9);
+      background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.032)), rgba(13,13,18,.9);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       padding:20px;
@@ -330,55 +312,75 @@
       overflow:hidden;
     }
 
-    .scoreboard::before{
+    .proof-panel::before{
       content:"";
       position:absolute;
-      width:220px;
-      height:220px;
+      top:-90px;
+      right:-90px;
+      width:250px;
+      height:250px;
       border-radius:50%;
-      background:rgba(240,184,74,.12);
-      filter:blur(28px);
-      top:-80px;
-      right:-80px;
+      background:rgba(240,184,74,.13);
+      filter:blur(30px);
     }
 
-    .score-title{
+    .panel-head{
       position:relative;
       display:flex;
+      align-items:flex-start;
       justify-content:space-between;
       gap:14px;
-      align-items:flex-start;
-      border-bottom:1px solid var(--line);
       padding-bottom:16px;
       margin-bottom:18px;
+      border-bottom:1px solid var(--line);
     }
 
-    .score-title h2{font-size:1rem;text-transform:uppercase;letter-spacing:.08em}
+    .panel-head h2{font-size:1rem;text-transform:uppercase;letter-spacing:.08em}
 
     .badge{
-      background:rgba(102,255,153,.11);
-      color:var(--green);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       border:1px solid rgba(102,255,153,.22);
+      background:rgba(102,255,153,.1);
+      color:var(--green);
       border-radius:999px;
       padding:7px 10px;
-      font-size:.75rem;
+      font-size:.74rem;
       font-weight:1000;
       white-space:nowrap;
     }
 
-    .stat-grid{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .value-stack{position:relative;display:flex;flex-direction:column;gap:10px}
 
-    .stat{
+    .value-row{
+      display:grid;
+      grid-template-columns:44px minmax(0,1fr);
+      gap:12px;
+      align-items:center;
+      padding:13px;
       border:1px solid var(--line);
-      background:rgba(255,255,255,.045);
       border-radius:18px;
-      padding:14px;
+      background:rgba(255,255,255,.045);
     }
 
-    .stat strong{display:block;font-size:2rem;letter-spacing:-.05em;color:var(--gold);line-height:1}
-    .stat span{display:block;color:var(--muted);margin-top:8px;line-height:1.35;font-size:.86rem}
+    .value-num{
+      width:44px;
+      height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:14px;
+      background:rgba(240,184,74,.1);
+      border:1px solid rgba(240,184,74,.22);
+      color:var(--gold);
+      font-weight:1000;
+      letter-spacing:.08em;
+    }
 
-    /* SECTIONS */
+    .value-row strong{display:block;font-size:.98rem;letter-spacing:-.02em;margin-bottom:3px}
+    .value-row span{display:block;color:var(--muted);font-size:.84rem;line-height:1.35}
+
     .section{padding:34px 0}
 
     .section-head{
@@ -390,263 +392,187 @@
     }
 
     .section-head h2{
-      font-size:clamp(1.9rem,4vw,3.6rem);
-      letter-spacing:-.06em;
+      font-size:clamp(1.9rem,4vw,3.65rem);
       line-height:1;
+      letter-spacing:-.06em;
       text-transform:uppercase;
     }
 
-    .section-head p{color:var(--muted);max-width:560px;line-height:1.6}
+    .section-head p{max-width:590px;color:var(--muted);line-height:1.6}
 
-    .access-path{
+    .thesis{
+      border:1px solid rgba(240,184,74,.23);
+      background:radial-gradient(circle at 20% 10%, rgba(240,184,74,.16), transparent 32%), rgba(255,255,255,.045);
+      border-radius:28px;
+      padding:24px;
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:14px;
-      margin-bottom:20px;
+      align-items:stretch;
     }
 
-    .path-card{
+    .thesis-card{
       border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
+      background:rgba(5,5,7,.42);
       border-radius:22px;
       padding:18px;
     }
 
-    .path-card.free{border-color:rgba(102,255,153,.2);background:rgba(102,255,153,.045)}
-    .path-card.paid{border-color:rgba(240,184,74,.24);background:rgba(240,184,74,.055)}
+    .thesis-card strong{display:block;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;font-size:.75rem;margin-bottom:8px}
+    .thesis-card h3{font-size:1.45rem;letter-spacing:-.04em;line-height:1.1;margin-bottom:8px}
+    .thesis-card p{color:var(--muted);line-height:1.55;font-size:.96rem}
 
-    .path-card strong{display:block;font-size:1.12rem;letter-spacing:-.03em;margin-bottom:7px}
-    .path-card span{display:block;color:var(--muted);line-height:1.45;font-size:.92rem}
-
-    .roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-
-    .phase{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      border-radius:20px;
-      padding:16px;
+    .coach-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
     }
 
-    .phase strong{display:block;color:var(--gold);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em;font-size:.74rem}
-    .phase span{display:block;color:var(--muted);line-height:1.45;font-size:.92rem}
-
-    .control-bar{display:grid;grid-template-columns:1fr 240px;gap:10px;margin-bottom:18px}
-
-    .search,.select{
-      width:100%;
+    .coach-card{
       border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      border-radius:16px;
-      padding:14px 16px;
-      outline:none;
-    }
-
-    .select option{color:#111}
-
-    /* GROUP LISTS */
-    .coach-grid{display:flex;flex-direction:column;gap:18px}
-
-    .coach-group{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)), rgba(13,13,18,.9);
+      background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.032)), rgba(13,13,18,.9);
       border-radius:var(--radius);
       overflow:hidden;
-      box-shadow:0 14px 44px rgba(0,0,0,.25);
+      box-shadow:0 14px 44px rgba(0,0,0,.24);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
     }
 
-    .group-toggle{
-      width:100%;
-      border:0;
-      color:var(--text);
-      text-align:left;
-      cursor:pointer;
+    .coach-top{
+      padding:16px;
+      border-bottom:1px solid var(--line);
+      background:radial-gradient(circle at top right, rgba(240,184,74,.14), transparent 46%), rgba(255,255,255,.035);
+    }
+
+    .coach-number{
+      display:inline-flex;
+      color:var(--gold);
+      background:rgba(240,184,74,.08);
+      border:1px solid rgba(240,184,74,.22);
+      border-radius:999px;
+      padding:6px 9px;
+      font-size:.72rem;
+      font-weight:1000;
+      letter-spacing:.1em;
+      margin-bottom:10px;
+    }
+
+    .coach-top h3{font-size:1.1rem;line-height:1.12;letter-spacing:-.04em;margin-bottom:8px}
+    .coach-top p{color:var(--muted);line-height:1.45;font-size:.86rem}
+
+    .coach-body{padding:16px;display:flex;flex-direction:column;gap:12px;flex:1}
+
+    .cog-line{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:16px;
-      padding:18px 16px;
-      background:rgba(255,255,255,.045);
-      border-bottom:1px solid var(--line);
-    }
-
-    .group-toggle:hover{background:rgba(240,184,74,.065)}
-
-    .group-kicker{color:var(--gold);font-size:.74rem;font-weight:1000;letter-spacing:.13em;text-transform:uppercase;margin-bottom:6px}
-    .group-title{font-size:1.18rem;letter-spacing:-.03em;line-height:1.1;margin-bottom:6px}
-    .group-sub{color:var(--muted);line-height:1.45;font-size:.9rem;max-width:760px}
-
-    .group-meta{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
-
-    .pill{
-      border:1px solid rgba(240,184,74,.25);
+      gap:8px;
       color:var(--gold);
-      background:rgba(240,184,74,.08);
-      border-radius:999px;
-      padding:8px 11px;
-      font-size:.76rem;
+      font-size:.78rem;
       font-weight:1000;
-      white-space:nowrap;
-    }
-
-    .pill.free{color:var(--green);border-color:rgba(102,255,153,.24);background:rgba(102,255,153,.08)}
-    .pill.lock{color:#ffdb8d}
-
-    .chevron{
-      width:34px;
-      height:34px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border:1px solid var(--line);
-      border-radius:999px;
-      color:var(--gold);
-      transition:.2s ease;
-      flex-shrink:0;
-    }
-
-    .coach-group.closed .chevron{transform:rotate(-90deg)}
-    .coach-group.closed .coach-list{display:none}
-
-    .coach-list{display:flex;flex-direction:column}
-
-    .coach-row{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      gap:12px;
-      align-items:center;
-      padding:14px 16px;
-      border-bottom:1px solid var(--line);
-      background:rgba(255,255,255,.018);
-      transition:.2s ease;
-    }
-
-    .coach-row:last-child{border-bottom:none}
-    .coach-row:hover{background:rgba(240,184,74,.07)}
-
-    .coach-main{min-width:0}
-    .coach-topline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
-
-    .coach-num{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:44px;
-      padding:5px 9px;
-      border-radius:999px;
-      border:1px solid rgba(240,184,74,.24);
-      background:rgba(240,184,74,.08);
-      color:var(--gold);
-      font-size:.72rem;
-      font-weight:1000;
+      text-transform:uppercase;
       letter-spacing:.08em;
     }
 
-    .coach-topic{color:var(--gold);text-transform:uppercase;letter-spacing:.13em;font-size:.68rem;font-weight:1000}
-    .coach-name{font-size:1rem;line-height:1.18;letter-spacing:-.02em;margin-bottom:4px}
-    .coach-purpose{color:var(--muted);line-height:1.45;font-size:.88rem;max-width:780px}
+    .mini-list{display:flex;flex-direction:column;gap:8px;color:var(--muted);font-size:.86rem;line-height:1.35}
+    .mini-list span{display:block;padding-left:14px;position:relative}
+    .mini-list span::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--gold)}
 
-    .unlock-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:36px;
-      padding:0 13px;
-      border-radius:999px;
-      border:1px solid transparent;
-      background:linear-gradient(135deg, rgba(240,184,74,.96), rgba(255,122,26,.96));
-      color:#100a02;
-      font-weight:1000;
-      font-size:.78rem;
-      white-space:nowrap;
-      transition:.2s ease;
+    .card-actions{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:9px;
+      margin-top:auto;
     }
 
-    .unlock-btn:hover{transform:translateY(-1px)}
-
-    .locked-note{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:38px;
-      padding:0 12px;
-      border-radius:999px;
-      border:1px solid rgba(240,184,74,.18);
-      background:rgba(240,184,74,.06);
-      color:var(--muted);
-      font-size:.78rem;
-      font-weight:900;
-      white-space:nowrap;
-    }
-
-    .open-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+    .small-btn{
       min-height:42px;
-      padding:0 16px;
       border-radius:14px;
-      border:1px solid transparent;
-      background:linear-gradient(135deg, rgba(240,184,74,.96), rgba(255,122,26,.96));
-      color:#100a02;
+      border:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size:.86rem;
       font-weight:1000;
-      font-size:.88rem;
-      white-space:nowrap;
       transition:.2s ease;
     }
 
-    .open-btn:hover{transform:translateY(-1px)}
+    .small-btn.free{background:rgba(255,255,255,.055);color:var(--text)}
+    .small-btn.paid{background:linear-gradient(135deg, var(--gold), var(--orange));color:#100a02;border-color:transparent}
+    .small-btn:hover{transform:translateY(-1px)}
+    .small-btn.disabled{opacity:.55;cursor:not-allowed;pointer-events:none}
+
+    .drill-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+    }
+
+    .drill-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.045);
+      border-radius:22px;
+      padding:16px;
+    }
+
+    .drill-card strong{display:block;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px}
+    .drill-card h3{font-size:1.05rem;letter-spacing:-.03em;line-height:1.15;margin-bottom:8px}
+    .drill-card p{color:var(--muted);font-size:.88rem;line-height:1.45}
 
     .final-cta{
       text-align:center;
       border:1px solid rgba(240,184,74,.22);
-      background:radial-gradient(circle at center top, rgba(240,184,74,.16), transparent 42%), rgba(13,13,18,.86);
-      border-radius:28px;
-      padding:34px 20px;
+      background:radial-gradient(circle at center top, rgba(240,184,74,.17), transparent 44%), rgba(13,13,18,.9);
+      border-radius:30px;
+      padding:38px 22px;
       box-shadow:var(--shadow);
     }
 
-    .final-cta h2{font-size:clamp(2rem,5vw,4.6rem);line-height:.95;letter-spacing:-.07em;text-transform:uppercase;margin-bottom:14px}
-    .final-cta p{color:var(--muted);max-width:760px;margin:0 auto 22px;line-height:1.6;font-size:1rem}
+    .final-cta h2{font-size:clamp(2rem,5vw,4.8rem);line-height:.95;letter-spacing:-.07em;text-transform:uppercase;margin-bottom:14px}
+    .final-cta p{max-width:780px;margin:0 auto 24px;color:var(--muted);line-height:1.6;font-size:1.02rem}
 
-    footer{padding:32px 0 50px;color:var(--muted);text-align:center;border-top:1px solid var(--line);margin-top:32px}
-
-    /* MOBILE */
-    @media (max-width: 980px){
-      .hero-grid{grid-template-columns:1fr}
-      .roadmap{grid-template-columns:repeat(2,1fr)}
+    footer{
+      padding:32px 0 50px;
+      color:var(--muted);
+      text-align:center;
+      border-top:1px solid var(--line);
+      margin-top:32px;
     }
 
-    @media (max-width: 820px){
+    @media (max-width: 1080px){
+      .coach-grid,.drill-grid{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
       .nav-links,.lang-inline{display:none}
-      .menu-toggle{display:flex}
-      .hero{padding:28px 0 24px}
-      .hero-logo-wrap{margin-inline:auto;width:min(300px, 84vw)}
+      .menu-toggle{display:block}
       .hero-copy{text-align:center}
+      .hero-logo-wrap{margin-inline:auto;width:min(305px,84vw)}
       .eyebrow{margin-left:auto;margin-right:auto}
       .hero p{margin-left:auto;margin-right:auto}
-      .section{padding:28px 0}
+      .hero-actions{justify-content:center}
     }
 
     @media (max-width: 720px){
       .wrap,.nav-inner,.mobile-menu-inner{width:min(var(--max), calc(100% - 18px))}
+      .hero{padding:28px 0 22px}
+      .section{padding:28px 0}
       .section-head{align-items:flex-start;flex-direction:column}
-      .control-bar,.access-path{grid-template-columns:1fr}
-      .roadmap{grid-template-columns:1fr}
-      .group-toggle{align-items:flex-start;flex-direction:column}
-      .group-meta{justify-content:flex-start}
-      .coach-row{grid-template-columns:1fr;gap:12px}
-      .open-btn,.locked-note,.unlock-btn{width:100%}
-      .stat-grid{grid-template-columns:1fr 1fr}
-      h1{font-size:clamp(2.45rem, 14vw, 4.6rem)}
-      .hero-actions{display:grid;grid-template-columns:1fr}
+      .thesis{grid-template-columns:1fr;padding:16px;border-radius:24px}
+      .coach-grid,.drill-grid{grid-template-columns:1fr}
+      .hero-actions{display:grid;grid-template-columns:1fr;width:100%}
       .btn{width:100%}
+      h1{font-size:clamp(2.45rem,14vw,4.7rem)}
+      .proof-panel{padding:16px}
+      .panel-head{flex-direction:column;align-items:flex-start}
       .brand-copy strong{font-size:.95rem}
     }
   </style>
 </head>
 <body data-lang="en">
-
   <nav class="nav">
     <div class="nav-inner">
       <a class="brand-mark" href="#top" aria-label="Basketball Money Home Court">
@@ -659,8 +585,9 @@
 
       <div class="nav-links">
         <a href="#system"><span class="en">System</span><span class="es">Sistema</span></a>
-        <a href="#coaches"><span class="en">Coaches</span><span class="es">Coaches</span></a>
-        <a href="#blueprint"><span class="en">Blueprint</span><span class="es">Blueprint</span></a>
+        <a href="#coaches"><span class="en">Free Coaches</span><span class="es">Coaches Gratis</span></a>
+        <a href="#drills"><span class="en">COG Drills</span><span class="es">COG Drills</span></a>
+        <a href="#start"><span class="en">Start</span><span class="es">Empezar</span></a>
       </div>
 
       <div class="nav-actions">
@@ -668,19 +595,16 @@
           <button class="active" data-set-lang="en">English</button>
           <button data-set-lang="es">Español PR</button>
         </div>
-
-        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-          <span></span>
-        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
       </div>
     </div>
 
     <div class="mobile-menu" id="mobileMenu">
       <div class="mobile-menu-inner">
         <a href="#system" class="mobile-link"><span class="en">System</span><span class="es">Sistema</span></a>
-        <a href="#coaches" class="mobile-link"><span class="en">Coach Roster</span><span class="es">Roster de Coaches</span></a>
-        <a href="#blueprint" class="mobile-link"><span class="en">Blueprint</span><span class="es">Blueprint</span></a>
-
+        <a href="#coaches" class="mobile-link"><span class="en">Free Coaches</span><span class="es">Coaches Gratis</span></a>
+        <a href="#drills" class="mobile-link"><span class="en">COG Drills</span><span class="es">COG Drills</span></a>
+        <a href="#start" class="mobile-link"><span class="en">Start</span><span class="es">Empezar</span></a>
         <div class="lang-menu">
           <button class="active" data-set-lang="en">English</button>
           <button data-set-lang="es">Español PR</button>
@@ -697,37 +621,33 @@
             <img class="hero-logo" src="hoops-money.png" alt="Basketball Money logo" />
           </div>
 
-          <div class="eyebrow">
-            <span class="dot"></span>
-            <span class="en">The Business of Basketball</span>
-            <span class="es">El Negocio del Baloncesto</span>
-          </div>
+          <div class="eyebrow"><span class="dot"></span><span class="en">Basketball Money = Value</span><span class="es">Basketball Money = Valor</span></div>
 
           <h1>
-            <span class="en">Your Home Court for <span class="grad">Basketball Money</span></span>
-            <span class="es">Tu Home Court de <span class="grad">Basketball Money</span></span>
+            <span class="en">Turn Cognitive Skill Into <span class="grad">Player Value</span></span>
+            <span class="es">Convierte Habilidad Cognitiva En <span class="grad">Valor De Jugador</span></span>
           </h1>
 
-          <p class="en">Thirty MyGPT coaches. One player-development system. Organized for mobile, grouped by access level, and connected to the full Basketball Money pathway.</p>
-          <p class="es">Treinta MyGPT coaches. Un sistema completo de desarrollo. Organizado para móvil, agrupado por nivel de acceso y conectado al camino completo de Basketball Money.</p>
+          <p class="en">The free coach helps you understand it. The paid COG drill helps you prove it. Basketball Money turns pattern recognition, reaction control, sequence recall, vision, and decision speed into real basketball value.</p>
+          <p class="es">El coach gratis te ayuda a entenderlo. El COG pago te ayuda a probarlo. Basketball Money convierte reconocimiento de patrones, control de reacción, secuencia, visión y velocidad de decisión en valor real de baloncesto.</p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#coaches"><span class="en">Start Free</span><span class="es">Empezar Gratis</span></a>
-            <a class="btn btn-secondary" href="#paid"><span class="en">Go Paid</span><span class="es">Ir a Pago</span></a>
+            <a class="btn btn-primary" href="#coaches"><span class="en">Start With A Free Coach</span><span class="es">Empieza Con Un Coach Gratis</span></a>
+            <a class="btn btn-secondary" href="#drills"><span class="en">See The COG Drills</span><span class="es">Ver Los COG Drills</span></a>
           </div>
         </div>
 
-        <aside class="scoreboard" aria-label="Basketball Money system summary">
-          <div class="score-title">
-            <h2><span class="en">System Scoreboard</span><span class="es">Marcador del Sistema</span></h2>
-            <span class="badge"><span class="en">Full Roster</span><span class="es">Roster Completo</span></span>
+        <aside class="proof-panel" aria-label="Basketball Money cognitive value system">
+          <div class="panel-head">
+            <h2><span class="en">Cognitive Proof System</span><span class="es">Sistema De Prueba Cognitiva</span></h2>
+            <span class="badge"><span class="en">Free → Paid</span><span class="es">Gratis → Pago</span></span>
           </div>
-
-          <div class="stat-grid">
-            <div class="stat"><strong>30</strong><span class="en">MyGPT Coaches</span><span class="es">MyGPT Coaches</span></div>
-            <div class="stat"><strong>6</strong><span class="en">Groups</span><span class="es">Grupos</span></div>
-            <div class="stat"><strong>5</strong><span class="en">Paid COG Layers</span><span class="es">Capas COG Pagas</span></div>
-            <div class="stat"><strong>2</strong><span class="en">Languages</span><span class="es">Idiomas</span></div>
+          <div class="value-stack">
+            <div class="value-row"><div class="value-num">01</div><div><strong>Pattern</strong><span class="en">See what others miss.</span><span class="es">Ve lo que otros no ven.</span></div></div>
+            <div class="value-row"><div class="value-num">02</div><div><strong>Reaction</strong><span class="en">React fast without losing control.</span><span class="es">Reacciona rápido sin perder control.</span></div></div>
+            <div class="value-row"><div class="value-num">03</div><div><strong>Sequence</strong><span class="en">Remember the right action under pressure.</span><span class="es">Recuerda la acción correcta bajo presión.</span></div></div>
+            <div class="value-row"><div class="value-num">04</div><div><strong>Vision</strong><span class="en">Track more of the game at once.</span><span class="es">Lee más del juego al mismo tiempo.</span></div></div>
+            <div class="value-row"><div class="value-num">05</div><div><strong>Decision</strong><span class="en">Choose before the advantage disappears.</span><span class="es">Decide antes de que la ventaja desaparezca.</span></div></div>
           </div>
         </aside>
       </div>
@@ -736,31 +656,24 @@
     <section class="section" id="system">
       <div class="wrap">
         <div class="section-head">
-          <h2><span class="en">The System</span><span class="es">El Sistema</span></h2>
-          <p class="en">The player moves from value and habits into proof, then deeper into basketball IQ, leadership, leverage, future self, and the final Blueprint.</p>
-          <p class="es">El jugador se mueve desde valor y hábitos hacia prueba, luego más profundo en IQ de baloncesto, liderazgo, ventaja, futuro personal y el Blueprint final.</p>
+          <h2><span class="en">The New System</span><span class="es">El Nuevo Sistema</span></h2>
+          <p class="en">Basketball Money is not selling GPT links. The free MyGPTs are the discovery layer. The locked COG platform is the proof layer.</p>
+          <p class="es">Basketball Money no vende enlaces de GPT. Los MyGPTs gratis son la capa de descubrimiento. La plataforma COG bloqueada es la capa de prueba.</p>
         </div>
 
-        <div class="access-path" id="paid">
-          <div class="path-card free">
-            <strong><span class="en">🔓 Free Start: 001–005</span><span class="es">🔓 Inicio Gratis: 001–005</span></strong>
-            <span class="en">The free entry builds the player’s foundation: value, habits, control, opportunity, and brand.</span>
-            <span class="es">La entrada gratis construye la base del jugador: valor, hábitos, control, oportunidad y marca.</span>
+        <div class="thesis">
+          <div class="thesis-card">
+            <strong><span class="en">Free Layer</span><span class="es">Capa Gratis</span></strong>
+            <h3><span class="en">The coach explains it.</span><span class="es">El coach lo explica.</span></h3>
+            <p class="en">Five free Basketball Money coaches prepare the player for the exact cognitive value each COG drill will test.</p>
+            <p class="es">Cinco coaches gratis de Basketball Money preparan al jugador para el valor cognitivo exacto que cada COG drill va a poner a prueba.</p>
           </div>
-          <div class="path-card paid">
-            <strong><span class="en">🔒 Paid Path: 006–030</span><span class="es">🔒 Ruta Paga: 006–030</span></strong>
-            <span class="en">Each paid bundle includes five MyGPT coaches plus one Cognitive Training Drill.</span>
-            <span class="es">Cada paquete pago incluye cinco MyGPT coaches más un Cognitive Training Drill.</span>
+          <div class="thesis-card">
+            <strong><span class="en">Paid Layer</span><span class="es">Capa Paga</span></strong>
+            <h3><span class="en">The COG drill proves it.</span><span class="es">El COG drill lo prueba.</span></h3>
+            <p class="en">The paid COG platform measures the skill, saves the result, and turns cognitive proof into basketball value.</p>
+            <p class="es">La plataforma COG paga mide la habilidad, guarda el resultado y convierte la prueba cognitiva en valor de baloncesto.</p>
           </div>
-        </div>
-
-        <div class="roadmap">
-          <div class="phase"><strong><span class="en">Free Entry</span><span class="es">Entrada Gratis</span></strong><span class="en">001–005: Value, habits, control, opportunity, and brand.</span><span class="es">001–005: Valor, hábitos, control, oportunidad y marca.</span></div>
-          <div class="phase"><strong>COG 01</strong><span class="en">006–010: Money mindset, proof, compound effect, opportunity mindset, and relationships.</span><span class="es">006–010: Mentalidad de dinero, prueba, efecto compuesto, mentalidad de oportunidad y relaciones.</span></div>
-          <div class="phase"><strong>COG 02</strong><span class="en">011–015: Visibility plus the first IQ layer.</span><span class="es">011–015: Visibilidad más la primera capa de IQ.</span></div>
-          <div class="phase"><strong>COG 03</strong><span class="en">016–020: Vision, anticipation, reaction control, adaptability, and role intelligence.</span><span class="es">016–020: Visión, anticipación, control de reacción, adaptabilidad e inteligencia de rol.</span></div>
-          <div class="phase"><strong>COG 04</strong><span class="en">021–025: Communication, leadership, consistency, resilience, and accountability.</span><span class="es">021–025: Comunicación, liderazgo, consistencia, resiliencia y responsabilidad.</span></div>
-          <div class="phase"><strong>COG 05</strong><span class="en">026–030: Coachability, game identity, leverage, future self, and the full Blueprint.</span><span class="es">026–030: Coachability, identidad de juego, ventaja, futuro personal y el Blueprint completo.</span></div>
         </div>
       </div>
     </section>
@@ -768,35 +681,34 @@
     <section class="section" id="coaches">
       <div class="wrap">
         <div class="section-head">
-          <h2><span class="en">Coach Roster</span><span class="es">Roster de Coaches</span></h2>
-          <p class="en">Organized by group of five. 001–005 are free. Every group after that is a paid bundle connected to one COG drill.</p>
-          <p class="es">Organizado en grupos de cinco. 001–005 son gratis. Cada grupo después de eso es un paquete pago conectado a un COG drill.</p>
+          <h2><span class="en">Five Free Coaches</span><span class="es">Cinco Coaches Gratis</span></h2>
+          <p class="en">Each free coach teaches one cognitive value. Each one points to a paid COG drill where the player proves it.</p>
+          <p class="es">Cada coach gratis enseña un valor cognitivo. Cada uno apunta a un COG pago donde el jugador lo prueba.</p>
         </div>
 
-        <div class="control-bar">
-          <input id="search" class="search" type="search" placeholder="Search coaches, topics, purpose..." aria-label="Search coaches" />
-          <select id="groupFilter" class="select" aria-label="Filter by group">
-            <option value="all">All Groups</option>
-            <option value="free">Free Access: 001–005</option>
-            <option value="paid-1">Paid Bundle: 006–010 + COG 01</option>
-            <option value="paid-2">Paid Bundle: 011–015 + COG 02</option>
-            <option value="paid-3">Paid Bundle: 016–020 + COG 03</option>
-            <option value="paid-4">Paid Bundle: 021–025 + COG 04</option>
-            <option value="paid-5">Paid Bundle: 026–030 + COG 05</option>
-          </select>
-        </div>
-
-        <div id="coachGrid" class="coach-grid"></div>
+        <div class="coach-grid" id="coachGrid"></div>
       </div>
     </section>
 
-    <section class="section" id="blueprint">
+    <section class="section" id="drills">
+      <div class="wrap">
+        <div class="section-head">
+          <h2><span class="en">Paid COG Drills</span><span class="es">COG Drills Pagos</span></h2>
+          <p class="en">The COG drills are the locked product. They create measurable proof that can become a player profile, progress path, and Basketball Money value statement.</p>
+          <p class="es">Los COG drills son el producto bloqueado. Crean prueba medible que puede convertirse en perfil del jugador, progreso y declaración de valor Basketball Money.</p>
+        </div>
+
+        <div class="drill-grid" id="drillGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="start">
       <div class="wrap">
         <div class="final-cta">
-          <h2><span class="en">The Final Blueprint</span><span class="es">El Blueprint Final</span></h2>
-          <p class="en">The final coach brings everything together into one complete player map: value, proof, brand, relationships, visibility, opportunity, leverage, future self, and next move.</p>
-          <p class="es">El coach final une todo en un mapa completo del jugador: valor, prueba, marca, relaciones, visibilidad, oportunidad, ventaja, futuro personal y próximo movimiento.</p>
-          <a class="btn btn-primary" href="paid-gate.html?bundle=5"><span class="en">Unlock the Final Bundle</span><span class="es">Desbloquear el Paquete Final</span></a>
+          <h2><span class="en">Basketball Money Is Value</span><span class="es">Basketball Money Es Valor</span></h2>
+          <p class="en">Start with the free coach. Understand the skill. Then unlock the COG drill and prove the value.</p>
+          <p class="es">Empieza con el coach gratis. Entiende la habilidad. Luego desbloquea el COG drill y prueba el valor.</p>
+          <a class="btn btn-primary" href="#coaches"><span class="en">Start Free</span><span class="es">Empezar Gratis</span></a>
         </div>
       </div>
     </section>
@@ -804,149 +716,115 @@
 
   <footer>
     <div class="wrap">
-      <p class="en">Basketball Money — The Business of Basketball. Built as a conversation-first player value system.</p>
-      <p class="es">Basketball Money — El Negocio del Baloncesto. Construido como un sistema conversacional de valor para jugadores.</p>
+      <p class="en">Basketball Money — The Business of Basketball. Cognitive skill becomes player value.</p>
+      <p class="es">Basketball Money — El Negocio del Baloncesto. La habilidad cognitiva se convierte en valor de jugador.</p>
     </div>
   </footer>
 
   <script>
     const coaches = [
-      {n:'001', topic:'Value', name:'Basketball Money: The Value Coach', purpose:{en:'Define basketball value beyond points and explain why coaches, teams, sponsors, or brands would choose the player.', es:'Define el valor en el baloncesto más allá de los puntos y explica por qué coaches, equipos, auspiciadores o marcas escogerían al jugador.'}, url:'https://chatgpt.com/g/g-69f05969132c819198162a679f1a9871-basketball-money-the-value-coach'},
-      {n:'002', topic:'Habits', name:'Basketball Money: The Habit Coach', purpose:{en:'Identify the daily habits that build or damage a player’s basketball future.', es:'Identifica los hábitos diarios que construyen o dañan el futuro del jugador en el baloncesto.'}, url:'https://chatgpt.com/g/g-69f05a2beab0819198ff094ae9f71fe4-habits-basketball-money-the-habits-coach'},
-      {n:'003', topic:'Control', name:'Basketball Money: The Control Coach', purpose:{en:'Master tempo, decisions, emotion, body language, and pressure.', es:'Domina ritmo, decisiones, emociones, lenguaje corporal y presión.'}, url:'https://chatgpt.com/g/g-69f05bcd97ac8191b7c8d52a4d4d93ca-control-basketball-money-the-control-coach'},
-      {n:'004', topic:'Opportunity', name:'Basketball Money: The Opportunity Coach', purpose:{en:'Recognize, create, and convert basketball opportunities.', es:'Reconoce, crea y convierte oportunidades en el baloncesto.'}, url:'https://chatgpt.com/g/g-69f05d5f264c8191b372752a5881e5b7-basketball-money-the-opportunity-coach'},
-      {n:'005', topic:'Brand', name:'Basketball Money: The Brand Coach', purpose:{en:'Build a real basketball brand based on identity, value, reputation, and proof.', es:'Construye una marca real en el baloncesto basada en identidad, valor, reputación y prueba.'}, url:'https://chatgpt.com/g/g-69f05ea7975c819194457ff104bb72de-basketball-money-the-brand-coach'},
-      {n:'006', topic:'Money Mindset', name:'Basketball Money: The Money Mindset Coach', purpose:{en:'Think like a basketball asset by connecting value, discipline, decisions, and opportunity.', es:'Piensa como un activo de baloncesto conectando valor, disciplina, decisiones y oportunidad.'}},
-      {n:'007', topic:'Build Proof', name:'Basketball Money: The Proof Coach', purpose:{en:'Build proof of value through film, habits, results, trust, and visible work.', es:'Construye prueba de valor a través de video, hábitos, resultados, confianza y trabajo visible.'}},
-      {n:'008', topic:'The Compound Effect', name:'Basketball Money: The Compounding Coach', purpose:{en:'Turn small daily actions into long-term basketball value and opportunity.', es:'Convierte pequeñas acciones diarias en valor y oportunidad a largo plazo.'}},
-      {n:'009', topic:'Opportunity Mindset', name:'Basketball Money: The Opportunity Mindset Coach', purpose:{en:'Develop the mindset to see, prepare for, create, and convert opportunity.', es:'Desarrolla la mentalidad para ver, prepararse, crear y convertir oportunidades.'}},
-      {n:'010', topic:'Relationships', name:'Basketball Money: The Relationship Coach', purpose:{en:'Build trusted relationships with coaches, teammates, trainers, scouts, sponsors, and community.', es:'Construye relaciones de confianza con coaches, compañeros, entrenadores, scouts, auspiciadores y comunidad.'}},
-      {n:'011', topic:'Visibility', name:'Basketball Money: The Visibility Coach', purpose:{en:'Become visible for the right reasons through proof, brand, relationships, and trust.', es:'Hazte visible por las razones correctas con prueba, marca, relaciones y confianza.'}},
-      {n:'012', topic:'Pattern Recognition', name:'Basketball Money: The Pattern Coach', purpose:{en:'Recognize patterns in plays, habits, defenders, teammates, pressure, and timing.', es:'Reconoce patrones en jugadas, hábitos, defensores, compañeros, presión y timing.'}},
-      {n:'013', topic:'Spatial Awareness', name:'Basketball Money: The Space Coach', purpose:{en:'Read space, spacing, angles, lanes, timing, and positioning.', es:'Lee el espacio, el spacing, los ángulos, las líneas, el timing y el posicionamiento.'}},
-      {n:'014', topic:'Decision Speed', name:'Basketball Money: The Decision Speed Coach', purpose:{en:'Make faster, smarter decisions without playing rushed.', es:'Toma decisiones más rápidas e inteligentes sin jugar apresurado.'}},
-      {n:'015', topic:'Pressure Recall', name:'Basketball Money: The Pressure Recall Coach', purpose:{en:'Remember plays, reads, corrections, and assignments under pressure.', es:'Recuerda jugadas, lecturas, correcciones y asignaciones bajo presión.'}},
-      {n:'016', topic:'Multi-Target Vision', name:'Basketball Money: The Vision Coach', purpose:{en:'Read multiple targets at once: ball, defenders, teammates, space, timing, and pressure.', es:'Lee múltiples objetivos a la vez: balón, defensores, compañeros, espacio, timing y presión.'}},
-      {n:'017', topic:'Anticipation', name:'Basketball Money: The Anticipation Coach', purpose:{en:'Read plays, pressure, mistakes, movement, and opportunity before they happen.', es:'Lee jugadas, presión, errores, movimiento y oportunidad antes de que ocurran.'}},
-      {n:'018', topic:'Reaction Control', name:'Basketball Money: The Reaction Control Coach', purpose:{en:'React fast with control, discipline, timing, and composure.', es:'Reacciona rápido con control, disciplina, timing y compostura.'}},
-      {n:'019', topic:'Adaptability', name:'Basketball Money: The Adaptability Coach', purpose:{en:'Adjust to changing roles, pressure, matchups, coaches, teammates, and game situations.', es:'Ajústate a cambios de rol, presión, pareos, coaches, compañeros y situaciones del juego.'}},
-      {n:'020', topic:'Role Intelligence', name:'Basketball Money: The Role Intelligence Coach', purpose:{en:'Understand role, create value within it, and earn more trust.', es:'Entiende tu rol, crea valor dentro de ese rol y gana más confianza.'}},
-      {n:'021', topic:'Communication', name:'Basketball Money: The Communication Coach', purpose:{en:'Use voice, body language, listening, clarity, and presence to create trust.', es:'Usa voz, lenguaje corporal, escucha, claridad y presencia para crear confianza.'}},
-      {n:'022', topic:'Leadership', name:'Basketball Money: The Leadership Coach', purpose:{en:'Build real leadership through trust, standards, communication, accountability, and presence.', es:'Construye liderazgo real mediante confianza, estándares, comunicación, responsabilidad y presencia.'}},
-      {n:'023', topic:'Consistency', name:'Basketball Money: The Consistency Coach', purpose:{en:'Become reliable through habits, effort, execution, attitude, preparation, and proof.', es:'Conviértete en alguien confiable mediante hábitos, esfuerzo, ejecución, actitud, preparación y prueba.'}},
-      {n:'024', topic:'Resilience', name:'Basketball Money: The Resilience Coach', purpose:{en:'Recover from mistakes, losses, criticism, pressure, and setbacks.', es:'Recupérate de errores, derrotas, críticas, presión y obstáculos.'}},
-      {n:'025', topic:'Accountability', name:'Basketball Money: The Accountability Coach', purpose:{en:'Own habits, decisions, effort, mistakes, attitude, and growth.', es:'Asume responsabilidad por hábitos, decisiones, esfuerzo, errores, actitud y crecimiento.'}},
-      {n:'026', topic:'Coachability', name:'Basketball Money: The Coachability Coach', purpose:{en:'Receive correction, apply feedback, build trust, and turn coaching into proof.', es:'Recibe corrección, aplica feedback, construye confianza y convierte coaching en prueba.'}},
-      {n:'027', topic:'Game Identity', name:'Basketball Money: The Game Identity Coach', purpose:{en:'Define who the player is on the court and what value coaches can trust.', es:'Define quién es el jugador en la cancha y qué valor pueden confiar los coaches.'}},
-      {n:'028', topic:'Player Leverage', name:'Basketball Money: The Leverage Coach', purpose:{en:'Understand how value, proof, brand, relationships, visibility, and trust create options.', es:'Entiende cómo el valor, la prueba, la marca, las relaciones, la visibilidad y la confianza crean opciones.'}},
-      {n:'029', topic:'Future Self', name:'Basketball Money: The Future Self Coach', purpose:{en:'Connect today’s habits, choices, identity, and value to the future player being built.', es:'Conecta los hábitos, decisiones, identidad y valor de hoy con el jugador que se está construyendo para el futuro.'}},
-      {n:'030', topic:'Basketball Money Blueprint', name:'Basketball Money: The Blueprint Coach', purpose:{en:'Build the complete final map of value, proof, brand, relationships, visibility, opportunity, and next move.', es:'Construye el mapa final completo de valor, prueba, marca, relaciones, visibilidad, oportunidad y próximo movimiento.'}}
+      {
+        n:'001',
+        name:'Basketball Money: The Pattern Coach',
+        cog:'COG 01',
+        drill:'Pattern Recognition Drill',
+        freeUrl:'',
+        paidUrl:'paid-gate.html?cog=1',
+        purpose:{en:'Learn to see repeated cues, defender habits, spacing signals, mistakes, and opportunities before reacting.', es:'Aprende a ver señales repetidas, hábitos defensivos, spacing, errores y oportunidades antes de reaccionar.'},
+        bullets:{en:['See what others miss','Recognize repeated cues','Turn pattern recognition into value'], es:['Ve lo que otros no ven','Reconoce señales repetidas','Convierte patrones en valor']}
+      },
+      {
+        n:'002',
+        name:'Basketball Money: The Reaction Control Coach',
+        cog:'COG 02',
+        drill:'Reaction Control Drill',
+        freeUrl:'',
+        paidUrl:'paid-gate.html?cog=2',
+        purpose:{en:'Learn to react quickly without panic, overreaction, emotional loss, or poor discipline.', es:'Aprende a reaccionar rápido sin pánico, sobre-reacción, pérdida emocional o falta de disciplina.'},
+        bullets:{en:['React fast with control','Stay disciplined under pressure','Turn reaction into trust'], es:['Reacciona rápido con control','Mantente disciplinado bajo presión','Convierte reacción en confianza']}
+      },
+      {
+        n:'003',
+        name:'Basketball Money: The Sequence Recall Coach',
+        cog:'COG 03',
+        drill:'Sequence Recall Drill',
+        freeUrl:'',
+        paidUrl:'paid-gate.html?cog=3',
+        purpose:{en:'Learn to remember sequences, reads, instructions, and the right action when pressure rises.', es:'Aprende a recordar secuencias, lecturas, instrucciones y la acción correcta cuando sube la presión.'},
+        bullets:{en:['Remember under pressure','Build sequence discipline','Prove mental organization'], es:['Recuerda bajo presión','Construye disciplina de secuencia','Prueba organización mental']}
+      },
+      {
+        n:'004',
+        name:'Basketball Money: The Vision Coach',
+        cog:'COG 04',
+        drill:'Multi-Target Vision Drill',
+        freeUrl:'',
+        paidUrl:'paid-gate.html?cog=4',
+        purpose:{en:'Learn to track multiple targets: ball, defenders, teammates, space, timing, and pressure.', es:'Aprende a seguir múltiples objetivos: balón, defensores, compañeros, espacio, timing y presión.'},
+        bullets:{en:['Track more than one target','Read the whole floor','Turn vision into opportunity'], es:['Sigue más de un objetivo','Lee toda la cancha','Convierte visión en oportunidad']}
+      },
+      {
+        n:'005',
+        name:'Basketball Money: The Decision Speed Coach',
+        cog:'COG 05',
+        drill:'Decision Speed Blueprint Drill',
+        freeUrl:'',
+        paidUrl:'paid-gate.html?cog=5',
+        purpose:{en:'Learn to make faster, smarter decisions without playing rushed or losing the advantage.', es:'Aprende a tomar decisiones más rápidas e inteligentes sin jugar apresurado ni perder la ventaja.'},
+        bullets:{en:['Process fast without rushing','Choose before the window closes','Build your Basketball Money Blueprint'], es:['Procesa rápido sin apresurarte','Decide antes de que cierre la ventana','Construye tu Blueprint Basketball Money']}
+      }
     ];
 
-    const groupOrder = ['free','paid-1','paid-2','paid-3','paid-4','paid-5'];
-
-    function groupForNumber(num){
-      const n = Number(num);
-      if(n <= 5) return 'free';
-      if(n <= 10) return 'paid-1';
-      if(n <= 15) return 'paid-2';
-      if(n <= 20) return 'paid-3';
-      if(n <= 25) return 'paid-4';
-      return 'paid-5';
-    }
-
-    function groupInfo(key){
-      const info = {
-        free:{range:'001–005', cog:'Free Access', access:'free', unlock:'', title:{en:'Free Entry — Start Here', es:'Entrada Gratis — Empieza Aquí'}, sub:{en:'The first five coaches introduce Basketball Money: value, habits, control, opportunity, and brand.', es:'Los primeros cinco coaches presentan Basketball Money: valor, hábitos, control, oportunidad y marca.'}},
-        'paid-1':{range:'006–010', cog:'COG 01', access:'paid', unlock:'paid-gate.html?bundle=1', title:{en:'Paid Bundle One', es:'Paquete Pago Uno'}, sub:{en:'Money mindset, proof, compounding, opportunity mindset, and relationships.', es:'Mentalidad de dinero, prueba, efecto compuesto, mentalidad de oportunidad y relaciones.'}},
-        'paid-2':{range:'011–015', cog:'COG 02', access:'paid', unlock:'paid-gate.html?bundle=2', title:{en:'Paid Bundle Two', es:'Paquete Pago Dos'}, sub:{en:'Visibility plus the first IQ layer: patterns, space, decision speed, and pressure recall.', es:'Visibilidad más la primera capa de IQ: patrones, espacio, velocidad de decisión y memoria bajo presión.'}},
-        'paid-3':{range:'016–020', cog:'COG 03', access:'paid', unlock:'paid-gate.html?bundle=3', title:{en:'Paid Bundle Three', es:'Paquete Pago Tres'}, sub:{en:'Vision, anticipation, reaction control, adaptability, and role intelligence.', es:'Visión, anticipación, control de reacción, adaptabilidad e inteligencia de rol.'}},
-        'paid-4':{range:'021–025', cog:'COG 04', access:'paid', unlock:'paid-gate.html?bundle=4', title:{en:'Paid Bundle Four', es:'Paquete Pago Cuatro'}, sub:{en:'Communication, leadership, consistency, resilience, and accountability.', es:'Comunicación, liderazgo, consistencia, resiliencia y responsabilidad.'}},
-        'paid-5':{range:'026–030', cog:'COG 05', access:'paid', unlock:'paid-gate.html?bundle=5', title:{en:'Paid Bundle Five', es:'Paquete Pago Cinco'}, sub:{en:'Coachability, game identity, leverage, future self, and the final Blueprint.', es:'Coachability, identidad de juego, ventaja, futuro personal y el Blueprint final.'}}
-      };
-      return info[key];
-    }
-
-    const coachGrid = document.getElementById('coachGrid');
-    const searchInput = document.getElementById('search');
-    const groupFilter = document.getElementById('groupFilter');
     const body = document.body;
+    const coachGrid = document.getElementById('coachGrid');
+    const drillGrid = document.getElementById('drillGrid');
 
-    function currentLang(){return body.dataset.lang || 'en'}
+    function lang(){return body.dataset.lang || 'en'}
 
-    function renderGroups(){
-      const lang = currentLang();
-      const query = searchInput.value.trim().toLowerCase();
-      const filter = groupFilter.value;
-
-      const filtered = coaches.filter(c => {
-        const group = groupForNumber(c.n);
-        const haystack = [c.n, c.topic, c.name, c.purpose.en, c.purpose.es, groupInfo(group).title.en, groupInfo(group).title.es].join(' ').toLowerCase();
-        return (filter === 'all' || group === filter) && (!query || haystack.includes(query));
-      });
-
-      const grouped = groupOrder.map(key => ({key, items: filtered.filter(c => groupForNumber(c.n) === key)})).filter(group => group.items.length);
-
-      coachGrid.innerHTML = grouped.map((group, index) => {
-        const info = groupInfo(group.key);
-        const isFree = info.access === 'free';
-        const accessLabel = isFree ? (lang === 'en' ? '🔓 FREE' : '🔓 GRATIS') : (lang === 'en' ? '🔒 PAID' : '🔒 PAGO');
-        const closedClass = index === 0 ? '' : 'closed';
-
+    function render(){
+      const current = lang();
+      coachGrid.innerHTML = coaches.map(coach => {
+        const freeBtn = coach.freeUrl
+          ? `<a class="small-btn free" href="${coach.freeUrl}" target="_blank" rel="noopener noreferrer">${current === 'en' ? 'Open Free Coach' : 'Abrir Coach Gratis'}</a>`
+          : `<a class="small-btn free disabled" href="#">${current === 'en' ? 'Free Coach Link Coming' : 'Enlace Del Coach Próximamente'}</a>`;
         return `
-          <section class="coach-group ${closedClass}" data-group="${group.key}">
-            <button class="group-toggle" type="button" aria-expanded="${index === 0 ? 'true' : 'false'}">
-              <div>
-                <div class="group-kicker">${info.range}</div>
-                <div class="group-title">${info.title[lang]}</div>
-                <div class="group-sub">${info.sub[lang]}</div>
-              </div>
-              <div class="group-meta">
-                <span class="pill ${isFree ? 'free' : 'lock'}">${accessLabel}</span>
-                <span class="pill">${info.cog}</span>
-                ${isFree ? '' : `<a class="unlock-btn" href="${info.unlock}">${lang === 'en' ? 'Unlock Bundle' : 'Desbloquear'}</a>`}
-                <span class="chevron">⌄</span>
-              </div>
-            </button>
-            <div class="coach-list">
-              ${group.items.map(c => `
-                <article class="coach-row">
-                  <div class="coach-main">
-                    <div class="coach-topline">
-                      <span class="coach-num">${c.n}</span>
-                      <span class="coach-topic">${c.topic}</span>
-                    </div>
-                    <div class="coach-name">${c.name}</div>
-                    <div class="coach-purpose">${c.purpose[lang]}</div>
-                  </div>
-                  ${isFree ? `<a class="open-btn" href="${c.url}" target="_blank" rel="noopener noreferrer">${lang === 'en' ? 'Open GPT' : 'Abrir GPT'}</a>` : `<span class="locked-note">${lang === 'en' ? 'Locked inside paid platform' : 'Bloqueado dentro de la plataforma paga'}</span>`}
-                </article>
-              `).join('')}
+          <article class="coach-card">
+            <div class="coach-top">
+              <span class="coach-number">${coach.n}</span>
+              <h3>${coach.name}</h3>
+              <p>${coach.purpose[current]}</p>
             </div>
-          </section>
+            <div class="coach-body">
+              <div class="cog-line"><span>${coach.cog}</span><span>🔒</span></div>
+              <div class="mini-list">
+                ${coach.bullets[current].map(item => `<span>${item}</span>`).join('')}
+              </div>
+              <div class="card-actions">
+                ${freeBtn}
+                <a class="small-btn paid" href="${coach.paidUrl}">${current === 'en' ? `Unlock ${coach.cog}` : `Desbloquear ${coach.cog}`}</a>
+              </div>
+            </div>
+          </article>
         `;
       }).join('');
 
-      document.querySelectorAll('.group-toggle').forEach(button => {
-        button.addEventListener('click', () => {
-          const group = button.closest('.coach-group');
-          group.classList.toggle('closed');
-          button.setAttribute('aria-expanded', group.classList.contains('closed') ? 'false' : 'true');
-        });
-      });
+      drillGrid.innerHTML = coaches.map(coach => `
+        <article class="drill-card">
+          <strong>${coach.cog}</strong>
+          <h3>${coach.drill}</h3>
+          <p>${coach.purpose[current]}</p>
+        </article>
+      `).join('');
     }
 
-    function setLanguage(lang){
-      body.dataset.lang = lang;
-      document.documentElement.lang = lang === 'es' ? 'es' : 'en';
-      document.querySelectorAll('[data-set-lang]').forEach(btn => btn.classList.toggle('active', btn.dataset.setLang === lang));
-      searchInput.placeholder = lang === 'en' ? 'Search coaches, topics, purpose...' : 'Buscar coaches, temas, propósito...';
-      renderGroups();
+    function setLanguage(nextLang){
+      body.dataset.lang = nextLang;
+      document.documentElement.lang = nextLang === 'es' ? 'es' : 'en';
+      document.querySelectorAll('[data-set-lang]').forEach(btn => btn.classList.toggle('active', btn.dataset.setLang === nextLang));
+      render();
     }
 
     document.querySelectorAll('[data-set-lang]').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.setLang)));
-    searchInput.addEventListener('input', renderGroups);
-    groupFilter.addEventListener('change', renderGroups);
 
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -954,20 +832,20 @@
     function closeMenu(){
       mobileMenu.classList.remove('open');
       menuToggle.classList.remove('active');
-      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-expanded','false');
     }
 
     function openMenu(){
       mobileMenu.classList.add('open');
       menuToggle.classList.add('active');
-      menuToggle.setAttribute('aria-expanded', 'true');
+      menuToggle.setAttribute('aria-expanded','true');
     }
 
     menuToggle.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
     document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', closeMenu));
-    window.addEventListener('resize', () => { if(window.innerWidth > 820) closeMenu(); });
+    window.addEventListener('resize', () => { if(window.innerWidth > 920) closeMenu(); });
 
-    renderGroups();
+    render();
   </script>
 </body>
 </html>
