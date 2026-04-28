@@ -15,24 +15,22 @@
       --muted:#b9b3a6;
       --gold:#f0b84a;
       --orange:#ff7a1a;
-      --red:#d92d20;
       --green:#66ff99;
-      --blue:#6ea8ff;
+      --red:#ff5b45;
       --shadow:0 18px 60px rgba(0,0,0,.45);
-      --radius:24px;
-      --max:1180px;
+      --radius:22px;
+      --max:1120px;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-
     html{scroll-behavior:smooth}
 
     body{
       font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(240,184,74,.16), transparent 34%),
-        radial-gradient(circle at 80% 10%, rgba(255,122,26,.12), transparent 28%),
-        linear-gradient(180deg, #050507 0%, #09090d 45%, #050507 100%);
+        radial-gradient(circle at top left, rgba(240,184,74,.15), transparent 32%),
+        radial-gradient(circle at 85% 5%, rgba(255,122,26,.12), transparent 26%),
+        linear-gradient(180deg, #050507 0%, #09090d 48%, #050507 100%);
       color:var(--text);
       min-height:100vh;
       overflow-x:hidden;
@@ -43,37 +41,40 @@
       position:fixed;
       inset:0;
       pointer-events:none;
-      opacity:.08;
+      opacity:.06;
       background-image:
         linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
-      background-size:42px 42px;
-      mask-image:linear-gradient(to bottom, black, transparent 80%);
+      background-size:40px 40px;
+      mask-image:linear-gradient(to bottom, black, transparent 82%);
       z-index:-1;
     }
 
     a{color:inherit;text-decoration:none}
     button,input,select{font:inherit}
+    .wrap{width:min(var(--max), calc(100% - 24px)); margin-inline:auto}
 
-    .wrap{width:min(var(--max), calc(100% - 32px)); margin-inline:auto}
+    [data-lang="es"] .en,
+    [data-lang="en"] .es{display:none!important}
 
+    /* NAV */
     .nav{
       position:sticky;
       top:0;
-      z-index:20;
+      z-index:50;
       backdrop-filter:blur(18px);
-      background:rgba(5,5,7,.72);
+      background:rgba(5,5,7,.84);
       border-bottom:1px solid var(--line);
     }
 
     .nav-inner{
-      width:min(var(--max), calc(100% - 32px));
+      width:min(var(--max), calc(100% - 24px));
       margin:auto;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:18px;
-      padding:16px 0;
+      gap:14px;
+      min-height:70px;
     }
 
     .brand-mark{
@@ -83,93 +84,162 @@
       min-width:max-content;
     }
 
-    .ball{
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      background:
-        radial-gradient(circle at 28% 26%, #ffd27a 0 10%, transparent 11%),
-        linear-gradient(135deg, var(--gold), var(--orange));
-      box-shadow:0 0 0 3px rgba(240,184,74,.16), 0 0 36px rgba(240,184,74,.28);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .ball::before,.ball::after{
-      content:"";
-      position:absolute;
-      inset:7px;
-      border:2px solid rgba(20,12,5,.62);
-      border-radius:50%;
-    }
-
-    .ball::after{
-      inset:-8px 18px;
-      border-radius:50%;
-      transform:rotate(25deg);
+    .nav-logo{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      object-fit:cover;
+      box-shadow:0 0 0 2px rgba(240,184,74,.2), 0 0 28px rgba(240,184,74,.24);
+      background:#111;
     }
 
     .brand-copy small{
       display:block;
       color:var(--gold);
-      font-weight:800;
+      font-weight:900;
       letter-spacing:.16em;
       text-transform:uppercase;
-      font-size:.68rem;
+      font-size:.66rem;
     }
 
     .brand-copy strong{
-      font-size:1.02rem;
+      font-size:1rem;
       letter-spacing:-.02em;
+      line-height:1.1;
     }
 
     .nav-links{
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:16px;
       color:var(--muted);
       font-size:.92rem;
     }
 
     .nav-links a:hover{color:var(--text)}
 
-    .lang-toggle{
+    .nav-actions{
       display:flex;
-      justify-content:center;
       align-items:center;
-      gap:8px;
-      padding:10px 0 16px;
+      gap:10px;
     }
 
-    .lang-toggle button{
+    .lang-inline,
+    .lang-menu{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .lang-inline button,
+    .lang-menu button{
       border:1px solid var(--line);
       background:rgba(255,255,255,.05);
       color:var(--muted);
-      padding:9px 14px;
+      padding:9px 12px;
       border-radius:999px;
       cursor:pointer;
       transition:.2s ease;
-      font-weight:800;
-      font-size:.86rem;
+      font-weight:900;
+      font-size:.82rem;
     }
 
-    .lang-toggle button.active,
-    .lang-toggle button:hover{
+    .lang-inline button.active,
+    .lang-inline button:hover,
+    .lang-menu button.active,
+    .lang-menu button:hover{
       color:#100a02;
       background:linear-gradient(135deg, var(--gold), var(--orange));
       border-color:transparent;
     }
 
-    .hero{
-      padding:72px 0 36px;
+    .menu-toggle{
+      display:none;
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      cursor:pointer;
+      align-items:center;
+      justify-content:center;
       position:relative;
+      flex-shrink:0;
     }
+
+    .menu-toggle span,
+    .menu-toggle::before,
+    .menu-toggle::after{
+      content:"";
+      position:absolute;
+      width:20px;
+      height:2px;
+      background:var(--text);
+      border-radius:999px;
+      transition:.22s ease;
+    }
+
+    .menu-toggle span{transform:translateY(0)}
+    .menu-toggle::before{transform:translateY(-6px)}
+    .menu-toggle::after{transform:translateY(6px)}
+    .menu-toggle.active span{opacity:0}
+    .menu-toggle.active::before{transform:rotate(45deg)}
+    .menu-toggle.active::after{transform:rotate(-45deg)}
+
+    .mobile-menu{
+      display:none;
+      border-top:1px solid var(--line);
+      background:rgba(9,9,13,.98);
+    }
+
+    .mobile-menu.open{display:block}
+
+    .mobile-menu-inner{
+      width:min(var(--max), calc(100% - 24px));
+      margin:auto;
+      padding:14px 0 18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .mobile-menu a{
+      padding:12px 14px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .lang-menu{flex-wrap:wrap;padding-top:2px}
+
+    /* HERO */
+    .hero{padding:38px 0 28px}
 
     .hero-grid{
       display:grid;
-      grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);
-      gap:42px;
+      grid-template-columns:minmax(0,1.12fr) minmax(290px,.88fr);
+      gap:26px;
       align-items:center;
+    }
+
+    .hero-logo-wrap{
+      width:min(340px, 78vw);
+      margin:0 0 22px;
+      border-radius:30px;
+      padding:10px;
+      background:linear-gradient(135deg, rgba(240,184,74,.26), rgba(255,122,26,.1), rgba(255,255,255,.04));
+      border:1px solid rgba(240,184,74,.22);
+      box-shadow:0 22px 70px rgba(0,0,0,.42), 0 0 70px rgba(240,184,74,.12);
+    }
+
+    .hero-logo{
+      display:block;
+      width:100%;
+      border-radius:24px;
+      object-fit:cover;
     }
 
     .eyebrow{
@@ -181,11 +251,11 @@
       border:1px solid rgba(240,184,74,.22);
       border-radius:999px;
       padding:9px 14px;
-      font-size:.82rem;
-      font-weight:900;
+      font-size:.78rem;
+      font-weight:1000;
       letter-spacing:.13em;
       text-transform:uppercase;
-      margin-bottom:20px;
+      margin-bottom:16px;
     }
 
     .dot{
@@ -197,11 +267,11 @@
     }
 
     h1{
-      font-size:clamp(3rem, 7.8vw, 7.8rem);
-      line-height:.88;
-      letter-spacing:-.08em;
-      max-width:860px;
+      font-size:clamp(2.45rem, 8vw, 6.8rem);
+      line-height:.9;
+      letter-spacing:-.07em;
       text-transform:uppercase;
+      max-width:760px;
     }
 
     .grad{
@@ -212,17 +282,17 @@
 
     .hero p{
       color:var(--muted);
-      font-size:clamp(1.05rem, 1.55vw, 1.28rem);
+      font-size:clamp(1rem, 1.65vw, 1.18rem);
       line-height:1.6;
       max-width:720px;
-      margin-top:24px;
+      margin-top:18px;
     }
 
     .hero-actions{
       display:flex;
       flex-wrap:wrap;
-      gap:12px;
-      margin-top:30px;
+      gap:10px;
+      margin-top:24px;
     }
 
     .btn{
@@ -230,14 +300,14 @@
       align-items:center;
       justify-content:center;
       gap:10px;
-      min-height:48px;
+      min-height:46px;
       padding:0 18px;
       border-radius:999px;
       border:1px solid var(--line);
       cursor:pointer;
       transition:.2s ease;
-      font-weight:900;
-      font-size:.93rem;
+      font-weight:1000;
+      font-size:.92rem;
     }
 
     .btn-primary{
@@ -247,21 +317,15 @@
       box-shadow:0 12px 36px rgba(255,122,26,.22);
     }
 
-    .btn-secondary{
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-    }
-
+    .btn-secondary{background:rgba(255,255,255,.06);color:var(--text)}
     .btn:hover{transform:translateY(-2px)}
 
     .scoreboard{
       border:1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
-        rgba(13,13,18,.9);
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)), rgba(13,13,18,.9);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:24px;
+      padding:20px;
       position:relative;
       overflow:hidden;
     }
@@ -269,31 +333,27 @@
     .scoreboard::before{
       content:"";
       position:absolute;
-      width:260px;
-      height:260px;
+      width:220px;
+      height:220px;
       border-radius:50%;
       background:rgba(240,184,74,.12);
-      filter:blur(30px);
-      top:-90px;
-      right:-90px;
+      filter:blur(28px);
+      top:-80px;
+      right:-80px;
     }
 
     .score-title{
       position:relative;
       display:flex;
       justify-content:space-between;
-      gap:18px;
+      gap:14px;
       align-items:flex-start;
       border-bottom:1px solid var(--line);
-      padding-bottom:18px;
-      margin-bottom:20px;
+      padding-bottom:16px;
+      margin-bottom:18px;
     }
 
-    .score-title h2{
-      font-size:1.1rem;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-    }
+    .score-title h2{font-size:1rem;text-transform:uppercase;letter-spacing:.08em}
 
     .badge{
       background:rgba(102,255,153,.11);
@@ -301,72 +361,76 @@
       border:1px solid rgba(102,255,153,.22);
       border-radius:999px;
       padding:7px 10px;
-      font-size:.78rem;
-      font-weight:900;
+      font-size:.75rem;
+      font-weight:1000;
       white-space:nowrap;
     }
 
-    .stat-grid{
-      position:relative;
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-    }
+    .stat-grid{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 
     .stat{
       border:1px solid var(--line);
       background:rgba(255,255,255,.045);
       border-radius:18px;
-      padding:16px;
+      padding:14px;
     }
 
-    .stat strong{
-      display:block;
-      font-size:2.2rem;
-      letter-spacing:-.05em;
-      color:var(--gold);
-      line-height:1;
-    }
+    .stat strong{display:block;font-size:2rem;letter-spacing:-.05em;color:var(--gold);line-height:1}
+    .stat span{display:block;color:var(--muted);margin-top:8px;line-height:1.35;font-size:.86rem}
 
-    .stat span{
-      display:block;
-      color:var(--muted);
-      margin-top:8px;
-      line-height:1.35;
-      font-size:.9rem;
-    }
-
-    .section{
-      padding:46px 0;
-    }
+    /* SECTIONS */
+    .section{padding:34px 0}
 
     .section-head{
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
-      gap:20px;
-      margin-bottom:22px;
+      gap:18px;
+      margin-bottom:18px;
     }
 
     .section-head h2{
-      font-size:clamp(2rem,4vw,3.8rem);
+      font-size:clamp(1.9rem,4vw,3.6rem);
       letter-spacing:-.06em;
       line-height:1;
       text-transform:uppercase;
     }
 
-    .section-head p{
-      color:var(--muted);
-      max-width:560px;
-      line-height:1.6;
-    }
+    .section-head p{color:var(--muted);max-width:560px;line-height:1.6}
 
-    .control-bar{
+    .access-path{
       display:grid;
-      grid-template-columns:1fr 220px;
-      gap:12px;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
       margin-bottom:20px;
     }
+
+    .path-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      border-radius:22px;
+      padding:18px;
+    }
+
+    .path-card.free{border-color:rgba(102,255,153,.2);background:rgba(102,255,153,.045)}
+    .path-card.paid{border-color:rgba(240,184,74,.24);background:rgba(240,184,74,.055)}
+
+    .path-card strong{display:block;font-size:1.12rem;letter-spacing:-.03em;margin-bottom:7px}
+    .path-card span{display:block;color:var(--muted);line-height:1.45;font-size:.92rem}
+
+    .roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+
+    .phase{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      border-radius:20px;
+      padding:16px;
+    }
+
+    .phase strong{display:block;color:var(--gold);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em;font-size:.74rem}
+    .phase span{display:block;color:var(--muted);line-height:1.45;font-size:.92rem}
+
+    .control-bar{display:grid;grid-template-columns:1fr 240px;gap:10px;margin-bottom:18px}
 
     .search,.select{
       width:100%;
@@ -380,53 +444,39 @@
 
     .select option{color:#111}
 
-    .coach-grid{
-      display:flex;
-      flex-direction:column;
-      gap:22px;
-    }
+    /* GROUP LISTS */
+    .coach-grid{display:flex;flex-direction:column;gap:18px}
 
     .coach-group{
       border:1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)),
-        rgba(13,13,18,.9);
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)), rgba(13,13,18,.9);
       border-radius:var(--radius);
       overflow:hidden;
       box-shadow:0 14px 44px rgba(0,0,0,.25);
     }
 
-    .group-head{
+    .group-toggle{
+      width:100%;
+      border:0;
+      color:var(--text);
+      text-align:left;
+      cursor:pointer;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      padding:18px 20px;
+      padding:18px 16px;
       background:rgba(255,255,255,.045);
       border-bottom:1px solid var(--line);
     }
 
-    .group-kicker{
-      color:var(--gold);
-      font-size:.74rem;
-      font-weight:1000;
-      letter-spacing:.13em;
-      text-transform:uppercase;
-      margin-bottom:6px;
-    }
+    .group-toggle:hover{background:rgba(240,184,74,.065)}
 
-    .group-title{
-      font-size:1.25rem;
-      letter-spacing:-.03em;
-      line-height:1.1;
-    }
+    .group-kicker{color:var(--gold);font-size:.74rem;font-weight:1000;letter-spacing:.13em;text-transform:uppercase;margin-bottom:6px}
+    .group-title{font-size:1.18rem;letter-spacing:-.03em;line-height:1.1;margin-bottom:6px}
+    .group-sub{color:var(--muted);line-height:1.45;font-size:.9rem;max-width:760px}
 
-    .group-meta{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
+    .group-meta{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
 
     .pill{
       border:1px solid rgba(240,184,74,.25);
@@ -434,309 +484,203 @@
       background:rgba(240,184,74,.08);
       border-radius:999px;
       padding:8px 11px;
-      font-size:.78rem;
+      font-size:.76rem;
       font-weight:1000;
       white-space:nowrap;
     }
 
-    .pill.free{
-      color:var(--green);
-      border-color:rgba(102,255,153,.24);
-      background:rgba(102,255,153,.08);
-    }
+    .pill.free{color:var(--green);border-color:rgba(102,255,153,.24);background:rgba(102,255,153,.08)}
+    .pill.lock{color:#ffdb8d}
 
-    .coach-list{
-      display:flex;
-      flex-direction:column;
-    }
-
-    .coach-card{
-      border-bottom:1px solid var(--line);
-      background:rgba(255,255,255,.018);
-      transition:.2s ease;
-      display:grid;
-      grid-template-columns:86px minmax(0,1fr) auto;
-      gap:16px;
+    .chevron{
+      width:34px;
+      height:34px;
+      display:inline-flex;
       align-items:center;
-      padding:14px 16px;
-    }
-
-    .coach-card:last-child{border-bottom:none}
-
-    .coach-card:hover{
-      background:rgba(240,184,74,.07);
-    }
-
-    .thumb{
-      position:relative;
-      width:86px;
-      height:62px;
-      border-radius:16px;
-      background:
-        radial-gradient(circle at center, rgba(240,184,74,.14), transparent 42%),
-        linear-gradient(135deg,#19151a,#08080d);
-      overflow:hidden;
+      justify-content:center;
       border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--gold);
+      transition:.2s ease;
       flex-shrink:0;
     }
 
-    .thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      opacity:.92;
-    }
+    .coach-group.closed .chevron{transform:rotate(-90deg)}
+    .coach-group.closed .coach-list{display:none}
 
-    .thumb::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg, transparent 30%, rgba(5,5,7,.55));
-    }
+    .coach-list{display:flex;flex-direction:column}
 
-    .num{
-      position:absolute;
-      top:7px;
-      left:7px;
-      z-index:2;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(0,0,0,.58);
-      backdrop-filter:blur(10px);
-      border-radius:999px;
-      padding:4px 7px;
-      font-weight:1000;
-      letter-spacing:.08em;
-      color:var(--gold);
-      font-size:.66rem;
-    }
-
-    .coach-body{
-      min-width:0;
-    }
-
-    .topic{
-      color:var(--gold);
-      text-transform:uppercase;
-      letter-spacing:.13em;
-      font-size:.68rem;
-      font-weight:1000;
-      margin-bottom:4px;
-    }
-
-    .coach-body h3{
-      font-size:1.06rem;
-      line-height:1.15;
-      letter-spacing:-.03em;
-      margin-bottom:5px;
-    }
-
-    .purpose{
-      color:var(--muted);
-      line-height:1.4;
-      font-size:.88rem;
-      max-width:820px;
-    }
-
-    .starter-box{
-      color:#ddd6c8;
-      line-height:1.35;
-      font-size:.84rem;
-      margin-top:7px;
-    }
-
-    .card-actions{
-      display:flex;
+    .coach-row{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:12px;
       align-items:center;
-      justify-content:flex-end;
-      gap:8px;
-    }
-
-    .mini-btn{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      border-radius:14px;
-      min-height:42px;
-      cursor:pointer;
-      font-weight:900;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.018);
       transition:.2s ease;
     }
 
-    .mini-btn:hover{
-      background:rgba(240,184,74,.14);
-      border-color:rgba(240,184,74,.28);
+    .coach-row:last-child{border-bottom:none}
+    .coach-row:hover{background:rgba(240,184,74,.07)}
+
+    .coach-main{min-width:0}
+    .coach-topline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+
+    .coach-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:44px;
+      padding:5px 9px;
+      border-radius:999px;
+      border:1px solid rgba(240,184,74,.24);
+      background:rgba(240,184,74,.08);
+      color:var(--gold);
+      font-size:.72rem;
+      font-weight:1000;
+      letter-spacing:.08em;
     }
 
-    .mini-btn.open{
+    .coach-topic{color:var(--gold);text-transform:uppercase;letter-spacing:.13em;font-size:.68rem;font-weight:1000}
+    .coach-name{font-size:1rem;line-height:1.18;letter-spacing:-.02em;margin-bottom:4px}
+    .coach-purpose{color:var(--muted);line-height:1.45;font-size:.88rem;max-width:780px}
+
+    .open-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:14px;
+      border:1px solid transparent;
       background:linear-gradient(135deg, rgba(240,184,74,.96), rgba(255,122,26,.96));
       color:#100a02;
-      border-color:transparent;
+      font-weight:1000;
+      font-size:.88rem;
+      white-space:nowrap;
+      transition:.2s ease;
     }
 
-    .mini-btn.open.is-empty{
-      background:rgba(255,255,255,.05);
-      color:var(--muted);
-      cursor:not-allowed;
-    }
-
-    .roadmap{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:12px;
-    }
-
-    .phase{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      border-radius:20px;
-      padding:18px;
-    }
-
-    .phase strong{
-      display:block;
-      color:var(--gold);
-      margin-bottom:8px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-size:.75rem;
-    }
-
-    .phase span{
-      display:block;
-      color:var(--muted);
-      line-height:1.45;
-      font-size:.94rem;
-    }
+    .open-btn:hover{transform:translateY(-1px)}
 
     .final-cta{
       text-align:center;
       border:1px solid rgba(240,184,74,.22);
-      background:
-        radial-gradient(circle at center top, rgba(240,184,74,.16), transparent 42%),
-        rgba(13,13,18,.86);
-      border-radius:32px;
-      padding:44px 24px;
+      background:radial-gradient(circle at center top, rgba(240,184,74,.16), transparent 42%), rgba(13,13,18,.86);
+      border-radius:28px;
+      padding:34px 20px;
       box-shadow:var(--shadow);
     }
 
-    .final-cta h2{
-      font-size:clamp(2.1rem,5vw,5rem);
-      line-height:.95;
-      letter-spacing:-.07em;
-      text-transform:uppercase;
-      margin-bottom:18px;
-    }
+    .final-cta h2{font-size:clamp(2rem,5vw,4.6rem);line-height:.95;letter-spacing:-.07em;text-transform:uppercase;margin-bottom:14px}
+    .final-cta p{color:var(--muted);max-width:760px;margin:0 auto 22px;line-height:1.6;font-size:1rem}
 
-    .final-cta p{
-      color:var(--muted);
-      max-width:760px;
-      margin:0 auto 26px;
-      line-height:1.6;
-      font-size:1.08rem;
-    }
+    footer{padding:32px 0 50px;color:var(--muted);text-align:center;border-top:1px solid var(--line);margin-top:32px}
 
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:24px;
-      transform:translateX(-50%) translateY(20px);
-      background:#111117;
-      border:1px solid rgba(240,184,74,.28);
-      color:var(--text);
-      border-radius:999px;
-      padding:12px 18px;
-      opacity:0;
-      pointer-events:none;
-      transition:.25s ease;
-      z-index:50;
-      box-shadow:var(--shadow);
-      font-weight:800;
-    }
-
-    .toast.show{
-      opacity:1;
-      transform:translateX(-50%) translateY(0);
-    }
-
-    .hidden{display:none!important}
-
-    [data-lang="es"] .en,
-    [data-lang="en"] .es{display:none!important}
-
-    footer{
-      padding:36px 0 54px;
-      color:var(--muted);
-      text-align:center;
-      border-top:1px solid var(--line);
-      margin-top:40px;
-    }
-
+    /* MOBILE */
     @media (max-width: 980px){
       .hero-grid{grid-template-columns:1fr}
       .roadmap{grid-template-columns:repeat(2,1fr)}
     }
 
+    @media (max-width: 820px){
+      .nav-links,.lang-inline{display:none}
+      .menu-toggle{display:flex}
+      .hero{padding:28px 0 24px}
+      .hero-logo-wrap{margin-inline:auto;width:min(300px, 84vw)}
+      .hero-copy{text-align:center}
+      .eyebrow{margin-left:auto;margin-right:auto}
+      .hero p{margin-left:auto;margin-right:auto}
+      .section{padding:28px 0}
+    }
+
     @media (max-width: 720px){
-      .nav-inner{align-items:flex-start;flex-direction:column}
-      .nav-links{flex-wrap:wrap}
-      .hero{padding-top:44px}
-      .control-bar{grid-template-columns:1fr}
-      .roadmap{grid-template-columns:1fr}
+      .wrap,.nav-inner,.mobile-menu-inner{width:min(var(--max), calc(100% - 18px))}
       .section-head{align-items:flex-start;flex-direction:column}
-      .stat-grid{grid-template-columns:1fr 1fr}
-      .group-head{align-items:flex-start;flex-direction:column}
+      .control-bar,.access-path{grid-template-columns:1fr}
+      .roadmap{grid-template-columns:1fr}
+      .group-toggle{align-items:flex-start;flex-direction:column}
       .group-meta{justify-content:flex-start}
-      .coach-card{
-        grid-template-columns:70px minmax(0,1fr);
-        gap:12px;
-        padding:13px;
-      }
-      .thumb{width:70px;height:54px;border-radius:14px}
-      .card-actions{
-        grid-column:1 / -1;
-        width:100%;
-        display:grid;
-        grid-template-columns:1fr;
-      }
-      .starter-box{display:none}
-      h1{font-size:clamp(3rem, 17vw, 5.4rem)}
+      .coach-row{grid-template-columns:1fr;gap:12px}
+      .open-btn{width:100%}
+      .stat-grid{grid-template-columns:1fr 1fr}
+      h1{font-size:clamp(2.45rem, 14vw, 4.6rem)}
+      .hero-actions{display:grid;grid-template-columns:1fr}
+      .btn{width:100%}
+      .brand-copy strong{font-size:.95rem}
     }
   </style>
 </head>
 <body data-lang="en">
+
   <nav class="nav">
     <div class="nav-inner">
       <a class="brand-mark" href="#top" aria-label="Basketball Money Home Court">
-        <span class="ball" aria-hidden="true"></span>
+        <img class="nav-logo" src="hoops-money.png" alt="Basketball Money logo" />
         <span class="brand-copy">
           <small>Basketball Money</small>
           <strong>Home Court</strong>
         </span>
       </a>
+
       <div class="nav-links">
         <a href="#system"><span class="en">System</span><span class="es">Sistema</span></a>
         <a href="#coaches"><span class="en">Coaches</span><span class="es">Coaches</span></a>
         <a href="#blueprint"><span class="en">Blueprint</span><span class="es">Blueprint</span></a>
       </div>
+
+      <div class="nav-actions">
+        <div class="lang-inline" aria-label="Language toggle">
+          <button class="active" data-set-lang="en">English</button>
+          <button data-set-lang="es">Español PR</button>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+        </button>
+      </div>
     </div>
-    <div class="lang-toggle" aria-label="Language toggle">
-      <button class="active" data-set-lang="en">English</button>
-      <button data-set-lang="es">Español PR</button>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-inner">
+        <a href="#system" class="mobile-link"><span class="en">System</span><span class="es">Sistema</span></a>
+        <a href="#coaches" class="mobile-link"><span class="en">Coach Roster</span><span class="es">Roster de Coaches</span></a>
+        <a href="#blueprint" class="mobile-link"><span class="en">Blueprint</span><span class="es">Blueprint</span></a>
+
+        <div class="lang-menu">
+          <button class="active" data-set-lang="en">English</button>
+          <button data-set-lang="es">Español PR</button>
+        </div>
+      </div>
     </div>
   </nav>
 
   <main id="top">
     <section class="hero">
       <div class="wrap hero-grid">
-        <div>
-          <div class="eyebrow"><span class="dot"></span><span class="en">The Business of Basketball</span><span class="es">El Negocio del Baloncesto</span></div>
-          <h1><span class="en">Your Home Court for <span class="grad">Basketball Money</span></span><span class="es">Tu Home Court de <span class="grad">Basketball Money</span></span></h1>
-          <p class="en">Thirty focused MyGPT coaches. One player-development system. Build value, habits, control, proof, brand, relationships, visibility, leverage, and the complete Basketball Money Blueprint.</p>
-          <p class="es">Treinta MyGPT coaches enfocados. Un sistema completo de desarrollo para jugadores. Construye valor, hábitos, control, prueba, marca, relaciones, visibilidad, ventaja y el Blueprint completo de Basketball Money.</p>
+        <div class="hero-copy">
+          <div class="hero-logo-wrap">
+            <img class="hero-logo" src="hoops-money.png" alt="Basketball Money logo" />
+          </div>
+
+          <div class="eyebrow">
+            <span class="dot"></span>
+            <span class="en">The Business of Basketball</span>
+            <span class="es">El Negocio del Baloncesto</span>
+          </div>
+
+          <h1>
+            <span class="en">Your Home Court for <span class="grad">Basketball Money</span></span>
+            <span class="es">Tu Home Court de <span class="grad">Basketball Money</span></span>
+          </h1>
+
+          <p class="en">Thirty MyGPT coaches. One player-development system. Organized for mobile, grouped by access level, and connected to the full Basketball Money pathway.</p>
+          <p class="es">Treinta MyGPT coaches. Un sistema completo de desarrollo. Organizado para móvil, agrupado por nivel de acceso y conectado al camino completo de Basketball Money.</p>
+
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#coaches"><span class="en">Enter the Coach Roster</span><span class="es">Entrar al Roster de Coaches</span></a>
-            <a class="btn btn-secondary" href="#blueprint"><span class="en">Go to the Blueprint</span><span class="es">Ir al Blueprint</span></a>
+            <a class="btn btn-primary" href="#coaches"><span class="en">Start Free</span><span class="es">Empezar Gratis</span></a>
+            <a class="btn btn-secondary" href="#paid"><span class="en">Go Paid</span><span class="es">Ir a Pago</span></a>
           </div>
         </div>
 
@@ -745,11 +689,12 @@
             <h2><span class="en">System Scoreboard</span><span class="es">Marcador del Sistema</span></h2>
             <span class="badge"><span class="en">Full Roster</span><span class="es">Roster Completo</span></span>
           </div>
+
           <div class="stat-grid">
             <div class="stat"><strong>30</strong><span class="en">MyGPT Coaches</span><span class="es">MyGPT Coaches</span></div>
-            <div class="stat"><strong>5</strong><span class="en">Development Phases</span><span class="es">Fases de Desarrollo</span></div>
+            <div class="stat"><strong>6</strong><span class="en">Groups</span><span class="es">Grupos</span></div>
+            <div class="stat"><strong>5</strong><span class="en">Paid COG Layers</span><span class="es">Capas COG Pagas</span></div>
             <div class="stat"><strong>2</strong><span class="en">Languages</span><span class="es">Idiomas</span></div>
-            <div class="stat"><strong>1</strong><span class="en">Blueprint</span><span class="es">Blueprint</span></div>
           </div>
         </aside>
       </div>
@@ -759,15 +704,30 @@
       <div class="wrap">
         <div class="section-head">
           <h2><span class="en">The System</span><span class="es">El Sistema</span></h2>
-          <p class="en">The player moves from understanding value to building proof, then into basketball IQ, leadership, leverage, future self, and the final Blueprint.</p>
-          <p class="es">El jugador se mueve desde entender su valor hasta construir prueba, luego entra en IQ de baloncesto, liderazgo, ventaja, futuro personal y el Blueprint final.</p>
+          <p class="en">The player moves from value and habits into proof, then deeper into basketball IQ, leadership, leverage, future self, and the final Blueprint.</p>
+          <p class="es">El jugador se mueve desde valor y hábitos hacia prueba, luego más profundo en IQ de baloncesto, liderazgo, ventaja, futuro personal y el Blueprint final.</p>
         </div>
+
+        <div class="access-path" id="paid">
+          <div class="path-card free">
+            <strong><span class="en">🔓 Free Start: 001–005</span><span class="es">🔓 Inicio Gratis: 001–005</span></strong>
+            <span class="en">The free entry builds the player’s foundation: value, habits, control, opportunity, and brand.</span>
+            <span class="es">La entrada gratis construye la base del jugador: valor, hábitos, control, oportunidad y marca.</span>
+          </div>
+          <div class="path-card paid">
+            <strong><span class="en">🔒 Paid Path: 006–030</span><span class="es">🔒 Ruta Paga: 006–030</span></strong>
+            <span class="en">Each paid bundle includes five MyGPT coaches plus one Cognitive Training Drill.</span>
+            <span class="es">Cada paquete pago incluye cinco MyGPT coaches más un Cognitive Training Drill.</span>
+          </div>
+        </div>
+
         <div class="roadmap">
-          <div class="phase"><strong>Phase 1</strong><span class="en">Value, habits, control, opportunity, brand, money mindset.</span><span class="es">Valor, hábitos, control, oportunidad, marca y mentalidad de dinero.</span></div>
-          <div class="phase"><strong>Phase 2</strong><span class="en">Proof, compounding, relationships, visibility.</span><span class="es">Prueba, efecto compuesto, relaciones y visibilidad.</span></div>
-          <div class="phase"><strong>Phase 3</strong><span class="en">Pattern recognition, space, decisions, recall, vision.</span><span class="es">Patrones, espacio, decisiones, memoria bajo presión y visión.</span></div>
-          <div class="phase"><strong>Phase 4</strong><span class="en">Anticipation, reaction, adaptability, role, communication, leadership.</span><span class="es">Anticipación, reacción, adaptación, rol, comunicación y liderazgo.</span></div>
-          <div class="phase"><strong>Phase 5</strong><span class="en">Consistency, resilience, accountability, coachability, identity, leverage, future self, blueprint.</span><span class="es">Consistencia, resiliencia, responsabilidad, coachability, identidad, ventaja, futuro y blueprint.</span></div>
+          <div class="phase"><strong><span class="en">Free Entry</span><span class="es">Entrada Gratis</span></strong><span class="en">001–005: Value, habits, control, opportunity, and brand.</span><span class="es">001–005: Valor, hábitos, control, oportunidad y marca.</span></div>
+          <div class="phase"><strong>COG 01</strong><span class="en">006–010: Money mindset, proof, compound effect, opportunity mindset, and relationships.</span><span class="es">006–010: Mentalidad de dinero, prueba, efecto compuesto, mentalidad de oportunidad y relaciones.</span></div>
+          <div class="phase"><strong>COG 02</strong><span class="en">011–015: Visibility plus the first IQ layer.</span><span class="es">011–015: Visibilidad más la primera capa de IQ.</span></div>
+          <div class="phase"><strong>COG 03</strong><span class="en">016–020: Vision, anticipation, reaction control, adaptability, and role intelligence.</span><span class="es">016–020: Visión, anticipación, control de reacción, adaptabilidad e inteligencia de rol.</span></div>
+          <div class="phase"><strong>COG 04</strong><span class="en">021–025: Communication, leadership, consistency, resilience, and accountability.</span><span class="es">021–025: Comunicación, liderazgo, consistencia, resiliencia y responsabilidad.</span></div>
+          <div class="phase"><strong>COG 05</strong><span class="en">026–030: Coachability, game identity, leverage, future self, and the full Blueprint.</span><span class="es">026–030: Coachability, identidad de juego, ventaja, futuro personal y el Blueprint completo.</span></div>
         </div>
       </div>
     </section>
@@ -776,13 +736,13 @@
       <div class="wrap">
         <div class="section-head">
           <h2><span class="en">Coach Roster</span><span class="es">Roster de Coaches</span></h2>
-          <p class="en">The full roster is now organized into groups of five: 001–005 are free, then every paid bundle includes five coaches plus one Cognitive Training Drill.</p>
-          <p class="es">El roster completo ahora está organizado en grupos de cinco: 001–005 son gratis, y cada paquete pago incluye cinco coaches más un Cognitive Training Drill.</p>
+          <p class="en">Organized by group of five. 001–005 are free. Every group after that is a paid bundle connected to one COG drill.</p>
+          <p class="es">Organizado en grupos de cinco. 001–005 son gratis. Cada grupo después de eso es un paquete pago conectado a un COG drill.</p>
         </div>
 
         <div class="control-bar">
           <input id="search" class="search" type="search" placeholder="Search coaches, topics, purpose..." aria-label="Search coaches" />
-          <select id="phaseFilter" class="select" aria-label="Filter by phase">
+          <select id="groupFilter" class="select" aria-label="Filter by group">
             <option value="all">All Groups</option>
             <option value="free">Free Access: 001–005</option>
             <option value="paid-1">Paid Bundle: 006–010 + COG 01</option>
@@ -801,12 +761,9 @@
       <div class="wrap">
         <div class="final-cta">
           <h2><span class="en">The Final Blueprint</span><span class="es">El Blueprint Final</span></h2>
-          <p class="en">The final coach pulls everything together into one complete player map: value, proof, brand, relationships, visibility, opportunity, leverage, future self, and next move.</p>
+          <p class="en">The final coach brings everything together into one complete player map: value, proof, brand, relationships, visibility, opportunity, leverage, future self, and next move.</p>
           <p class="es">El coach final une todo en un mapa completo del jugador: valor, prueba, marca, relaciones, visibilidad, oportunidad, ventaja, futuro personal y próximo movimiento.</p>
-          <a class="btn btn-primary" href="#coaches">
-            <span class="en">Open the Coach Roster</span>
-            <span class="es">Abrir el Roster de Coaches</span>
-          </a>
+          <a class="btn btn-primary" href="https://chatgpt.com/g/g-69f072a6005c8191ac983fd3be188111-basketball-money-the-blueprint-coach" target="_blank" rel="noopener noreferrer"><span class="en">Open the Blueprint Coach</span><span class="es">Abrir el Blueprint Coach</span></a>
         </div>
       </div>
     </section>
@@ -819,96 +776,41 @@
     </div>
   </footer>
 
-  <div id="toast" class="toast">Copied</div>
-
   <script>
     const coaches = [
-      {n:'001', phase:'foundation', img:'/images/image-001.png', name:'Basketball Money: The Value Coach', topic:'Value', purpose:{en:'Helps players define their basketball value beyond points and understand why coaches, teams, sponsors, or brands would choose them.', es:'Ayuda a los jugadores a definir su valor más allá de los puntos y entender por qué coaches, equipos, auspiciadores o marcas los escogerían.'}, starter:{en:'Coach me through what my basketball value is, who it helps, and how I can turn it into real opportunity.', es:'Entréname para entender cuál es mi valor en el baloncesto, a quién ayuda y cómo puedo convertirlo en una oportunidad real.'}, url:'https://chatgpt.com/g/g-69f05969132c819198162a679f1a9871-basketball-money-the-value-coach'},
-      {n:'002', phase:'foundation', img:'/images/image-002.png', name:'Basketball Money: The Habit Coach', topic:'Habits', purpose:{en:'Helps players identify the daily habits that build or damage their basketball future.', es:'Ayuda a los jugadores a identificar los hábitos diarios que construyen o dañan su futuro en el baloncesto.'}, starter:{en:'Coach me through the habits that are building or hurting my basketball value.', es:'Entréname para identificar los hábitos que están construyendo o dañando mi valor en el baloncesto.'}, url:'https://chatgpt.com/g/g-69f05a2beab0819198ff094ae9f71fe4-habits-basketball-money-the-habits-coach'},
-      {n:'003', phase:'foundation', img:'/images/image-003.png', name:'Basketball Money: The Control Coach', topic:'Control', purpose:{en:'Helps players master tempo, decisions, emotion, body language, and pressure.', es:'Ayuda a los jugadores a dominar ritmo, decisiones, emociones, lenguaje corporal y presión.'}, starter:{en:'Coach me through how I control tempo, pressure, decisions, and attention — and help me turn control into basketball value.', es:'Entréname para entender cómo controlo el ritmo, la presión, mis decisiones y la atención — y ayúdame a convertir ese control en valor de baloncesto.'}, url:'https://chatgpt.com/g/g-69f05bcd97ac8191b7c8d52a4d4d93ca-control-basketball-money-the-control-coach'},
-      {n:'004', phase:'foundation', img:'/images/image-004.png', name:'Basketball Money: The Opportunity Coach', topic:'Opportunity', purpose:{en:'Helps players recognize, create, and convert basketball opportunities.', es:'Ayuda a los jugadores a reconocer, crear y convertir oportunidades en el baloncesto.'}, starter:{en:'Coach me through the opportunities I already have around me and help me see which ones I am missing.', es:'Entréname para ver las oportunidades que ya tengo alrededor y ayúdame a identificar cuáles estoy dejando pasar.'}, url:'https://chatgpt.com/g/g-69f05d5f264c8191b372752a5881e5b7-basketball-money-the-opportunity-coach'},
-      {n:'005', phase:'foundation', img:'/images/image-005.png', name:'Basketball Money: The Brand Coach', topic:'Brand', purpose:{en:'Helps players build a real basketball brand based on identity, value, reputation, and proof.', es:'Ayuda a los jugadores a construir una marca real basada en identidad, valor, reputación y prueba.'}, starter:{en:'Coach me through what my basketball brand is and help me understand what people remember about me.', es:'Entréname para entender cuál es mi marca como jugador y qué es lo que la gente recuerda de mí.'}, url:'https://chatgpt.com/g/g-69f05ea7975c819194457ff104bb72de-basketball-money-the-brand-coach'},
-      {n:'006', phase:'foundation', img:'/images/image-006.png', name:'Basketball Money: The Money Mindset Coach', topic:'Money Mindset', purpose:{en:'Helps players think like basketball assets by connecting value, discipline, decisions, and opportunity.', es:'Ayuda a los jugadores a pensar como activos de baloncesto conectando valor, disciplina, decisiones y oportunidad.'}, starter:{en:'Coach me through my basketball money mindset and help me understand how my value can create future opportunity.', es:'Entréname para desarrollar mi mentalidad de Basketball Money y ayúdame a entender cómo mi valor puede crear oportunidades futuras.'}, url:'https://chatgpt.com/g/g-69f05f44fb948191a56202be75fda6b0-basketball-money-the-money-mindset-coach'},
-      {n:'007', phase:'proof', img:'/images/image-007.png', name:'Basketball Money: The Proof Coach', topic:'Build Proof', purpose:{en:'Helps players build evidence of their value through film, habits, results, trust, and visible work.', es:'Ayuda a los jugadores a construir evidencia de su valor a través de video, hábitos, resultados, confianza y trabajo visible.'}, starter:{en:'Coach me through what proof I need to build so coaches, teams, sponsors, or brands can believe my value.', es:'Entréname para saber qué prueba necesito construir para que coaches, equipos, auspiciadores o marcas crean en mi valor.'}, url:'https://chatgpt.com/g/g-69f05fe4b7c48191a6ecaa2d81789325-basketball-money-the-proof-coach'},
-      {n:'008', phase:'proof', img:'/images/image-008.png', name:'Basketball Money: The Compounding Coach', topic:'The Compound Effect', purpose:{en:'Helps players turn small daily actions into long-term basketball value and opportunity.', es:'Ayuda a los jugadores a convertir pequeñas acciones diarias en valor y oportunidad a largo plazo.'}, starter:{en:'Coach me through the small daily actions that are helping or hurting my basketball future.', es:'Entréname para identificar las pequeñas acciones diarias que están ayudando o dañando mi futuro en el baloncesto.'}, url:'https://chatgpt.com/g/g-69f06097bf5481918032b16b71b2fcd3-basketball-money-the-compounding-coach'},
-      {n:'009', phase:'proof', img:'/images/image-009.png', name:'Basketball Money: The Opportunity Mindset Coach', topic:'Opportunity Mindset', purpose:{en:'Helps players develop the mindset to see, prepare for, create, and convert opportunity.', es:'Ayuda a los jugadores a desarrollar la mentalidad para ver, prepararse, crear y convertir oportunidades.'}, starter:{en:'Coach me through the opportunity mindset I need so I can stop waiting and start creating real basketball chances.', es:'Entréname para desarrollar la mentalidad de oportunidad que necesito para dejar de esperar y empezar a crear oportunidades reales en el baloncesto.'}, url:'https://chatgpt.com/g/g-69f061401c0c8191907e8ece6f274a8d-basketball-money-the-opportunity-mindset-coach'},
-      {n:'010', phase:'proof', img:'/images/image-010.png', name:'Basketball Money: The Relationship Coach', topic:'Relationships', purpose:{en:'Helps players build trusted relationships with coaches, teammates, trainers, scouts, sponsors, and community.', es:'Ayuda a los jugadores a construir relaciones de confianza con coaches, compañeros, entrenadores, scouts, auspiciadores y comunidad.'}, starter:{en:'Coach me through the basketball relationships I already have and help me see which ones can create opportunity.', es:'Entréname para entender las relaciones de baloncesto que ya tengo y ayúdame a ver cuáles pueden crear oportunidad.'}, url:'https://chatgpt.com/g/g-69f062bab3c481919cb3720f6b9de4e1-basketball-money-the-relationship-coach'},
-      {n:'011', phase:'proof', img:'/images/image-011.png', name:'Basketball Money: The Visibility Coach', topic:'Visibility', purpose:{en:'Helps players become visible for the right reasons through proof, brand, relationships, and trust.', es:'Ayuda a los jugadores a hacerse visibles por las razones correctas con prueba, marca, relaciones y confianza.'}, starter:{en:'Coach me through who needs to see my basketball value and how I can become visible for the right reasons.', es:'Entréname para saber quién necesita ver mi valor en el baloncesto y cómo puedo hacerme visible por las razones correctas.'}, url:'https://chatgpt.com/g/g-69f06352c54c81919551f0edc0316100-basketball-money-the-visibility-coach'},
-      {n:'012', phase:'iq', img:'/images/image-012.png', name:'Basketball Money: The Pattern Coach', topic:'Pattern Recognition', purpose:{en:'Helps players recognize basketball patterns in plays, habits, defenders, teammates, pressure, and timing.', es:'Ayuda a los jugadores a reconocer patrones en jugadas, hábitos, defensores, compañeros, presión y timing.'}, starter:{en:'Coach me through the basketball patterns I already recognize and the ones I keep missing.', es:'Entréname para identificar los patrones de baloncesto que ya reconozco y los que todavía sigo perdiendo.'}, url:'https://chatgpt.com/g/g-69f063f036a88191a247a78c12999edc-basketball-money-the-pattern-coach'},
-      {n:'013', phase:'iq', img:'/images/image-013.png', name:'Basketball Money: The Space Coach', topic:'Spatial Awareness', purpose:{en:'Helps players read space, spacing, angles, lanes, timing, and positioning.', es:'Ayuda a los jugadores a leer espacio, spacing, ángulos, líneas, timing y posicionamiento.'}, starter:{en:'Coach me through my spatial awareness and help me understand how I use space, lanes, angles, and positioning.', es:'Entréname para entender mi conciencia espacial y cómo uso el espacio, las líneas, los ángulos y mi posición en la cancha.'}, url:'https://chatgpt.com/g/g-69f0649be3988191b4db25b9a921dc48-basketball-money-the-space-coach'},
-      {n:'014', phase:'iq', img:'/images/image-014.png', name:'Basketball Money: The Decision Speed Coach', topic:'Decision Speed', purpose:{en:'Helps players make faster, smarter decisions without playing rushed.', es:'Ayuda a los jugadores a tomar decisiones más rápidas e inteligentes sin jugar apresurados.'}, starter:{en:'Coach me through my decision speed and help me understand where I hesitate, rush, or make the right read.', es:'Entréname para entender mi velocidad de decisión y ayúdame a ver dónde dudo, dónde me apresuro y dónde leo bien el juego.'}, url:'https://chatgpt.com/g/g-69f0652c63d88191959f903158e64a98-basketball-money-the-decision-speed-coach'},
-      {n:'015', phase:'iq', img:'/images/image-015.png', name:'Basketball Money: The Pressure Recall Coach', topic:'Pressure Recall', purpose:{en:'Helps players remember plays, reads, corrections, and assignments under pressure.', es:'Ayuda a los jugadores a recordar jugadas, lecturas, correcciones y asignaciones bajo presión.'}, starter:{en:'Coach me through what I remember and what I forget when basketball pressure rises.', es:'Entréname para entender qué recuerdo y qué olvido cuando sube la presión en el baloncesto.'}, url:'https://chatgpt.com/g/g-69f065c6854481919379eb458fbfce72-basketball-money-the-pressure-recall-coach'},
-      {n:'016', phase:'iq', img:'/images/image-016.png', name:'Basketball Money: The Vision Coach', topic:'Multi-Target Vision', purpose:{en:'Helps players read multiple targets at once: ball, defenders, teammates, space, timing, and pressure.', es:'Ayuda a los jugadores a leer múltiples objetivos a la vez: balón, defensores, compañeros, espacio, timing y presión.'}, starter:{en:'Coach me through my court vision and help me understand what I see, what I miss, and where my eyes get locked.', es:'Entréname para entender mi visión de cancha, qué veo, qué se me escapa y dónde mis ojos se quedan fijados.'}, url:'https://chatgpt.com/g/g-69f0666152f48191b4c63c780963c05c-basketball-money-the-vision-coach'},
-      {n:'017', phase:'iq', img:'/images/image-017.png', name:'Basketball Money: The Anticipation Coach', topic:'Anticipation', purpose:{en:'Helps players read plays, pressure, mistakes, movement, and opportunity before they happen.', es:'Ayuda a los jugadores a leer jugadas, presión, errores, movimiento y oportunidad antes de que ocurran.'}, starter:{en:'Coach me through what I anticipate well and where I react late during basketball games.', es:'Entréname para entender qué anticipo bien y dónde reacciono tarde durante los juegos de baloncesto.'}, url:'https://chatgpt.com/g/g-69f067bfd34881918fb1c65e3a03af0a-basketball-money-the-anticipation-coach'},
-      {n:'018', phase:'iq', img:'/images/image-018.png', name:'Basketball Money: The Reaction Control Coach', topic:'Reaction Control', purpose:{en:'Helps players react fast with control, discipline, timing, and composure.', es:'Ayuda a los jugadores a reaccionar rápido con control, disciplina, timing y compostura.'}, starter:{en:'Coach me through how I react under pressure and where I need more control.', es:'Entréname para entender cómo reacciono bajo presión y dónde necesito más control.'}, url:'https://chatgpt.com/g/g-69f0685ddf5081918b756cf141545973-basketball-money-the-reaction-control-coach'},
-      {n:'019', phase:'leadership', img:'/images/image-019.png', name:'Basketball Money: The Adaptability Coach', topic:'Adaptability', purpose:{en:'Helps players adjust to changing roles, pressure, matchups, coaches, teammates, and game situations.', es:'Ayuda a los jugadores a ajustarse a cambios de rol, presión, pareos, coaches, compañeros y situaciones del juego.'}, starter:{en:'Coach me through how well I adapt when my role, minutes, matchup, or game situation changes.', es:'Entréname para entender qué tan bien me adapto cuando cambia mi rol, mis minutos, mi pareo o la situación del juego.'}, url:'https://chatgpt.com/g/g-69f0690cb8388191bd6d4c493b700ae9-basketball-money-the-adaptability-coach'},
-      {n:'020', phase:'leadership', img:'/images/image-020.png', name:'Basketball Money: The Role Intelligence Coach', topic:'Role Intelligence', purpose:{en:'Helps players understand their role, create value within it, and earn more trust.', es:'Ayuda a los jugadores a entender su rol, crear valor dentro de ese rol y ganar más confianza.'}, starter:{en:'Coach me through my current basketball role and help me understand how that role creates value.', es:'Entréname para entender mi rol actual en el baloncesto y cómo ese rol crea valor.'}, url:'https://chatgpt.com/g/g-69f069e842d0819190c5e0e22195a4cb-basketball-money-the-role-intelligence-coach'},
-      {n:'021', phase:'leadership', img:'/images/image-021.png', name:'Basketball Money: The Communication Coach', topic:'Communication', purpose:{en:'Helps players use voice, body language, listening, clarity, and presence to create trust.', es:'Ayuda a los jugadores a usar voz, lenguaje corporal, escucha, claridad y presencia para crear confianza.'}, starter:{en:'Coach me through my communication style and help me understand what my voice and body language say about me.', es:'Entréname para entender mi estilo de comunicación y lo que mi voz y mi lenguaje corporal dicen de mí.'}, url:'https://chatgpt.com/g/g-69f06bbc47988191ac5b66b407f3c0e3-basketball-money-the-communication-coach'},
-      {n:'022', phase:'leadership', img:'/images/image-022.png', name:'Basketball Money: The Leadership Coach', topic:'Leadership', purpose:{en:'Helps players build real leadership through trust, standards, communication, accountability, and presence.', es:'Ayuda a los jugadores a construir liderazgo real con confianza, estándares, comunicación, responsabilidad y presencia.'}, starter:{en:'Coach me through my leadership style and help me understand how I influence my team.', es:'Entréname para entender mi estilo de liderazgo y cómo influyo en mi equipo.'}, url:'https://chatgpt.com/g/g-69f06c4cddec8191852faee53014b5ae-basketball-money-the-leadership-coach'},
-      {n:'023', phase:'blueprint', img:'/images/image-023.png', name:'Basketball Money: The Consistency Coach', topic:'Consistency', purpose:{en:'Helps players become reliable through habits, effort, execution, attitude, preparation, and proof.', es:'Ayuda a los jugadores a ser confiables mediante hábitos, esfuerzo, ejecución, actitud, preparación y prueba.'}, starter:{en:'Coach me through where I am consistent and where I lose consistency as a basketball player.', es:'Entréname para entender dónde soy consistente y dónde pierdo consistencia como jugador de baloncesto.'}, url:'https://chatgpt.com/g/g-69f06d413ba48191a19166d9fd20ab8b-basketball-money-the-consistency-coach'},
-      {n:'024', phase:'blueprint', img:'/images/image-024.png', name:'Basketball Money: The Resilience Coach', topic:'Resilience', purpose:{en:'Helps players recover from mistakes, losses, criticism, pressure, and setbacks.', es:'Ayuda a los jugadores a recuperarse de errores, derrotas, críticas, presión y obstáculos.'}, starter:{en:'Coach me through how I respond to mistakes, criticism, pressure, and setbacks as a basketball player.', es:'Entréname para entender cómo respondo a errores, críticas, presión y obstáculos como jugador de baloncesto.'}, url:'https://chatgpt.com/g/g-69f06e4bf344819193f234c281b0185e-basketball-money-the-resilience-coach'},
-      {n:'025', phase:'blueprint', img:'/images/image-025.png', name:'Basketball Money: The Accountability Coach', topic:'Accountability', purpose:{en:'Helps players own their habits, decisions, effort, mistakes, attitude, and growth.', es:'Ayuda a los jugadores a tomar responsabilidad por sus hábitos, decisiones, esfuerzo, errores, actitud y crecimiento.'}, starter:{en:'Coach me through where I take ownership and where I make excuses as a basketball player.', es:'Entréname para entender dónde tomo responsabilidad y dónde pongo excusas como jugador de baloncesto.'}, url:'https://chatgpt.com/g/g-69f06edb6ecc819192bb3b3fe1758041-basketball-money-the-accountability-coach'},
-      {n:'026', phase:'blueprint', img:'/images/image-026.png', name:'Basketball Money: The Coachability Coach', topic:'Coachability', purpose:{en:'Helps players receive correction, apply feedback, build trust, and turn coaching into proof.', es:'Ayuda a los jugadores a recibir corrección, aplicar feedback, construir confianza y convertir coaching en prueba.'}, starter:{en:'Coach me through how I respond to correction and help me become more coachable.', es:'Entréname para entender cómo respondo a la corrección y ayúdame a ser más coachable.'}, url:'https://chatgpt.com/g/g-69f06f7017648191b72212aaed0a3ecf-basketball-money-the-coachability-coach'},
-      {n:'027', phase:'blueprint', img:'/images/image-027.png', name:'Basketball Money: The Game Identity Coach', topic:'Game Identity', purpose:{en:'Helps players define who they are on the court and what value coaches can trust.', es:'Ayuda a los jugadores a definir quiénes son en la cancha y qué valor los coaches pueden confiar.'}, starter:{en:'Coach me through my game identity and help me understand who I really am as a basketball player.', es:'Entréname para entender mi identidad de juego y ayúdame a descubrir quién soy realmente como jugador de baloncesto.'}, url:'https://chatgpt.com/g/g-69f0707368b08191905c75452c1faec2-basketball-money-the-game-identity-coach'},
-      {n:'028', phase:'blueprint', img:'/images/image-028.png', name:'Basketball Money: The Leverage Coach', topic:'Player Leverage', purpose:{en:'Helps players understand how value, proof, brand, relationships, visibility, and trust create options.', es:'Ayuda a los jugadores a entender cómo valor, prueba, marca, relaciones, visibilidad y confianza crean opciones.'}, starter:{en:'Coach me through my player leverage and help me understand what value gives me real basketball options.', es:'Entréname para entender mi ventaja como jugador y ayúdame a descubrir qué valor me puede abrir opciones reales en el baloncesto.'}, url:'https://chatgpt.com/g/g-69f0712ea8208191afe7a3886f133c42-basketball-money-the-leverage-coach'},
-      {n:'029', phase:'blueprint', img:'/images/image-029.png', name:'Basketball Money: The Future Self Coach', topic:'Future Self', purpose:{en:'Helps players connect today’s habits, choices, identity, and value to the future player they are becoming.', es:'Ayuda a los jugadores a conectar los hábitos, decisiones, identidad y valor de hoy con el jugador que están construyendo para el futuro.'}, starter:{en:'Coach me through the future player I am becoming and help me connect today’s habits to tomorrow’s opportunity.', es:'Entréname para entender el jugador que estoy construyendo para el futuro y ayúdame a conectar mis hábitos de hoy con las oportunidades de mañana.'}, url:'https://chatgpt.com/g/g-69f071ec40308191aa9d54f764baf19e-basketball-money-the-future-self-coach'},
-      {n:'030', phase:'blueprint', img:'/images/image-030.png', name:'Basketball Money: The Blueprint Coach', topic:'Basketball Money Blueprint', purpose:{en:'Helps players build the complete final map of value, proof, brand, relationships, visibility, opportunity, and next move.', es:'Ayuda a los jugadores a construir el mapa final completo de valor, prueba, marca, relaciones, visibilidad, oportunidad y próximo movimiento.'}, starter:{en:'Coach me through my complete Basketball Money Blueprint and help me connect my value, proof, brand, relationships, visibility, and opportunity.', es:'Entréname paso a paso en mi Blueprint de Basketball Money y ayúdame a conectar mi valor, prueba, marca, relaciones, visibilidad y oportunidad.'}, url:'https://chatgpt.com/g/g-69f072a6005c8191ac983fd3be188111-basketball-money-the-blueprint-coach'}
+      {n:'001', topic:'Value', name:'Basketball Money: The Value Coach', purpose:{en:'Define basketball value beyond points and explain why coaches, teams, sponsors, or brands would choose the player.', es:'Define el valor en el baloncesto más allá de los puntos y explica por qué coaches, equipos, auspiciadores o marcas escogerían al jugador.'}, url:'https://chatgpt.com/g/g-69f05969132c819198162a679f1a9871-basketball-money-the-value-coach'},
+      {n:'002', topic:'Habits', name:'Basketball Money: The Habit Coach', purpose:{en:'Identify the daily habits that build or damage a player’s basketball future.', es:'Identifica los hábitos diarios que construyen o dañan el futuro del jugador en el baloncesto.'}, url:'https://chatgpt.com/g/g-69f05a2beab0819198ff094ae9f71fe4-habits-basketball-money-the-habits-coach'},
+      {n:'003', topic:'Control', name:'Basketball Money: The Control Coach', purpose:{en:'Master tempo, decisions, emotion, body language, and pressure.', es:'Domina ritmo, decisiones, emociones, lenguaje corporal y presión.'}, url:'https://chatgpt.com/g/g-69f05bcd97ac8191b7c8d52a4d4d93ca-control-basketball-money-the-control-coach'},
+      {n:'004', topic:'Opportunity', name:'Basketball Money: The Opportunity Coach', purpose:{en:'Recognize, create, and convert basketball opportunities.', es:'Reconoce, crea y convierte oportunidades en el baloncesto.'}, url:'https://chatgpt.com/g/g-69f05d5f264c8191b372752a5881e5b7-basketball-money-the-opportunity-coach'},
+      {n:'005', topic:'Brand', name:'Basketball Money: The Brand Coach', purpose:{en:'Build a real basketball brand based on identity, value, reputation, and proof.', es:'Construye una marca real en el baloncesto basada en identidad, valor, reputación y prueba.'}, url:'https://chatgpt.com/g/g-69f05ea7975c819194457ff104bb72de-basketball-money-the-brand-coach'},
+      {n:'006', topic:'Money Mindset', name:'Basketball Money: The Money Mindset Coach', purpose:{en:'Think like a basketball asset by connecting value, discipline, decisions, and opportunity.', es:'Piensa como un activo de baloncesto conectando valor, disciplina, decisiones y oportunidad.'}, url:'https://chatgpt.com/g/g-69f05f44fb948191a56202be75fda6b0-basketball-money-the-money-mindset-coach'},
+      {n:'007', topic:'Build Proof', name:'Basketball Money: The Proof Coach', purpose:{en:'Build proof of value through film, habits, results, trust, and visible work.', es:'Construye prueba de valor a través de video, hábitos, resultados, confianza y trabajo visible.'}, url:'https://chatgpt.com/g/g-69f05fe4b7c48191a6ecaa2d81789325-basketball-money-the-proof-coach'},
+      {n:'008', topic:'The Compound Effect', name:'Basketball Money: The Compounding Coach', purpose:{en:'Turn small daily actions into long-term basketball value and opportunity.', es:'Convierte pequeñas acciones diarias en valor y oportunidad a largo plazo.'}, url:'https://chatgpt.com/g/g-69f06097bf5481918032b16b71b2fcd3-basketball-money-the-compounding-coach'},
+      {n:'009', topic:'Opportunity Mindset', name:'Basketball Money: The Opportunity Mindset Coach', purpose:{en:'Develop the mindset to see, prepare for, create, and convert opportunity.', es:'Desarrolla la mentalidad para ver, prepararse, crear y convertir oportunidades.'}, url:'https://chatgpt.com/g/g-69f061401c0c8191907e8ece6f274a8d-basketball-money-the-opportunity-mindset-coach'},
+      {n:'010', topic:'Relationships', name:'Basketball Money: The Relationship Coach', purpose:{en:'Build trusted relationships with coaches, teammates, trainers, scouts, sponsors, and community.', es:'Construye relaciones de confianza con coaches, compañeros, entrenadores, scouts, auspiciadores y comunidad.'}, url:'https://chatgpt.com/g/g-69f062bab3c481919cb3720f6b9de4e1-basketball-money-the-relationship-coach'},
+      {n:'011', topic:'Visibility', name:'Basketball Money: The Visibility Coach', purpose:{en:'Become visible for the right reasons through proof, brand, relationships, and trust.', es:'Hazte visible por las razones correctas con prueba, marca, relaciones y confianza.'}, url:'https://chatgpt.com/g/g-69f06352c54c81919551f0edc0316100-basketball-money-the-visibility-coach'},
+      {n:'012', topic:'Pattern Recognition', name:'Basketball Money: The Pattern Coach', purpose:{en:'Recognize patterns in plays, habits, defenders, teammates, pressure, and timing.', es:'Reconoce patrones en jugadas, hábitos, defensores, compañeros, presión y timing.'}, url:'https://chatgpt.com/g/g-69f063f036a88191a247a78c12999edc-basketball-money-the-pattern-coach'},
+      {n:'013', topic:'Spatial Awareness', name:'Basketball Money: The Space Coach', purpose:{en:'Read space, spacing, angles, lanes, timing, and positioning.', es:'Lee el espacio, el spacing, los ángulos, las líneas, el timing y el posicionamiento.'}, url:'https://chatgpt.com/g/g-69f0649be3988191b4db25b9a921dc48-basketball-money-the-space-coach'},
+      {n:'014', topic:'Decision Speed', name:'Basketball Money: The Decision Speed Coach', purpose:{en:'Make faster, smarter decisions without playing rushed.', es:'Toma decisiones más rápidas e inteligentes sin jugar apresurado.'}, url:'https://chatgpt.com/g/g-69f0652c63d88191959f903158e64a98-basketball-money-the-decision-speed-coach'},
+      {n:'015', topic:'Pressure Recall', name:'Basketball Money: The Pressure Recall Coach', purpose:{en:'Remember plays, reads, corrections, and assignments under pressure.', es:'Recuerda jugadas, lecturas, correcciones y asignaciones bajo presión.'}, url:'https://chatgpt.com/g/g-69f065c6854481919379eb458fbfce72-basketball-money-the-pressure-recall-coach'},
+      {n:'016', topic:'Multi-Target Vision', name:'Basketball Money: The Vision Coach', purpose:{en:'Read multiple targets at once: ball, defenders, teammates, space, timing, and pressure.', es:'Lee múltiples objetivos a la vez: balón, defensores, compañeros, espacio, timing y presión.'}, url:'https://chatgpt.com/g/g-69f0666152f48191b4c63c780963c05c-basketball-money-the-vision-coach'},
+      {n:'017', topic:'Anticipation', name:'Basketball Money: The Anticipation Coach', purpose:{en:'Read plays, pressure, mistakes, movement, and opportunity before they happen.', es:'Lee jugadas, presión, errores, movimiento y oportunidad antes de que ocurran.'}, url:'https://chatgpt.com/g/g-69f067bfd34881918fb1c65e3a03af0a-basketball-money-the-anticipation-coach'},
+      {n:'018', topic:'Reaction Control', name:'Basketball Money: The Reaction Control Coach', purpose:{en:'React fast with control, discipline, timing, and composure.', es:'Reacciona rápido con control, disciplina, timing y compostura.'}, url:'https://chatgpt.com/g/g-69f0685ddf5081918b756cf141545973-basketball-money-the-reaction-control-coach'},
+      {n:'019', topic:'Adaptability', name:'Basketball Money: The Adaptability Coach', purpose:{en:'Adjust to changing roles, pressure, matchups, coaches, teammates, and game situations.', es:'Ajústate a cambios de rol, presión, pareos, coaches, compañeros y situaciones del juego.'}, url:'https://chatgpt.com/g/g-69f0690cb8388191bd6d4c493b700ae9-basketball-money-the-adaptability-coach'},
+      {n:'020', topic:'Role Intelligence', name:'Basketball Money: The Role Intelligence Coach', purpose:{en:'Understand role, create value within it, and earn more trust.', es:'Entiende tu rol, crea valor dentro de ese rol y gana más confianza.'}, url:'https://chatgpt.com/g/g-69f069e842d0819190c5e0e22195a4cb-basketball-money-the-role-intelligence-coach'},
+      {n:'021', topic:'Communication', name:'Basketball Money: The Communication Coach', purpose:{en:'Use voice, body language, listening, clarity, and presence to create trust.', es:'Usa voz, lenguaje corporal, escucha, claridad y presencia para crear confianza.'}, url:'https://chatgpt.com/g/g-69f06bbc47988191ac5b66b407f3c0e3-basketball-money-the-communication-coach'},
+      {n:'022', topic:'Leadership', name:'Basketball Money: The Leadership Coach', purpose:{en:'Build real leadership through trust, standards, communication, accountability, and presence.', es:'Construye liderazgo real mediante confianza, estándares, comunicación, responsabilidad y presencia.'}, url:'https://chatgpt.com/g/g-69f06c4cddec8191852faee53014b5ae-basketball-money-the-leadership-coach'},
+      {n:'023', topic:'Consistency', name:'Basketball Money: The Consistency Coach', purpose:{en:'Become reliable through habits, effort, execution, attitude, preparation, and proof.', es:'Conviértete en alguien confiable mediante hábitos, esfuerzo, ejecución, actitud, preparación y prueba.'}, url:'https://chatgpt.com/g/g-69f06d413ba48191a19166d9fd20ab8b-basketball-money-the-consistency-coach'},
+      {n:'024', topic:'Resilience', name:'Basketball Money: The Resilience Coach', purpose:{en:'Recover from mistakes, losses, criticism, pressure, and setbacks.', es:'Recupérate de errores, derrotas, críticas, presión y obstáculos.'}, url:'https://chatgpt.com/g/g-69f06e4bf344819193f234c281b0185e-basketball-money-the-resilience-coach'},
+      {n:'025', topic:'Accountability', name:'Basketball Money: The Accountability Coach', purpose:{en:'Own habits, decisions, effort, mistakes, attitude, and growth.', es:'Asume responsabilidad por hábitos, decisiones, esfuerzo, errores, actitud y crecimiento.'}, url:'https://chatgpt.com/g/g-69f06edb6ecc819192bb3b3fe1758041-basketball-money-the-accountability-coach'},
+      {n:'026', topic:'Coachability', name:'Basketball Money: The Coachability Coach', purpose:{en:'Receive correction, apply feedback, build trust, and turn coaching into proof.', es:'Recibe corrección, aplica feedback, construye confianza y convierte coaching en prueba.'}, url:'https://chatgpt.com/g/g-69f06f7017648191b72212aaed0a3ecf-basketball-money-the-coachability-coach'},
+      {n:'027', topic:'Game Identity', name:'Basketball Money: The Game Identity Coach', purpose:{en:'Define who the player is on the court and what value coaches can trust.', es:'Define quién es el jugador en la cancha y qué valor pueden confiar los coaches.'}, url:'https://chatgpt.com/g/g-69f0707368b08191905c75452c1faec2-basketball-money-the-game-identity-coach'},
+      {n:'028', topic:'Player Leverage', name:'Basketball Money: The Leverage Coach', purpose:{en:'Understand how value, proof, brand, relationships, visibility, and trust create options.', es:'Entiende cómo el valor, la prueba, la marca, las relaciones, la visibilidad y la confianza crean opciones.'}, url:'https://chatgpt.com/g/g-69f0712ea8208191afe7a3886f133c42-basketball-money-the-leverage-coach'},
+      {n:'029', topic:'Future Self', name:'Basketball Money: The Future Self Coach', purpose:{en:'Connect today’s habits, choices, identity, and value to the future player being built.', es:'Conecta los hábitos, decisiones, identidad y valor de hoy con el jugador que se está construyendo para el futuro.'}, url:'https://chatgpt.com/g/g-69f071ec40308191aa9d54f764baf19e-basketball-money-the-future-self-coach'},
+      {n:'030', topic:'Basketball Money Blueprint', name:'Basketball Money: The Blueprint Coach', purpose:{en:'Build the complete final map of value, proof, brand, relationships, visibility, opportunity, and next move.', es:'Construye el mapa final completo de valor, prueba, marca, relaciones, visibilidad, oportunidad y próximo movimiento.'}, url:'https://chatgpt.com/g/g-69f072a6005c8191ac983fd3be188111-basketball-money-the-blueprint-coach'}
     ];
 
-    const grid = document.getElementById('coachGrid');
-    const search = document.getElementById('search');
-    const phaseFilter = document.getElementById('phaseFilter');
-    const toast = document.getElementById('toast');
-
-    function lang(){ return document.body.dataset.lang || 'en'; }
-
-    function showToast(message){
-      toast.textContent = message;
-      toast.classList.add('show');
-      clearTimeout(window.toastTimer);
-      window.toastTimer = setTimeout(() => toast.classList.remove('show'), 1500);
-    }
-
-    async function copyText(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        showToast(lang() === 'en' ? 'Starter copied' : 'Prompt copiado');
-      }catch(err){
-        const area = document.createElement('textarea');
-        area.value = text;
-        document.body.appendChild(area);
-        area.select();
-        document.execCommand('copy');
-        area.remove();
-        showToast(lang() === 'en' ? 'Starter copied' : 'Prompt copiado');
-      }
-    }
-
-    function placeholderSvg(n, topic){
-      const safeTopic = topic.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
-          <defs>
-            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-              <stop stop-color="#1b1207" offset="0"/>
-              <stop stop-color="#07070b" offset="1"/>
-            </linearGradient>
-            <radialGradient id="r" cx="50%" cy="42%" r="55%">
-              <stop stop-color="#f0b84a" stop-opacity=".36" offset="0"/>
-              <stop stop-color="#ff7a1a" stop-opacity=".12" offset="45%"/>
-              <stop stop-color="#050507" stop-opacity="0" offset="100%"/>
-            </radialGradient>
-          </defs>
-          <rect width="800" height="500" fill="url(#g)"/>
-          <rect width="800" height="500" fill="url(#r)"/>
-          <circle cx="400" cy="210" r="96" fill="#f0b84a" opacity=".9"/>
-          <path d="M305 210h190M400 114c-58 64-58 128 0 192M400 114c58 64 58 128 0 192" stroke="#100802" stroke-width="12" fill="none" opacity=".62"/>
-          <text x="50" y="80" fill="#f0b84a" font-size="34" font-family="Arial" font-weight="900" letter-spacing="8">${n}</text>
-          <text x="50" y="410" fill="#fff7e8" font-size="48" font-family="Arial" font-weight="900">${safeTopic}</text>
-          <text x="50" y="452" fill="#b9b3a6" font-size="24" font-family="Arial">Basketball Money</text>
-        </svg>
-      `)}`;
-    }
+    const groupOrder = ['free','paid-1','paid-2','paid-3','paid-4','paid-5'];
 
     function groupForNumber(num){
       const n = Number(num);
@@ -932,91 +834,106 @@
       return info[key];
     }
 
-    function renderCards(){
-      const q = search.value.trim().toLowerCase();
-      const selectedGroup = phaseFilter.value;
-      const current = lang();
+    const coachGrid = document.getElementById('coachGrid');
+    const searchInput = document.getElementById('search');
+    const groupFilter = document.getElementById('groupFilter');
+    const body = document.body;
+
+    function currentLang(){return body.dataset.lang || 'en'}
+
+    function renderGroups(){
+      const lang = currentLang();
+      const query = searchInput.value.trim().toLowerCase();
+      const filter = groupFilter.value;
+
       const filtered = coaches.filter(c => {
         const group = groupForNumber(c.n);
-        const haystack = [c.n, c.name, c.topic, c.purpose.en, c.purpose.es, c.starter.en, c.starter.es, groupInfo(group).title.en, groupInfo(group).title.es].join(' ').toLowerCase();
-        return (selectedGroup === 'all' || group === selectedGroup) && (!q || haystack.includes(q));
+        const haystack = [c.n, c.topic, c.name, c.purpose.en, c.purpose.es, groupInfo(group).title.en, groupInfo(group).title.es].join(' ').toLowerCase();
+        return (filter === 'all' || group === filter) && (!query || haystack.includes(query));
       });
 
-      const order = ['free','paid-1','paid-2','paid-3','paid-4','paid-5'];
-      const grouped = order.map(key => ({key, items: filtered.filter(c => groupForNumber(c.n) === key)})).filter(g => g.items.length);
+      const grouped = groupOrder.map(key => ({key, items: filtered.filter(c => groupForNumber(c.n) === key)})).filter(group => group.items.length);
 
-      grid.innerHTML = grouped.map(group => {
+      coachGrid.innerHTML = grouped.map((group, index) => {
         const info = groupInfo(group.key);
-        const accessLabel = info.access === 'free' ? (current === 'en' ? 'FREE' : 'GRATIS') : (current === 'en' ? 'PAID' : 'PAGO');
-        const accessClass = info.access === 'free' ? 'free' : '';
-        const rows = group.items.map(c => {
-          const openClass = c.url ? 'open' : 'open is-empty';
-          const openLabel = c.url ? (current === 'en' ? 'Open GPT' : 'Abrir GPT') : (current === 'en' ? 'Add Link' : 'Añadir Link');
-          return `
-            <article class="coach-card" data-card="${c.n}">
-              <div class="thumb">
-                <span class="num">${c.n}</span>
-                <img src="${c.img}" alt="${c.topic}" onerror="this.onerror=null;this.src='${placeholderSvg(c.n, c.topic)}';" />
-              </div>
-              <div class="coach-body">
-                <div class="topic">${c.topic}</div>
-                <h3>${c.name}</h3>
-                <p class="purpose">${c.purpose[current]}</p>
-                <div class="starter-box">${c.starter[current]}</div>
-              </div>
-              <div class="card-actions">
-                <button class="mini-btn ${openClass}" data-open="${c.n}">${openLabel}</button>
-              </div>
-            </article>
-          `;
-        }).join('');
+        const isFree = info.access === 'free';
+        const accessLabel = isFree ? (lang === 'en' ? '🔓 FREE' : '🔓 GRATIS') : (lang === 'en' ? '🔒 PAID' : '🔒 PAGO');
+        const closedClass = index === 0 ? '' : 'closed';
 
         return `
-          <section class="coach-group" data-group="${group.key}">
-            <div class="group-head">
+          <section class="coach-group ${closedClass}" data-group="${group.key}">
+            <button class="group-toggle" type="button" aria-expanded="${index === 0 ? 'true' : 'false'}">
               <div>
                 <div class="group-kicker">${info.range}</div>
-                <h3 class="group-title">${info.title[current]}</h3>
-                <p class="purpose">${info.sub[current]}</p>
+                <div class="group-title">${info.title[lang]}</div>
+                <div class="group-sub">${info.sub[lang]}</div>
               </div>
               <div class="group-meta">
-                <span class="pill ${accessClass}">${accessLabel}</span>
+                <span class="pill ${isFree ? 'free' : 'lock'}">${accessLabel}</span>
                 <span class="pill">${info.cog}</span>
+                <span class="chevron">⌄</span>
               </div>
+            </button>
+            <div class="coach-list">
+              ${group.items.map(c => `
+                <article class="coach-row">
+                  <div class="coach-main">
+                    <div class="coach-topline">
+                      <span class="coach-num">${c.n}</span>
+                      <span class="coach-topic">${c.topic}</span>
+                    </div>
+                    <div class="coach-name">${c.name}</div>
+                    <div class="coach-purpose">${c.purpose[lang]}</div>
+                  </div>
+                  <a class="open-btn" href="${c.url}" target="_blank" rel="noopener noreferrer">${lang === 'en' ? 'Open GPT' : 'Abrir GPT'}</a>
+                </article>
+              `).join('')}
             </div>
-            <div class="coach-list">${rows}</div>
           </section>
         `;
       }).join('');
 
-
-      grid.querySelectorAll('[data-open]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const coach = coaches.find(c => c.n === btn.dataset.open);
-          if(!coach.url){
-            showToast(lang() === 'en' ? 'Add this GPT link in the code first' : 'Añade el enlace de este GPT en el código primero');
-            return;
-          }
-          window.open(coach.url, '_blank', 'noopener,noreferrer');
+      document.querySelectorAll('.group-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+          const group = button.closest('.coach-group');
+          group.classList.toggle('closed');
+          button.setAttribute('aria-expanded', group.classList.contains('closed') ? 'false' : 'true');
         });
       });
     }
 
-    document.querySelectorAll('[data-set-lang]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.body.dataset.lang = btn.dataset.setLang;
-        document.documentElement.lang = btn.dataset.setLang === 'es' ? 'es' : 'en';
-        document.querySelectorAll('[data-set-lang]').forEach(b => b.classList.toggle('active', b === btn));
-        search.placeholder = btn.dataset.setLang === 'en' ? 'Search coaches, topics, purpose...' : 'Buscar coaches, temas, propósito...';
-        renderCards();
-      });
-    });
+    function setLanguage(lang){
+      body.dataset.lang = lang;
+      document.documentElement.lang = lang === 'es' ? 'es' : 'en';
+      document.querySelectorAll('[data-set-lang]').forEach(btn => btn.classList.toggle('active', btn.dataset.setLang === lang));
+      searchInput.placeholder = lang === 'en' ? 'Search coaches, topics, purpose...' : 'Buscar coaches, temas, propósito...';
+      renderGroups();
+    }
 
-    search.addEventListener('input', renderCards);
-    phaseFilter.addEventListener('change', renderCards);
+    document.querySelectorAll('[data-set-lang]').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.setLang)));
+    searchInput.addEventListener('input', renderGroups);
+    groupFilter.addEventListener('change', renderGroups);
 
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-    renderCards();
+    function closeMenu(){
+      mobileMenu.classList.remove('open');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function openMenu(){
+      mobileMenu.classList.add('open');
+      menuToggle.classList.add('active');
+      menuToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    menuToggle.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
+    document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => { if(window.innerWidth > 820) closeMenu(); });
+
+    renderGroups();
   </script>
 </body>
 </html>
