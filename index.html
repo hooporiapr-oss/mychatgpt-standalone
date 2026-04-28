@@ -546,6 +546,39 @@
     .coach-name{font-size:1rem;line-height:1.18;letter-spacing:-.02em;margin-bottom:4px}
     .coach-purpose{color:var(--muted);line-height:1.45;font-size:.88rem;max-width:780px}
 
+    .unlock-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:36px;
+      padding:0 13px;
+      border-radius:999px;
+      border:1px solid transparent;
+      background:linear-gradient(135deg, rgba(240,184,74,.96), rgba(255,122,26,.96));
+      color:#100a02;
+      font-weight:1000;
+      font-size:.78rem;
+      white-space:nowrap;
+      transition:.2s ease;
+    }
+
+    .unlock-btn:hover{transform:translateY(-1px)}
+
+    .locked-note{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:38px;
+      padding:0 12px;
+      border-radius:999px;
+      border:1px solid rgba(240,184,74,.18);
+      background:rgba(240,184,74,.06);
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
     .open-btn{
       display:inline-flex;
       align-items:center;
@@ -603,7 +636,7 @@
       .group-toggle{align-items:flex-start;flex-direction:column}
       .group-meta{justify-content:flex-start}
       .coach-row{grid-template-columns:1fr;gap:12px}
-      .open-btn{width:100%}
+      .open-btn,.locked-note,.unlock-btn{width:100%}
       .stat-grid{grid-template-columns:1fr 1fr}
       h1{font-size:clamp(2.45rem, 14vw, 4.6rem)}
       .hero-actions{display:grid;grid-template-columns:1fr}
@@ -763,7 +796,7 @@
           <h2><span class="en">The Final Blueprint</span><span class="es">El Blueprint Final</span></h2>
           <p class="en">The final coach brings everything together into one complete player map: value, proof, brand, relationships, visibility, opportunity, leverage, future self, and next move.</p>
           <p class="es">El coach final une todo en un mapa completo del jugador: valor, prueba, marca, relaciones, visibilidad, oportunidad, ventaja, futuro personal y próximo movimiento.</p>
-          <a class="btn btn-primary" href="https://chatgpt.com/g/g-69f072a6005c8191ac983fd3be188111-basketball-money-the-blueprint-coach" target="_blank" rel="noopener noreferrer"><span class="en">Open the Blueprint Coach</span><span class="es">Abrir el Blueprint Coach</span></a>
+          <a class="btn btn-primary" href="paid-gate.html?bundle=5"><span class="en">Unlock the Final Bundle</span><span class="es">Desbloquear el Paquete Final</span></a>
         </div>
       </div>
     </section>
@@ -783,31 +816,31 @@
       {n:'003', topic:'Control', name:'Basketball Money: The Control Coach', purpose:{en:'Master tempo, decisions, emotion, body language, and pressure.', es:'Domina ritmo, decisiones, emociones, lenguaje corporal y presión.'}, url:'https://chatgpt.com/g/g-69f05bcd97ac8191b7c8d52a4d4d93ca-control-basketball-money-the-control-coach'},
       {n:'004', topic:'Opportunity', name:'Basketball Money: The Opportunity Coach', purpose:{en:'Recognize, create, and convert basketball opportunities.', es:'Reconoce, crea y convierte oportunidades en el baloncesto.'}, url:'https://chatgpt.com/g/g-69f05d5f264c8191b372752a5881e5b7-basketball-money-the-opportunity-coach'},
       {n:'005', topic:'Brand', name:'Basketball Money: The Brand Coach', purpose:{en:'Build a real basketball brand based on identity, value, reputation, and proof.', es:'Construye una marca real en el baloncesto basada en identidad, valor, reputación y prueba.'}, url:'https://chatgpt.com/g/g-69f05ea7975c819194457ff104bb72de-basketball-money-the-brand-coach'},
-      {n:'006', topic:'Money Mindset', name:'Basketball Money: The Money Mindset Coach', purpose:{en:'Think like a basketball asset by connecting value, discipline, decisions, and opportunity.', es:'Piensa como un activo de baloncesto conectando valor, disciplina, decisiones y oportunidad.'}, url:'https://chatgpt.com/g/g-69f05f44fb948191a56202be75fda6b0-basketball-money-the-money-mindset-coach'},
-      {n:'007', topic:'Build Proof', name:'Basketball Money: The Proof Coach', purpose:{en:'Build proof of value through film, habits, results, trust, and visible work.', es:'Construye prueba de valor a través de video, hábitos, resultados, confianza y trabajo visible.'}, url:'https://chatgpt.com/g/g-69f05fe4b7c48191a6ecaa2d81789325-basketball-money-the-proof-coach'},
-      {n:'008', topic:'The Compound Effect', name:'Basketball Money: The Compounding Coach', purpose:{en:'Turn small daily actions into long-term basketball value and opportunity.', es:'Convierte pequeñas acciones diarias en valor y oportunidad a largo plazo.'}, url:'https://chatgpt.com/g/g-69f06097bf5481918032b16b71b2fcd3-basketball-money-the-compounding-coach'},
-      {n:'009', topic:'Opportunity Mindset', name:'Basketball Money: The Opportunity Mindset Coach', purpose:{en:'Develop the mindset to see, prepare for, create, and convert opportunity.', es:'Desarrolla la mentalidad para ver, prepararse, crear y convertir oportunidades.'}, url:'https://chatgpt.com/g/g-69f061401c0c8191907e8ece6f274a8d-basketball-money-the-opportunity-mindset-coach'},
-      {n:'010', topic:'Relationships', name:'Basketball Money: The Relationship Coach', purpose:{en:'Build trusted relationships with coaches, teammates, trainers, scouts, sponsors, and community.', es:'Construye relaciones de confianza con coaches, compañeros, entrenadores, scouts, auspiciadores y comunidad.'}, url:'https://chatgpt.com/g/g-69f062bab3c481919cb3720f6b9de4e1-basketball-money-the-relationship-coach'},
-      {n:'011', topic:'Visibility', name:'Basketball Money: The Visibility Coach', purpose:{en:'Become visible for the right reasons through proof, brand, relationships, and trust.', es:'Hazte visible por las razones correctas con prueba, marca, relaciones y confianza.'}, url:'https://chatgpt.com/g/g-69f06352c54c81919551f0edc0316100-basketball-money-the-visibility-coach'},
-      {n:'012', topic:'Pattern Recognition', name:'Basketball Money: The Pattern Coach', purpose:{en:'Recognize patterns in plays, habits, defenders, teammates, pressure, and timing.', es:'Reconoce patrones en jugadas, hábitos, defensores, compañeros, presión y timing.'}, url:'https://chatgpt.com/g/g-69f063f036a88191a247a78c12999edc-basketball-money-the-pattern-coach'},
-      {n:'013', topic:'Spatial Awareness', name:'Basketball Money: The Space Coach', purpose:{en:'Read space, spacing, angles, lanes, timing, and positioning.', es:'Lee el espacio, el spacing, los ángulos, las líneas, el timing y el posicionamiento.'}, url:'https://chatgpt.com/g/g-69f0649be3988191b4db25b9a921dc48-basketball-money-the-space-coach'},
-      {n:'014', topic:'Decision Speed', name:'Basketball Money: The Decision Speed Coach', purpose:{en:'Make faster, smarter decisions without playing rushed.', es:'Toma decisiones más rápidas e inteligentes sin jugar apresurado.'}, url:'https://chatgpt.com/g/g-69f0652c63d88191959f903158e64a98-basketball-money-the-decision-speed-coach'},
-      {n:'015', topic:'Pressure Recall', name:'Basketball Money: The Pressure Recall Coach', purpose:{en:'Remember plays, reads, corrections, and assignments under pressure.', es:'Recuerda jugadas, lecturas, correcciones y asignaciones bajo presión.'}, url:'https://chatgpt.com/g/g-69f065c6854481919379eb458fbfce72-basketball-money-the-pressure-recall-coach'},
-      {n:'016', topic:'Multi-Target Vision', name:'Basketball Money: The Vision Coach', purpose:{en:'Read multiple targets at once: ball, defenders, teammates, space, timing, and pressure.', es:'Lee múltiples objetivos a la vez: balón, defensores, compañeros, espacio, timing y presión.'}, url:'https://chatgpt.com/g/g-69f0666152f48191b4c63c780963c05c-basketball-money-the-vision-coach'},
-      {n:'017', topic:'Anticipation', name:'Basketball Money: The Anticipation Coach', purpose:{en:'Read plays, pressure, mistakes, movement, and opportunity before they happen.', es:'Lee jugadas, presión, errores, movimiento y oportunidad antes de que ocurran.'}, url:'https://chatgpt.com/g/g-69f067bfd34881918fb1c65e3a03af0a-basketball-money-the-anticipation-coach'},
-      {n:'018', topic:'Reaction Control', name:'Basketball Money: The Reaction Control Coach', purpose:{en:'React fast with control, discipline, timing, and composure.', es:'Reacciona rápido con control, disciplina, timing y compostura.'}, url:'https://chatgpt.com/g/g-69f0685ddf5081918b756cf141545973-basketball-money-the-reaction-control-coach'},
-      {n:'019', topic:'Adaptability', name:'Basketball Money: The Adaptability Coach', purpose:{en:'Adjust to changing roles, pressure, matchups, coaches, teammates, and game situations.', es:'Ajústate a cambios de rol, presión, pareos, coaches, compañeros y situaciones del juego.'}, url:'https://chatgpt.com/g/g-69f0690cb8388191bd6d4c493b700ae9-basketball-money-the-adaptability-coach'},
-      {n:'020', topic:'Role Intelligence', name:'Basketball Money: The Role Intelligence Coach', purpose:{en:'Understand role, create value within it, and earn more trust.', es:'Entiende tu rol, crea valor dentro de ese rol y gana más confianza.'}, url:'https://chatgpt.com/g/g-69f069e842d0819190c5e0e22195a4cb-basketball-money-the-role-intelligence-coach'},
-      {n:'021', topic:'Communication', name:'Basketball Money: The Communication Coach', purpose:{en:'Use voice, body language, listening, clarity, and presence to create trust.', es:'Usa voz, lenguaje corporal, escucha, claridad y presencia para crear confianza.'}, url:'https://chatgpt.com/g/g-69f06bbc47988191ac5b66b407f3c0e3-basketball-money-the-communication-coach'},
-      {n:'022', topic:'Leadership', name:'Basketball Money: The Leadership Coach', purpose:{en:'Build real leadership through trust, standards, communication, accountability, and presence.', es:'Construye liderazgo real mediante confianza, estándares, comunicación, responsabilidad y presencia.'}, url:'https://chatgpt.com/g/g-69f06c4cddec8191852faee53014b5ae-basketball-money-the-leadership-coach'},
-      {n:'023', topic:'Consistency', name:'Basketball Money: The Consistency Coach', purpose:{en:'Become reliable through habits, effort, execution, attitude, preparation, and proof.', es:'Conviértete en alguien confiable mediante hábitos, esfuerzo, ejecución, actitud, preparación y prueba.'}, url:'https://chatgpt.com/g/g-69f06d413ba48191a19166d9fd20ab8b-basketball-money-the-consistency-coach'},
-      {n:'024', topic:'Resilience', name:'Basketball Money: The Resilience Coach', purpose:{en:'Recover from mistakes, losses, criticism, pressure, and setbacks.', es:'Recupérate de errores, derrotas, críticas, presión y obstáculos.'}, url:'https://chatgpt.com/g/g-69f06e4bf344819193f234c281b0185e-basketball-money-the-resilience-coach'},
-      {n:'025', topic:'Accountability', name:'Basketball Money: The Accountability Coach', purpose:{en:'Own habits, decisions, effort, mistakes, attitude, and growth.', es:'Asume responsabilidad por hábitos, decisiones, esfuerzo, errores, actitud y crecimiento.'}, url:'https://chatgpt.com/g/g-69f06edb6ecc819192bb3b3fe1758041-basketball-money-the-accountability-coach'},
-      {n:'026', topic:'Coachability', name:'Basketball Money: The Coachability Coach', purpose:{en:'Receive correction, apply feedback, build trust, and turn coaching into proof.', es:'Recibe corrección, aplica feedback, construye confianza y convierte coaching en prueba.'}, url:'https://chatgpt.com/g/g-69f06f7017648191b72212aaed0a3ecf-basketball-money-the-coachability-coach'},
-      {n:'027', topic:'Game Identity', name:'Basketball Money: The Game Identity Coach', purpose:{en:'Define who the player is on the court and what value coaches can trust.', es:'Define quién es el jugador en la cancha y qué valor pueden confiar los coaches.'}, url:'https://chatgpt.com/g/g-69f0707368b08191905c75452c1faec2-basketball-money-the-game-identity-coach'},
-      {n:'028', topic:'Player Leverage', name:'Basketball Money: The Leverage Coach', purpose:{en:'Understand how value, proof, brand, relationships, visibility, and trust create options.', es:'Entiende cómo el valor, la prueba, la marca, las relaciones, la visibilidad y la confianza crean opciones.'}, url:'https://chatgpt.com/g/g-69f0712ea8208191afe7a3886f133c42-basketball-money-the-leverage-coach'},
-      {n:'029', topic:'Future Self', name:'Basketball Money: The Future Self Coach', purpose:{en:'Connect today’s habits, choices, identity, and value to the future player being built.', es:'Conecta los hábitos, decisiones, identidad y valor de hoy con el jugador que se está construyendo para el futuro.'}, url:'https://chatgpt.com/g/g-69f071ec40308191aa9d54f764baf19e-basketball-money-the-future-self-coach'},
-      {n:'030', topic:'Basketball Money Blueprint', name:'Basketball Money: The Blueprint Coach', purpose:{en:'Build the complete final map of value, proof, brand, relationships, visibility, opportunity, and next move.', es:'Construye el mapa final completo de valor, prueba, marca, relaciones, visibilidad, oportunidad y próximo movimiento.'}, url:'https://chatgpt.com/g/g-69f072a6005c8191ac983fd3be188111-basketball-money-the-blueprint-coach'}
+      {n:'006', topic:'Money Mindset', name:'Basketball Money: The Money Mindset Coach', purpose:{en:'Think like a basketball asset by connecting value, discipline, decisions, and opportunity.', es:'Piensa como un activo de baloncesto conectando valor, disciplina, decisiones y oportunidad.'}},
+      {n:'007', topic:'Build Proof', name:'Basketball Money: The Proof Coach', purpose:{en:'Build proof of value through film, habits, results, trust, and visible work.', es:'Construye prueba de valor a través de video, hábitos, resultados, confianza y trabajo visible.'}},
+      {n:'008', topic:'The Compound Effect', name:'Basketball Money: The Compounding Coach', purpose:{en:'Turn small daily actions into long-term basketball value and opportunity.', es:'Convierte pequeñas acciones diarias en valor y oportunidad a largo plazo.'}},
+      {n:'009', topic:'Opportunity Mindset', name:'Basketball Money: The Opportunity Mindset Coach', purpose:{en:'Develop the mindset to see, prepare for, create, and convert opportunity.', es:'Desarrolla la mentalidad para ver, prepararse, crear y convertir oportunidades.'}},
+      {n:'010', topic:'Relationships', name:'Basketball Money: The Relationship Coach', purpose:{en:'Build trusted relationships with coaches, teammates, trainers, scouts, sponsors, and community.', es:'Construye relaciones de confianza con coaches, compañeros, entrenadores, scouts, auspiciadores y comunidad.'}},
+      {n:'011', topic:'Visibility', name:'Basketball Money: The Visibility Coach', purpose:{en:'Become visible for the right reasons through proof, brand, relationships, and trust.', es:'Hazte visible por las razones correctas con prueba, marca, relaciones y confianza.'}},
+      {n:'012', topic:'Pattern Recognition', name:'Basketball Money: The Pattern Coach', purpose:{en:'Recognize patterns in plays, habits, defenders, teammates, pressure, and timing.', es:'Reconoce patrones en jugadas, hábitos, defensores, compañeros, presión y timing.'}},
+      {n:'013', topic:'Spatial Awareness', name:'Basketball Money: The Space Coach', purpose:{en:'Read space, spacing, angles, lanes, timing, and positioning.', es:'Lee el espacio, el spacing, los ángulos, las líneas, el timing y el posicionamiento.'}},
+      {n:'014', topic:'Decision Speed', name:'Basketball Money: The Decision Speed Coach', purpose:{en:'Make faster, smarter decisions without playing rushed.', es:'Toma decisiones más rápidas e inteligentes sin jugar apresurado.'}},
+      {n:'015', topic:'Pressure Recall', name:'Basketball Money: The Pressure Recall Coach', purpose:{en:'Remember plays, reads, corrections, and assignments under pressure.', es:'Recuerda jugadas, lecturas, correcciones y asignaciones bajo presión.'}},
+      {n:'016', topic:'Multi-Target Vision', name:'Basketball Money: The Vision Coach', purpose:{en:'Read multiple targets at once: ball, defenders, teammates, space, timing, and pressure.', es:'Lee múltiples objetivos a la vez: balón, defensores, compañeros, espacio, timing y presión.'}},
+      {n:'017', topic:'Anticipation', name:'Basketball Money: The Anticipation Coach', purpose:{en:'Read plays, pressure, mistakes, movement, and opportunity before they happen.', es:'Lee jugadas, presión, errores, movimiento y oportunidad antes de que ocurran.'}},
+      {n:'018', topic:'Reaction Control', name:'Basketball Money: The Reaction Control Coach', purpose:{en:'React fast with control, discipline, timing, and composure.', es:'Reacciona rápido con control, disciplina, timing y compostura.'}},
+      {n:'019', topic:'Adaptability', name:'Basketball Money: The Adaptability Coach', purpose:{en:'Adjust to changing roles, pressure, matchups, coaches, teammates, and game situations.', es:'Ajústate a cambios de rol, presión, pareos, coaches, compañeros y situaciones del juego.'}},
+      {n:'020', topic:'Role Intelligence', name:'Basketball Money: The Role Intelligence Coach', purpose:{en:'Understand role, create value within it, and earn more trust.', es:'Entiende tu rol, crea valor dentro de ese rol y gana más confianza.'}},
+      {n:'021', topic:'Communication', name:'Basketball Money: The Communication Coach', purpose:{en:'Use voice, body language, listening, clarity, and presence to create trust.', es:'Usa voz, lenguaje corporal, escucha, claridad y presencia para crear confianza.'}},
+      {n:'022', topic:'Leadership', name:'Basketball Money: The Leadership Coach', purpose:{en:'Build real leadership through trust, standards, communication, accountability, and presence.', es:'Construye liderazgo real mediante confianza, estándares, comunicación, responsabilidad y presencia.'}},
+      {n:'023', topic:'Consistency', name:'Basketball Money: The Consistency Coach', purpose:{en:'Become reliable through habits, effort, execution, attitude, preparation, and proof.', es:'Conviértete en alguien confiable mediante hábitos, esfuerzo, ejecución, actitud, preparación y prueba.'}},
+      {n:'024', topic:'Resilience', name:'Basketball Money: The Resilience Coach', purpose:{en:'Recover from mistakes, losses, criticism, pressure, and setbacks.', es:'Recupérate de errores, derrotas, críticas, presión y obstáculos.'}},
+      {n:'025', topic:'Accountability', name:'Basketball Money: The Accountability Coach', purpose:{en:'Own habits, decisions, effort, mistakes, attitude, and growth.', es:'Asume responsabilidad por hábitos, decisiones, esfuerzo, errores, actitud y crecimiento.'}},
+      {n:'026', topic:'Coachability', name:'Basketball Money: The Coachability Coach', purpose:{en:'Receive correction, apply feedback, build trust, and turn coaching into proof.', es:'Recibe corrección, aplica feedback, construye confianza y convierte coaching en prueba.'}},
+      {n:'027', topic:'Game Identity', name:'Basketball Money: The Game Identity Coach', purpose:{en:'Define who the player is on the court and what value coaches can trust.', es:'Define quién es el jugador en la cancha y qué valor pueden confiar los coaches.'}},
+      {n:'028', topic:'Player Leverage', name:'Basketball Money: The Leverage Coach', purpose:{en:'Understand how value, proof, brand, relationships, visibility, and trust create options.', es:'Entiende cómo el valor, la prueba, la marca, las relaciones, la visibilidad y la confianza crean opciones.'}},
+      {n:'029', topic:'Future Self', name:'Basketball Money: The Future Self Coach', purpose:{en:'Connect today’s habits, choices, identity, and value to the future player being built.', es:'Conecta los hábitos, decisiones, identidad y valor de hoy con el jugador que se está construyendo para el futuro.'}},
+      {n:'030', topic:'Basketball Money Blueprint', name:'Basketball Money: The Blueprint Coach', purpose:{en:'Build the complete final map of value, proof, brand, relationships, visibility, opportunity, and next move.', es:'Construye el mapa final completo de valor, prueba, marca, relaciones, visibilidad, oportunidad y próximo movimiento.'}}
     ];
 
     const groupOrder = ['free','paid-1','paid-2','paid-3','paid-4','paid-5'];
@@ -824,12 +857,12 @@
 
     function groupInfo(key){
       const info = {
-        free:{range:'001–005', cog:'Free Access', access:'free', title:{en:'Free Entry — Start Here', es:'Entrada Gratis — Empieza Aquí'}, sub:{en:'The first five coaches introduce Basketball Money: value, habits, control, opportunity, and brand.', es:'Los primeros cinco coaches presentan Basketball Money: valor, hábitos, control, oportunidad y marca.'}},
-        'paid-1':{range:'006–010', cog:'COG 01', access:'paid', title:{en:'Paid Bundle One', es:'Paquete Pago Uno'}, sub:{en:'Money mindset, proof, compounding, opportunity mindset, and relationships.', es:'Mentalidad de dinero, prueba, efecto compuesto, mentalidad de oportunidad y relaciones.'}},
-        'paid-2':{range:'011–015', cog:'COG 02', access:'paid', title:{en:'Paid Bundle Two', es:'Paquete Pago Dos'}, sub:{en:'Visibility plus the first IQ layer: patterns, space, decision speed, and pressure recall.', es:'Visibilidad más la primera capa de IQ: patrones, espacio, velocidad de decisión y memoria bajo presión.'}},
-        'paid-3':{range:'016–020', cog:'COG 03', access:'paid', title:{en:'Paid Bundle Three', es:'Paquete Pago Tres'}, sub:{en:'Vision, anticipation, reaction control, adaptability, and role intelligence.', es:'Visión, anticipación, control de reacción, adaptabilidad e inteligencia de rol.'}},
-        'paid-4':{range:'021–025', cog:'COG 04', access:'paid', title:{en:'Paid Bundle Four', es:'Paquete Pago Cuatro'}, sub:{en:'Communication, leadership, consistency, resilience, and accountability.', es:'Comunicación, liderazgo, consistencia, resiliencia y responsabilidad.'}},
-        'paid-5':{range:'026–030', cog:'COG 05', access:'paid', title:{en:'Paid Bundle Five', es:'Paquete Pago Cinco'}, sub:{en:'Coachability, game identity, leverage, future self, and the final Blueprint.', es:'Coachability, identidad de juego, ventaja, futuro personal y el Blueprint final.'}}
+        free:{range:'001–005', cog:'Free Access', access:'free', unlock:'', title:{en:'Free Entry — Start Here', es:'Entrada Gratis — Empieza Aquí'}, sub:{en:'The first five coaches introduce Basketball Money: value, habits, control, opportunity, and brand.', es:'Los primeros cinco coaches presentan Basketball Money: valor, hábitos, control, oportunidad y marca.'}},
+        'paid-1':{range:'006–010', cog:'COG 01', access:'paid', unlock:'paid-gate.html?bundle=1', title:{en:'Paid Bundle One', es:'Paquete Pago Uno'}, sub:{en:'Money mindset, proof, compounding, opportunity mindset, and relationships.', es:'Mentalidad de dinero, prueba, efecto compuesto, mentalidad de oportunidad y relaciones.'}},
+        'paid-2':{range:'011–015', cog:'COG 02', access:'paid', unlock:'paid-gate.html?bundle=2', title:{en:'Paid Bundle Two', es:'Paquete Pago Dos'}, sub:{en:'Visibility plus the first IQ layer: patterns, space, decision speed, and pressure recall.', es:'Visibilidad más la primera capa de IQ: patrones, espacio, velocidad de decisión y memoria bajo presión.'}},
+        'paid-3':{range:'016–020', cog:'COG 03', access:'paid', unlock:'paid-gate.html?bundle=3', title:{en:'Paid Bundle Three', es:'Paquete Pago Tres'}, sub:{en:'Vision, anticipation, reaction control, adaptability, and role intelligence.', es:'Visión, anticipación, control de reacción, adaptabilidad e inteligencia de rol.'}},
+        'paid-4':{range:'021–025', cog:'COG 04', access:'paid', unlock:'paid-gate.html?bundle=4', title:{en:'Paid Bundle Four', es:'Paquete Pago Cuatro'}, sub:{en:'Communication, leadership, consistency, resilience, and accountability.', es:'Comunicación, liderazgo, consistencia, resiliencia y responsabilidad.'}},
+        'paid-5':{range:'026–030', cog:'COG 05', access:'paid', unlock:'paid-gate.html?bundle=5', title:{en:'Paid Bundle Five', es:'Paquete Pago Cinco'}, sub:{en:'Coachability, game identity, leverage, future self, and the final Blueprint.', es:'Coachability, identidad de juego, ventaja, futuro personal y el Blueprint final.'}}
       };
       return info[key];
     }
@@ -871,6 +904,7 @@
               <div class="group-meta">
                 <span class="pill ${isFree ? 'free' : 'lock'}">${accessLabel}</span>
                 <span class="pill">${info.cog}</span>
+                ${isFree ? '' : `<a class="unlock-btn" href="${info.unlock}">${lang === 'en' ? 'Unlock Bundle' : 'Desbloquear'}</a>`}
                 <span class="chevron">⌄</span>
               </div>
             </button>
@@ -885,7 +919,7 @@
                     <div class="coach-name">${c.name}</div>
                     <div class="coach-purpose">${c.purpose[lang]}</div>
                   </div>
-                  <a class="open-btn" href="${c.url}" target="_blank" rel="noopener noreferrer">${lang === 'en' ? 'Open GPT' : 'Abrir GPT'}</a>
+                  ${isFree ? `<a class="open-btn" href="${c.url}" target="_blank" rel="noopener noreferrer">${lang === 'en' ? 'Open GPT' : 'Abrir GPT'}</a>` : `<span class="locked-note">${lang === 'en' ? 'Locked inside paid platform' : 'Bloqueado dentro de la plataforma paga'}</span>`}
                 </article>
               `).join('')}
             </div>
